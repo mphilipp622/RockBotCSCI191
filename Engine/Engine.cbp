@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -31,7 +33,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add directory="../Common/include/GL" />
-			<Add directory="include" />
 		</Compiler>
 		<Linker>
 			<Add library="opengl32" />

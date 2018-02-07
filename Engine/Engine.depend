@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1518027050 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+	<windows.h>
+	<GLScene.h>
+	<stdlib.h>
+	<iostream>
+	<windows.h>
+
+1518028029 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+	<windows.h>
+	<glut.h>
+	<iostream>
+
+1517271330 c:\users\seapanda\documents\college\191\191\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+

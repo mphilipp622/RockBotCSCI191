@@ -1,3 +1,5 @@
+// updated 2/7/18
+
 #ifndef GLSCENE_H
 #define GLSCENE_H
 

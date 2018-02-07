@@ -1,3 +1,5 @@
+// updated 2/7/18
+
 #ifndef GLLIGHT_H
 #define GLLIGHT_H
 

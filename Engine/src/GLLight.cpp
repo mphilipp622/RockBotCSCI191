@@ -1,3 +1,5 @@
+// updated 2/7/18
+
 #include "GLLight.h"
 
 GLLight :: GLLight(GLenum)
