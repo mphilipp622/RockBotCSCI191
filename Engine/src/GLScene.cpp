@@ -1,6 +1,10 @@
 // updated 2/7/18
 
 #include "GLScene.h"
+#include "GLLight.h"
+#include <Model.h>
+
+Model *modelTeapot = new Model();
 
 GLScene::GLScene()
 {
@@ -21,6 +25,9 @@ GLint GLScene::initGL()
     glEnable(GL_DEPTH_TEST); // test to see what's in front and what's in back
     glDepthFunc(GL_LEQUAL);
 
+    glEnable(GL_COLOR_MATERIAL); // allows texture to have color
+    GLLight Light(GL_LIGHT0);
+
     return true;
 
 }
@@ -30,11 +37,8 @@ GLint GLScene::drawGLScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    glTranslated(0, 0, -8.0);
-    glColor3f(1.0, .75, .25);
-
     glPushMatrix();
-    glutSolidTeapot(1.5);
+    modelTeapot->DrawModel(); // render teapot
     glPopMatrix();
 }
 
