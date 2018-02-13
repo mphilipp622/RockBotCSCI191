@@ -71,8 +71,14 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             keyboardAndMouse->KeyUp();
             break;
 
-        case WM_LBUTTONDOWN:
+        case WM_MOUSEMOVE:
+            keyboardAndMouse->wParam = wParam;
+            keyboardAndMouse->MouseDown(modelTeapot, LOWORD(lParam), HIWORD(lParam));
             break;
+
+//        case WM_LBUTTONDOWN:
+//            keyboardAndMouse->MouseDown(modelTeapot, LOWORD(lParam), HIWORD(lParam));
+//            break;
 
         case WM_RBUTTONDOWN:
             break;

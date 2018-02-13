@@ -17,7 +17,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1518483308 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1518563973 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	"GLScene.h"
 	"GLLight.h"
 	<Model.h>
@@ -36,10 +36,10 @@
 	<windows.h>
 	"glut.h"
 
-1518483033 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+1518563953 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	"Inputs.h"
 
-1518482579 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+1518561540 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>

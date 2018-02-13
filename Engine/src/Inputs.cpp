@@ -39,9 +39,35 @@ void Inputs::KeyUp()
 
 }
 
-void Inputs::MouseDown(Model*, double, double)
+void Inputs::MouseDown(Model* model, double xNew, double yNew)
 {
+    double currentX = xNew - prevMouseX;
+    double currentY = xNew - prevMouseY;
 
+    if(wParam == VK_LBUTTON)
+    {
+
+        std::cout << xNew << "    " << prevMouseX << "    " << currentX << std::endl;
+        if(currentX > 1.0) currentX = 1.0;
+        if(currentX < -1.0) currentX = -1.0;
+        if(currentY > 1.0) currentY = 1.0;
+        if(currentY < -1.0) currentY = -1.0;
+//        model->rotateY += currentX / 10;
+//        model->rotateX += currentY / 10;
+        model->rotateX += currentY;
+        model->rotateY += currentX;
+//        if(currentX <= -1)
+//        model->rotateY -= 1.0;
+//        else if(currentX >= 1)
+//            model->rotateY += 1.0;
+//        if(currentY <= -1)
+//            model->rotateX -= 1.0;
+//        else if(currentY >= 1)
+//            model->rotateX += 1.0;
+    }
+
+    prevMouseX = xNew;
+    prevMouseY = yNew;
 }
 
 void Inputs::MouseUp()
