@@ -3,8 +3,11 @@
 #include "GLScene.h"
 #include "GLLight.h"
 #include <Model.h>
+#include <Inputs.h>
 
 Model *modelTeapot = new Model();
+Inputs *keyboardAndMouse = new Inputs();
+
 
 GLScene::GLScene()
 {
@@ -53,4 +56,25 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity(); // loads identity matrix for modelview
 
+}
+int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch (uMsg)									// Check For Windows Messages
+	{
+        case WM_KEYDOWN:
+            keyboardAndMouse->wParam = wParam;
+            keyboardAndMouse->KeyPressed(modelTeapot);
+            break;
+
+        case WM_KEYUP:
+            keyboardAndMouse->wParam = wParam;
+            keyboardAndMouse->KeyUp();
+            break;
+
+        case WM_LBUTTONDOWN:
+            break;
+
+        case WM_RBUTTONDOWN:
+            break;
+	}
 }

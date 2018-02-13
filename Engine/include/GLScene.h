@@ -18,6 +18,9 @@ class GLScene
         GLint drawGLScene();
         GLvoid resizeGLScene(GLsizei, GLsizei);
 
+        int windowsMsg(HWND, UINT, WPARAM, LPARAM);
+
+        WPARAM wParam;
 
     protected:
 

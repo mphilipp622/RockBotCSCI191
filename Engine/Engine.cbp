@@ -42,10 +42,12 @@
 		</Linker>
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
+		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/Model.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
+		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/Model.cpp" />
 		<Extensions>
 			<code_completion />

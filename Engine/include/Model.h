@@ -1,7 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <windows.h>>
+#include <windows.h>
 #include "glut.h"
 
 class Model
