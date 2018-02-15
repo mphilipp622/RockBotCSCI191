@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <windows.h>		// Header File For Windows
+#include "DeltaTime.h"
 
 using namespace std;
 
@@ -313,6 +314,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 					LPSTR		lpCmdLine,			// Command Line Parameters
 					int			nCmdShow)			// Window Show State
 {
+
 	MSG		msg;									// Windows Message Structure
 	BOOL	done=FALSE;								// Bool Variable To Exit Loop
 
@@ -333,6 +335,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 
 	while(!done)									// Loop That Runs While done=FALSE
 	{
+//	    dTime->UpdateDeltaTime();
 		if (PeekMessage(&msg,NULL,0,0,PM_REMOVE))	// Is There A Message Waiting?
 		{
 			if (msg.message==WM_QUIT)				// Have We Received A Quit Message?

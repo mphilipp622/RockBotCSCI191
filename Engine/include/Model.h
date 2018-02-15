@@ -10,6 +10,7 @@ class Model
         Model();
         virtual ~Model();
         void DrawModel();
+        void InitModel();
 
         double rotateX, rotateY, rotateZ;
 

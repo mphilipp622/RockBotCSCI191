@@ -3,8 +3,11 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="Engine" />
+		<Option makefile="MakeFile" />
+		<Option execution_dir="../soil/Simple OpenGL Image Library/projects/makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/Engine" prefix_auto="1" extension_auto="1" />
@@ -33,8 +36,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add directory="../Common/include/GL" />
+			<Add directory="Common/include" />
 		</Compiler>
 		<Linker>
+			<Add library="Common/lib/libSOIL.a" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
 			<Add library="gdi32" />
@@ -44,11 +49,13 @@
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/Model.h" />
+		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/Model.cpp" />
+		<Unit filename="src/TextureLoader.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -8,7 +8,6 @@
 Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
 
-
 GLScene::GLScene()
 {
 
@@ -28,9 +27,10 @@ GLint GLScene::initGL()
     glEnable(GL_DEPTH_TEST); // test to see what's in front and what's in back
     glDepthFunc(GL_LEQUAL);
 
-    glEnable(GL_COLOR_MATERIAL); // allows texture to have color
+//    glEnable(GL_COLOR_MATERIAL); // allows texture to have color
     GLLight Light(GL_LIGHT0);
 
+    modelTeapot->InitModel();
     return true;
 
 }
@@ -74,6 +74,10 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         case WM_MOUSEMOVE:
             keyboardAndMouse->wParam = wParam;
             keyboardAndMouse->MouseDown(modelTeapot, LOWORD(lParam), HIWORD(lParam));
+            break;
+
+        case WM_MOUSEWHEEL:
+            keyboardAndMouse->WheelMove(modelTeapot, GET_WHEEL_DELTA_WPARAM(wParam));
             break;
 
 //        case WM_LBUTTONDOWN:
