@@ -4,13 +4,16 @@
 #include "GLLight.h"
 #include <Model.h>
 #include <Inputs.h>
+#include "Parallax.h"
 
 Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
+Parallax *plx = new Parallax();
 
 GLScene::GLScene()
 {
-
+    screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
+    screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 }
 
 GLScene::~GLScene()
@@ -30,9 +33,10 @@ GLint GLScene::initGL()
 //    glEnable(GL_COLOR_MATERIAL); // allows texture to have color
     GLLight Light(GL_LIGHT0);
 
-    modelTeapot->InitModel();
+    // Initialize Models Here
+    modelTeapot->InitModel("Images/MilkyWay.jpg");
+    plx->ParallaxInit("Images/background.jpg");
     return true;
-
 }
 
 GLint GLScene::drawGLScene()
@@ -43,6 +47,13 @@ GLint GLScene::drawGLScene()
     glPushMatrix();
     modelTeapot->DrawModel(); // render teapot
     glPopMatrix();
+
+    glScaled(3.33, 3.33, 1);
+    glPushMatrix();
+    plx->DrawSquare(screenWidth, screenHeight); // draw background
+    glPopMatrix();
+
+    modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
 }
 
 GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)

@@ -10,7 +10,7 @@
 #if defined(_WIN32)
 
 /* GLUT 3.7 now tries to avoid including <windows.h>
-   to avoid name space pollution, but Win32's <GL/gl.h> 
+   to avoid name space pollution, but Win32's <GL/gl.h>
    needs APIENTRY and WINGDIAPI defined properly. */
 # if defined(__BORLANDC__) && defined(__cplusplus)
    /* This would put tons of macros and crap in our clean name space. */
@@ -21,7 +21,7 @@
    /* XXX This is from Win32's <windef.h> */
 #  ifndef APIENTRY
 #   define GLUT_APIENTRY_DEFINED
-#   if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__) || defined(__MINGW32__)   
+#   if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__) || defined(__MINGW32__)
 #    define APIENTRY    __stdcall
 #   else
 #    define APIENTRY
@@ -157,11 +157,11 @@ extern void exit(int);
 
 /**
  GLUT API revision history:
- 
+
  GLUT_API_VERSION is updated to reflect incompatible GLUT
  API changes (interface changes, semantic changes, deletions,
  or additions).
- 
+
  GLUT_API_VERSION=1  First public release of GLUT.  11/29/94
 
  GLUT_API_VERSION=2  Added support for OpenGL/GLX multisampling,
@@ -182,7 +182,7 @@ extern void exit(int);
 
 /**
  GLUT implementation revision history:
- 
+
  GLUT_XLIB_IMPLEMENTATION is updated to reflect both GLUT
  API revisions and implementation revisions (ie, bug fixes).
 
@@ -190,7 +190,7 @@ extern void exit(int);
  GLUT Xlib-based implementation.  11/29/94
 
  GLUT_XLIB_IMPLEMENTATION=2  mjk's second public release of
- GLUT Xlib-based implementation providing GLUT version 2 
+ GLUT Xlib-based implementation providing GLUT version 2
  interfaces.
 
  GLUT_XLIB_IMPLEMENTATION=3  mjk's GLUT 2.2 images. 4/17/95

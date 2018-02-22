@@ -5,17 +5,15 @@
 class DeltaTime
 {
     public:
-        static int deltaTime;
         DeltaTime();
         virtual ~DeltaTime();
+        static double GetDeltaTime();
         void UpdateDeltaTime();
-
 
     protected:
 
     private:
-        int oldTime;
-        int newTime;
+        double oldTime;
 };
 
 #endif // DELTATIME_H

@@ -11,30 +11,40 @@ Inputs::~Inputs()
 void Inputs::KeyPressed(Model* model)
 {
     // Handle key presses for model passed to this function
+    const int aKey = 0x41, dKey = 0x44;
+
     switch(wParam)
     {
-        case VK_LEFT:
-//            model->xPos -= 0.1;
-            model->rotateX += 1.0;
+        case aKey:
+            model->xPos -= 0.1;
             break;
-        case VK_RIGHT:
-            model->rotateX -= 1.0;
+        case dKey:
+            model->xPos += 0.1;
             break;
-        case VK_DOWN:
-            model->rotateY -= 1.0;
+        case VK_SPACE:
+            model->SetJump(true);
             break;
-        case VK_UP:
-            model->rotateY += 1.0;
-            break;
-        case VK_ADD:
-            model->zoom += 1.0;
-            break;
-        case VK_SUBTRACT:
-            model->zoom -= 1.0;
-            break;
-        case VK_MBUTTON:
-            model->zoom += wParam;
-            break;
+//        case VK_LEFT:
+//            model->rotateX += 1.0;
+//            break;
+//        case VK_RIGHT:
+//            model->rotateX -= 1.0;
+//            break;
+//        case VK_DOWN:
+//            model->rotateY -= 1.0;
+//            break;
+//        case VK_UP:
+//            model->rotateY += 1.0;
+//            break;
+//        case VK_ADD:
+//            model->zoom += 1.0;
+//            break;
+//        case VK_SUBTRACT:
+//            model->zoom -= 1.0;
+//            break;
+//        case VK_MBUTTON:
+//            model->zoom += wParam;
+//            break;
     }
 }
 

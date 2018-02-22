@@ -21,6 +21,7 @@ class GLScene
         int windowsMsg(HWND, UINT, WPARAM, LPARAM);
 
         WPARAM wParam;
+        float screenHeight, screenWidth;
 
     protected:
 

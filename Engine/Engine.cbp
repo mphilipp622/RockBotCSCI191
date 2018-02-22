@@ -45,16 +45,20 @@
 			<Add library="gdi32" />
 			<Add library="Common/lib/glut32.lib" />
 		</Linker>
+		<Unit filename="include/DeltaTime.h" />
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/Model.h" />
+		<Unit filename="include/Parallax.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/DeltaTime.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/Model.cpp" />
+		<Unit filename="src/Parallax.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
 		<Extensions>
 			<code_completion />

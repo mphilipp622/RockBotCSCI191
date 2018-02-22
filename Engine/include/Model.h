@@ -10,7 +10,10 @@ class Model
         Model();
         virtual ~Model();
         void DrawModel();
-        void InitModel();
+        void InitModel(char* fileName);
+        void Jump();
+        void Update();
+        void SetJump(bool);
 
         double rotateX, rotateY, rotateZ;
 
@@ -21,6 +24,9 @@ class Model
     protected:
 
     private:
+        bool jump;
+        float jumpY;
+        float initialY;
 };
 
 #endif // MODEL_H
