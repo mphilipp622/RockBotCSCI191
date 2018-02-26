@@ -3,6 +3,9 @@
 
 #include "SOIL.h"
 #include "gl/gl.h"
+#include <iostream>
+
+using namespace std;
 
 class TextureLoader
 {

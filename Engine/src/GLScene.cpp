@@ -30,11 +30,13 @@ GLint GLScene::initGL()
     glEnable(GL_DEPTH_TEST); // test to see what's in front and what's in back
     glDepthFunc(GL_LEQUAL);
 
-//    glEnable(GL_COLOR_MATERIAL); // allows texture to have color
+    glEnable(GL_COLOR_MATERIAL); // allows texture to have color
     GLLight Light(GL_LIGHT0);
 
     // Initialize Models Here
+    cout << "Model Initializing" << endl;
     modelTeapot->InitModel("Images/MilkyWay.jpg");
+    cout << "Parallax Initializing" << endl;
     plx->ParallaxInit("Images/background.jpg");
     return true;
 }
@@ -50,10 +52,11 @@ GLint GLScene::drawGLScene()
 
     glScaled(3.33, 3.33, 1);
     glPushMatrix();
+
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
-    modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
+    //modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
 }
 
 GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)

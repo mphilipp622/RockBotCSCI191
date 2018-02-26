@@ -1,9 +1,12 @@
 #include "Model.h"
-#include "TextureLoader.h"s
+#include "TextureLoader.h"
 #include "DeltaTime.h"
 #include <iostream>
 
+using namespace std;
+
 TextureLoader* texture = new TextureLoader();
+
 
 Model::Model()
 {
@@ -26,7 +29,7 @@ Model::~Model()
 }
 void Model::DrawModel()
 {
-    // render this model
+    //render this model
     glColor3f(1.0, 1.0, 1.0);
     texture->Binder(); // update texture
     glTranslated(xPos, yPos, zoom);
@@ -34,15 +37,29 @@ void Model::DrawModel()
     glRotated(rotateY, 0, 1, 0);
     glRotated(rotateZ, 0, 0, 1);
 
-//    glScalef(1.0, 1.0, 0.0);
 
-    glutSolidTeapot(1.5);
+    //Uncomment the below to make teapot object
+    //glScalef(1.0, 1.0, 0.0);
+    //glutSolidTeapot(1.0);
+
+    //This draws out a perfect 2D square.
+    glBegin(GL_POLYGON);
+
+
+    glVertex3f(-0.500000, -0.500000, 0.500000);
+    glVertex3f(0.500000, -0.500000, 0.500000);
+    glVertex3f(0.500000, 0.500000, 0.500000);
+    glVertex3f(-0.500000, 0.500000, 0.500000);
+    glEnd();
+
 }
 
 void Model::InitModel(char* fileName)
 {
     texture->Binder();
+     cout << "Loading Model: " << fileName << endl;
     texture->BindTexture(fileName);
+
 }
 
 void Model::Jump()
@@ -64,7 +81,7 @@ void Model::Update()
     if(jump)
         Jump();
 
-    std::cout <<"" << std::endl; // WHY? Why does it need something here?
+   // cout <<"" << endl; // WHY? Why does it need something here?
 }
 
 void Model::SetJump(bool newVal)
