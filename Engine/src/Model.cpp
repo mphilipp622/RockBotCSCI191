@@ -20,6 +20,9 @@ Model::Model()
     xPos = 0;
     yPos = 0;
 
+    // physics
+    gravity = 0.98;
+    acceleration = 0.0;
     jump = false;
 }
 
@@ -44,14 +47,11 @@ void Model::DrawModel()
 
     //This draws out a perfect 2D square.
     glBegin(GL_POLYGON);
-
-
     glVertex3f(-0.500000, -0.500000, 0.500000);
     glVertex3f(0.500000, -0.500000, 0.500000);
     glVertex3f(0.500000, 0.500000, 0.500000);
     glVertex3f(-0.500000, 0.500000, 0.500000);
     glEnd();
-
 }
 
 void Model::InitModel(char* fileName)
@@ -76,12 +76,22 @@ void Model::Jump()
         jump = false;
 }
 
+
+void Model::NormalAttack(bool newVal)
+{
+    if(newVal)
+    {
+        cout << "attacking" << endl;
+    }
+
+}
+
 void Model::Update()
 {
     if(jump)
         Jump();
 
-   // cout <<"" << endl; // WHY? Why does it need something here?
+   cout <<"" << endl; // WHY? Why does it need something here?
 }
 
 void Model::SetJump(bool newVal)
