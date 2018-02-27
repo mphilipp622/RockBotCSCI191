@@ -9,6 +9,8 @@
 
 Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
+
+// Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
 
 GLScene::GLScene()
@@ -57,7 +59,8 @@ GLint GLScene::drawGLScene()
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
-    plx->Scroll(false, "up", 1);
+
+//    plx->Scroll(false, modelTeapot->direction, 1);
     //modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
 }
 
@@ -80,6 +83,7 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         case WM_KEYDOWN:
             keyboardAndMouse->wParam = wParam;
             keyboardAndMouse->KeyPressed(modelTeapot);
+            keyboardAndMouse->KeyEnv(plx, 0.1);
             break;
 
         case WM_KEYUP:

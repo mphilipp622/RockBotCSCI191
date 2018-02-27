@@ -21,6 +21,7 @@ class Model
         double rotateX, rotateY, rotateZ;
         double zoom;
         double xPos, yPos;
+//        string direction;
 
         float gravity;
     protected:

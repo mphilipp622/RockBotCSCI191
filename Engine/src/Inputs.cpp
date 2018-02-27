@@ -1,5 +1,6 @@
 #include "Inputs.h"
 #include <iostream>
+#include "DeltaTime.h"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ void Inputs::KeyPressed(Model* model)
     {
         case aKey:
             model->xPos -= 0.1 * (model->acceleration+=0.098);
-//            plx->Scroll(true, "left", 1);
+//            model->direction = "left";
             cout << model->xPos << endl;
             break;
         case dKey:
@@ -101,5 +102,30 @@ void Inputs::MouseUp()
 
 void Inputs::WheelMove(Model* model, double delta)
 {
-     model->zoom += (delta / 120); // 120 is the default WHEEL_DELTA value in windows.h. HThis will constrain zoom to +/- 1.0
+     model->zoom += (delta / 120); // 120 is the default WHEEL_DELTA value in windows.h. This will constrain zoom to +/- 1.0
+}
+void Inputs::KeyEnv(Parallax* plx, float speed)
+{
+    // handles background scrolling based on key inputs
+    const int aKey = 0x41, dKey = 0x44;
+
+    switch(wParam)
+    {
+    case aKey:
+        plx->xMin -= speed * DeltaTime::GetDeltaTime();
+        plx->xMax -= speed * DeltaTime::GetDeltaTime();
+        break;
+    case dKey:
+        plx->xMin += speed * DeltaTime::GetDeltaTime();
+        plx->xMax += speed * DeltaTime::GetDeltaTime();
+        break;
+    case VK_UP:
+        plx->yMin -= speed * DeltaTime::GetDeltaTime();
+        plx->yMax -= speed * DeltaTime::GetDeltaTime();
+        break;
+    case VK_DOWN:
+        plx->yMin += speed * DeltaTime::GetDeltaTime();
+        plx->yMax += speed * DeltaTime::GetDeltaTime();
+        break;
+    }
 }

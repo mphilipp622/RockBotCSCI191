@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <iostream>
 #include <Model.h>
+#include <Parallax.h>
 
 class Inputs
 {
@@ -13,6 +14,8 @@ class Inputs
 
         void KeyPressed(Model*);
         void KeyUp();
+        void KeyEnv(Parallax*, float); // movements of background
+
         void MouseDown(Model*, double, double);
         void MouseUp();
         void WheelMove(Model*, double);
