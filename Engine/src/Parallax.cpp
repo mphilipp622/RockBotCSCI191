@@ -1,5 +1,6 @@
 #include "Parallax.h"
 #include "TextureLoader.h"
+#include "DeltaTime.h"
 
 TextureLoader *backgroundTexture = new TextureLoader();
 
@@ -46,7 +47,31 @@ void Parallax::ParallaxInit(char* fileName)
     backgroundTexture->BindTexture(fileName);
 }
 
-void Parallax::Scroll(bool, string, float)
+// Scrolls the background based on directions
+void Parallax::Scroll(bool Auto, string dir, float speed)
 {
+    if(Auto)
+    {
+        if(dir == "up")
+        {
+            yMin -= speed * DeltaTime::GetDeltaTime();
+            yMax -= speed * DeltaTime::GetDeltaTime();
+        }
+        if(dir == "down")
+        {
 
+            yMin += speed * DeltaTime::GetDeltaTime();
+            yMax += speed * DeltaTime::GetDeltaTime();
+        }
+        if(dir == "left")
+        {
+            xMin -= speed * DeltaTime::GetDeltaTime();;
+            xMax -= speed * DeltaTime::GetDeltaTime();;
+        }
+        if(dir == "right")
+        {
+            xMin += speed * DeltaTime::GetDeltaTime();;
+            xMax += speed * DeltaTime::GetDeltaTime();;
+        }
+    }
 }

@@ -5,6 +5,7 @@
 #include <Model.h>
 #include <Inputs.h>
 #include "Parallax.h"
+#include "DeltaTime.h"
 
 Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
@@ -56,6 +57,7 @@ GLint GLScene::drawGLScene()
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
+    plx->Scroll(false, "up", 1);
     //modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
 }
 

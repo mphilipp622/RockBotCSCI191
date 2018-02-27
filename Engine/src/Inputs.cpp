@@ -24,6 +24,7 @@ void Inputs::KeyPressed(Model* model)
     {
         case aKey:
             model->xPos -= 0.1 * (model->acceleration+=0.098);
+//            plx->Scroll(true, "left", 1);
             cout << model->xPos << endl;
             break;
         case dKey:
