@@ -107,6 +107,7 @@ void Inputs::WheelMove(Model* model, double delta)
 void Inputs::KeyEnv(Parallax* plx, float speed)
 {
     // handles background scrolling based on key inputs
+
     const int aKey = 0x41, dKey = 0x44;
 
     switch(wParam)

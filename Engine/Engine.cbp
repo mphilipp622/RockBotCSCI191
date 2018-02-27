@@ -51,6 +51,7 @@
 		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/Model.h" />
 		<Unit filename="include/Parallax.h" />
+		<Unit filename="include/Player.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
@@ -59,6 +60,7 @@
 		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/Model.cpp" />
 		<Unit filename="src/Parallax.cpp" />
+		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
 		<Extensions>
 			<code_completion />

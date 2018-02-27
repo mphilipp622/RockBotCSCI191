@@ -6,9 +6,12 @@
 #include <Inputs.h>
 #include "Parallax.h"
 #include "DeltaTime.h"
+#include "Player.h"
+
 
 Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
+Player *newPlayer = new Player();
 
 // Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
@@ -50,7 +53,8 @@ GLint GLScene::drawGLScene()
     glLoadIdentity();
 
     glPushMatrix();
-    modelTeapot->DrawModel(); // render teapot
+    newPlayer->DrawPlayer();
+//    modelTeapot->DrawModel(); // render teapot
     glPopMatrix();
 
     glScaled(3.33, 3.33, 1);
@@ -58,7 +62,6 @@ GLint GLScene::drawGLScene()
 
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
-
 
 //    plx->Scroll(false, modelTeapot->direction, 1);
     //modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
