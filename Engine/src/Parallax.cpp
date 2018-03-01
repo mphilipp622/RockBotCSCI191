@@ -19,25 +19,21 @@ Parallax::~Parallax()
 
 void Parallax::DrawSquare(float width, float height)
 {
-    //glColor3f(1.0, 1.0, 1.0);
-
+    glColor3f(1.0,1.0,1.0);
     backgroundTexture->Binder();
+    glBegin(GL_POLYGON);
+        glTexCoord2f(xMin,yMin);
+        glVertex3f(-width/height,-1,-8.0f);
 
-    glBegin(GL_POLYGON); // begin drawing square
-    //Changed coordinations to push back the background further to open more room between the game scene and background
-    glTexCoord2f(xMin, yMin);
-    glVertex3f(3*(-width / height), -3.0f, -20.0f); // has z depth. Used for parallaxing. If character is on z = 0, will look good
+        glTexCoord2f(xMax,yMin);
+        glVertex3f(width/height,-1,-8.0f);
 
-    glTexCoord2f(xMax, yMin);
-    glVertex3f(3*(width / height), -3.0f, -20.0f); // has z depth. Could use 2f for 2D
+        glTexCoord2f(xMax,yMax);
+        glVertex3f(width/height,1,-8.0f);
 
-    glTexCoord2f(xMax, yMax);
-    glVertex3f(3*(width / height), 3.0f, -20.0f); // has z depth. Could use 2f for 2D
-
-    glTexCoord2f(xMin, yMax);
-    glVertex3f(3*(-width / height), 3.0f, -20.0f); // has z depth. Could use 2f for 2D
-
-    glEnd();
+        glTexCoord2f(xMin,yMax);
+        glVertex3f(-width/height,1,-8.0f);
+     glEnd();
 }
 
 void Parallax::ParallaxInit(char* fileName)

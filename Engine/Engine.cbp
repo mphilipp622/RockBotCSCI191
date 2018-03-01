@@ -53,6 +53,7 @@
 		<Unit filename="include/Parallax.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/TextureLoader.h" />
+		<Unit filename="include/Timer.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
 		<Unit filename="src/GLLight.cpp" />
@@ -62,6 +63,7 @@
 		<Unit filename="src/Parallax.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
+		<Unit filename="src/Timer.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

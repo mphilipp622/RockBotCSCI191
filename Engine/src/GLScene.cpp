@@ -40,10 +40,11 @@ GLint GLScene::initGL()
     GLLight Light(GL_LIGHT0);
 
     // Initialize Models Here
-    cout << "Model Initializing" << endl;
-    modelTeapot->InitModel("Images/MilkyWay.jpg");
     cout << "Parallax Initializing" << endl;
     plx->ParallaxInit("Images/background.jpg");
+    cout << "Model Initializing" << endl;
+    modelTeapot->InitModel("Images/Player/play.png", true);
+
     return true;
 }
 
@@ -53,14 +54,12 @@ GLint GLScene::drawGLScene()
     glLoadIdentity();
 
     glPushMatrix();
-    newPlayer->DrawPlayer();
-//    modelTeapot->DrawModel(); // render teapot
+    glScaled(3.33, 3.33, 1);
+    plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
-    glScaled(3.33, 3.33, 1);
-    glPushMatrix();
-
-    plx->DrawSquare(screenWidth, screenHeight); // draw background
+    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
+    modelTeapot->DrawModel(); // render teapot
     glPopMatrix();
 
 //    plx->Scroll(false, modelTeapot->direction, 1);

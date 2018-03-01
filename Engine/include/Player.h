@@ -8,17 +8,17 @@
 typedef struct
 {
     float x, y, z;
-}vec;
+}vec1;
 
 // class for player character. Inherits from Model for positions/rotations/etc.
-class Player : public Model
+class Player
 {
     public:
         Player();
         virtual ~Player();
 
         float scaleSize[3] = {1.0, 1.0, 1.0}; // x, y, z scale values
-        vec vertices[4]; // 4 vertices of xyz values
+        vec1 vertices[4]; // 4 vertices of xyz values
 
         // player stats
         int hp;
