@@ -4,6 +4,8 @@
 #include "SOIL.h"
 #include "gl/gl.h"
 #include <iostream>
+#include <Windows.h>
+
 
 using namespace std;
 
@@ -12,11 +14,12 @@ class TextureLoader
     public:
         TextureLoader();
         virtual ~TextureLoader();
-        void BindTexture(char*); //char* is filename
+        void BindTexture(string); //char* is filename
         void Binder();
         unsigned char* image;
         int width, height;
         GLuint tex;
+	
 
     protected:
 

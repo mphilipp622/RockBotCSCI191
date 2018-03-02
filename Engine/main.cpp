@@ -10,6 +10,8 @@
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
 
+#include <string>
+
 #include <GLScene.h>
 #include <stdlib.h>
 #include <iostream>
@@ -27,6 +29,7 @@ HINSTANCE	hInstance;		// Holds The Instance Of The Application
 bool	keys[256];			// Array Used For The Keyboard Routine
 bool	active=TRUE;		// Window Active Flag Set To TRUE By Default
 bool	fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+string gameName = "Game Engine";
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
@@ -86,7 +89,7 @@ GLvoid KillGLWindow()								// Properly Kill The Window
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //										THE CREATE GL WINDOW
 /////////////////////////////////////////////////////////////////////////////////////////////////
-BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscreenflag)
+BOOL CreateGLWindow(string title, int width, int height, int bits, bool fullscreenflag)
 {
 	GLuint		PixelFormat;			// Holds The Results After Searching For A Match
 	WNDCLASS	wc;						// Windows Class Structure
@@ -143,7 +146,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	// Create The Window
 	if (!(hWnd=CreateWindowEx(	dwExStyle,							// Extended Style For The Window
 								"OpenGL",							// Class Name
-								title,								// Window Title
+								title.c_str(),								// Window Title
 								dwStyle |							// Defined Window Style
 								WS_CLIPSIBLINGS |					// Required Window Style
 								WS_CLIPCHILDREN,					// Required Window Style
@@ -328,7 +331,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 //	}
 
 	// Create Our OpenGL Window
-	if (!CreateGLWindow("Game Engine Lesson 01",fullscreenWidth,fullscreenHeight,256,fullscreen))
+	if (!CreateGLWindow(gameName,fullscreenWidth,fullscreenHeight,256,fullscreen))
 	{
 		return 0;									// Quit If Window Was Not Created
 	}
@@ -366,7 +369,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				KillGLWindow();						// Kill Our Current Window
 				fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
 				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("Game Engine Lesson 01",fullscreenWidth,fullscreenHeight,256,fullscreen))
+				if (!CreateGLWindow(gameName,fullscreenWidth,fullscreenHeight,256,fullscreen))
 				{
 					return 0;						// Quit If Window Was Not Created
 				}

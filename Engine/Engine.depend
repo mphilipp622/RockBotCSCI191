@@ -85,82 +85,88 @@
 	<GL/gl.h>
 	<windows.h>
 
-1519437888 source:c:\users\sesat\documents\github\191\engine\main.cpp
+1519972719 source:c:\users\sesat\documents\github\191\engine\main.cpp
 	<windows.h>
+	<string>
 	<GLScene.h>
 	<stdlib.h>
 	<iostream>
 	<windows.h>
-	"DeltaTime.h"
 
-1519434073 c:\users\sesat\documents\github\191\engine\include\glscene.h
+1519972986 c:\users\sesat\documents\github\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
 
-1519434072 c:\users\sesat\documents\github\191\common\include\gl\glut.h
+1519971867 c:\users\sesat\documents\github\191\common\include\gl\glut.h
 	<windows.h>
 	<stdlib.h>
 	<GL/gl.h>
 	<GL/glu.h>
 
-1519434073 c:\users\sesat\documents\github\191\engine\include\deltatime.h
+1519971867 c:\users\sesat\documents\github\191\engine\include\deltatime.h
 
-1519434073 source:c:\users\sesat\documents\github\191\engine\src\deltatime.cpp
+1519971867 source:c:\users\sesat\documents\github\191\engine\src\deltatime.cpp
 	"DeltaTime.h"
 	<windows.h>
 	<glut.h>
 	<iostream>
 
-1519434073 source:c:\users\sesat\documents\github\191\engine\src\gllight.cpp
+1519971867 source:c:\users\sesat\documents\github\191\engine\src\gllight.cpp
 	"GLLight.h"
 
-1519434073 c:\users\sesat\documents\github\191\engine\include\gllight.h
+1519971867 c:\users\sesat\documents\github\191\engine\include\gllight.h
 	<GLScene.h>
 
-1519442660 source:c:\users\sesat\documents\github\191\engine\src\glscene.cpp
+1519975759 source:c:\users\sesat\documents\github\191\engine\src\glscene.cpp
 	"GLScene.h"
-	"GLLight.h"
+	<GLLight.h>
 	<Model.h>
 	<Inputs.h>
 	"Parallax.h"
+	"DeltaTime.h"
 
-1519684337 c:\users\sesat\documents\github\191\engine\include\model.h
+1519972422 c:\users\sesat\documents\github\191\engine\include\model.h
 	<windows.h>
 	"glut.h"
+	<string>
 
-1519434073 c:\users\sesat\documents\github\191\engine\include\inputs.h
+1519971867 c:\users\sesat\documents\github\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
+	<Parallax.h>
 
-1519434073 c:\users\sesat\documents\github\191\engine\include\parallax.h
+1519972363 c:\users\sesat\documents\github\191\engine\include\parallax.h
 	<string>
 	<GL/gl.h>
 	<windows.h>
 
-1519686524 source:c:\users\sesat\documents\github\191\engine\src\inputs.cpp
+1519971867 source:c:\users\sesat\documents\github\191\engine\src\inputs.cpp
 	"Inputs.h"
 	<iostream>
+	"DeltaTime.h"
 
-1519686380 source:c:\users\sesat\documents\github\191\engine\src\model.cpp
+1519972408 source:c:\users\sesat\documents\github\191\engine\src\model.cpp
 	"Model.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
 	<iostream>
 
-1519437029 c:\users\sesat\documents\github\191\engine\include\textureloader.h
+1519975304 c:\users\sesat\documents\github\191\engine\include\textureloader.h
 	"SOIL.h"
 	"gl/gl.h"
 	<iostream>
+	<Windows.h>
 
-1519434072 c:\users\sesat\documents\github\191\engine\common\include\soil.h
+1519971867 c:\users\sesat\documents\github\191\engine\common\include\soil.h
 
-1519442840 source:c:\users\sesat\documents\github\191\engine\src\parallax.cpp
+1519972363 source:c:\users\sesat\documents\github\191\engine\src\parallax.cpp
 	"Parallax.h"
 	"TextureLoader.h"
+	"DeltaTime.h"
 
-1519443225 source:c:\users\sesat\documents\github\191\engine\src\textureloader.cpp
+1519975806 source:c:\users\sesat\documents\github\191\engine\src\textureloader.cpp
 	"TextureLoader.h"
 	<SOIL.h>
 	"gl/gl.h"
@@ -178,5 +184,19 @@
 	"Timer.h"
 
 1519868407 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
+	<time.h>
+
+1519971867 source:c:\users\sesat\documents\github\191\engine\src\player.cpp
+	"Player.h"
+
+1519971867 c:\users\sesat\documents\github\191\engine\include\player.h
+	"GL/gl.h"
+	<Model.h>
+	<TextureLoader.h>
+
+1519971867 source:c:\users\sesat\documents\github\191\engine\src\timer.cpp
+	"Timer.h"
+
+1519971867 c:\users\sesat\documents\github\191\engine\include\timer.h
 	<time.h>
 

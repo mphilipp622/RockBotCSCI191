@@ -1,5 +1,7 @@
 // updated 2/7/18
 
+#pragma warning (disable : 4716)
+
 #include "GLScene.h"
 #include <GLLight.h>
 #include <Model.h>
@@ -41,9 +43,9 @@ GLint GLScene::initGL()
 
     // Initialize Models Here
     cout << "Parallax Initializing" << endl;
-    plx->ParallaxInit("Images/background.jpg");
+    plx->ParallaxInit(""); //Add in the entire path of the image you want to load for now
     cout << "Model Initializing" << endl;
-    modelTeapot->InitModel("Images/Player/play.png", true);
+    modelTeapot->InitModel("", true); //Add in the entire path of the image you want to load for now
 
     return true;
 }
@@ -65,6 +67,7 @@ GLint GLScene::drawGLScene()
     dTime->UpdateDeltaTime();
 //    plx->Scroll(false, "left", 1);
     //modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
+
 }
 
 GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
@@ -110,4 +113,5 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         case WM_RBUTTONDOWN:
             break;
 	}
+
 }

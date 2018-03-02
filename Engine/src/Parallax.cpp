@@ -36,7 +36,7 @@ void Parallax::DrawSquare(float width, float height)
      glEnd();
 }
 
-void Parallax::ParallaxInit(char* fileName)
+void Parallax::ParallaxInit(string fileName)
 {
     backgroundTexture->Binder();
     cout << "Loading Parallax: " << fileName << endl;

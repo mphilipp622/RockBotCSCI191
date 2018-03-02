@@ -16,18 +16,18 @@ TextureLoader::~TextureLoader()
     //dtor
 }
 
-void TextureLoader::BindTexture(char* fileName)
+void TextureLoader::BindTexture(string fileName)
 {
     glGenTextures(1, &tex);
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
     glBindTexture(GL_TEXTURE_2D, tex);
-    image = SOIL_load_image(fileName, &width, &height, 0, SOIL_LOAD_RGBA);
-
+    image = SOIL_load_image(fileName.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
+	
     if(!image)
         cout << "NO IMAGE LOADED" << endl;
     else
-        cout << "Loading Asset: " << fileName << endl << endl;
+        cout << "Loading Asset: " << fileName.c_str() << endl << endl;
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
     SOIL_free_image_data(image);

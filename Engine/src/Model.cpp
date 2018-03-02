@@ -75,7 +75,7 @@ void Model::DrawModel()
 //    glEnd();
 }
 
-void Model::InitModel(char* fileName, bool transparent)
+void Model::InitModel(string fileName, bool transparent)
 {
     if(transparent)
     {

@@ -3,6 +3,9 @@
 
 #include <windows.h>
 #include "glut.h"
+#include <string> 
+
+using namespace std;
 
 typedef struct
 {
@@ -15,7 +18,7 @@ class Model
         Model();
         virtual ~Model();
         void DrawModel();
-        void InitModel(char* fileName, bool transparent);
+        void InitModel(string fileName, bool transparent);
         void Jump();
         void Jump2();
         void Update();
