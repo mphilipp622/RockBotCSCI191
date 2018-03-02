@@ -1,17 +1,17 @@
 // updated 2/7/18
 
 #include "GLScene.h"
-#include "GLLight.h"
+#include <GLLight.h>
 #include <Model.h>
 #include <Inputs.h>
 #include "Parallax.h"
 #include "DeltaTime.h"
-#include "Player.h"
 
 
 Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
-Player *newPlayer = new Player();
+
+DeltaTime* dTime = new DeltaTime();
 
 // Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
@@ -31,8 +31,8 @@ GLScene::~GLScene()
 GLint GLScene::initGL()
 {
     glShadeModel(GL_SMOOTH); // Shading mode
-    glClearColor(0, 0, 0, 0); // set background color to black
-    glClearDepth(1.0); // depth buffer
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background color to black
+    glClearDepth(1.0f); // depth buffer
     glEnable(GL_DEPTH_TEST); // test to see what's in front and what's in back
     glDepthFunc(GL_LEQUAL);
 
@@ -62,7 +62,8 @@ GLint GLScene::drawGLScene()
     modelTeapot->DrawModel(); // render teapot
     glPopMatrix();
 
-//    plx->Scroll(false, modelTeapot->direction, 1);
+    dTime->UpdateDeltaTime();
+//    plx->Scroll(false, "left", 1);
     //modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
 }
 

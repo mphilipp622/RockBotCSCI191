@@ -19,7 +19,6 @@ class Inputs
         void MouseDown(Model*, double, double);
         void MouseUp();
         void WheelMove(Model*, double);
-        int GetDeltaTime();
 
         double prevMouseX, prevMouseY;
 

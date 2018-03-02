@@ -1,11 +1,10 @@
 # depslib dependency file v1.0
-1519867360 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+1519959024 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
 	<iostream>
 	<windows.h>
-	"DeltaTime.h"
 
 1519867768 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
@@ -18,37 +17,36 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1519867596 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1519960055 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	"GLScene.h"
-	"GLLight.h"
+	<GLLight.h>
 	<Model.h>
 	<Inputs.h>
 	"Parallax.h"
 	"DeltaTime.h"
-	"Player.h"
 
 1518048244 source:c:\users\seapanda\documents\college\191\191\engine\src\gllight.cpp
 	"GLLight.h"
 
-1518028024 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
+1519960587 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1519867544 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+1519960059 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	"Model.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
 	<iostream>
 
-1519863258 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1519868407 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
 	"glut.h"
 
-1519692458 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+1519868407 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	"Inputs.h"
 	<iostream>
 	"DeltaTime.h"
 
-1519691510 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+1519960833 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -77,7 +75,7 @@
 	<glut.h>
 	<iostream>
 
-1519865957 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
+1519960427 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
 	"Parallax.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
@@ -168,17 +166,17 @@
 	"gl/gl.h"
 	<iostream>
 
-1519863790 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1519868407 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	"Player.h"
 
-1519863972 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1519868407 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	"GL/gl.h"
 	<Model.h>
 	<TextureLoader.h>
 
-1519866990 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
+1519868407 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
 	"Timer.h"
 
-1519866761 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
+1519868407 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
 	<time.h>
 
