@@ -16,11 +16,17 @@ class Model
         virtual ~Model();
         void DrawModel();
         void InitModel(char* fileName, bool transparent);
+
+        // Character Controller Functions
         void Jump();
         void Jump2();
-        void Update();
         void NormalAttack(bool);
         void SetJump(bool);
+        void Move(float direction);
+        void StopMove();
+        void SlowDown();
+
+        void Update();
 
         double acceleration;
         double rotateX, rotateY, rotateZ;
@@ -32,9 +38,10 @@ class Model
     protected:
 
     private:
-        bool jump;
+        bool jump, slowDown;
         float jumpY;
         float initialY;
+        float xDirection;
 
 };
 

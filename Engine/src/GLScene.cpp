@@ -62,9 +62,9 @@ GLint GLScene::drawGLScene()
     modelTeapot->DrawModel(); // render teapot
     glPopMatrix();
 
-    dTime->UpdateDeltaTime();
 //    plx->Scroll(false, "left", 1);
-    //modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
+    modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
+    dTime->UpdateDeltaTime();
 }
 
 GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
@@ -91,7 +91,7 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         case WM_KEYUP:
             keyboardAndMouse->wParam = wParam;
-            keyboardAndMouse->KeyUp();
+            keyboardAndMouse->KeyUp(modelTeapot);
             break;
 
         case WM_MOUSEMOVE:

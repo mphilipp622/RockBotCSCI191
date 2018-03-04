@@ -24,12 +24,14 @@ void Inputs::KeyPressed(Model* model)
     switch(wParam)
     {
         case aKey:
-            model->xPos -= 0.1 * (model->acceleration+=0.098);
+            model->Move(-1.0);
+//            model->xPos -= 0.1 * (model->acceleration+=0.098);
 //            model->direction = "left";
-            cout << model->xPos << endl;
+//            cout << model->xPos << endl;
             break;
         case dKey:
-            model->xPos += 0.1 * (model->acceleration+=0.098);
+            model->Move(1.0);
+//            model->xPos += 0.1 * (model->acceleration+=0.098);
             break;
         case VK_SPACE:
             model->SetJump(true);
@@ -70,9 +72,18 @@ void Inputs::KeyPressed(Model* model)
     }
 }
 
-void Inputs::KeyUp()
+void Inputs::KeyUp(Model* model)
 {
-
+    const int aKey = 0x41, dKey = 0x44, cKey = 0x43, bKey = 0x42;
+    switch(wParam)
+    {
+        case aKey:
+            model->SlowDown();
+            break;
+        case dKey:
+            model->SlowDown();
+            break;
+    }
 }
 
 void Inputs::MouseDown(Model* model, double xNew, double yNew)

@@ -13,7 +13,7 @@ class Inputs
         virtual ~Inputs();
 
         void KeyPressed(Model*);
-        void KeyUp();
+        void KeyUp(Model* model);
         void KeyEnv(Parallax*, float); // movements of background
 
         void MouseDown(Model*, double, double);

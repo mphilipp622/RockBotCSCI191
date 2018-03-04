@@ -7,7 +7,6 @@ using namespace std;
 
 TextureLoader* texture = new TextureLoader();
 
-
 Model::Model()
 {
     // rotations
@@ -30,6 +29,7 @@ Model::Model()
     gravity = 0.98;
     acceleration = 0.0;
     jump = false;
+    slowDown = false;
 }
 
 Model::~Model()
@@ -116,8 +116,9 @@ void Model::Update()
 {
     if(jump)
         Jump();
-
-   cout <<"" << endl; // WHY? Why does it need something here?
+    if(slowDown)
+        StopMove();
+//   cout <<"" << endl; // WHY? Why does it need something here?
 }
 
 void Model::SetJump(bool newVal)
@@ -128,4 +129,33 @@ void Model::SetJump(bool newVal)
         jumpY = yPos + 2.0;
         initialY = yPos;
     }
+}
+
+void Model::Move(float direction)
+{
+    xDirection = direction; // set local x direction for use with slow down mechanics later
+
+    if(acceleration < 2.0)
+        acceleration += .098;
+
+    xPos += (direction * acceleration) * DeltaTime::GetDeltaTime();
+}
+
+void Model::SlowDown()
+{
+    slowDown = true;
+}
+
+void Model::StopMove()
+{
+    if(acceleration > 0)
+        acceleration -= .098;
+    else
+    {
+        slowDown = false; // once acceleration is 0, we no longer need to slow down.
+        xDirection = 0;
+        acceleration = 0;
+    }
+    cout << acceleration << endl;
+    xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 }
