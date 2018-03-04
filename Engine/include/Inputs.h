@@ -5,6 +5,8 @@
 #include <iostream>
 #include <Model.h>
 #include <Parallax.h>
+#include <unordered_map>
+#include <string>
 
 class Inputs
 {
@@ -27,6 +29,7 @@ class Inputs
     protected:
 
     private:
+        std::unordered_map<std::string, bool> keys;
 };
 
 #endif // INPUTS_H

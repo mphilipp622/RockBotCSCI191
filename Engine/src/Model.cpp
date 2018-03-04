@@ -28,8 +28,13 @@ Model::Model()
     // physics
     gravity = 0.98;
     acceleration = 0.0;
+    accelRate = 0.05;
+    deceleration = 0.2; // rate of deceleration
+    maxAcceleration = 2.0;
     jump = false;
     slowDown = false;
+    gravity = -9.80;
+    moving = false;
 }
 
 Model::~Model()
@@ -88,20 +93,21 @@ void Model::InitModel(char* fileName, bool transparent)
 
 }
 
-void Model::Jump()
+void Model::Update()
 {
-    // Will probably move this into a player class later
-    if(yPos < jumpY)
-        yPos += 1 * DeltaTime::GetDeltaTime();
-    else if(yPos > initialY)
+    if(moving)
     {
-        yPos -= 1 * DeltaTime::GetDeltaTime();
-        jumpY = initialY; // reset this so we fall. Will replace with physics later.
+        if(xDirection > 0)
+            MoveRight();
+        else if(xDirection < 0)
+            MoveLeft();
     }
-    else
-        jump = false;
+    if(jump)
+        Jump();
+    if(slowDown)
+        StopMove();
+//   cout <<"" << endl; // WHY? Why does it need something here?
 }
-
 
 void Model::NormalAttack(bool newVal)
 {
@@ -112,50 +118,109 @@ void Model::NormalAttack(bool newVal)
 
 }
 
-void Model::Update()
+void Model::StartJump()
 {
     if(jump)
-        Jump();
-    if(slowDown)
-        StopMove();
-//   cout <<"" << endl; // WHY? Why does it need something here?
+        return; // if we're already jumping, don't allow another jump
+
+    jump = true;
+    jumpVelocity = 4.0;
+    initialY = yPos;
 }
 
-void Model::SetJump(bool newVal)
+void Model::Jump()
 {
-    jump = newVal;
-    if(jump)
+    // Will probably move this into a player class later
+//    if(yPos < jumpY)
+    jumpVelocity += gravity * DeltaTime::GetDeltaTime();
+    yPos += jumpVelocity * DeltaTime::GetDeltaTime();
+    if(yPos <= initialY)
     {
-        jumpY = yPos + 2.0;
-        initialY = yPos;
+        yPos = initialY;
+        jump = false;
     }
+//    else if(yPos > initialY)
+//    {
+//        yPos -= 1.0 * DeltaTime::GetDeltaTime();
+//        jumpY = initialY; // reset this so we fall. Will replace with physics later.
+//    }
+//    else
+//        jump = false;
 }
 
-void Model::Move(float direction)
+void Model::StartMove(float dir)
 {
-    xDirection = direction; // set local x direction for use with slow down mechanics later
+    xDirection = dir;
+    moving = true;
+}
 
-    if(acceleration < 2.0)
-        acceleration += .098;
+void Model::MoveLeft()
+{
+    slowDown = false;
 
-    xPos += (direction * acceleration) * DeltaTime::GetDeltaTime();
+    xDirection = -1.0;
+
+    if(acceleration > -maxAcceleration)
+        acceleration -= accelRate;
+
+    if(acceleration < -maxAcceleration)
+        acceleration = -maxAcceleration;
+
+    xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+}
+
+void Model::MoveRight()
+{
+    slowDown = false;
+
+    xDirection = 1.0;
+
+    if(acceleration < maxAcceleration)
+        acceleration += accelRate;
+
+    if(acceleration > maxAcceleration)
+        acceleration = maxAcceleration;
+
+    xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 }
 
 void Model::SlowDown()
 {
+    prevXDirection = xDirection;
     slowDown = true;
+    moving = false;
 }
 
 void Model::StopMove()
 {
-    if(acceleration > 0)
-        acceleration -= .098;
-    else
+    moving = false;
+    if(prevXDirection > 0)
     {
-        slowDown = false; // once acceleration is 0, we no longer need to slow down.
-        xDirection = 0;
-        acceleration = 0;
+        // if we're moving right, execute different code
+
+        if(acceleration > 0)
+            acceleration -= deceleration;
+        else
+        {
+            slowDown = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        xPos += (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
     }
-    cout << acceleration << endl;
-    xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+    else if(prevXDirection < 0)
+    {
+        // Code for left direction slow down
+
+        if(acceleration < 0)
+            acceleration += deceleration;
+        else
+        {
+            slowDown = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        xPos -= (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
+    }
+
 }
