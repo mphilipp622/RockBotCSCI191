@@ -17,13 +17,14 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1520123813 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1520299199 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	"GLScene.h"
 	<GLLight.h>
 	<Model.h>
 	<Inputs.h>
 	"Parallax.h"
 	"DeltaTime.h"
+	<Player.h>
 
 1518048244 source:c:\users\seapanda\documents\college\191\191\engine\src\gllight.cpp
 	"GLLight.h"
@@ -31,29 +32,30 @@
 1519961014 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1520200784 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+1520298508 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	"Model.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
 	<iostream>
 
-1520200754 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1520298589 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
 	"glut.h"
 
-1520200423 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+1520298569 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	"Inputs.h"
 	<iostream>
 	"DeltaTime.h"
 	<string>
 
-1520200876 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+1520298551 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
 	<Parallax.h>
 	<unordered_map>
 	<string>
+	<Player.h>
 
 1215479608 c:\users\seapanda\documents\college\191\191\soil\simple opengl image library\src\soil.h
 
@@ -169,13 +171,17 @@
 	"gl/gl.h"
 	<iostream>
 
-1519960999 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
-	"Player.h"
+1520299063 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+	<Player.h>
+	<Timer.h>
+	<TextureLoader.h>
+	<string>
 
-1519960999 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1520298611 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	"GL/gl.h"
 	<Model.h>
 	<TextureLoader.h>
+	<DeltaTime.h>
 
 1519960999 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
 	"Timer.h"

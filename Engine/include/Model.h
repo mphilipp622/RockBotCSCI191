@@ -17,20 +17,7 @@ class Model
         void DrawModel();
         void InitModel(char* fileName, bool transparent);
 
-        void Update();
-
-        // Character Controller Functions
-        void Jump();
-        void Jump2();
-        void NormalAttack(bool);
-        void StartJump();
-
-        // x Movement
-        void StartMove(float dir);
-        void MoveLeft();
-        void MoveRight();
-        void StopMove();
-        void SlowDown();
+        void InitPlayer();
 
         double rotateX, rotateY, rotateZ;
         double zoom;
@@ -40,12 +27,6 @@ class Model
     protected:
 
     private:
-        bool jump, slowDown, moving;
-        float jumpVelocity;
-        float initialY;
-        float xDirection, prevXDirection;
-        float acceleration, accelRate, maxAcceleration, deceleration;
-        float gravity;
 
 };
 

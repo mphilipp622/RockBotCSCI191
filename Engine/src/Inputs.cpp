@@ -17,50 +17,50 @@ Inputs::~Inputs()
 float acceleration = 0.0;
 //Global variable for acceleration, might want to
 //implement into the model class later on.
-void Inputs::KeyPressed(Model* model)
+void Inputs::KeyPressed(Player* model)
 {
     // Handle key presses for model passed to this function
     const int aKey = 0x41, dKey = 0x44, cKey = 0x43, bKey = 0x42;
 
     // Use the unordered map of booleans to keep track of which keys are pressed. This allows multiple keys being pressed at once
-    if(!keys["a"] && wParam == aKey)
+    if(!keys["MoveLeft"] && wParam == aKey)
     {
         model->StartMove(-1.0);
-        keys["a"] = true;
+        keys["MoveLeft"] = true;
     }
-    if(!keys["d"] && wParam == dKey)
+    if(!keys["MoveRight"] && wParam == dKey)
     {
         model->StartMove(1.0);
-        keys["d"] = true;
+        keys["MoveRight"] = true;
     }
-    if (!keys["space"] && wParam == VK_SPACE)
+    if (!keys["Jump"] && wParam == VK_SPACE)
     {
         model->StartJump();
-        keys["space"] = true;
+        keys["Jump"] = true;
     }
 }
 
-void Inputs::KeyUp(Model* model)
+void Inputs::KeyUp(Player* model)
 {
     const int aKey = 0x41, dKey = 0x44, cKey = 0x43, bKey = 0x42;
 
-    if(keys["a"] && wParam == aKey)
+    if(keys["MoveLeft"] && wParam == aKey)
     {
         model->SlowDown();
-        keys["a"] = false;
+        keys["MoveLeft"] = false;
     }
-    if (keys["d"] && wParam == dKey)
+    if (keys["MoveRight"] && wParam == dKey)
     {
         model->SlowDown();
-        keys["d"] = false;
+        keys["MoveRight"] = false;
     }
-    if(keys["space"] && wParam == VK_SPACE)
+    if(keys["Jump"] && wParam == VK_SPACE)
     {
-        keys["space"] = false;
+        keys["Jump"] = false;
     }
 }
 
-void Inputs::MouseDown(Model* model, double xNew, double yNew)
+void Inputs::MouseDown(Player* model, double xNew, double yNew)
 {
     double currentX = xNew - prevMouseX;
     double currentY = yNew - prevMouseY;
@@ -80,7 +80,7 @@ void Inputs::MouseUp()
 
 }
 
-void Inputs::WheelMove(Model* model, double delta)
+void Inputs::WheelMove(Player* model, double delta)
 {
      model->zoom += (delta / 120); // 120 is the default WHEEL_DELTA value in windows.h. This will constrain zoom to +/- 1.0
 }

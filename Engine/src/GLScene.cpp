@@ -6,10 +6,12 @@
 #include <Inputs.h>
 #include "Parallax.h"
 #include "DeltaTime.h"
+#include <Player.h>
 
 
-Model *modelTeapot = new Model();
+//Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
+Player *testPlayer = new Player();
 
 DeltaTime* dTime = new DeltaTime();
 
@@ -42,8 +44,9 @@ GLint GLScene::initGL()
     // Initialize Models Here
     cout << "Parallax Initializing" << endl;
     plx->ParallaxInit("Images/background.jpg");
-    cout << "Model Initializing" << endl;
-    modelTeapot->InitModel("Images/Player/play.png", true);
+//    cout << "Model Initializing" << endl;
+    testPlayer->InitPlayer();
+//    modelTeapot->InitModel("Images/Player/play.png", true);
 
     return true;
 }
@@ -58,12 +61,14 @@ GLint GLScene::drawGLScene()
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
-    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
-    modelTeapot->DrawModel(); // render teapot
-    glPopMatrix();
+//    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
+////    modelTeapot->DrawModel(); // render teapot
+//    testPlayer->Actions(0);
+//    glPopMatrix();
 
 //    plx->Scroll(false, "left", 1);
-    modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
+    testPlayer->Update();
+//    modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
     dTime->UpdateDeltaTime();
 }
 
@@ -85,22 +90,22 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
         case WM_KEYDOWN:
             keyboardAndMouse->wParam = wParam;
-            keyboardAndMouse->KeyPressed(modelTeapot);
+            keyboardAndMouse->KeyPressed(testPlayer);
             keyboardAndMouse->KeyEnv(plx, 0.1);
             break;
 
         case WM_KEYUP:
             keyboardAndMouse->wParam = wParam;
-            keyboardAndMouse->KeyUp(modelTeapot);
+            keyboardAndMouse->KeyUp(testPlayer);
             break;
 
         case WM_MOUSEMOVE:
             keyboardAndMouse->wParam = wParam;
-            keyboardAndMouse->MouseDown(modelTeapot, LOWORD(lParam), HIWORD(lParam));
+            keyboardAndMouse->MouseDown(testPlayer, LOWORD(lParam), HIWORD(lParam));
             break;
 
         case WM_MOUSEWHEEL:
-            keyboardAndMouse->WheelMove(modelTeapot, GET_WHEEL_DELTA_WPARAM(wParam));
+            keyboardAndMouse->WheelMove(testPlayer, GET_WHEEL_DELTA_WPARAM(wParam));
             break;
 
 //        case WM_LBUTTONDOWN:
