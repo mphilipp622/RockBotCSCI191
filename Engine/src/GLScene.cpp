@@ -2,7 +2,6 @@
 
 #include "GLScene.h"
 #include <GLLight.h>
-#include <Model.h>
 #include <Inputs.h>
 #include "Parallax.h"
 #include "DeltaTime.h"
@@ -12,6 +11,7 @@
 //Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
 Player *testPlayer = new Player();
+Model *block = new Model(1.0, 0.5, "block");
 
 DeltaTime* dTime = new DeltaTime();
 
@@ -22,12 +22,20 @@ GLScene::GLScene()
 {
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
+
+    movableObjects.push_back(testPlayer);
+    staticObjects.push_back(block);
 }
 
 GLScene::~GLScene()
 {
 
 }
+
+// Static Variables for use in player class to check collision
+vector<Model*> GLScene::movableObjects;
+vector<Model*> GLScene::staticObjects;
+
 
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
@@ -46,6 +54,7 @@ GLint GLScene::initGL()
     plx->ParallaxInit("Images/background.jpg");
 //    cout << "Model Initializing" << endl;
     testPlayer->InitPlayer();
+    block->InitModel("Images/Block.png", true);
 //    modelTeapot->InitModel("Images/Player/play.png", true);
 
     return true;
@@ -61,13 +70,16 @@ GLint GLScene::drawGLScene()
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
-//    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
-////    modelTeapot->DrawModel(); // render teapot
-//    testPlayer->Actions(0);
-//    glPopMatrix();
+    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
+    block->DrawModel();
+    glPopMatrix();
 
 //    plx->Scroll(false, "left", 1);
     testPlayer->Update();
+//    if(testPlayer->Collision(block))
+//        cout << "COLLIDE" << endl;
+//    else
+//        cout << "" << endl;
 //    modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
     dTime->UpdateDeltaTime();
 }

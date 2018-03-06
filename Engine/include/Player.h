@@ -45,6 +45,7 @@ class Player : public Model
         void MoveRight();
         void StopMove();
         void SlowDown();
+//        void SetVertices();
     protected:
 
     private:
@@ -54,6 +55,8 @@ class Player : public Model
         float xDirection, prevXDirection;
         float acceleration, accelRate, maxAcceleration, deceleration;
         float gravity;
+
+        void CheckCollision();
 };
 
 #endif // PLAYER_H

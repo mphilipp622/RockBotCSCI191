@@ -6,6 +6,8 @@
 #include <windows.h>
 #include <glut.h>
 #include <iostream>
+#include <vector>
+#include <Model.h>
 
 using namespace std;
 
@@ -22,6 +24,9 @@ class GLScene
 
         WPARAM wParam;
         float screenHeight, screenWidth;
+
+        static vector<Model*> movableObjects; // only moving objects will check for collision
+        static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
 
     protected:
 

@@ -38,6 +38,8 @@ void Inputs::KeyPressed(Player* model)
         model->StartJump();
         keys["Jump"] = true;
     }
+//    if(wParam == VK_RIGHT)
+//        model->SetVertices();
 }
 
 void Inputs::KeyUp(Player* model)

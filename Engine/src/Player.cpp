@@ -2,6 +2,7 @@
 #include <Timer.h>
 #include <TextureLoader.h>
 #include <string>
+#include <GLScene.h>
 
 Timer *T = new Timer();
 TextureLoader run[10];
@@ -10,21 +11,25 @@ TextureLoader jumpAnim[1];
 
 Player::Player()
 {
+    // Collision
+    width = 1.0;
+    height = 1.0;
+
     // Initialize Quad
     vertices[0].x = 0.0;
     vertices[0].y = 0.0;
     vertices[0].z = -1.0;
 
-    vertices[1].x = 1.0;
+    vertices[1].x = width;
     vertices[1].y = 0.0;
     vertices[1].z = -1.0;
 
-    vertices[2].x = 1.0;
-    vertices[2].y = 1.0;
+    vertices[2].x = width;
+    vertices[2].y = height;
     vertices[2].z = -1.0;
 
     vertices[3].x = 0.0;
-    vertices[3].y = 1.0;
+    vertices[3].y = height;
     vertices[3].z = -1.0;
 
     moveSpeed = 1.0;
@@ -53,6 +58,28 @@ Player::~Player()
     //dtor
 }
 
+//void Player::SetVertices()
+//{
+//    height += 0.1;
+//    width += 0.1;
+//
+//    // Initialize Quad
+//    vertices[0].x = 0.0;
+//    vertices[0].y = 0.0;
+//    vertices[0].z = -1.0;
+//
+//    vertices[1].x = width;
+//    vertices[1].y = 0.0;
+//    vertices[1].z = -1.0;
+//
+//    vertices[2].x = width;
+//    vertices[2].y = height;
+//    vertices[2].z = -1.0;
+//
+//    vertices[3].x = 0.0;
+//    vertices[3].y = height;
+//    vertices[3].z = -1.0;
+//}
 void Player::DrawPlayer()
 {
     glColor3f(1.0, 1.0, 1.0);
@@ -169,6 +196,9 @@ void Player::Update()
 
     if(slowDown)
         StopMove();
+
+    CheckCollision();
+
 //   cout <<"" << endl; // WHY? Why does it need something here?
 }
 
@@ -279,4 +309,14 @@ void Player::StopMove()
         xPos -= (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
     }
 
+}
+
+void Player::CheckCollision()
+{
+    for(auto& model : GLScene::staticObjects)
+    {
+        if(Collision(model))
+            cout << "Collision with " << model->GetName() << endl;
+//        else cout << " " << endl;
+    }
 }

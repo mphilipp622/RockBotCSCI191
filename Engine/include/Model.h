@@ -3,6 +3,9 @@
 
 #include <windows.h>
 #include "glut.h"
+#include <string>
+
+using namespace std;
 
 typedef struct
 {
@@ -13,6 +16,7 @@ class Model
 {
     public:
         Model();
+        Model(float, float, string);
         virtual ~Model();
         void DrawModel();
         void InitModel(char* fileName, bool transparent);
@@ -24,10 +28,21 @@ class Model
         double xPos, yPos;
 //        string direction;
         vec vertices[4];
+
+        // collision getters
+        double GetX();
+        double GetY();
+        double GetWidth();
+        double GetHeight();
+
+        bool Collision(Model*);
+
+        string GetName();
     protected:
-
+        float width, height;
+        string name;
     private:
-
+        bool Overlapping(double min0, double max0, double min1, double max1);
 };
 
 #endif // MODEL_H

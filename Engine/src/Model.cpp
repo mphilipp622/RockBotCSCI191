@@ -27,6 +27,28 @@ Model::Model()
 
 }
 
+Model::Model(float newWidth, float newHeight, string newName)
+{
+    width = newWidth;
+    height = newHeight;
+    name = newName;
+
+    rotateX = 0;
+    rotateY = 0;
+    rotateZ = 0;
+
+    // translations
+    zoom = -4.0;
+    xPos = 1.0;
+    yPos = -0.5;
+
+    // Create Square
+    vertices[0].x = 0.0; vertices[0].y = 0.0; vertices[0].z = 1.0;
+    vertices[1].x = width; vertices[1].y = 0.0; vertices[1].z = 1.0;
+    vertices[2].x = width; vertices[2].y = height; vertices[2].z = 1.0;
+    vertices[3].x = 0.0; vertices[3].y = height; vertices[3].z = 1.0;
+}
+
 Model::~Model()
 {
 
@@ -83,4 +105,38 @@ void Model::InitModel(char* fileName, bool transparent)
 
 }
 
+bool Model::Collision(Model* collider)
+{
+    return Overlapping(xPos, xPos + width, collider->GetX(), collider->GetX() + collider->GetWidth()) &&
+           Overlapping(yPos, yPos + height, collider->GetY(), collider->GetY() + collider->GetHeight());
+}
 
+bool Model::Overlapping(double min0, double max0, double min1, double max1)
+{
+    return (max0 >= min1 && min0 <= max1);
+}
+
+double Model::GetX()
+{
+    return xPos;
+}
+
+double Model::GetY()
+{
+    return yPos;
+}
+
+double Model::GetWidth()
+{
+    return width;
+}
+
+double Model::GetHeight()
+{
+    return height;
+}
+
+string Model::GetName()
+{
+    return name;
+}
