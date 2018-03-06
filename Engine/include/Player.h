@@ -45,6 +45,8 @@ class Player : public Model
         void MoveRight();
         void StopMove();
         void SlowDown();
+
+        void ApplyGravity();
 //        void SetVertices();
     protected:
 
@@ -53,6 +55,7 @@ class Player : public Model
         float jumpVelocity;
         float initialY;
         float xDirection, prevXDirection;
+        float prevXPos, prevYPos;
         float acceleration, accelRate, maxAcceleration, deceleration;
         float gravity;
 

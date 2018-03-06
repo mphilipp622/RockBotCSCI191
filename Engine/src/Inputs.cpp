@@ -38,8 +38,8 @@ void Inputs::KeyPressed(Player* model)
         model->StartJump();
         keys["Jump"] = true;
     }
-//    if(wParam == VK_RIGHT)
-//        model->SetVertices();
+    if(wParam == VK_RIGHT)
+        model->ApplyGravity();
 }
 
 void Inputs::KeyUp(Player* model)

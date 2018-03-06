@@ -15,6 +15,10 @@ Player::Player()
     width = 1.0;
     height = 1.0;
 
+    // set previous positions to our starting position
+    prevXPos = xPos;
+    prevYPos = yPos;
+
     // Initialize Quad
     vertices[0].x = 0.0;
     vertices[0].y = 0.0;
@@ -193,6 +197,8 @@ void Player::Update()
         Jump();
         Actions(2);
     }
+    else
+        ApplyGravity();
 
     if(slowDown)
         StopMove();
@@ -226,12 +232,19 @@ void Player::Jump()
     // Will probably move this into a player class later
 //    if(yPos < jumpY)
     jumpVelocity += gravity * DeltaTime::GetDeltaTime();
+    prevYPos = yPos;
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
     if(yPos <= initialY)
     {
         yPos = initialY;
         jump = false;
     }
+}
+
+void Player::ApplyGravity()
+{
+    prevYPos = yPos;
+    yPos += gravity * 0.0001;
 }
 
 void Player::StartMove(float dir)
@@ -252,6 +265,7 @@ void Player::MoveLeft()
     if(acceleration < -maxAcceleration)
         acceleration = -maxAcceleration;
 
+    prevXPos = xPos;
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 }
 
@@ -267,6 +281,7 @@ void Player::MoveRight()
     if(acceleration > maxAcceleration)
         acceleration = maxAcceleration;
 
+    prevXPos = xPos;
     xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 }
 
@@ -315,8 +330,21 @@ void Player::CheckCollision()
 {
     for(auto& model : GLScene::staticObjects)
     {
-        if(Collision(model))
-            cout << "Collision with " << model->GetName() << endl;
+        if(Collision(model) && !GroundCheck(model))
+        {
+            xPos = prevXPos;
+            yPos = prevYPos;
+
+//            if(GroundCheck(model))
+//                cout << "Hi" << endl;
+//                jump = false;
+        }
+        else if(Collision(model) && GroundCheck(model))
+        {
+            yPos = prevYPos;
+        }
+//            jump = false;
+//            cout << "Collision with " << model->GetName() << endl;
 //        else cout << " " << endl;
     }
 }

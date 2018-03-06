@@ -25,7 +25,6 @@ class Model
 
         double rotateX, rotateY, rotateZ;
         double zoom;
-        double xPos, yPos;
 //        string direction;
         vec vertices[4];
 
@@ -34,15 +33,19 @@ class Model
         double GetY();
         double GetWidth();
         double GetHeight();
-
-        bool Collision(Model*);
+        void SetPosition(double, double);
 
         string GetName();
     protected:
         float width, height;
+        double xPos, yPos;
         string name;
+        bool GroundCheck(Model*);
+        bool Collision(Model*);
+
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);
+        bool OverlapGround(double maxY, double minY);
 };
 
 #endif // MODEL_H

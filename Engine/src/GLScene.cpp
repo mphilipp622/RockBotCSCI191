@@ -10,8 +10,9 @@
 
 //Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
-Player *testPlayer = new Player();
 Model *block = new Model(1.0, 0.5, "block");
+Model *ground = new Model(1.0, 0.5, "ground");
+Player *testPlayer = new Player();
 
 DeltaTime* dTime = new DeltaTime();
 
@@ -25,6 +26,7 @@ GLScene::GLScene()
 
     movableObjects.push_back(testPlayer);
     staticObjects.push_back(block);
+    staticObjects.push_back(ground);
 }
 
 GLScene::~GLScene()
@@ -53,8 +55,12 @@ GLint GLScene::initGL()
     cout << "Parallax Initializing" << endl;
     plx->ParallaxInit("Images/background.jpg");
 //    cout << "Model Initializing" << endl;
-    testPlayer->InitPlayer();
+
+    block->SetPosition(1.0, -0.5);
     block->InitModel("Images/Block.png", true);
+    ground->InitModel("Images/Block.png", true);
+    ground->SetPosition(-2.0, -0.5);
+    testPlayer->InitPlayer();
 //    modelTeapot->InitModel("Images/Player/play.png", true);
 
     return true;
@@ -74,6 +80,9 @@ GLint GLScene::drawGLScene()
     block->DrawModel();
     glPopMatrix();
 
+    glPushMatrix();
+    ground->DrawModel();
+    glPopMatrix();
 //    plx->Scroll(false, "left", 1);
     testPlayer->Update();
 //    if(testPlayer->Collision(block))

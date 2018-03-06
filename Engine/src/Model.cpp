@@ -39,8 +39,8 @@ Model::Model(float newWidth, float newHeight, string newName)
 
     // translations
     zoom = -4.0;
-    xPos = 1.0;
-    yPos = -0.5;
+    xPos = 0;
+    yPos = 0;
 
     // Create Square
     vertices[0].x = 0.0; vertices[0].y = 0.0; vertices[0].z = 1.0;
@@ -116,6 +116,17 @@ bool Model::Overlapping(double min0, double max0, double min1, double max1)
     return (max0 >= min1 && min0 <= max1);
 }
 
+bool Model::OverlapGround(double maxY, double minY)
+{
+    return (maxY >= minY);
+}
+
+bool Model::GroundCheck(Model* collider)
+{
+    return OverlapGround(yPos + height, -collider->GetY());
+}
+
+
 double Model::GetX()
 {
     return xPos;
@@ -139,4 +150,10 @@ double Model::GetHeight()
 string Model::GetName()
 {
     return name;
+}
+
+void Model::SetPosition(double newX, double newY)
+{
+    xPos = newX;
+    yPos = newY;
 }
