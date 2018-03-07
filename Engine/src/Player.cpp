@@ -223,7 +223,7 @@ void Player::StartJump()
         return; // if we're already jumping, don't allow another jump
 
     jump = true;
-    jumpVelocity = 4.0;
+    jumpVelocity = 6.0;
     initialY = yPos;
 }
 
@@ -244,7 +244,7 @@ void Player::Jump()
 void Player::ApplyGravity()
 {
     prevYPos = yPos;
-    yPos += gravity * 0.0001;
+    yPos += gravity * DeltaTime::GetDeltaTime() * 0.01;
 }
 
 void Player::StartMove(float dir)
@@ -334,13 +334,14 @@ void Player::CheckCollision()
         {
             xPos = prevXPos;
             yPos = prevYPos;
-
+            cout << "Collide With " << model->GetName() << endl;
 //            if(GroundCheck(model))
 //                cout << "Hi" << endl;
 //                jump = false;
         }
         else if(Collision(model) && GroundCheck(model))
         {
+            cout << "Ground Check " << model->GetName() << endl;
             yPos = prevYPos;
         }
 //            jump = false;

@@ -16,7 +16,7 @@ class Model
 {
     public:
         Model();
-        Model(float, float, string);
+        Model(float, float, double, double, string);
         virtual ~Model();
         void DrawModel();
         void InitModel(char* fileName, bool transparent);
@@ -31,9 +31,10 @@ class Model
         // collision getters
         double GetX();
         double GetY();
-        double GetWidth();
-        double GetHeight();
+        float GetWidth();
+        float GetHeight();
         void SetPosition(double, double);
+        void SetWidth(double);
 
         string GetName();
     protected:

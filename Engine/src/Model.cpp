@@ -2,6 +2,7 @@
 #include "TextureLoader.h"
 #include "DeltaTime.h"
 #include <iostream>
+#include <algorithm> // max and min
 
 using namespace std;
 
@@ -27,10 +28,11 @@ Model::Model()
 
 }
 
-Model::Model(float newWidth, float newHeight, string newName)
+Model::Model(float newWidth, float newHeight, double newX, double newY, string newName)
 {
     width = newWidth;
     height = newHeight;
+
     name = newName;
 
     rotateX = 0;
@@ -39,8 +41,8 @@ Model::Model(float newWidth, float newHeight, string newName)
 
     // translations
     zoom = -4.0;
-    xPos = 0;
-    yPos = 0;
+    xPos = newX;
+    yPos = newY;
 
     // Create Square
     vertices[0].x = 0.0; vertices[0].y = 0.0; vertices[0].z = 1.0;
@@ -113,17 +115,17 @@ bool Model::Collision(Model* collider)
 
 bool Model::Overlapping(double min0, double max0, double min1, double max1)
 {
-    return (max0 >= min1 && min0 <= max1);
+    return max0 >= min1 && min0 <= max1;
 }
 
 bool Model::OverlapGround(double maxY, double minY)
 {
-    return (maxY >= minY);
+    return minY == maxY;
 }
 
 bool Model::GroundCheck(Model* collider)
 {
-    return OverlapGround(yPos + height, -collider->GetY());
+    return Collision(collider) && OverlapGround(collider->GetY(), yPos + height);
 }
 
 
@@ -137,12 +139,12 @@ double Model::GetY()
     return yPos;
 }
 
-double Model::GetWidth()
+float Model::GetWidth()
 {
     return width;
 }
 
-double Model::GetHeight()
+float Model::GetHeight()
 {
     return height;
 }
@@ -156,4 +158,9 @@ void Model::SetPosition(double newX, double newY)
 {
     xPos = newX;
     yPos = newY;
+}
+
+void Model::SetWidth(double newWidth)
+{
+    width = newWidth;
 }
