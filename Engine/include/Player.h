@@ -4,6 +4,7 @@
 #include "GL/gl.h"
 #include <Model.h>
 #include <TextureLoader.h>
+#include <DeltaTime.h>
 
 typedef struct
 {
@@ -11,7 +12,7 @@ typedef struct
 }vec1;
 
 // class for player character. Inherits from Model for positions/rotations/etc.
-class Player
+class Player : public Model
 {
     public:
         Player();
@@ -22,15 +23,43 @@ class Player
 
         // player stats
         int hp;
-        float moveSpeed, jumpSpeed;
+        int moveSpeed, jumpSpeed;
 
         void DrawPlayer();
         void InitPlayer();
-        void Actions();
 
+        int actionTrigger;
+        void Actions(int);
+
+        void Update();
+
+        // Character Controller Functions
+        void Jump();
+        void Jump2();
+        void NormalAttack(bool);
+        void StartJump();
+
+        // x Movement
+        void StartMove(float dir);
+        void MoveLeft();
+        void MoveRight();
+        void StopMove();
+        void SlowDown();
+
+        void ApplyGravity();
+//        void SetVertices();
     protected:
 
     private:
+        bool jump, slowDown, moving;
+        float jumpVelocity;
+        float initialY;
+        float xDirection, prevXDirection;
+        float prevXPos, prevYPos;
+        float acceleration, accelRate, maxAcceleration, deceleration;
+        float gravity;
+
+        void CheckCollision();
 };
 
 #endif // PLAYER_H

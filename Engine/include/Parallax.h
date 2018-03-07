@@ -12,7 +12,7 @@ class Parallax
         Parallax();
         virtual ~Parallax();
         void DrawSquare(float, float);
-        void ParallaxInit(string fileName);
+        void ParallaxInit(char* fileName);
         void Scroll(bool, string, float);
 
         float xMax, yMax, xMin, yMin;

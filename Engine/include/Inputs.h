@@ -5,6 +5,9 @@
 #include <iostream>
 #include <Model.h>
 #include <Parallax.h>
+#include <unordered_map>
+#include <string>
+#include <Player.h>
 
 class Inputs
 {
@@ -12,13 +15,13 @@ class Inputs
         Inputs();
         virtual ~Inputs();
 
-        void KeyPressed(Model*);
-        void KeyUp();
+        void KeyPressed(Player*);
+        void KeyUp(Player* model);
         void KeyEnv(Parallax*, float); // movements of background
 
-        void MouseDown(Model*, double, double);
+        void MouseDown(Player*, double, double);
         void MouseUp();
-        void WheelMove(Model*, double);
+        void WheelMove(Player*, double);
 
         double prevMouseX, prevMouseY;
 
@@ -27,6 +30,7 @@ class Inputs
     protected:
 
     private:
+        std::unordered_map<std::string, bool> keys;
 };
 
 #endif // INPUTS_H
