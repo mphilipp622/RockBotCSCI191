@@ -10,8 +10,8 @@
 
 //Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
-Model *block = new Model(1.0, 0.5, 1.0, -0.5, "block");
 Model *ground = new Model(3.33, 0.2, -2.0, -1.1, "ground");
+Model *block = new Model(1.0, 0.5, 1.0, -0.5, "block");
 Player *testPlayer = new Player();
 
 DeltaTime* dTime = new DeltaTime();
@@ -25,20 +25,18 @@ GLScene::GLScene()
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
     movableObjects.push_back(testPlayer);
+
     staticObjects.push_back(block);
     staticObjects.push_back(ground);
 }
 
 GLScene::~GLScene()
 {
-
 }
 
 // Static Variables for use in player class to check collision
 vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
-
-
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
@@ -58,10 +56,9 @@ GLint GLScene::initGL()
 
     block->InitModel("Images/Block.png", true);
     ground->InitModel("Images/Block.png", true);
-
+    dTime ->UpdateDeltaTime();
     testPlayer->InitPlayer();
 //    modelTeapot->InitModel("Images/Player/play.png", true);
-
     return true;
 }
 
@@ -85,6 +82,7 @@ GLint GLScene::drawGLScene()
 
 //    cout << "(" << testPlayer->GetX() << ", " << testPlayer->GetY() << ")" << endl;
 //    plx->Scroll(false, "left", 1);
+
     testPlayer->Update();
 //    if(testPlayer->Collision(block))
 //        cout << "COLLIDE" << endl;

@@ -3,8 +3,10 @@
 #include <TextureLoader.h>
 #include <string>
 #include <GLScene.h>
+#include <cmath>
 
 Timer *T = new Timer();
+Timer *loadTimer = new Timer();
 TextureLoader run[10];
 TextureLoader idle[1];
 TextureLoader jumpAnim[1];
@@ -47,12 +49,15 @@ Player::Player()
     accelRate = 0.05;
     deceleration = 0.2; // rate of deceleration
     maxAcceleration = 2.0;
-    jump = false;
+    jump = false; // set true to avoid falling through earth on scene load
     slowDown = false;
     gravity = -9.80;
     moving = false;
+    jumpVelocity = 5.0;
+    fallVelocity = 0.0;
 
     T->Start();
+    loadTimer->Start();
 
 //    InitPlayer();
 }
@@ -111,6 +116,7 @@ void Player::DrawPlayer()
 
 void Player::InitPlayer()
 {
+
     // player must always render last in the scene
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -131,6 +137,7 @@ void Player::InitPlayer()
     idle[0].BindTexture("Images/Player/play.png");
 
     jumpAnim[0].BindTexture("Images/Player/player0.png");
+
 }
 
 void Player::Actions(int newAction)
@@ -203,8 +210,6 @@ void Player::Update()
     if(slowDown)
         StopMove();
 
-    CheckCollision();
-
 //   cout <<"" << endl; // WHY? Why does it need something here?
 }
 
@@ -223,7 +228,7 @@ void Player::StartJump()
         return; // if we're already jumping, don't allow another jump
 
     jump = true;
-    jumpVelocity = 6.0;
+    jumpVelocity = 5.0;
     initialY = yPos;
 }
 
@@ -234,17 +239,39 @@ void Player::Jump()
     jumpVelocity += gravity * DeltaTime::GetDeltaTime();
     prevYPos = yPos;
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
-    if(yPos <= initialY)
+    if(CheckCollision())
     {
-        yPos = initialY;
         jump = false;
+        yPos = prevYPos;
     }
+//    if(yPos <= initialY)
+//    {
+//        yPos = initialY;
+//        jump = false;
+//    }
 }
 
 void Player::ApplyGravity()
 {
+//    jumpVelocity += gravity * DeltaTime::GetDeltaTime();
+
+    if(DeltaTime::GetDeltaTime() > 1)
+        return; // kill if delta time is too high
+
+    fallVelocity += gravity * DeltaTime::GetDeltaTime();
+
+    if(fallVelocity < sqrt(2 * gravity))
+        fallVelocity =  sqrt(2 * gravity); // set to terminal velocity
+
     prevYPos = yPos;
-    yPos += gravity * DeltaTime::GetDeltaTime() * 0.01;
+    yPos += fallVelocity * DeltaTime::GetDeltaTime();
+
+    if(CheckCollision())
+    {
+        fallVelocity = 0;
+        yPos = prevYPos;
+    }
+
 }
 
 void Player::StartMove(float dir)
@@ -267,6 +294,13 @@ void Player::MoveLeft()
 
     prevXPos = xPos;
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+    if(CheckCollision())
+    {
+        xPos = prevXPos;
+        moving = false;
+        xDirection = 0;
+        acceleration = 0;
+    }
 }
 
 void Player::MoveRight()
@@ -283,6 +317,13 @@ void Player::MoveRight()
 
     prevXPos = xPos;
     xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+    if(CheckCollision())
+    {
+        xPos = prevXPos;
+        moving = false;
+        xDirection = 0;
+        acceleration = 0;
+    }
 }
 
 void Player::SlowDown()
@@ -326,26 +367,15 @@ void Player::StopMove()
 
 }
 
-void Player::CheckCollision()
+bool Player::CheckCollision()
 {
+
     for(auto& model : GLScene::staticObjects)
     {
-        if(Collision(model) && !GroundCheck(model))
-        {
-            xPos = prevXPos;
-            yPos = prevYPos;
-            cout << "Collide With " << model->GetName() << endl;
-//            if(GroundCheck(model))
-//                cout << "Hi" << endl;
-//                jump = false;
-        }
-        else if(Collision(model) && GroundCheck(model))
-        {
-            cout << "Ground Check " << model->GetName() << endl;
-            yPos = prevYPos;
-        }
-//            jump = false;
-//            cout << "Collision with " << model->GetName() << endl;
-//        else cout << " " << endl;
+        if(Collision(model))
+            return true;
+
     }
+
+    return false;
 }

@@ -52,14 +52,16 @@ class Player : public Model
 
     private:
         bool jump, slowDown, moving;
-        float jumpVelocity;
+        float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
         float prevXPos, prevYPos;
         float acceleration, accelRate, maxAcceleration, deceleration;
         float gravity;
 
-        void CheckCollision();
+        bool CheckCollision();
+//        bool CheckCollisionY();
+//        bool CheckCollisionX();
 };
 
 #endif // PLAYER_H

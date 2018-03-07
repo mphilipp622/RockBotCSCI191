@@ -8,6 +8,7 @@ double deltaTime = 0.0;
 DeltaTime::DeltaTime()
 {
     oldTime = glutGet(GLUT_ELAPSED_TIME);
+    UpdateDeltaTime();
 }
 
 DeltaTime::~DeltaTime()

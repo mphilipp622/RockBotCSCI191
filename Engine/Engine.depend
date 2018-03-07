@@ -6,7 +6,7 @@
 	<iostream>
 	<windows.h>
 
-1520318151 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1520458662 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -19,7 +19,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1520453623 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1520459827 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	"GLScene.h"
 	<GLLight.h>
 	<Inputs.h>
@@ -33,14 +33,14 @@
 1519961014 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1520454247 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+1520455619 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	"Model.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
 	<iostream>
 	<algorithm>
 
-1520453578 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1520455598 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
 	"glut.h"
 	<string>
@@ -77,7 +77,7 @@
 
 1518653483 c:\users\seapanda\documents\college\191\191\engine\common\include\soil.h
 
-1519254909 source:c:\users\seapanda\documents\college\191\191\engine\src\deltatime.cpp
+1520459872 source:c:\users\seapanda\documents\college\191\191\engine\src\deltatime.cpp
 	"DeltaTime.h"
 	<windows.h>
 	<glut.h>
@@ -174,14 +174,15 @@
 	"gl/gl.h"
 	<iostream>
 
-1520454373 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1520459769 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<Timer.h>
 	<TextureLoader.h>
 	<string>
 	<GLScene.h>
+	<cmath>
 
-1520378542 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1520459565 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	"GL/gl.h"
 	<Model.h>
 	<TextureLoader.h>
