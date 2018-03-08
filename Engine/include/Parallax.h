@@ -3,7 +3,6 @@
 #include <string>
 #include <GL/gl.h>
 #include <windows.h>
-#include <string>
 
 using namespace std;
 
@@ -13,7 +12,7 @@ class Parallax
         Parallax();
         virtual ~Parallax();
         void DrawSquare(float, float);
-        void ParallaxInit(string fileName);
+        void ParallaxInit(char* fileName);
         void Scroll(bool, string, float);
 
         float xMax, yMax, xMin, yMin;
