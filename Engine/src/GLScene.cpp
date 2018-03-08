@@ -6,6 +6,7 @@
 #include "Parallax.h"
 #include "DeltaTime.h"
 #include <Player.h>
+#include <Skybox.h>
 
 
 //Model *modelTeapot = new Model();
@@ -15,7 +16,7 @@ Model *block = new Model(1.0, 0.5, 1.0, -0.5, "block");
 Player *testPlayer = new Player();
 
 DeltaTime* dTime = new DeltaTime();
-
+//Skybox* sky = new Skybox();
 // Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
 
@@ -37,6 +38,7 @@ GLScene::~GLScene()
 // Static Variables for use in player class to check collision
 vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
+
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
@@ -52,13 +54,14 @@ GLint GLScene::initGL()
     // Initialize Models Here
     cout << "Parallax Initializing" << endl;
     plx->ParallaxInit("Images/background.jpg");
-//    cout << "Model Initializing" << endl;
 
     block->InitModel("Images/Block.png", true);
     ground->InitModel("Images/Block.png", true);
     dTime ->UpdateDeltaTime();
+
+//    sky->LoadTextures();
+
     testPlayer->InitPlayer();
-//    modelTeapot->InitModel("Images/Player/play.png", true);
     return true;
 }
 
@@ -67,6 +70,10 @@ GLint GLScene::drawGLScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
+//    glPushMatrix();
+////    glScaled(3.33, 3.33, 1);
+//    sky->DrawBox();
+//    glPopMatrix();
     glPushMatrix();
     glScaled(3.33, 3.33, 1);
     plx->DrawSquare(screenWidth, screenHeight); // draw background
@@ -80,15 +87,12 @@ GLint GLScene::drawGLScene()
     ground->DrawModel();
     glPopMatrix();
 
-//    cout << "(" << testPlayer->GetX() << ", " << testPlayer->GetY() << ")" << endl;
-//    plx->Scroll(false, "left", 1);
-
     testPlayer->Update();
-//    if(testPlayer->Collision(block))
-//        cout << "COLLIDE" << endl;
-//    else
-//        cout << "" << endl;
-//    modelTeapot->Update(); // Will eventuall be replaced with an array of models. Will iterate each one and update
+
+
+//    glTranslatef(testPlayer->GetX(), testPlayer->GetY(), 0);
+//    gluLookAt(testPlayer->GetX(), testPlayer->GetY(), -10.0, testPlayer->GetX(), testPlayer->GetY(), -1.0, 0, 1.0, 100.0);
+
     dTime->UpdateDeltaTime();
 }
 

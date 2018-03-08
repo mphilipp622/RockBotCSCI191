@@ -59,7 +59,6 @@ Player::Player()
     T->Start();
     loadTimer->Start();
 
-//    InitPlayer();
 }
 
 Player::~Player()
@@ -67,35 +66,11 @@ Player::~Player()
     //dtor
 }
 
-//void Player::SetVertices()
-//{
-//    height += 0.1;
-//    width += 0.1;
-//
-//    // Initialize Quad
-//    vertices[0].x = 0.0;
-//    vertices[0].y = 0.0;
-//    vertices[0].z = -1.0;
-//
-//    vertices[1].x = width;
-//    vertices[1].y = 0.0;
-//    vertices[1].z = -1.0;
-//
-//    vertices[2].x = width;
-//    vertices[2].y = height;
-//    vertices[2].z = -1.0;
-//
-//    vertices[3].x = 0.0;
-//    vertices[3].y = height;
-//    vertices[3].z = -1.0;
-//}
 void Player::DrawPlayer()
 {
     glColor3f(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
-
-//    glPushMatrix();
 
     glTexCoord2f(0.0, 1.0);
     glVertex3f(vertices[0].x, vertices[0].y, vertices[0].z);
@@ -110,7 +85,6 @@ void Player::DrawPlayer()
     glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
 
     glEnd();
-//    glPopMatrix();
 
 }
 
@@ -210,7 +184,6 @@ void Player::Update()
     if(slowDown)
         StopMove();
 
-//   cout <<"" << endl; // WHY? Why does it need something here?
 }
 
 void Player::NormalAttack(bool newVal)
@@ -235,7 +208,7 @@ void Player::StartJump()
 void Player::Jump()
 {
     // Will probably move this into a player class later
-//    if(yPos < jumpY)
+
     jumpVelocity += gravity * DeltaTime::GetDeltaTime();
     prevYPos = yPos;
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
@@ -244,11 +217,6 @@ void Player::Jump()
         jump = false;
         yPos = prevYPos;
     }
-//    if(yPos <= initialY)
-//    {
-//        yPos = initialY;
-//        jump = false;
-//    }
 }
 
 void Player::ApplyGravity()

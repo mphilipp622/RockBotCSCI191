@@ -81,17 +81,6 @@ void Model::DrawModel()
     glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
 
     glEnd();
-    //Uncomment the below to make teapot object
-    //glScalef(1.0, 1.0, 0.0);
-    //glutSolidTeapot(1.0);
-
-    //This draws out a perfect 2D square.
-//    glBegin(GL_POLYGON);
-//    glVertex3f(-0.500000, -0.500000, 0.500000);
-//    glVertex3f(0.500000, -0.500000, 0.500000);
-//    glVertex3f(0.500000, 0.500000, 0.500000);
-//    glVertex3f(-0.500000, 0.500000, 0.500000);
-//    glEnd();
 }
 
 void Model::InitModel(char* fileName, bool transparent)
@@ -99,7 +88,7 @@ void Model::InitModel(char* fileName, bool transparent)
     if(transparent)
     {
         glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead. Change it to mess with cool effects
     }
     texture->Binder();
      cout << "Loading Model: " << fileName << endl;
