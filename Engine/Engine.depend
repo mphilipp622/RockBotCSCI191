@@ -232,3 +232,23 @@
 
 1519271379 e:\college\191\191\engine\common\include\soil.h
 
+1520562923 source:e:\college\191\191\engine\main.cpp
+	<windows.h>
+	<windows.h>
+	<GLScene.h>
+	<stdlib.h>
+	<iostream>
+	<string>
+
+1520561265 e:\college\191\191\engine\include\glscene.h
+	<windows.h>
+	<glut.h>
+	<iostream>
+	<vector>
+	<Model.h>
+
+1520562847 e:\college\191\191\engine\include\model.h
+	<windows.h>
+	<glut.h>
+	<string>
+
