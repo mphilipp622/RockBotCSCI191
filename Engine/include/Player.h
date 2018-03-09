@@ -15,7 +15,7 @@ typedef struct
 class Player : public Model
 {
     public:
-        Player();
+        Player(double, double);
         virtual ~Player();
 
         float scaleSize[3] = {1.0, 1.0, 1.0}; // x, y, z scale values
@@ -47,6 +47,11 @@ class Player : public Model
         void SlowDown();
 
         void ApplyGravity();
+
+        static Player* player;
+        double GetOffsetX();
+        double GetOffsetY();
+        double GetZoom();
 //        void SetVertices();
     protected:
 
@@ -58,6 +63,7 @@ class Player : public Model
         float prevXPos, prevYPos;
         float acceleration, accelRate, maxAcceleration, deceleration;
         float gravity;
+        float playerZoom;
 
         bool CheckCollision();
 //        bool CheckCollisionY();
