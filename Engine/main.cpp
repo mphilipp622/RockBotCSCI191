@@ -10,11 +10,13 @@
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
 
+#include <windows.h>		// Header File For Windows
 #include <GLScene.h>
 #include <stdlib.h>
 #include <iostream>
-#include <windows.h>		// Header File For Windows
+
 //#include "DeltaTime.h"
+#include <string>
 
 using namespace std;
 
@@ -328,7 +330,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 //	}
 
 	// Create Our OpenGL Window
-	if (!CreateGLWindow("Game Engine Lesson 01",fullscreenWidth,fullscreenHeight,256,fullscreen))
+	char* title = new char[1];
+	title[0] = 0;
+	if (!CreateGLWindow(title, fullscreenWidth,fullscreenHeight,256,fullscreen))
 	{
 		return 0;									// Quit If Window Was Not Created
 	}
@@ -366,7 +370,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				KillGLWindow();						// Kill Our Current Window
 				fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
 				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("Game Engine Lesson 01",fullscreenWidth,fullscreenHeight,256,fullscreen))
+				if (!CreateGLWindow(title,fullscreenWidth,fullscreenHeight,256,fullscreen))
 				{
 					return 0;						// Quit If Window Was Not Created
 				}

@@ -1,4 +1,4 @@
-#include "Skybox.h"
+#include <Skybox.h>
 
 TextureLoader texLoader[6];
 

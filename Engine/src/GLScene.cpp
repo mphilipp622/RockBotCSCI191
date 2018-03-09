@@ -1,10 +1,10 @@
 // updated 2/7/18
 
-#include "GLScene.h"
+#include <GLScene.h>
 #include <GLLight.h>
 #include <Inputs.h>
-#include "Parallax.h"
-#include "DeltaTime.h"
+#include <Parallax.h>
+#include <DeltaTime.h>
 #include <Player.h>
 #include <Skybox.h>
 
@@ -104,6 +104,8 @@ GLint GLScene::drawGLScene()
 //    gluLookAt(testPlayer->GetX(), testPlayer->GetY(), -10.0, testPlayer->GetX(), testPlayer->GetY(), -1.0, 0, 1.0, 100.0);
 
     dTime->UpdateDeltaTime();
+
+	return 1;
 }
 
 GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
@@ -149,6 +151,8 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         case WM_RBUTTONDOWN:
             break;
 	}
+
+	return 1;
 }
 
 void GLScene::UpdateModelPositions()

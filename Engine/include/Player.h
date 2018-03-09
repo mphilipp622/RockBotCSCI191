@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "GL/gl.h"
+#include <GL\GL.h>
 #include <Model.h>
 #include <TextureLoader.h>
 #include <DeltaTime.h>

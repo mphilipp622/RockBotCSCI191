@@ -1,7 +1,7 @@
-#include "TextureLoader.h"
+#include <TextureLoader.h>
 
 #include <SOIL.h>
-#include "gl/gl.h"
+#include <GL\GL.h>
 #include <iostream>
 
 using namespace std;
@@ -16,13 +16,14 @@ TextureLoader::~TextureLoader()
     //dtor
 }
 
-void TextureLoader::BindTexture(char* fileName)
+void TextureLoader::BindTexture(string fileName)
 {
     glGenTextures(1, &tex);
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
     glBindTexture(GL_TEXTURE_2D, tex);
-    image = SOIL_load_image(fileName, &width, &height, 0, SOIL_LOAD_RGBA);
+
+    image = SOIL_load_image(fileName.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
 
     if(!image)
         cout << "NO IMAGE LOADED" << endl;

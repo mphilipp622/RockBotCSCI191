@@ -2,7 +2,7 @@
 #define MODEL_H
 
 #include <windows.h>
-#include "glut.h"
+#include <glut.h>
 #include <string>
 
 using namespace std;
@@ -19,7 +19,7 @@ class Model
         Model(float, float, double, double, string);
         virtual ~Model();
         void DrawModel();
-        void InitModel(char* fileName, bool transparent);
+        void InitModel(string fileName, bool transparent);
 
         void InitPlayer();
 

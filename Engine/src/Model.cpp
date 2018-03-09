@@ -1,9 +1,10 @@
-#include "Model.h"
-#include "TextureLoader.h"
-#include "DeltaTime.h"
+#include <Model.h>
+#include <TextureLoader.h>
+#include <DeltaTime.h>
 #include <iostream>
 #include <algorithm> // max and min
 #include <Player.h>
+#include <string>
 
 using namespace std;
 
@@ -95,7 +96,7 @@ void Model::DrawModel()
     glEnd();
 }
 
-void Model::InitModel(char* fileName, bool transparent)
+void Model::InitModel(string fileName, bool transparent)
 {
     if(transparent)
     {

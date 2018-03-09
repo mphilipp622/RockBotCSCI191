@@ -1,6 +1,6 @@
-#include "Inputs.h"
+#include <Inputs.h>
 #include <iostream>
-#include "DeltaTime.h"
+#include <DeltaTime.h>
 #include <string>
 
 using namespace std;

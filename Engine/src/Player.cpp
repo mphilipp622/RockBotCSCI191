@@ -5,8 +5,7 @@
 #include <GLScene.h>
 #include <cmath>
 
-Timer *T = new Timer();
-Timer *loadTimer = new Timer();
+Timer *T;
 TextureLoader run[4];
 TextureLoader idle[1];
 TextureLoader jumpAnim[1];
@@ -62,8 +61,8 @@ Player::Player(double newX, double newY)
 
     name = "player";
     player = this;
+	T = new Timer();
     T->Start();
-    loadTimer->Start();
 
 }
 

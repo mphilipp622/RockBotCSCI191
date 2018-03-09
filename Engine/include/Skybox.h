@@ -1,7 +1,7 @@
 #ifndef SKYBOX_H
 #define SKYBOX_H
 
-#include <GL/gl.h>
+#include <GL\GL.h>
 #include <TextureLoader.h>
 
 class Skybox
