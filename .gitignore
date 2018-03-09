@@ -318,3 +318,10 @@ ASALocalRun/
 
 # MSBuild Binary and Structured Log
 *.binlog
+
+#################  
+## Code::Blocks  
+#################  
+
+*.depend  
+*.layout  
