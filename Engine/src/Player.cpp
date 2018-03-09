@@ -407,11 +407,7 @@ bool Player::CheckCollision()
     for(auto& model : GLScene::staticObjects)
     {
         if(Collision(model))
-        {
-
-            cout << "(" << xPos << ", " << yPos << ")" << endl;
             return true;
-        }
 
     }
 
