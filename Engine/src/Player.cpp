@@ -7,36 +7,40 @@
 
 Timer *T = new Timer();
 Timer *loadTimer = new Timer();
-TextureLoader run[10];
+TextureLoader run[4];
 TextureLoader idle[1];
 TextureLoader jumpAnim[1];
 
-Player::Player()
+Player::Player(double newX, double newY)
 {
     // Collision
     width = 1.0;
     height = 1.0;
+
+    xPos = newX;
+    yPos = newY;
+    playerZoom = -3.0;
 
     // set previous positions to our starting position
     prevXPos = xPos;
     prevYPos = yPos;
 
     // Initialize Quad
-    vertices[0].x = 0.0;
-    vertices[0].y = 0.0;
-    vertices[0].z = -1.0;
+    vertices[0].x = -width / 2;
+    vertices[0].y = -height / 2;
+    vertices[0].z = playerZoom;
 
-    vertices[1].x = width;
-    vertices[1].y = 0.0;
-    vertices[1].z = -1.0;
+    vertices[1].x = width / 2;
+    vertices[1].y = -height / 2;
+    vertices[1].z = playerZoom;
 
-    vertices[2].x = width;
-    vertices[2].y = height;
-    vertices[2].z = -1.0;
+    vertices[2].x = width / 2;
+    vertices[2].y = height / 2;
+    vertices[2].z = playerZoom;
 
-    vertices[3].x = 0.0;
-    vertices[3].y = height;
-    vertices[3].z = -1.0;
+    vertices[3].x = -width / 2;
+    vertices[3].y = height / 2;
+    vertices[3].z = playerZoom;
 
     moveSpeed = 1.0;
     jumpSpeed = 1.0;
@@ -56,10 +60,14 @@ Player::Player()
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
 
+    name = "player";
+    player = this;
     T->Start();
     loadTimer->Start();
 
 }
+
+Player* Player::player;
 
 Player::~Player()
 {
@@ -101,16 +109,10 @@ void Player::InitPlayer()
     run[1].BindTexture("Images/Player/player1.png");
     run[2].BindTexture("Images/Player/player2.png");
     run[3].BindTexture("Images/Player/player3.png");
-    run[4].BindTexture("Images/Player/player4.png");
-    run[5].BindTexture("Images/Player/player5.png");
-    run[6].BindTexture("Images/Player/player6.png");
-    run[7].BindTexture("Images/Player/player7.png");
-    run[8].BindTexture("Images/Player/player8.png");
-    run[9].BindTexture("Images/Player/player9.png");
 
     idle[0].BindTexture("Images/Player/play.png");
 
-    jumpAnim[0].BindTexture("Images/Player/player0.png");
+    jumpAnim[0].BindTexture("Images/Player/jump.png");
 
 }
 
@@ -121,7 +123,8 @@ void Player::Actions(int newAction)
     case 0:
         glPushMatrix();
 
-        glTranslated(xPos, yPos, -1.0);
+        glTranslated(xPos, yPos, playerZoom);
+//        glTranslated(-0.5, -0.5, -1.0);
         idle[0].Binder();
         DrawPlayer();
 
@@ -131,11 +134,12 @@ void Player::Actions(int newAction)
     case 1:
         glPushMatrix();
 
-        glTranslated(xPos, yPos, -1.0);
-        if(T->GetTicks() > 15)
+        glTranslated(xPos, yPos, playerZoom);
+//        glTranslated(-0.5, -0.5, -1.0);
+        if(T->GetTicks() > 60)
         {
             moveSpeed++;
-            moveSpeed %= 10;
+            moveSpeed %= 4;
             T->Reset();
         }
 
@@ -147,7 +151,8 @@ void Player::Actions(int newAction)
     case 2:
         glPushMatrix();
 
-        glTranslated(xPos, yPos, -1.0);
+        glTranslated(xPos, yPos, playerZoom);
+//        glTranslated(-0.5, -0.5, -1.0);
         jumpAnim[0].Binder();
         DrawPlayer();
 
@@ -176,7 +181,8 @@ void Player::Update()
     if(jump)
     {
         Jump();
-        Actions(2);
+        if(!moving)
+            Actions(2);
     }
     else
         ApplyGravity();
@@ -216,7 +222,10 @@ void Player::Jump()
     {
         jump = false;
         yPos = prevYPos;
+        return;
     }
+
+    GLScene::UpdateModelPositions();
 }
 
 void Player::ApplyGravity()
@@ -238,8 +247,9 @@ void Player::ApplyGravity()
     {
         fallVelocity = 0;
         yPos = prevYPos;
+        return;
     }
-
+    GLScene::UpdateModelPositions();
 }
 
 void Player::StartMove(float dir)
@@ -268,7 +278,9 @@ void Player::MoveLeft()
         moving = false;
         xDirection = 0;
         acceleration = 0;
+        return;
     }
+    GLScene::UpdateModelPositions();
 }
 
 void Player::MoveRight()
@@ -291,7 +303,10 @@ void Player::MoveRight()
         moving = false;
         xDirection = 0;
         acceleration = 0;
+        return;
     }
+    GLScene::UpdateModelPositions();
+
 }
 
 void Player::SlowDown()
@@ -316,7 +331,20 @@ void Player::StopMove()
             acceleration = 0; // acceleration is back to baseline
         }
 
+        prevXPos = xPos;
         xPos += (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+        if(CheckCollision())
+        {
+            xPos = prevXPos;
+            moving = false;
+            slowDown = false;
+            xDirection = 0;
+            acceleration = 0;
+            return;
+        }
+        GLScene::UpdateModelPositions();
+
     }
     else if(prevXDirection < 0)
     {
@@ -330,7 +358,19 @@ void Player::StopMove()
             acceleration = 0; // acceleration is back to baseline
         }
 
+        prevXPos = xPos;
         xPos -= (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+        if(CheckCollision())
+        {
+            xPos = prevXPos;
+            moving = false;
+            slowDown = false;
+            xDirection = 0;
+            acceleration = 0;
+            return;
+        }
+        GLScene::UpdateModelPositions();
     }
 
 }
@@ -341,9 +381,29 @@ bool Player::CheckCollision()
     for(auto& model : GLScene::staticObjects)
     {
         if(Collision(model))
+        {
+
+            cout << "(" << xPos << ", " << yPos << ")" << endl;
             return true;
+        }
 
     }
 
     return false;
+}
+
+double Player::GetOffsetX()
+{
+    return xPos - prevXPos;
+}
+
+double Player::GetOffsetY()
+{
+    return yPos - prevYPos;
+}
+
+double Player::GetZoom()
+{
+
+    return playerZoom;
 }

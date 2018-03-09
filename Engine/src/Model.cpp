@@ -3,6 +3,7 @@
 #include "DeltaTime.h"
 #include <iostream>
 #include <algorithm> // max and min
+#include <Player.h>
 
 using namespace std;
 
@@ -10,21 +11,21 @@ TextureLoader* texture = new TextureLoader();
 
 Model::Model()
 {
-    // rotations
-    rotateX = 0;
-    rotateY = 0;
-    rotateZ = 0;
-
-    // translations
-    zoom = -4.0;
-    xPos = -0.5;
-    yPos = -0.5;
-
-    // Create Square
-    vertices[0].x = 0.0; vertices[0].y = 0.0; vertices[0].z = 1.0;
-    vertices[1].x = 1.0; vertices[1].y = 0.0; vertices[1].z = 1.0;
-    vertices[2].x = 1.0; vertices[2].y = 1.0; vertices[2].z = 1.0;
-    vertices[3].x = 0.0; vertices[3].y = 1.0; vertices[3].z = 1.0;
+//    // rotations
+//    rotateX = 0;
+//    rotateY = 0;
+//    rotateZ = 0;
+//
+//    // translations
+//    zoom = -3.0;
+//    xPos = -0.5;
+//    yPos = -0.5;
+//
+//    // Create Square
+//    vertices[0].x = 0.0; vertices[0].y = 0.0; vertices[0].z = 1.0;
+//    vertices[1].x = 1.0; vertices[1].y = 0.0; vertices[1].z = 1.0;
+//    vertices[2].x = 1.0; vertices[2].y = 1.0; vertices[2].z = 1.0;
+//    vertices[3].x = 0.0; vertices[3].y = 1.0; vertices[3].z = 1.0;
 
 }
 
@@ -40,15 +41,26 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
     rotateZ = 0;
 
     // translations
-    zoom = -4.0;
+    zoom = -3.0;
     xPos = newX;
     yPos = newY;
 
-    // Create Square
-    vertices[0].x = 0.0; vertices[0].y = 0.0; vertices[0].z = 1.0;
-    vertices[1].x = width; vertices[1].y = 0.0; vertices[1].z = 1.0;
-    vertices[2].x = width; vertices[2].y = height; vertices[2].z = 1.0;
-    vertices[3].x = 0.0; vertices[3].y = height; vertices[3].z = 1.0;
+    // Initialize Quad
+    vertices[0].x = -width / 2;
+    vertices[0].y = -height / 2;
+    vertices[0].z = zoom;
+
+    vertices[1].x = width / 2;
+    vertices[1].y = -height / 2;
+    vertices[1].z = zoom;
+
+    vertices[2].x = width / 2;
+    vertices[2].y = height / 2;
+    vertices[2].z = zoom;
+
+    vertices[3].x = -width / 2;
+    vertices[3].y = height / 2;
+    vertices[3].z = zoom;
 }
 
 Model::~Model()
@@ -60,11 +72,11 @@ void Model::DrawModel()
     //render this model
     glColor3f(1.0, 1.0, 1.0);
     texture->Binder(); // update texture
-    glTranslated(xPos, yPos, zoom);
+//    if(this->name != "player")
+    glTranslated(this->xPos, this->yPos, this->zoom);
     glRotated(rotateX, 1, 0, 0);
     glRotated(rotateY, 0, 1, 0);
     glRotated(rotateZ, 0, 0, 1);
-
 
     glBegin(GL_QUADS);
 
@@ -98,8 +110,10 @@ void Model::InitModel(char* fileName, bool transparent)
 
 bool Model::Collision(Model* collider)
 {
-    return Overlapping(xPos, xPos + width, collider->GetX(), collider->GetX() + collider->GetWidth()) &&
-           Overlapping(yPos, yPos + height, collider->GetY(), collider->GetY() + collider->GetHeight());
+    return Overlapping(xPos - width / 2, xPos + width / 2, collider->GetX() - collider->GetWidth() / 2,
+                       collider->GetX() + collider->GetWidth() / 2) &&
+           Overlapping(yPos - height / 2, yPos + height / 2, collider->GetY() - collider->GetHeight() / 2,
+                       collider->GetY() + collider->GetHeight() / 2);
 }
 
 bool Model::Overlapping(double min0, double max0, double min1, double max1)

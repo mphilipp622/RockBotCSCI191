@@ -11,9 +11,10 @@
 
 //Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
-Model *ground = new Model(3.33, 0.2, -2.0, -1.1, "ground");
-Model *block = new Model(1.0, 0.5, 1.0, -0.5, "block");
-Player *testPlayer = new Player();
+Model *ground = new Model(6.0, 0.2, 0, -1.0, "ground");
+Model *block = new Model(2.0, 0.2, 3.0, 0, "block");
+Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2");
+Player *testPlayer = new Player(0, 0);
 
 DeltaTime* dTime = new DeltaTime();
 //Skybox* sky = new Skybox();
@@ -29,6 +30,7 @@ GLScene::GLScene()
 
     staticObjects.push_back(block);
     staticObjects.push_back(ground);
+    staticObjects.push_back(block2);
 }
 
 GLScene::~GLScene()
@@ -69,7 +71,9 @@ GLint GLScene::drawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-
+    gluLookAt(Player::player->GetX(), Player::player->GetY(), 0.0,
+            Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
+            0.0f, 1.0f, 0.0f);
 //    glPushMatrix();
 ////    glScaled(3.33, 3.33, 1);
 //    sky->DrawBox();
@@ -79,13 +83,19 @@ GLint GLScene::drawGLScene()
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
-    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
-    block->DrawModel();
-    glPopMatrix();
-
-    glPushMatrix();
-    ground->DrawModel();
-    glPopMatrix();
+    for(auto& model : staticObjects)
+    {
+        glPushMatrix();
+        model->DrawModel();
+        glPopMatrix();
+    }
+//    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
+//    block->DrawModel();
+//    glPopMatrix();
+//
+//    glPushMatrix();
+//    ground->DrawModel();
+//    glPopMatrix();
 
     testPlayer->Update();
 
@@ -139,4 +149,14 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         case WM_RBUTTONDOWN:
             break;
 	}
+}
+
+void GLScene::UpdateModelPositions()
+{
+    return;
+//    for(auto& model : staticObjects)
+//        model->SetPosition(model->GetX() - Player::player->GetOffsetX(), model->GetY() - Player::player->GetOffsetY());
+    //for(auto& model : enemies)
+    //    model->SetPosition(model->GetX() + Player::player->GetOffsetX(), model->GetY() + Player::player->GetOffsetY());
+
 }
