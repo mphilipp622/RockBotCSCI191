@@ -7,6 +7,7 @@
 #include <DeltaTime.h>
 #include <Player.h>
 #include <Skybox.h>
+#include <Timer.h>
 
 
 //Model *modelTeapot = new Model();
@@ -14,12 +15,13 @@ Inputs *keyboardAndMouse = new Inputs();
 Model *ground = new Model(6.0, 0.2, 0, -1.0, "ground");
 Model *block = new Model(2.0, 0.2, 3.0, 0, "block");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2");
-Player *testPlayer = new Player(0, 0);
+Player *testPlayer = new Player(0, 10);
 
 DeltaTime* dTime = new DeltaTime();
 //Skybox* sky = new Skybox();
 // Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
+Timer *sceneTimer = new Timer();
 
 GLScene::GLScene()
 {
@@ -31,6 +33,8 @@ GLScene::GLScene()
     staticObjects.push_back(block);
     staticObjects.push_back(ground);
     staticObjects.push_back(block2);
+
+    sceneTimer->Start();
 }
 
 GLScene::~GLScene()
@@ -62,7 +66,6 @@ GLint GLScene::initGL()
     dTime ->UpdateDeltaTime();
 
 //    sky->LoadTextures();
-
     testPlayer->InitPlayer();
     return true;
 }
@@ -79,7 +82,7 @@ GLint GLScene::drawGLScene()
 //    sky->DrawBox();
 //    glPopMatrix();
     glPushMatrix();
-    glScaled(3.33, 3.33, 1);
+    glScaled(12, 12, 1);
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 

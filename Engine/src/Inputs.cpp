@@ -90,25 +90,25 @@ void Inputs::KeyEnv(Parallax* plx, float speed)
 {
     // handles background scrolling based on key inputs
 
-    const int aKey = 0x41, dKey = 0x44;
-
-    switch(wParam)
-    {
-    case aKey:
-        plx->xMin -= speed * DeltaTime::GetDeltaTime();
-        plx->xMax -= speed * DeltaTime::GetDeltaTime();
-        break;
-    case dKey:
-        plx->xMin += speed * DeltaTime::GetDeltaTime();
-        plx->xMax += speed * DeltaTime::GetDeltaTime();
-        break;
-    case VK_UP:
-        plx->yMin -= speed * DeltaTime::GetDeltaTime();
-        plx->yMax -= speed * DeltaTime::GetDeltaTime();
-        break;
-    case VK_DOWN:
-        plx->yMin += speed * DeltaTime::GetDeltaTime();
-        plx->yMax += speed * DeltaTime::GetDeltaTime();
-        break;
-    }
+//    const int aKey = 0x41, dKey = 0x44;
+//
+//    switch(wParam)
+//    {
+//    case aKey:
+//        plx->xMin -= speed * DeltaTime::GetDeltaTime();
+//        plx->xMax -= speed * DeltaTime::GetDeltaTime();
+//        break;
+//    case dKey:
+//        plx->xMin += speed * DeltaTime::GetDeltaTime();
+//        plx->xMax += speed * DeltaTime::GetDeltaTime();
+//        break;
+//    case VK_UP:
+//        plx->yMin -= speed * DeltaTime::GetDeltaTime();
+//        plx->yMax -= speed * DeltaTime::GetDeltaTime();
+//        break;
+//    case VK_DOWN:
+//        plx->yMin += speed * DeltaTime::GetDeltaTime();
+//        plx->yMax += speed * DeltaTime::GetDeltaTime();
+//        break;
+//    }
 }

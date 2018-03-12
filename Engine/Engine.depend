@@ -1,59 +1,62 @@
 # depslib dependency file v1.0
-1520546466 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+1520900072 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+	<windows.h>
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
 	<iostream>
-	<windows.h>
+	<string>
 
-1520549392 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1520562617 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
 	<vector>
 	<Model.h>
 
-1519252743 c:\users\seapanda\documents\college\191\191\common\include\gl\glut.h
+1519256343 c:\users\seapanda\documents\college\191\191\common\include\gl\glut.h
 	<windows.h>
 	<stdlib.h>
 	<GL/gl.h>
 	<GL/glu.h>
 
-1520558715 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
-	"GLScene.h"
+1520901858 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+	<GLScene.h>
 	<GLLight.h>
 	<Inputs.h>
-	"Parallax.h"
-	"DeltaTime.h"
+	<Parallax.h>
+	<DeltaTime.h>
 	<Player.h>
 	<Skybox.h>
+	<Timer.h>
 
-1518048244 source:c:\users\seapanda\documents\college\191\191\engine\src\gllight.cpp
-	"GLLight.h"
+1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\gllight.cpp
+	<GLLight.h>
 
-1519961014 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
+1519964614 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1520556915 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
-	"Model.h"
-	"TextureLoader.h"
-	"DeltaTime.h"
+1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+	<Model.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
 	<iostream>
 	<algorithm>
 	<Player.h>
+	<string>
 
-1520546466 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1520900072 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
-	"glut.h"
+	<glut.h>
 	<string>
 
-1520378542 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
-	"Inputs.h"
+1520901977 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+	<Inputs.h>
 	<iostream>
-	"DeltaTime.h"
+	<DeltaTime.h>
 	<string>
 
-1520299439 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+1520900907 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -64,36 +67,38 @@
 
 1215479608 c:\users\seapanda\documents\college\191\191\soil\simple opengl image library\src\soil.h
 
-1519254848 c:\users\seapanda\documents\college\191\191\engine\include\deltatime.h
+1519258448 c:\users\seapanda\documents\college\191\191\engine\include\deltatime.h
 
-1520546482 source:c:\users\seapanda\documents\college\191\191\engine\src\textureloader.cpp
-	"TextureLoader.h"
+1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\textureloader.cpp
+	<TextureLoader.h>
 	<SOIL.h>
-	"gl/gl.h"
+	<GL\GL.h>
 	<iostream>
 
-1520546482 c:\users\seapanda\documents\college\191\191\engine\include\textureloader.h
-	"SOIL.h"
-	"gl/gl.h"
+1520900072 c:\users\seapanda\documents\college\191\191\engine\include\textureloader.h
+	<SOIL.h>
+	<GL\GL.h>
 	<iostream>
+	<string>
 
-1518653483 c:\users\seapanda\documents\college\191\191\engine\common\include\soil.h
+1518657083 c:\users\seapanda\documents\college\191\191\engine\common\include\soil.h
 
-1520546466 source:c:\users\seapanda\documents\college\191\191\engine\src\deltatime.cpp
-	"DeltaTime.h"
+1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\deltatime.cpp
+	<DeltaTime.h>
 	<windows.h>
 	<glut.h>
 	<iostream>
 
-1520546482 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
-	"Parallax.h"
-	"TextureLoader.h"
-	"DeltaTime.h"
+1520901982 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
+	<Parallax.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
 
-1520546482 c:\users\seapanda\documents\college\191\191\engine\include\parallax.h
-	<string>
-	<GL/gl.h>
+1520900072 c:\users\seapanda\documents\college\191\191\engine\include\parallax.h
 	<windows.h>
+	<string>
+	<GL\GL.h>
+	<string>
 
 1519437888 source:c:\users\sesat\documents\github\191\engine\main.cpp
 	<windows.h>
@@ -176,7 +181,7 @@
 	"gl/gl.h"
 	<iostream>
 
-1520558846 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1520901444 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<Timer.h>
 	<TextureLoader.h>
@@ -184,23 +189,23 @@
 	<GLScene.h>
 	<cmath>
 
-1520554481 c:\users\seapanda\documents\college\191\191\engine\include\player.h
-	"GL/gl.h"
+1520901291 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1519960999 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
-	"Timer.h"
+1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
+	<Timer.h>
 
-1519960999 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
+1519964599 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
 	<time.h>
 
-1520540439 source:c:\users\seapanda\documents\college\191\191\engine\src\skybox.cpp
-	"Skybox.h"
+1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\skybox.cpp
+	<Skybox.h>
 
-1520546466 c:\users\seapanda\documents\college\191\191\engine\include\skybox.h
-	<GL/gl.h>
+1520900072 c:\users\seapanda\documents\college\191\191\engine\include\skybox.h
+	<GL\GL.h>
 	<TextureLoader.h>
 
 1520566853 source:e:\college\191\191\engine\src\deltatime.cpp

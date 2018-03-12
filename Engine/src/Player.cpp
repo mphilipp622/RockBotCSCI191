@@ -7,7 +7,7 @@
 
 Timer *T;
 TextureLoader run[4];
-TextureLoader idle[1];
+TextureLoader idle[5];
 TextureLoader jumpAnim[1];
 
 Player::Player(double newX, double newY)
@@ -58,6 +58,7 @@ Player::Player(double newX, double newY)
     moving = false;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
+    idleFrame = 0;
 
     name = "player";
     player = this;
@@ -118,19 +119,22 @@ void Player::DrawPlayer()
 
 void Player::InitPlayer()
 {
-
     // player must always render last in the scene
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 //    for(int i = 0; i < 10; i++)
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
-    run[0].BindTexture("Images/Player/player0.png");
-    run[1].BindTexture("Images/Player/player1.png");
-    run[2].BindTexture("Images/Player/player2.png");
-    run[3].BindTexture("Images/Player/player3.png");
+    run[0].BindTexture("Images/Player/Test_Movement_0000.png");
+    run[1].BindTexture("Images/Player/Test_Movement_0001.png");
+    run[2].BindTexture("Images/Player/Test_Movement_0002.png");
+    run[3].BindTexture("Images/Player/Test_Movement_0003.png");
 
-    idle[0].BindTexture("Images/Player/play.png");
+    idle[0].BindTexture("Images/Player/Test_Idle_0000.png");
+    idle[1].BindTexture("Images/Player/Test_Idle_0001.png");
+    idle[2].BindTexture("Images/Player/Test_Idle_0002.png");
+    idle[3].BindTexture("Images/Player/Test_Idle_0003.png");
+    idle[4].BindTexture("Images/Player/Test_Idle_0004.png");
 
     jumpAnim[0].BindTexture("Images/Player/jump.png");
 
@@ -147,7 +151,14 @@ void Player::Actions(int newAction)
 
         glTranslated(xPos, yPos, playerZoom);
 //        glTranslated(-0.5, -0.5, -1.0);
-        idle[0].Binder();
+        if(T->GetTicks() > 60)
+        {
+            idleFrame++;
+            idleFrame %= 5;
+            T->Reset();
+        }
+
+        idle[idleFrame].Binder();
         DrawPlayer();
 
         glPopMatrix();

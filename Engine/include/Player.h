@@ -56,7 +56,7 @@ class Player : public Model
     protected:
 
     private:
-        bool jump, slowDown, moving;
+        bool jump, slowDown, moving, startGravity;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
@@ -65,6 +65,7 @@ class Player : public Model
         float gravity;
         float playerZoom;
 
+        int idleFrame;
         bool CheckCollision();
 //        bool CheckCollisionY();
 //        bool CheckCollisionX();

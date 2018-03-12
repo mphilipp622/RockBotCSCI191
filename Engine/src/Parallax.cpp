@@ -23,16 +23,16 @@ void Parallax::DrawSquare(float width, float height)
     backgroundTexture->Binder();
     glBegin(GL_POLYGON);
         glTexCoord2f(xMin,yMin);
-        glVertex3f(-width/height,-1,-8.0f);
+        glVertex3f(-width/height,-1,-10.0f);
 
         glTexCoord2f(xMax,yMin);
-        glVertex3f(width/height,-1,-8.0f);
+        glVertex3f(width/height,-1,-10.0f);
 
         glTexCoord2f(xMax,yMax);
-        glVertex3f(width/height,1,-8.0f);
+        glVertex3f(width/height,1,-10.0f);
 
         glTexCoord2f(xMin,yMax);
-        glVertex3f(-width/height,1,-8.0f);
+        glVertex3f(-width/height,1,-10.0f);
      glEnd();
 }
 
