@@ -253,10 +253,11 @@
 	<Model.h>
 	<Inputs.h>
 
-1520571683 e:\college\191\191\engine\include\model.h
+1520922084 e:\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
+	<TextureLoader.h>
 
 1520571683 source:e:\college\191\191\engine\src\gllight.cpp
 	<GLLight.h>
@@ -300,7 +301,7 @@
 	<DeltaTime.h>
 	<string>
 
-1520915654 source:e:\college\191\191\engine\src\model.cpp
+1520922111 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -335,7 +336,7 @@
 1520571683 source:e:\college\191\191\engine\src\timer.cpp
 	<Timer.h>
 
-1520915432 source:e:\college\191\191\engine\src\projectile.cpp
+1520922159 source:e:\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 
 1520915424 e:\college\191\191\engine\include\projectile.h

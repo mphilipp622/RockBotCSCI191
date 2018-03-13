@@ -8,8 +8,6 @@
 
 using namespace std;
 
-TextureLoader* texture = new TextureLoader();
-
 Model::Model()
 {
 //    // rotations
@@ -62,6 +60,8 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
     this->vertices[3].x = -this->width / 2;
     this->vertices[3].y = this->height / 2;
     this->vertices[3].z = this->zoom;
+
+    this->texture = new TextureLoader();
 }
 
 Model::~Model()
@@ -72,7 +72,7 @@ void Model::DrawModel()
 {
     //render this model
     glColor3f(1.0, 1.0, 1.0);
-    texture->Binder(); // update texture
+    this->texture->Binder(); // update texture
 //    if(this->name != "player")
     glTranslated(this->xPos, this->yPos, this->zoom);
     glRotated(this->rotateX, 1, 0, 0);
@@ -103,9 +103,9 @@ void Model::InitModel(string fileName, bool transparent)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead. Change it to mess with cool effects
     }
-    texture->Binder();
+    this->texture->Binder();
      cout << "Loading Model: " << fileName << endl;
-    texture->BindTexture(fileName);
+    this->texture->BindTexture(fileName);
 
 }
 

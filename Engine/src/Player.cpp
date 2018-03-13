@@ -14,55 +14,56 @@ TextureLoader jumpAnim[1];
 Player::Player(double newX, double newY)
 {
     // Collision
-    width = 1.0;
-    height = 1.0;
+    this->width = 1.0;
+    this->height = 1.0;
 
-    xPos = newX;
-    yPos = newY;
-    playerZoom = -3.0;
+    this->xPos = newX;
+    this->yPos = newY;
+    this->playerZoom = -3.0;
 
     // set previous positions to our starting position
-    prevXPos = xPos;
-    prevYPos = yPos;
+    this->prevXPos = xPos;
+    this->prevYPos = yPos;
 
     // Initialize Quad
-    vertices[0].x = -width / 2;
-    vertices[0].y = -height / 2;
-    vertices[0].z = playerZoom;
+    this->vertices[0].x = -this->width / 2;
+    this->vertices[0].y = -this->height / 2;
+    this->vertices[0].z = this->playerZoom;
 
-    vertices[1].x = width / 2;
-    vertices[1].y = -height / 2;
-    vertices[1].z = playerZoom;
+    this->vertices[1].x = this->width / 2;
+    this->vertices[1].y = -this->height / 2;
+    this->vertices[1].z = this->playerZoom;
 
-    vertices[2].x = width / 2;
-    vertices[2].y = height / 2;
-    vertices[2].z = playerZoom;
+    this->vertices[2].x = this->width / 2;
+    this->vertices[2].y = this->height / 2;
+    this->vertices[2].z = this->playerZoom;
 
-    vertices[3].x = -width / 2;
-    vertices[3].y = height / 2;
-    vertices[3].z = playerZoom;
+    this->vertices[3].x = -this->width / 2;
+    this->vertices[3].y = this->height / 2;
+    this->vertices[3].z = this->playerZoom;
 
-    moveSpeed = 1.0;
-    jumpSpeed = 1.0;
-    hp = 3;
-    actionTrigger = 0;
+    this->moveSpeed = 1.0;
+    this->jumpSpeed = 1.0;
+    this->hp = 3;
+    this->actionTrigger = 0;
 
      // physics
-    gravity = 0.98;
-    acceleration = 0.0;
-    accelRate = 0.05;
-    deceleration = 0.2; // rate of deceleration
-    maxAcceleration = 2.0;
-    jump = false; // set true to avoid falling through earth on scene load
-    slowDown = false;
-    gravity = -9.80;
-    moving = false;
-    jumpVelocity = 5.0;
-    fallVelocity = 0.0;
-    idleFrame = 0;
+    this->gravity = 0.98;
+    this->acceleration = 0.0;
+    this->accelRate = 0.05;
+    this->deceleration = 0.2; // rate of deceleration
+    this->maxAcceleration = 2.0;
+    this->jump = false; // set true to avoid falling through earth on scene load
+    this->slowDown = false;
+    this->gravity = -9.80;
+    this->moving = false;
+    this->jumpVelocity = 5.0;
+    this->fallVelocity = 0.0;
+    this->idleFrame = 0;
 
-    name = "player";
-    player = this;
+    this->name = "player";
+    this->player = this;
+
 	T = new Timer();
     T->Start();
 
@@ -81,37 +82,37 @@ void Player::DrawPlayer()
 
     glBegin(GL_QUADS);
 
-	if (xDirection == -1.0)
+	if (this->xDirection == -1.0)
 	{
 		// flip texture to the left
 
 		glTexCoord2f(0.0, 1.0);
-		glVertex3f(-vertices[0].x, vertices[0].y, vertices[0].z);
+		glVertex3f(-this->vertices[0].x, this->vertices[0].y, this->vertices[0].z);
 
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(-vertices[1].x, vertices[1].y, vertices[1].z);
+		glVertex3f(-this->vertices[1].x, this->vertices[1].y, this->vertices[1].z);
 
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(-vertices[2].x, vertices[2].y, vertices[2].z);
+		glVertex3f(-this->vertices[2].x, this->vertices[2].y, this->vertices[2].z);
 
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(-vertices[3].x, vertices[3].y, vertices[3].z);
+		glVertex3f(-this->vertices[3].x, this->vertices[3].y, this->vertices[3].z);
 	}
 	else
 	{
 		// flip texture to the right
 
 		glTexCoord2f(0.0, 1.0);
-		glVertex3f(vertices[0].x, vertices[0].y, vertices[0].z);
+		glVertex3f(this->vertices[0].x, this->vertices[0].y, this->vertices[0].z);
 
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(vertices[1].x, vertices[1].y, vertices[1].z);
+		glVertex3f(this->vertices[1].x, this->vertices[1].y, this->vertices[1].z);
 
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(vertices[2].x, vertices[2].y, vertices[2].z);
+		glVertex3f(this->vertices[2].x, this->vertices[2].y, this->vertices[2].z);
 
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
+		glVertex3f(this->vertices[3].x, this->vertices[3].y, this->vertices[3].z);
 	}
 
     glEnd();

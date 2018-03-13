@@ -48,6 +48,8 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
     this->vertices[3].x = -this->width / 2;
     this->vertices[3].y = this->height / 2;
     this->vertices[3].z = this->zoom;
+
+    this->texture = new TextureLoader();
 }
 
 void Projectile::Update()

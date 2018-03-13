@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <glut.h>
 #include <string>
+#include <TextureLoader.h>
 
 using namespace std;
 
@@ -43,6 +44,7 @@ class Model
         string name;
         bool GroundCheck(Model*);
         bool Collision(Model*);
+        TextureLoader *texture;
 
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);
