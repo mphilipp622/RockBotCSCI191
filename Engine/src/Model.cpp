@@ -32,36 +32,36 @@ Model::Model()
 
 Model::Model(float newWidth, float newHeight, double newX, double newY, string newName)
 {
-    width = newWidth;
-    height = newHeight;
+    this->width = newWidth;
+    this->height = newHeight;
 
-    name = newName;
+    this->name = newName;
 
-    rotateX = 0;
-    rotateY = 0;
-    rotateZ = 0;
+    this->rotateX = 0;
+    this->rotateY = 0;
+    this->rotateZ = 0;
 
     // translations
-    zoom = -3.0;
-    xPos = newX;
-    yPos = newY;
+    this->zoom = -3.0;
+    this->xPos = newX;
+    this->yPos = newY;
 
     // Initialize Quad
-    vertices[0].x = -width / 2;
-    vertices[0].y = -height / 2;
-    vertices[0].z = zoom;
+    this->vertices[0].x = -this->width / 2;
+    this->vertices[0].y = -this->height / 2;
+    this->vertices[0].z = this->zoom;
 
-    vertices[1].x = width / 2;
-    vertices[1].y = -height / 2;
-    vertices[1].z = zoom;
+    this->vertices[1].x = this->width / 2;
+    this->vertices[1].y = -this->height / 2;
+    this->vertices[1].z = this->zoom;
 
-    vertices[2].x = width / 2;
-    vertices[2].y = height / 2;
-    vertices[2].z = zoom;
+    this->vertices[2].x = this->width / 2;
+    this->vertices[2].y = this->height / 2;
+    this->vertices[2].z = this->zoom;
 
-    vertices[3].x = -width / 2;
-    vertices[3].y = height / 2;
-    vertices[3].z = zoom;
+    this->vertices[3].x = -this->width / 2;
+    this->vertices[3].y = this->height / 2;
+    this->vertices[3].z = this->zoom;
 }
 
 Model::~Model()
@@ -75,23 +75,23 @@ void Model::DrawModel()
     texture->Binder(); // update texture
 //    if(this->name != "player")
     glTranslated(this->xPos, this->yPos, this->zoom);
-    glRotated(rotateX, 1, 0, 0);
-    glRotated(rotateY, 0, 1, 0);
-    glRotated(rotateZ, 0, 0, 1);
+    glRotated(this->rotateX, 1, 0, 0);
+    glRotated(this->rotateY, 0, 1, 0);
+    glRotated(this->rotateZ, 0, 0, 1);
 
     glBegin(GL_QUADS);
 
     glTexCoord2f(0.0, 1.0);
-    glVertex3f(vertices[0].x, vertices[0].y, vertices[0].z);
+    glVertex3f(this->vertices[0].x, this->vertices[0].y, this->vertices[0].z);
 
     glTexCoord2f(1.0, 1.0);
-    glVertex3f(vertices[1].x, vertices[1].y, vertices[1].z);
+    glVertex3f(this->vertices[1].x, this->vertices[1].y, this->vertices[1].z);
 
     glTexCoord2f(1.0, 0.0);
-    glVertex3f(vertices[2].x, vertices[2].y, vertices[2].z);
+    glVertex3f(this->vertices[2].x, this->vertices[2].y, this->vertices[2].z);
 
     glTexCoord2f(0.0, 0.0);
-    glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
+    glVertex3f(this->vertices[3].x, this->vertices[3].y, this->vertices[3].z);
 
     glEnd();
 }
@@ -111,9 +111,9 @@ void Model::InitModel(string fileName, bool transparent)
 
 bool Model::Collision(Model* collider)
 {
-    return Overlapping(xPos - width / 2, xPos + width / 2, collider->GetX() - collider->GetWidth() / 2,
+    return Overlapping(this->xPos - this->width / 2, this->xPos + this->width / 2, collider->GetX() - collider->GetWidth() / 2,
                        collider->GetX() + collider->GetWidth() / 2) &&
-           Overlapping(yPos - height / 2, yPos + height / 2, collider->GetY() - collider->GetHeight() / 2,
+           Overlapping(this->yPos - this->height / 2, this->yPos + this->height / 2, collider->GetY() - collider->GetHeight() / 2,
                        collider->GetY() + collider->GetHeight() / 2);
 }
 
@@ -135,36 +135,36 @@ bool Model::GroundCheck(Model* collider)
 
 double Model::GetX()
 {
-    return xPos;
+    return this->xPos;
 }
 
 double Model::GetY()
 {
-    return yPos;
+    return this->yPos;
 }
 
 float Model::GetWidth()
 {
-    return width;
+    return this->width;
 }
 
 float Model::GetHeight()
 {
-    return height;
+    return this->height;
 }
 
 string Model::GetName()
 {
-    return name;
+    return this->name;
 }
 
 void Model::SetPosition(double newX, double newY)
 {
-    xPos = newX;
-    yPos = newY;
+    this->xPos = newX;
+    this->yPos = newY;
 }
 
 void Model::SetWidth(double newWidth)
 {
-    width = newWidth;
+   this->width = newWidth;
 }

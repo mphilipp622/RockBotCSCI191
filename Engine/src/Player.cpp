@@ -4,6 +4,7 @@
 #include <string>
 #include <GLScene.h>
 #include <cmath>
+#include <Projectile.h>
 
 Timer *T;
 TextureLoader run[4];
@@ -443,4 +444,11 @@ double Player::GetZoom()
 {
 
     return playerZoom;
+}
+
+void Player::ShootProjectile(double x, double y)
+{
+    Projectile *newProjectile = new Projectile(xPos, yPos, 1.0, 1.0, 1, 2.0, "projectile", x, y);
+    newProjectile->InitModel("Images/Note.png", true);
+    GLScene::movableObjects.push_back(newProjectile);
 }

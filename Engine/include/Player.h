@@ -36,6 +36,7 @@ class Player : public Model
         // Character Controller Functions
         void Jump();
         void Jump2();
+        void ShootProjectile(double x, double y);
         void NormalAttack(bool);
         void StartJump();
 

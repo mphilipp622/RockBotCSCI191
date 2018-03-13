@@ -69,8 +69,9 @@ void Inputs::MouseDown(Player* model, double xNew, double yNew)
 
     if(wParam == VK_LBUTTON)
     {
-        model->rotateX += currentY;
-        model->rotateY += currentX;
+        model->ShootProjectile(currentX, currentY);
+//        model->rotateX += currentY;
+//        model->rotateY += currentX;
     }
 
     prevMouseX = xNew;

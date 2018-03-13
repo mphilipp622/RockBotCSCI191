@@ -93,6 +93,16 @@ GLint GLScene::drawGLScene()
         model->DrawModel();
         glPopMatrix();
     }
+
+    for(auto& model : movableObjects)
+    {
+        if(model->GetName() != "player")
+        {
+            glPushMatrix();
+            model->DrawModel();
+            glPopMatrix();
+        }
+    }
 //    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
 //    block->DrawModel();
 //    glPopMatrix();

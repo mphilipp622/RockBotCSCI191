@@ -53,6 +53,7 @@
 		<Unit filename="include/Model.h" />
 		<Unit filename="include/Parallax.h" />
 		<Unit filename="include/Player.h" />
+		<Unit filename="include/Projectile.h" />
 		<Unit filename="include/Skybox.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/Timer.h" />
@@ -64,6 +65,7 @@
 		<Unit filename="src/Model.cpp" />
 		<Unit filename="src/Parallax.cpp" />
 		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/Projectile.cpp" />
 		<Unit filename="src/Skybox.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
 		<Unit filename="src/Timer.cpp" />
