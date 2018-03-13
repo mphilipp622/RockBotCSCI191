@@ -26,11 +26,7 @@ GLScene::GLScene()
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
-    movableObjects.push_back(testPlayer);
 
-    staticObjects.push_back(block);
-    staticObjects.push_back(ground);
-    staticObjects.push_back(block2);
     keyboardAndMouse = new Inputs();
     sceneTimer->Start();
 }
@@ -65,6 +61,12 @@ GLint GLScene::initGL()
     block->InitModel("Images/Block.png", true);
     ground->InitModel("Images/Block.png", true);
     dTime ->UpdateDeltaTime();
+
+    movableObjects.push_back(testPlayer);
+
+    staticObjects.push_back(block);
+    staticObjects.push_back(ground);
+    staticObjects.push_back(block2);
 
 //    sky->LoadTextures();
     testPlayer->InitPlayer();
@@ -113,7 +115,6 @@ GLint GLScene::drawGLScene()
 
     for(auto& model : movableObjects)
         model->Update();
-
 
 //    glTranslatef(testPlayer->GetX(), testPlayer->GetY(), 0);
 //    gluLookAt(testPlayer->GetX(), testPlayer->GetY(), -10.0, testPlayer->GetX(), testPlayer->GetY(), -1.0, 0, 1.0, 100.0);

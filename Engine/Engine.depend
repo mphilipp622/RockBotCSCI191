@@ -36,7 +36,7 @@
 1519964614 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+1520984780 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -45,18 +45,19 @@
 	<Player.h>
 	<string>
 
-1520900072 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1520984780 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
+	<TextureLoader.h>
 
-1520903299 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+1520984780 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	<Inputs.h>
 	<iostream>
 	<DeltaTime.h>
 	<string>
 
-1520902780 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+1520984780 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -181,15 +182,16 @@
 	"gl/gl.h"
 	<iostream>
 
-1520903389 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1520984780 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<Timer.h>
 	<TextureLoader.h>
 	<string>
 	<GLScene.h>
 	<cmath>
+	<Projectile.h>
 
-1520901291 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1520984780 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -341,4 +343,10 @@
 
 1520981740 e:\college\191\191\engine\include\projectile.h
 	<Model.h>
+
+1520984780 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
+	<Model.h>
+
+1520984780 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
+	"Projectile.h"
 
