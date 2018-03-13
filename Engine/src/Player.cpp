@@ -155,13 +155,13 @@ void Player::Actions(int newAction)
 //        glTranslated(-0.5, -0.5, -1.0);
         if(T->GetTicks() > 60)
         {
-            idleFrame++;
-            idleFrame %= 5;
+            this->idleFrame++;
+            this->idleFrame %= 5;
             T->Reset();
         }
 
-        idle[idleFrame].Binder();
-        DrawPlayer();
+        idle[this->idleFrame].Binder();
+        this->DrawPlayer();
 
         glPopMatrix();
         break;
@@ -175,13 +175,13 @@ void Player::Actions(int newAction)
 //        glTranslated(-0.5, -0.5, -1.0);
         if(T->GetTicks() > 60)
         {
-            moveSpeed++;
-            moveSpeed %= 4;
+            this->moveSpeed++;
+            this->moveSpeed %= 4;
             T->Reset();
         }
 
-        run[moveSpeed].Binder();
-        DrawPlayer();
+        run[this->moveSpeed].Binder();
+        this->DrawPlayer();
 
         glPopMatrix();
         break;
@@ -193,7 +193,7 @@ void Player::Actions(int newAction)
         glTranslated(xPos, yPos, playerZoom);
 //        glTranslated(-0.5, -0.5, -1.0);
         jumpAnim[0].Binder();
-        DrawPlayer();
+        this->DrawPlayer();
 
         glPopMatrix();
         break;
@@ -202,32 +202,32 @@ void Player::Actions(int newAction)
 
 void Player::Update()
 {
-    if(moving)
+    if(this->moving)
     {
-        if(xDirection > 0)
-            MoveRight();
+        if(this->xDirection > 0)
+            this->MoveRight();
         else if(xDirection < 0)
-            MoveLeft();
+            this->MoveLeft();
 
-        if(!jump)
-            Actions(1);
+        if(!this->jump)
+            this->Actions(1);
         else
-            Actions(2);
+            this->Actions(2);
     }
-    else if(!moving && !jump)
-        Actions(0);
+    else if(!this->moving && !this->jump)
+        this->Actions(0);
 
-    if(jump)
+    if(this->jump)
     {
-        Jump();
-        if(!moving)
-            Actions(2);
+        this->Jump();
+        if(!this->moving)
+            this->Actions(2);
     }
     else
-        ApplyGravity();
+        this->ApplyGravity();
 
-    if(slowDown)
-        StopMove();
+    if(this->slowDown)
+        this->StopMove();
 
 }
 
@@ -242,12 +242,12 @@ void Player::NormalAttack(bool newVal)
 
 void Player::StartJump()
 {
-    if(jump)
+    if(this->jump)
         return; // if we're already jumping, don't allow another jump
 
-    jump = true;
-    jumpVelocity = 6.0;
-    initialY = yPos;
+    this->jump = true;
+    this->jumpVelocity = 6.0;
+    this->initialY = yPos;
 }
 
 void Player::Jump()

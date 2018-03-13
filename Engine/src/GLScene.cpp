@@ -111,7 +111,8 @@ GLint GLScene::drawGLScene()
 //    ground->DrawModel();
 //    glPopMatrix();
 
-    testPlayer->Update();
+    for(auto& model : movableObjects)
+        model->Update();
 
 
 //    glTranslatef(testPlayer->GetX(), testPlayer->GetY(), 0);
@@ -136,35 +137,58 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
 }
 int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    switch (uMsg)									// Check For Windows Messages
-	{
-        case WM_KEYDOWN:
-            keyboardAndMouse->wParam = wParam;
-            keyboardAndMouse->KeyPressed(testPlayer);
-            keyboardAndMouse->KeyEnv(plx, 0.1);
-            break;
+    if(uMsg == WM_KEYDOWN)
+    {
+        keyboardAndMouse->wParam = wParam;
+        keyboardAndMouse->KeyPressed(testPlayer);
+        keyboardAndMouse->KeyEnv(plx, 0.1);
+    }
+    if(uMsg == WM_KEYUP)
+    {
+        keyboardAndMouse->wParam = wParam;
+        keyboardAndMouse->KeyUp(testPlayer);
+    }
+    if(uMsg == WM_MOUSEMOVE)
+    // should constantly update mouse pointer x and y positions
+        keyboardAndMouse->SetMousePointer(LOWORD(lParam), HIWORD(lParam));
+    if(uMsg == WM_LBUTTONDOWN)
+    {
+        // left-click functionality
+        keyboardAndMouse->wParam = wParam;
+        keyboardAndMouse->MouseDown(testPlayer);
+    }
+    if(uMsg == WM_MOUSEWHEEL)
+        keyboardAndMouse->WheelMove(testPlayer, GET_WHEEL_DELTA_WPARAM(wParam));
 
-        case WM_KEYUP:
-            keyboardAndMouse->wParam = wParam;
-            keyboardAndMouse->KeyUp(testPlayer);
-            break;
-
-        case WM_MOUSEMOVE:
-            keyboardAndMouse->wParam = wParam;
-            keyboardAndMouse->MouseDown(testPlayer, LOWORD(lParam), HIWORD(lParam));
-            break;
-
-        case WM_MOUSEWHEEL:
-            keyboardAndMouse->WheelMove(testPlayer, GET_WHEEL_DELTA_WPARAM(wParam));
-            break;
-
-//        case WM_LBUTTONDOWN:
-//            keyboardAndMouse->MouseDown(modelTeapot, LOWORD(lParam), HIWORD(lParam));
+//    switch (uMsg)									// Check For Windows Messages
+//	{
+//        case WM_KEYDOWN:
+//            keyboardAndMouse->wParam = wParam;
+//            keyboardAndMouse->KeyPressed(testPlayer);
+//            keyboardAndMouse->KeyEnv(plx, 0.1);
 //            break;
-
-        case WM_RBUTTONDOWN:
-            break;
-	}
+//
+//        case WM_KEYUP:
+//            keyboardAndMouse->wParam = wParam;
+//            keyboardAndMouse->KeyUp(testPlayer);
+//            break;
+//
+//        case WM_MOUSEMOVE:
+//            keyboardAndMouse->wParam = wParam;
+//            keyboardAndMouse->MouseDown(testPlayer, LOWORD(lParam), HIWORD(lParam));
+//            break;
+//
+//        case WM_MOUSEWHEEL:
+//            keyboardAndMouse->WheelMove(testPlayer, GET_WHEEL_DELTA_WPARAM(wParam));
+//            break;
+//
+////        case WM_LBUTTONDOWN:
+////            keyboardAndMouse->MouseDown(modelTeapot, LOWORD(lParam), HIWORD(lParam));
+////            break;
+//
+//        case WM_RBUTTONDOWN:
+//            break;
+//	}
 
 	return 1;
 }

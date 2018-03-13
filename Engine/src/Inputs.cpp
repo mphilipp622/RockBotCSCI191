@@ -62,20 +62,19 @@ void Inputs::KeyUp(Player* model)
     }
 }
 
-void Inputs::MouseDown(Player* model, double xNew, double yNew)
+void Inputs::MouseDown(Player* model)
 {
-    double currentX = xNew - prevMouseX;
-    double currentY = yNew - prevMouseY;
-
+//    double currentX = xNew - prevMouseX;
+//    double currentY = yNew - prevMouseY;
     if(wParam == VK_LBUTTON)
     {
-        model->ShootProjectile(currentX, currentY);
+        model->ShootProjectile(mousePosX, mousePosY);
 //        model->rotateX += currentY;
 //        model->rotateY += currentX;
     }
 
-    prevMouseX = xNew;
-    prevMouseY = yNew;
+//    prevMouseX = xNew;
+//    prevMouseY = yNew;
 }
 
 void Inputs::MouseUp()
@@ -119,4 +118,11 @@ void Inputs::SetKey(string keyName, bool status)
 {
     // allow the player class to set status of a key. This is used to avoid input locking when collision happens
     keys[keyName] = status;
+}
+
+
+void Inputs::SetMousePointer(double x, double y)
+{
+    mousePosX = x;
+    mousePosY = y;
 }

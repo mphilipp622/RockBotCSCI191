@@ -54,5 +54,10 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
 
 void Projectile::Update()
 {
+    Move();
+}
+
+void Projectile::Move()
+{
 
 }

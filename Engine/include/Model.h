@@ -37,6 +37,8 @@ class Model
         void SetPosition(double, double);
         void SetWidth(double);
 
+        virtual void Update();
+
         string GetName();
     protected:
         float width, height;
@@ -45,6 +47,7 @@ class Model
         bool GroundCheck(Model*);
         bool Collision(Model*);
         TextureLoader *texture;
+
 
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);

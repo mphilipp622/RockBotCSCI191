@@ -17,6 +17,7 @@ class Projectile : public Model
         int damage;
         float speed;
         double targetX, targetY;
+        void Move();
 
     private:
 };

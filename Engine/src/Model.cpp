@@ -168,3 +168,8 @@ void Model::SetWidth(double newWidth)
 {
    this->width = newWidth;
 }
+
+void Model::Update()
+{
+
+}
