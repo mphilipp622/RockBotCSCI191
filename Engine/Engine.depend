@@ -7,12 +7,13 @@
 	<iostream>
 	<string>
 
-1520562617 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1520903110 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
 	<vector>
 	<Model.h>
+	<Inputs.h>
 
 1519256343 c:\users\seapanda\documents\college\191\191\common\include\gl\glut.h
 	<windows.h>
@@ -20,10 +21,9 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1520901858 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1520903125 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
-	<Inputs.h>
 	<Parallax.h>
 	<DeltaTime.h>
 	<Player.h>
@@ -50,13 +50,13 @@
 	<glut.h>
 	<string>
 
-1520901977 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+1520903299 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	<Inputs.h>
 	<iostream>
 	<DeltaTime.h>
 	<string>
 
-1520900907 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+1520902780 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -89,7 +89,7 @@
 	<glut.h>
 	<iostream>
 
-1520901982 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
+1520902288 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
 	<Parallax.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -181,7 +181,7 @@
 	"gl/gl.h"
 	<iostream>
 
-1520901444 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1520903389 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<Timer.h>
 	<TextureLoader.h>

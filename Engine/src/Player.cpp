@@ -244,7 +244,7 @@ void Player::StartJump()
         return; // if we're already jumping, don't allow another jump
 
     jump = true;
-    jumpVelocity = 5.0;
+    jumpVelocity = 6.0;
     initialY = yPos;
 }
 
@@ -257,6 +257,7 @@ void Player::Jump()
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
     if(CheckCollision())
     {
+        GLScene::keyboardAndMouse->SetKey("Jump", false);
         jump = false;
         yPos = prevYPos;
         return;
@@ -311,6 +312,7 @@ void Player::MoveLeft()
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
     if(CheckCollision())
     {
+        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
         xPos = prevXPos;
         moving = false;
         xDirection = 0;
@@ -336,6 +338,8 @@ void Player::MoveRight()
     xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
     if(CheckCollision())
     {
+
+        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
         xPos = prevXPos;
         moving = false;
         xDirection = 0;

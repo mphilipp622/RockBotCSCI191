@@ -2,7 +2,6 @@
 
 #include <GLScene.h>
 #include <GLLight.h>
-#include <Inputs.h>
 #include <Parallax.h>
 #include <DeltaTime.h>
 #include <Player.h>
@@ -11,7 +10,6 @@
 
 
 //Model *modelTeapot = new Model();
-Inputs *keyboardAndMouse = new Inputs();
 Model *ground = new Model(6.0, 0.2, 0, -1.0, "ground");
 Model *block = new Model(2.0, 0.2, 3.0, 0, "block");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2");
@@ -33,7 +31,7 @@ GLScene::GLScene()
     staticObjects.push_back(block);
     staticObjects.push_back(ground);
     staticObjects.push_back(block2);
-
+    keyboardAndMouse = new Inputs();
     sceneTimer->Start();
 }
 
@@ -44,6 +42,9 @@ GLScene::~GLScene()
 // Static Variables for use in player class to check collision
 vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
+
+// static input for player to use as well
+Inputs* GLScene::keyboardAndMouse;
 
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()

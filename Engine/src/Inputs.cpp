@@ -112,3 +112,10 @@ void Inputs::KeyEnv(Parallax* plx, float speed)
 //        break;
 //    }
 }
+
+
+void Inputs::SetKey(string keyName, bool status)
+{
+    // allow the player class to set status of a key. This is used to avoid input locking when collision happens
+    keys[keyName] = status;
+}
