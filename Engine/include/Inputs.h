@@ -19,7 +19,7 @@ class Inputs
         void KeyUp(Player* model);
         void KeyEnv(Parallax*, float); // movements of background
 
-        void MouseDown(Player*);
+        void MouseDown(Player*, LPARAM lParam);
         void MouseUp();
         void WheelMove(Player*, double);
         void SetMousePointer(double x, double y);

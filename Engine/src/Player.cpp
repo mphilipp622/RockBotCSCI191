@@ -259,7 +259,7 @@ void Player::Jump()
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
     if(CheckCollision())
     {
-        GLScene::keyboardAndMouse->SetKey("Jump", false);
+//        GLScene::keyboardAndMouse->SetKey("Jump", false);
         jump = false;
         yPos = prevYPos;
         return;
@@ -314,7 +314,7 @@ void Player::MoveLeft()
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
     if(CheckCollision())
     {
-        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
+//        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
         xPos = prevXPos;
         moving = false;
         xDirection = 0;
@@ -341,7 +341,7 @@ void Player::MoveRight()
     if(CheckCollision())
     {
 
-        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
+//        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
         xPos = prevXPos;
         moving = false;
         xDirection = 0;
@@ -449,7 +449,7 @@ double Player::GetZoom()
 
 void Player::ShootProjectile(double x, double y)
 {
-    Projectile *newProjectile = new Projectile(xPos, yPos, 1.0, 1.0, 1, 2.0, "projectile", x, y);
+    Projectile *newProjectile = new Projectile(this->xPos, this->yPos, 0.5, 0.5, 1, 4.0, "projectile", x + this->xPos, y + this->yPos);
     newProjectile->InitModel("Images/Note.png", true);
     GLScene::movableObjects.push_back(newProjectile);
 }

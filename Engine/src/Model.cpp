@@ -171,5 +171,10 @@ void Model::SetWidth(double newWidth)
 
 void Model::Update()
 {
+    return;
+}
 
+bool Model::CheckCollision()
+{
+    return false;
 }

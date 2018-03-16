@@ -156,7 +156,7 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         // left-click functionality
         keyboardAndMouse->wParam = wParam;
-        keyboardAndMouse->MouseDown(testPlayer);
+        keyboardAndMouse->MouseDown(testPlayer, lParam);
     }
     if(uMsg == WM_MOUSEWHEEL)
         keyboardAndMouse->WheelMove(testPlayer, GET_WHEEL_DELTA_WPARAM(wParam));

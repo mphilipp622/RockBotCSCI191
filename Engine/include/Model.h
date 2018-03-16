@@ -47,7 +47,7 @@ class Model
         bool GroundCheck(Model*);
         bool Collision(Model*);
         TextureLoader *texture;
-
+        virtual bool CheckCollision();
 
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);

@@ -62,12 +62,17 @@ void Inputs::KeyUp(Player* model)
     }
 }
 
-void Inputs::MouseDown(Player* model)
+void Inputs::MouseDown(Player* model, LPARAM lParam)
 {
 //    double currentX = xNew - prevMouseX;
 //    double currentY = yNew - prevMouseY;
     if(wParam == VK_LBUTTON)
     {
+        // convert mouse X and Y to openGL coordinates
+        double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
+        double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
+        mousePosX = LOWORD(lParam) / (screenWidth / 2) - 1.0;
+        mousePosY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0);
         model->ShootProjectile(mousePosX, mousePosY);
 //        model->rotateX += currentY;
 //        model->rotateY += currentX;
