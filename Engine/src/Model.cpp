@@ -40,7 +40,7 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
     this->rotateZ = 0;
 
     // translations
-    this->zoom = -3.0;
+    this->zoom = 0;
     this->xPos = newX;
     this->yPos = newY;
 

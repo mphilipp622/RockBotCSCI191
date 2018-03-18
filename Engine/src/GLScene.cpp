@@ -77,7 +77,7 @@ GLint GLScene::drawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    gluLookAt(Player::player->GetX(), Player::player->GetY(), 0.0,
+    gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
             Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
             0.0f, 1.0f, 0.0f);
 //    glPushMatrix();

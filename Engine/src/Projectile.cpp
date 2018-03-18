@@ -40,7 +40,7 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
     this->rotateZ = 0;
 
     // translations
-    this->zoom = -3.0;
+    this->zoom = 0;
 
     // Initialize Quad
     this->vertices[0].x = -this->width / 2;

@@ -19,7 +19,7 @@ Player::Player(double newX, double newY)
 
     this->xPos = newX;
     this->yPos = newY;
-    this->playerZoom = -3.0;
+    this->playerZoom = 0;
 
     // set previous positions to our starting position
     this->prevXPos = xPos;
@@ -449,7 +449,7 @@ double Player::GetZoom()
 
 void Player::ShootProjectile(double x, double y)
 {
-    Projectile *newProjectile = new Projectile(this->xPos, this->yPos, 0.5, 0.5, 1, 4.0, "projectile", x + this->xPos, y + this->yPos);
+    Projectile *newProjectile = new Projectile(this->xPos, this->yPos, 0.5, 0.5, 1, 4.0, "projectile", x + this->xPos, y + this->yPos); // sends relative mouse pointer location
     newProjectile->InitModel("Images/Note.png", true);
     GLScene::movableObjects.push_back(newProjectile);
 }
