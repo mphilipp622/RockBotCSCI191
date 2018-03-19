@@ -71,8 +71,9 @@ void Inputs::MouseDown(Player* model, LPARAM lParam)
         // convert mouse X and Y to openGL coordinates
         double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
         double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
-        mousePosX = LOWORD(lParam) / (screenWidth / 2) - 1.0;
-        mousePosY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0);
+        double aspectRatio = screenWidth / screenHeight;
+        mousePosX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
+        mousePosY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) * 3.33;
         model->ShootProjectile(mousePosX, mousePosY);
 //        model->rotateX += currentY;
 //        model->rotateY += currentX;

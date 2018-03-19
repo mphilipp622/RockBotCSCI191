@@ -9,7 +9,7 @@
 Timer *T;
 TextureLoader run[4];
 TextureLoader idle[5];
-TextureLoader jumpAnim[1];
+TextureLoader jumpAnim[4];
 
 Player::Player(double newX, double newY)
 {
@@ -52,7 +52,7 @@ Player::Player(double newX, double newY)
     this->acceleration = 0.0;
     this->accelRate = 0.05;
     this->deceleration = 0.2; // rate of deceleration
-    this->maxAcceleration = 2.0;
+    this->maxAcceleration = 2.5;
     this->jump = false; // set true to avoid falling through earth on scene load
     this->slowDown = false;
     this->gravity = -9.80;
@@ -138,7 +138,10 @@ void Player::InitPlayer()
     idle[3].BindTexture("Images/Player/Test_Idle_0003.png");
     idle[4].BindTexture("Images/Player/Test_Idle_0004.png");
 
-    jumpAnim[0].BindTexture("Images/Player/jump.png");
+    jumpAnim[0].BindTexture("Images/Player/Test_Movement_0000.png");
+    jumpAnim[1].BindTexture("Images/Player/Test_Movement_0001.png");
+    jumpAnim[2].BindTexture("Images/Player/Test_Movement_0002.png");
+    jumpAnim[3].BindTexture("Images/Player/Test_Movement_0003.png");
 
 }
 
