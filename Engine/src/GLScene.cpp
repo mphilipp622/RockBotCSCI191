@@ -10,10 +10,10 @@
 
 
 //Model *modelTeapot = new Model();
-Model *ground = new Model(6.0, 0.2, 0, -1.0, "ground");
+Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground");
 Model *block = new Model(2.0, 0.2, 3.0, 0, "block");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2");
-Player *testPlayer = new Player(0, 10);
+Player *testPlayer = new Player(0, 15);
 
 DeltaTime* dTime = new DeltaTime();
 //Skybox* sky = new Skybox();
@@ -56,9 +56,10 @@ GLint GLScene::initGL()
 
     // Initialize Models Here
     cout << "Parallax Initializing" << endl;
-    plx->ParallaxInit("Images/background.jpg");
+    plx->ParallaxInit("Images/BGSciFi.jpg");
 
     block->InitModel("Images/Block.png", true);
+    block2->InitModel("Images/Block2.png", true);
     ground->InitModel("Images/Block.png", true);
     dTime ->UpdateDeltaTime();
 
