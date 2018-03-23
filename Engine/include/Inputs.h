@@ -19,18 +19,30 @@ class Inputs
         void KeyUp(Player* model);
         void KeyEnv(Parallax*, float); // movements of background
 
+<<<<<<< HEAD
         void MouseDown(Player*, double, double);
         void MouseUp();
         void WheelMove(Player*, double);
+=======
+        void MouseDown(Player*, LPARAM lParam);
+        void MouseUp();
+        void WheelMove(Player*, double);
+        void SetMousePointer(double x, double y);
+>>>>>>> master
 
         double prevMouseX, prevMouseY;
 
+        void SetKey(string keyName, bool status);
         WPARAM wParam;
 
     protected:
 
     private:
         std::unordered_map<std::string, bool> keys;
+<<<<<<< HEAD
+=======
+        double mousePosX, mousePosY;
+>>>>>>> master
 };
 
 #endif // INPUTS_H

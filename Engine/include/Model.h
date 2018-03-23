@@ -2,8 +2,14 @@
 #define MODEL_H
 
 #include <windows.h>
+<<<<<<< HEAD
 #include "glut.h"
 #include <string>
+=======
+#include <glut.h>
+#include <string>
+#include <TextureLoader.h>
+>>>>>>> master
 
 using namespace std;
 
@@ -19,7 +25,11 @@ class Model
         Model(float, float, double, double, string);
         virtual ~Model();
         void DrawModel();
+<<<<<<< HEAD
         void InitModel(char* fileName, bool transparent);
+=======
+        void InitModel(string fileName, bool transparent);
+>>>>>>> master
 
         void InitPlayer();
 
@@ -36,6 +46,11 @@ class Model
         void SetPosition(double, double);
         void SetWidth(double);
 
+<<<<<<< HEAD
+=======
+        virtual void Update();
+
+>>>>>>> master
         string GetName();
     protected:
         float width, height;
@@ -43,6 +58,11 @@ class Model
         string name;
         bool GroundCheck(Model*);
         bool Collision(Model*);
+<<<<<<< HEAD
+=======
+        TextureLoader *texture;
+        virtual bool CheckCollision();
+>>>>>>> master
 
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);

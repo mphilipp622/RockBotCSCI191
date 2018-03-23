@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "GL/gl.h"
+#include <GL\GL.h>
 #include <Model.h>
 #include <TextureLoader.h>
 #include <DeltaTime.h>
@@ -15,7 +15,7 @@ typedef struct
 class Player : public Model
 {
     public:
-        Player();
+        Player(double, double);
         virtual ~Player();
 
         float scaleSize[3] = {1.0, 1.0, 1.0}; // x, y, z scale values
@@ -36,6 +36,10 @@ class Player : public Model
         // Character Controller Functions
         void Jump();
         void Jump2();
+<<<<<<< HEAD
+=======
+        void ShootProjectile(double x, double y);
+>>>>>>> master
         void NormalAttack(bool);
         void StartJump();
 
@@ -47,19 +51,41 @@ class Player : public Model
         void SlowDown();
 
         void ApplyGravity();
+<<<<<<< HEAD
+=======
+
+        static Player* player;
+        double GetOffsetX();
+        double GetOffsetY();
+        double GetZoom();
+>>>>>>> master
 //        void SetVertices();
     protected:
 
     private:
+<<<<<<< HEAD
         bool jump, slowDown, moving;
         float jumpVelocity;
+=======
+        bool jump, slowDown, moving, startGravity;
+        float jumpVelocity, fallVelocity;
+>>>>>>> master
         float initialY;
         float xDirection, prevXDirection;
         float prevXPos, prevYPos;
         float acceleration, accelRate, maxAcceleration, deceleration;
         float gravity;
+<<<<<<< HEAD
 
         void CheckCollision();
+=======
+        float playerZoom;
+
+        int idleFrame;
+        bool CheckCollision();
+//        bool CheckCollisionY();
+//        bool CheckCollisionX();
+>>>>>>> master
 };
 
 #endif // PLAYER_H
