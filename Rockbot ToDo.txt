@@ -1,8 +1,0 @@
-things we can do now:
-	- Character Controller
-	- Shoot Projectiles (direction vector points to mouse location)
-	- Background ( Parallax effects )
-	- Level Generation? (Platforms, etc)
-	- Enemy spawner (from right/left side of screen maybe. Simply spawn object for now and have 	it move a single direction towards you)
-	- Camera follow character. (Pan camera left/right/up/down based on character x and y positions)
-	- UI Elements: HP bars
