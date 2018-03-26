@@ -7,7 +7,7 @@
 	<iostream>
 	<string>
 
-1520903110 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1521930555 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -21,7 +21,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1521507844 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1522025382 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<Parallax.h>
@@ -29,6 +29,7 @@
 	<Player.h>
 	<Skybox.h>
 	<Timer.h>
+	<MMSystem.h>
 
 1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\gllight.cpp
 	<GLLight.h>
@@ -36,7 +37,7 @@
 1519964614 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1521244093 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+1521930555 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -45,19 +46,19 @@
 	<Player.h>
 	<string>
 
-1521239100 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1521930555 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
 	<TextureLoader.h>
 
-1521503807 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+1521930555 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	<Inputs.h>
 	<iostream>
 	<DeltaTime.h>
 	<string>
 
-1521237406 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+1521930555 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -90,7 +91,7 @@
 	<glut.h>
 	<iostream>
 
-1520902288 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
+1521930555 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
 	<Parallax.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -182,7 +183,7 @@
 	"gl/gl.h"
 	<iostream>
 
-1521503807 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1521930556 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<Timer.h>
 	<TextureLoader.h>
@@ -191,7 +192,7 @@
 	<cmath>
 	<Projectile.h>
 
-1520984780 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1521930555 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -349,14 +350,283 @@
 	<algorithm>
 	<Timer.h>
 
-1521240414 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
+1521930555 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
 	<algorithm>
 	<Timer.h>
 
-1521244577 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
+1521930556 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
+
+1521940313 source:c:\users\seapanda\documents\college\191\191\engine\src\audiomanager.cpp
+	"AudioManager.h"
+
+1521940329 c:\users\seapanda\documents\college\191\191\engine\include\audiomanager.h
+	<string>
+	<windows.h>
+	<mmsystem.h>
+
+1521940910 source:c:\users\seapanda\documents\college\191\191\engine\src\soundsystemclass.cpp
+	"SoundSystemClass.h"
+
+1521940995 c:\users\seapanda\documents\college\191\191\engine\include\soundsystemclass.h
+	"fmod.hpp"
+	"fmod_errors.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod.hpp
+	"fmod_common.h"
+	"fmod.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_common.h
+	"fmod_codec.h"
+	"fmod_dsp.h"
+	"fmod_output.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_codec.h
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_dsp.h
+	"fmod_dsp_effects.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_dsp_effects.h
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_output.h
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod.h
+	"fmod_common.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_errors.h
+	"fmod.h"
+
+1522007879 source:c:\users\seapanda\documents\college\191\191\engine\src\audiosource.cpp
+	"AudioSource.h"
+
+1522006947 c:\users\seapanda\documents\college\191\191\engine\include\audiosource.h
+	<string>
+	<windows.h>
+	<MMSystem.h>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Err.hpp>
+	<SFML/System/FileInputStream.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Lock.hpp>
+	<SFML/System/MemoryInputStream.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Sleep.hpp>
+	<SFML/System/String.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Utf.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\config.hpp
+	"TargetConditionals.h"
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\clock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\export.hpp
+	<SFML/Config.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\time.hpp
+	<SFML/System/Export.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\err.hpp
+	<SFML/System/Export.hpp>
+	<ostream>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\fileinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdio>
+	<string>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\inputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+
+1486740055 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\noncopyable.hpp
+	<SFML/System/Export.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\lock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\memoryinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Export.hpp>
+	<cstdlib>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\mutex.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\sleep.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\string.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Utf.hpp>
+	<iterator>
+	<locale>
+	<string>
+	<SFML/System/String.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\utf.hpp
+	<SFML/Config.hpp>
+	<algorithm>
+	<locale>
+	<string>
+	<cstdlib>
+	<SFML/System/Utf.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\utf.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\string.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\thread.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+	<SFML/System/Thread.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\thread.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\threadlocal.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\threadlocalptr.hpp
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\threadlocalptr.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\vector2.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\vector3.inl
+
+1486740055 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1486740055 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1486740055 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundfilefactory.inl
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
 

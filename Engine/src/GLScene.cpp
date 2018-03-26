@@ -7,7 +7,7 @@
 #include <Player.h>
 #include <Skybox.h>
 #include <Timer.h>
-
+#include <MMSystem.h>
 
 //Model *modelTeapot = new Model();
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground");
@@ -141,6 +141,7 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if(uMsg == WM_KEYDOWN)
     {
+//        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
         keyboardAndMouse->wParam = wParam;
         keyboardAndMouse->KeyPressed(testPlayer);
         keyboardAndMouse->KeyEnv(plx, 0.1);
