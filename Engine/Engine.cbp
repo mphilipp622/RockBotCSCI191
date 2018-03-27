@@ -36,7 +36,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-std=c++14" />
+			<Add option="-std=c++11" />
 			<Add option="-DSFML_STATIC" />
 			<Add directory="../Common/include/GL" />
 			<Add directory="Common/include" />

@@ -9,6 +9,8 @@
 #include <vector>
 #include <Model.h>
 #include <Inputs.h>
+#include <unordered_map>
+#include <AudioSource.h>
 
 using namespace std;
 
@@ -30,8 +32,11 @@ class GLScene
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static Inputs *keyboardAndMouse;
 
+        static Player* testPlayer;
+
         static void UpdateModelPositions();
     protected:
+        unordered_map<string, AudioSource*> audioSources;
 
     private:
 };

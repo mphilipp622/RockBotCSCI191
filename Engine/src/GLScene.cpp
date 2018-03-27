@@ -7,13 +7,14 @@
 #include <Player.h>
 #include <Skybox.h>
 #include <Timer.h>
-#include <MMSystem.h>
 
 //Model *modelTeapot = new Model();
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground");
 Model *block = new Model(2.0, 0.2, 3.0, 0, "block");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2");
-Player *testPlayer = new Player(0, 15);
+Player* GLScene::testPlayer;
+
+AudioSource *testAudio;
 
 DeltaTime* dTime = new DeltaTime();
 //Skybox* sky = new Skybox();
@@ -28,6 +29,8 @@ GLScene::GLScene()
 
 
     keyboardAndMouse = new Inputs();
+    testPlayer = new Player(0, 15);
+    testAudio = new AudioSource("test", 2.0, 0, 100);
     sceneTimer->Start();
 }
 
@@ -141,6 +144,8 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if(uMsg == WM_KEYDOWN)
     {
+//        testAudio->UpdatePosition();
+        testAudio->Play("Audio/Music/ab9.wav");
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
         keyboardAndMouse->wParam = wParam;
         keyboardAndMouse->KeyPressed(testPlayer);
