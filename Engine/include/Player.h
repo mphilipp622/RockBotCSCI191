@@ -37,7 +37,6 @@ class Player : public Model
         void Jump();
         void Jump2();
         void ShootProjectile(double x, double y);
-        void NormalAttack(bool);
         void StartJump();
 
         // x Movement
@@ -50,6 +49,7 @@ class Player : public Model
         void ApplyGravity();
 
         static Player* player;
+
         double GetOffsetX();
         double GetOffsetY();
         double GetZoom();

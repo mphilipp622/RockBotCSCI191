@@ -4,6 +4,7 @@
 #include <string>
 #include <windows.h>
 #include <MMSystem.h>
+#include <cmath>
 
 using namespace std;
 
@@ -12,11 +13,11 @@ class AudioSource
 {
     public:
         AudioSource();
-        AudioSource(string newName, double newX, double newY, unsigned short newVolume);
+        AudioSource(string newName, string newFilePath, double newX, double newY, unsigned short newVolume, bool isLooping);
         virtual ~AudioSource();
 
         // plays chord using name that's passed in as argument
-        void Play(string filepath);
+        void Play();
 
         // Stops playing any currently playing sound
         void Stop();
@@ -25,7 +26,7 @@ class AudioSource
         void SetVolume(unsigned short newVal);
 
         // Sets l/r channel balance based on player position
-        void UpdatePosition();
+        void UpdateChannelBalance();
 
         // Gets the name of this AudioSource
         string GetName();
@@ -35,12 +36,17 @@ class AudioSource
         double GetX();
         double GetY();
 
+        // called by drawGLScene in GLScene classes.
+        void Update(double newX, double newY);
+
     protected:
 
     private:
-        string name;
+        string name, filePath;
         DWORD volume, lChannel, rChannel;
+        unsigned short gain;
         double xPos, yPos;
+        bool loop;
 };
 
 #endif // AudioSource_H

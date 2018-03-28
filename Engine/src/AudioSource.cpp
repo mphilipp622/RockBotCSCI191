@@ -2,19 +2,23 @@
 #include <iostream>
 #include <GLScene.h>
 
+using namespace std;
+
 AudioSource::AudioSource()
 {
     //ctor
 //    PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
 }
 
-AudioSource::AudioSource(string newName, double newX, double newY, unsigned short newVolume)
+AudioSource::AudioSource(string newName, string newFilePath, double newX, double newY, unsigned short newVolume, bool isLooping)
 {
     name = newName;
+    filePath = newFilePath;
     xPos = newX;
     yPos = newY;
     lChannel = 0xFFFF;
     rChannel = 0xFFFF0000;
+    loop = isLooping;
     SetVolume(newVolume);
 }
 
@@ -23,9 +27,18 @@ AudioSource::~AudioSource()
     //dtor
 }
 
-void AudioSource::Play(string filepath)
+void AudioSource::Update(double newX, double newY)
 {
-    PlaySound(filepath.c_str(), NULL, SND_ASYNC);
+    SetPosition(newX, newY); // update x, y coordinates for the source. Only relevant for movable objects
+    UpdateChannelBalance(); // set L/R channel balance
+}
+
+void AudioSource::Play()
+{
+    if(loop)
+        PlaySound(filePath.c_str(), NULL, SND_ASYNC | SND_LOOP);
+    else
+        PlaySound(filePath.c_str(), NULL, SND_ASYNC);
 }
 
 void AudioSource::Stop()
@@ -41,36 +54,37 @@ void AudioSource::SetVolume(unsigned short newVal)
     // figure out the hex value of the new volume and scale it from 0 to 100.
     lChannel = 0xFFFF & (newVal * 65535 / 100);
     rChannel = 0xFFFF0000 & ((newVal * 65535 / 100) * 65535);
-
-    // set r/l channel balance
-//    UpdatePosition();
+    gain = newVal;
 
     volume = lChannel + rChannel;
 
     waveOutSetVolume(NULL, volume);
 }
 
-void AudioSource::UpdatePosition()
+void AudioSource::UpdateChannelBalance()
 {
-    int xDist = xPos - GLScene::testPlayer->GetX();
+    double xDist = xPos - Player::player->GetX();
 
     if(xDist > 0)
     {
-        // this source is to right of player so amplify right channel and lower left channel
-        DWORD newLChannel = lChannel >> xDist;
-
-        lChannel -= newLChannel;
-
-        std::cout << lChannel << std::endl;
-//        rChannel = 0xFFFF0000 & (((newVal * 65535 - (xDist * 65535) ) / 100) * 65535);
-//        lChannel = 0xFFFF & ((newVal * 65535 + (xDist * 65535)) / 100);
+        // this source is to right of player so keep right channel the same and lower left channel
+        if(gain - (abs(xDist) * 20) > 0)
+            lChannel = 0xFFFF & (int)((gain - (abs(xDist) * 20)) * 65535 / 100);
+        else
+            lChannel = 0;
     }
-//    else if(xDist < 0)
-//    {
-//        // source is to left of player so amplify left channel and lower right channel
-//        lChannel = 0xFFFF & ((newVal * 65535 - (-xDist * 65535)) / 100);
-//        rChannel = 0xFFFF0000 & (((newVal * 65535 + (-xDist * 65535) )/ 100) * 65535);
-//    }
+    else if(xDist < 0)
+    {
+        // this source is to left of player so keep left channel the same and lower right channel
+        if(gain - (abs(xDist) * 20) > 0)
+            rChannel = 0xFFFF0000 & ((int)((gain - (abs(xDist) * 20)) * 65535 / 100) * 65535);
+        else
+            rChannel = 0;
+    }
+
+    volume = lChannel + rChannel;
+
+    waveOutSetVolume(NULL, volume);
 }
 
 string AudioSource::GetName()

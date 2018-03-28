@@ -240,7 +240,7 @@
 
 1519274979 e:\college\191\191\engine\common\include\soil.h
 
-1521777892 source:e:\college\191\191\engine\main.cpp
+1522205123 source:e:\college\191\191\engine\main.cpp
 	<windows.h>
 	<windows.h>
 	<GLScene.h>
@@ -248,7 +248,7 @@
 	<iostream>
 	<string>
 
-1522113979 e:\college\191\191\engine\include\glscene.h
+1522205434 e:\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -258,19 +258,20 @@
 	<unordered_map>
 	<AudioSource.h>
 
-1521777927 e:\college\191\191\engine\include\model.h
+1522205078 e:\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
 	<TextureLoader.h>
+	<AudioSource.h>
 
-1521777892 source:e:\college\191\191\engine\src\gllight.cpp
+1522205046 source:e:\college\191\191\engine\src\gllight.cpp
 	<GLLight.h>
 
-1520051687 e:\college\191\191\engine\include\gllight.h
+1522205072 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1522115160 source:e:\college\191\191\engine\src\glscene.cpp
+1522206132 source:e:\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<Parallax.h>
@@ -294,7 +295,7 @@
 	<GL\GL.h>
 	<string>
 
-1521777927 e:\college\191\191\engine\include\player.h
+1522205790 e:\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -306,7 +307,7 @@
 	<DeltaTime.h>
 	<string>
 
-1521777927 source:e:\college\191\191\engine\src\model.cpp
+1522205053 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -320,7 +321,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1521777927 source:e:\college\191\191\engine\src\player.cpp
+1522205907 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<Timer.h>
 	<TextureLoader.h>
@@ -341,7 +342,7 @@
 1521777892 source:e:\college\191\191\engine\src\timer.cpp
 	<Timer.h>
 
-1521778139 source:e:\college\191\191\engine\src\projectile.cpp
+1522202952 source:e:\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -632,13 +633,41 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1522114370 source:e:\college\191\191\engine\src\audiosource.cpp
+1522211846 source:e:\college\191\191\engine\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1522115069 e:\college\191\191\engine\include\audiosource.h
+1522209726 e:\college\191\191\engine\include\audiosource.h
 	<string>
 	<windows.h>
 	<MMSystem.h>
+	<cmath>
+
+1522204547 source:e:\college\191\191\engine\src\scenemanager.cpp
+	"SceneManager.h"
+
+1522204626 e:\college\191\191\engine\include\scenemanager.h
+	<GLScene.h>
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod.hpp
+	"fmod_common.h"
+	"fmod.h"
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_common.h
+	"fmod_codec.h"
+	"fmod_dsp.h"
+	"fmod_output.h"
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_codec.h
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_dsp.h
+	"fmod_dsp_effects.h"
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_dsp_effects.h
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_output.h
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod.h
+	"fmod_common.h"
 

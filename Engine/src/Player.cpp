@@ -11,6 +11,8 @@ TextureLoader run[4];
 TextureLoader idle[5];
 TextureLoader jumpAnim[4];
 
+Player* Player::player; // Global getter for the player object
+
 Player::Player(double newX, double newY)
 {
     // Collision
@@ -62,14 +64,14 @@ Player::Player(double newX, double newY)
     this->idleFrame = 0;
 
     this->name = "player";
-    this->player = this;
+
+    this->audioSource = new AudioSource("PlayerSource", "Audio/Music/ab9.wav", this->xPos, this->yPos, 100, false);
 
 	T = new Timer();
     T->Start();
 
+    this->player = this;
 }
-
-Player* Player::player; // Global getter for the player object
 
 Player::~Player()
 {
@@ -232,16 +234,12 @@ void Player::Update()
     if(this->slowDown)
         this->StopMove();
 
+    if(this->audioSource) // update audio source position
+        this->audioSource->SetPosition(this->xPos, this->yPos);
+
+//    DrawPlayer();
 }
 
-void Player::NormalAttack(bool newVal)
-{
-    if(newVal)
-    {
-        cout << "attacking" << endl;
-    }
-
-}
 
 void Player::StartJump()
 {

@@ -12,9 +12,7 @@
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground");
 Model *block = new Model(2.0, 0.2, 3.0, 0, "block");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2");
-Player* GLScene::testPlayer;
-
-AudioSource *testAudio;
+//AudioSource *testAudio;
 
 DeltaTime* dTime = new DeltaTime();
 //Skybox* sky = new Skybox();
@@ -29,8 +27,8 @@ GLScene::GLScene()
 
 
     keyboardAndMouse = new Inputs();
-    testPlayer = new Player(0, 15);
-    testAudio = new AudioSource("test", 2.0, 0, 100);
+    player = new Player(0.0, 10.0);
+
     sceneTimer->Start();
 }
 
@@ -66,14 +64,14 @@ GLint GLScene::initGL()
     ground->InitModel("Images/Block.png", true);
     dTime ->UpdateDeltaTime();
 
-    movableObjects.push_back(testPlayer);
+    movableObjects.push_back(player);
 
     staticObjects.push_back(block);
     staticObjects.push_back(ground);
     staticObjects.push_back(block2);
 
 //    sky->LoadTextures();
-    testPlayer->InitPlayer();
+    player->InitPlayer();
     return true;
 }
 
@@ -81,8 +79,8 @@ GLint GLScene::drawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
-            Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
+    gluLookAt(player->GetX(), player->GetY(), 6.0,
+            player->GetX(), player->GetY(), player->GetZoom(),
             0.0f, 1.0f, 0.0f);
 //    glPushMatrix();
 ////    glScaled(3.33, 3.33, 1);
@@ -95,34 +93,15 @@ GLint GLScene::drawGLScene()
 
     for(auto& model : staticObjects)
     {
-        glPushMatrix();
+//        glPushMatrix();
         model->DrawModel();
-        glPopMatrix();
+//        glPopMatrix();
     }
 
     for(auto& model : movableObjects)
     {
-        if(model->GetName() != "player")
-        {
-            glPushMatrix();
-            model->DrawModel();
-            glPopMatrix();
-        }
-    }
-//    glPushMatrix(); // remove push/pop if you want things to interact with each other in the renderer
-//    block->DrawModel();
-//    glPopMatrix();
-//
-//    glPushMatrix();
-//    ground->DrawModel();
-//    glPopMatrix();
-
-    for(auto& model : movableObjects)
         model->Update();
-
-//    glTranslatef(testPlayer->GetX(), testPlayer->GetY(), 0);
-//    gluLookAt(testPlayer->GetX(), testPlayer->GetY(), -10.0, testPlayer->GetX(), testPlayer->GetY(), -1.0, 0, 1.0, 100.0);
-
+    }
     dTime->UpdateDeltaTime();
 
 	return 1;
@@ -145,49 +124,52 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     if(uMsg == WM_KEYDOWN)
     {
 //        testAudio->UpdatePosition();
-        testAudio->Play("Audio/Music/ab9.wav");
+
+//        testAudio->Update();
+//        testAudio->Play();
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
         keyboardAndMouse->wParam = wParam;
-        keyboardAndMouse->KeyPressed(testPlayer);
+        keyboardAndMouse->KeyPressed(player);
         keyboardAndMouse->KeyEnv(plx, 0.1);
     }
     if(uMsg == WM_KEYUP)
     {
         keyboardAndMouse->wParam = wParam;
-        keyboardAndMouse->KeyUp(testPlayer);
+        keyboardAndMouse->KeyUp(player);
     }
     if(uMsg == WM_MOUSEMOVE)
     // should constantly update mouse pointer x and y positions
         keyboardAndMouse->SetMousePointer(LOWORD(lParam), HIWORD(lParam));
     if(uMsg == WM_LBUTTONDOWN)
     {
+        player->GetAudioSource()->Play();
         // left-click functionality
         keyboardAndMouse->wParam = wParam;
-        keyboardAndMouse->MouseDown(testPlayer, lParam);
+        keyboardAndMouse->MouseDown(player, lParam);
     }
     if(uMsg == WM_MOUSEWHEEL)
-        keyboardAndMouse->WheelMove(testPlayer, GET_WHEEL_DELTA_WPARAM(wParam));
+        keyboardAndMouse->WheelMove(player, GET_WHEEL_DELTA_WPARAM(wParam));
 
 //    switch (uMsg)									// Check For Windows Messages
 //	{
 //        case WM_KEYDOWN:
 //            keyboardAndMouse->wParam = wParam;
-//            keyboardAndMouse->KeyPressed(testPlayer);
+//            keyboardAndMouse->KeyPressed(player);
 //            keyboardAndMouse->KeyEnv(plx, 0.1);
 //            break;
 //
 //        case WM_KEYUP:
 //            keyboardAndMouse->wParam = wParam;
-//            keyboardAndMouse->KeyUp(testPlayer);
+//            keyboardAndMouse->KeyUp(player);
 //            break;
 //
 //        case WM_MOUSEMOVE:
 //            keyboardAndMouse->wParam = wParam;
-//            keyboardAndMouse->MouseDown(testPlayer, LOWORD(lParam), HIWORD(lParam));
+//            keyboardAndMouse->MouseDown(player, LOWORD(lParam), HIWORD(lParam));
 //            break;
 //
 //        case WM_MOUSEWHEEL:
-//            keyboardAndMouse->WheelMove(testPlayer, GET_WHEEL_DELTA_WPARAM(wParam));
+//            keyboardAndMouse->WheelMove(player, GET_WHEEL_DELTA_WPARAM(wParam));
 //            break;
 //
 ////        case WM_LBUTTONDOWN:
@@ -205,8 +187,8 @@ void GLScene::UpdateModelPositions()
 {
     return;
 //    for(auto& model : staticObjects)
-//        model->SetPosition(model->GetX() - Player::player->GetOffsetX(), model->GetY() - Player::player->GetOffsetY());
+//        model->SetPosition(model->GetX() - player->GetOffsetX(), model->GetY() - player->GetOffsetY());
     //for(auto& model : enemies)
-    //    model->SetPosition(model->GetX() + Player::player->GetOffsetX(), model->GetY() + Player::player->GetOffsetY());
+    //    model->SetPosition(model->GetX() + player->GetOffsetX(), model->GetY() + player->GetOffsetY());
 
 }

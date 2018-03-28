@@ -63,6 +63,45 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
 
     this->texture = new TextureLoader();
 }
+Model::Model(float newWidth, float newHeight, double newX, double newY, string newName, AudioSource* newSource)
+{
+    this->width = newWidth;
+    this->height = newHeight;
+
+    this->name = newName;
+
+    this->rotateX = 0;
+    this->rotateY = 0;
+    this->rotateZ = 0;
+
+    // translations
+    this->zoom = 0;
+    this->xPos = newX;
+    this->yPos = newY;
+
+    // Initialize Quad
+    this->vertices[0].x = -this->width / 2;
+    this->vertices[0].y = -this->height / 2;
+    this->vertices[0].z = this->zoom;
+
+    this->vertices[1].x = this->width / 2;
+    this->vertices[1].y = -this->height / 2;
+    this->vertices[1].z = this->zoom;
+
+    this->vertices[2].x = this->width / 2;
+    this->vertices[2].y = this->height / 2;
+    this->vertices[2].z = this->zoom;
+
+    this->vertices[3].x = -this->width / 2;
+    this->vertices[3].y = this->height / 2;
+    this->vertices[3].z = this->zoom;
+
+    this->texture = new TextureLoader();
+
+    this->audioSource = newSource;
+}
+
+
 
 Model::~Model()
 {
@@ -71,6 +110,7 @@ Model::~Model()
 void Model::DrawModel()
 {
     //render this model
+    glPushMatrix();
     glColor3f(1.0, 1.0, 1.0);
     this->texture->Binder(); // update texture
 //    if(this->name != "player")
@@ -94,6 +134,7 @@ void Model::DrawModel()
     glVertex3f(this->vertices[3].x, this->vertices[3].y, this->vertices[3].z);
 
     glEnd();
+    glPopMatrix();
 }
 
 void Model::InitModel(string fileName, bool transparent)
@@ -171,10 +212,18 @@ void Model::SetWidth(double newWidth)
 
 void Model::Update()
 {
-    return;
+    if(this->name != "Player")
+        this->DrawModel();
+    if(this->GetAudioSource())
+        this->GetAudioSource()->Update(this->xPos, this->yPos);
 }
 
 bool Model::CheckCollision()
 {
     return false;
+}
+
+AudioSource* Model::GetAudioSource()
+{
+    return this->audioSource;
 }

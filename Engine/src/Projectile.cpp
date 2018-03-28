@@ -68,6 +68,8 @@ void Projectile::Update()
 {
     this->Move();
 
+    this->DrawModel();
+
     if(this->lifetime->GetTicks() > this->endOfLifeTime)
         this->Destroy();
 }
