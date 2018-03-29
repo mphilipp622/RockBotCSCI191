@@ -1,12 +1,10 @@
 #include <Player.h>
-#include <Timer.h>
 #include <TextureLoader.h>
 #include <string>
 #include <GLScene.h>
 #include <cmath>
 #include <Projectile.h>
 
-Timer *T;
 TextureLoader run[4];
 TextureLoader idle[5];
 TextureLoader jumpAnim[4];
@@ -16,61 +14,72 @@ Player* Player::player; // Global getter for the player object
 Player::Player(double newX, double newY)
 {
     // Collision
-    this->width = 1.0;
-    this->height = 1.0;
+    width = 1.0;
+    height = 1.0;
 
-    this->xPos = newX;
-    this->yPos = newY;
-    this->playerZoom = 0;
+    xPos = newX;
+    yPos = newY;
+    playerZoom = 0;
 
     // set previous positions to our starting position
-    this->prevXPos = xPos;
-    this->prevYPos = yPos;
+    prevXPos = xPos;
+    prevYPos = yPos;
 
     // Initialize Quad
-    this->vertices[0].x = -this->width / 2;
-    this->vertices[0].y = -this->height / 2;
-    this->vertices[0].z = this->playerZoom;
+    vertices[0].x = -width / 2;
+    vertices[0].y = -height / 2;
+    vertices[0].z = playerZoom;
 
-    this->vertices[1].x = this->width / 2;
-    this->vertices[1].y = -this->height / 2;
-    this->vertices[1].z = this->playerZoom;
+    vertices[1].x = width / 2;
+    vertices[1].y = -height / 2;
+    vertices[1].z = playerZoom;
 
-    this->vertices[2].x = this->width / 2;
-    this->vertices[2].y = this->height / 2;
-    this->vertices[2].z = this->playerZoom;
+    vertices[2].x = width / 2;
+    vertices[2].y = height / 2;
+    vertices[2].z = playerZoom;
 
-    this->vertices[3].x = -this->width / 2;
-    this->vertices[3].y = this->height / 2;
-    this->vertices[3].z = this->playerZoom;
+    vertices[3].x = -width / 2;
+    vertices[3].y = height / 2;
+    vertices[3].z = playerZoom;
 
-    this->moveSpeed = 1.0;
-    this->jumpSpeed = 1.0;
-    this->hp = 3;
-    this->actionTrigger = 0;
+    moveSpeed = 1.0;
+    jumpSpeed = 1.0;
+    hp = 3;
+    actionTrigger = 0;
 
      // physics
-    this->gravity = 0.98;
-    this->acceleration = 0.0;
-    this->accelRate = 0.05;
-    this->deceleration = 0.2; // rate of deceleration
-    this->maxAcceleration = 2.5;
-    this->jump = false; // set true to avoid falling through earth on scene load
-    this->slowDown = false;
-    this->gravity = -9.80;
-    this->moving = false;
-    this->jumpVelocity = 5.0;
-    this->fallVelocity = 0.0;
-    this->idleFrame = 0;
+    gravity = 0.98;
+    acceleration = 0.0;
+    accelRate = 0.05;
+    deceleration = 0.2; // rate of deceleration
+    maxAcceleration = 2.5;
+    jump = false; // set true to avoid falling through earth on scene load
+    slowDown = false;
+    gravity = -9.80;
+    moving = false;
+    jumpVelocity = 5.0;
+    fallVelocity = 0.0;
+    idleFrame = 0;
 
-    this->name = "player";
+    playingChords = false;
 
-    this->chord = new AudioSource("PlayerSource", "Audio/Music/", this->xPos, this->yPos, 1.0, false);
+    name = "player";
 
-	T = new Timer();
-    T->Start();
+    chord = new AudioSource("PlayerSource", "Audio/Music/", xPos, yPos, 1.0, false);
 
-    this->player = this;
+    // create icons for left and right mouse. They will be placed on the left and right side of our player
+    icons = {new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon"), new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon")};
+
+	frameTimer = new Timer();
+    frameTimer->Start();
+
+    chordTimer = new Timer();
+    cooldownTimer = new Timer();
+    cooldownTargetTime = 0;
+    chordTimingWindow = 2000; // chord timing window is 2 seconds. Might modify this later to fit with BPM
+    canPlay = true;
+
+    player = this;
 }
 
 Player::~Player()
@@ -84,37 +93,37 @@ void Player::DrawPlayer()
 
     glBegin(GL_QUADS);
 
-	if (this->xDirection == -1.0)
+	if (xDirection == -1.0)
 	{
 		// flip texture to the left
 
 		glTexCoord2f(0.0, 1.0);
-		glVertex3f(-this->vertices[0].x, this->vertices[0].y, this->vertices[0].z);
+		glVertex3f(-vertices[0].x, vertices[0].y, vertices[0].z);
 
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(-this->vertices[1].x, this->vertices[1].y, this->vertices[1].z);
+		glVertex3f(-vertices[1].x, vertices[1].y, vertices[1].z);
 
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(-this->vertices[2].x, this->vertices[2].y, this->vertices[2].z);
+		glVertex3f(-vertices[2].x, vertices[2].y, vertices[2].z);
 
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(-this->vertices[3].x, this->vertices[3].y, this->vertices[3].z);
+		glVertex3f(-vertices[3].x, vertices[3].y, vertices[3].z);
 	}
 	else
 	{
 		// flip texture to the right
 
 		glTexCoord2f(0.0, 1.0);
-		glVertex3f(this->vertices[0].x, this->vertices[0].y, this->vertices[0].z);
+		glVertex3f(vertices[0].x, vertices[0].y, vertices[0].z);
 
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(this->vertices[1].x, this->vertices[1].y, this->vertices[1].z);
+		glVertex3f(vertices[1].x, vertices[1].y, vertices[1].z);
 
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(this->vertices[2].x, this->vertices[2].y, this->vertices[2].z);
+		glVertex3f(vertices[2].x, vertices[2].y, vertices[2].z);
 
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(this->vertices[3].x, this->vertices[3].y, this->vertices[3].z);
+		glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
 	}
 
     glEnd();
@@ -145,6 +154,9 @@ void Player::InitPlayer()
     jumpAnim[2].BindTexture("Images/Player/Test_Movement_0002.png");
     jumpAnim[3].BindTexture("Images/Player/Test_Movement_0003.png");
 
+    icons[0]->InitModel("Images/HUD/LeftMouse.png", true);
+    icons[1]->InitModel("Images/HUD/RightMouse.png", true);
+
 }
 
 void Player::Actions(int newAction)
@@ -158,15 +170,15 @@ void Player::Actions(int newAction)
 
         glTranslated(xPos, yPos, playerZoom);
 //        glTranslated(-0.5, -0.5, -1.0);
-        if(T->GetTicks() > 60)
+        if(frameTimer->GetTicks() > 60)
         {
-            this->idleFrame++;
-            this->idleFrame %= 5;
-            T->Reset();
+            idleFrame++;
+            idleFrame %= 5;
+            frameTimer->Reset();
         }
 
-        idle[this->idleFrame].Binder();
-        this->DrawPlayer();
+        idle[idleFrame].Binder();
+        DrawPlayer();
 
         glPopMatrix();
         break;
@@ -178,15 +190,15 @@ void Player::Actions(int newAction)
 
         glTranslated(xPos, yPos, playerZoom);
 //        glTranslated(-0.5, -0.5, -1.0);
-        if(T->GetTicks() > 60)
+        if(frameTimer->GetTicks() > 60)
         {
-            this->moveSpeed++;
-            this->moveSpeed %= 4;
-            T->Reset();
+            moveSpeed++;
+            moveSpeed %= 4;
+            frameTimer->Reset();
         }
 
-        run[this->moveSpeed].Binder();
-        this->DrawPlayer();
+        run[moveSpeed].Binder();
+        DrawPlayer();
 
         glPopMatrix();
         break;
@@ -198,7 +210,7 @@ void Player::Actions(int newAction)
         glTranslated(xPos, yPos, playerZoom);
 //        glTranslated(-0.5, -0.5, -1.0);
         jumpAnim[0].Binder();
-        this->DrawPlayer();
+        DrawPlayer();
 
         glPopMatrix();
         break;
@@ -207,46 +219,59 @@ void Player::Actions(int newAction)
 
 void Player::Update()
 {
-    if(this->moving)
+    if(playingChords)
     {
-        if(this->xDirection > 0)
-            this->MoveRight();
-        else if(xDirection < 0)
-            this->MoveLeft();
+        if(chordTimer->GetTicks() > chordTimingWindow)
+        {
+            // if user has exceeded their timing window, re-random the input. Might want to punish them and add a cooldown, not sure yet
+            PlayChords(false);
+            PlayChords(true);
+        }
 
-        if(!this->jump)
-            this->Actions(1);
-        else
-            this->Actions(2);
+        UpdateIcons();
     }
-    else if(!this->moving && !this->jump)
-        this->Actions(0);
 
-    if(this->jump)
+    if(moving)
     {
-        this->Jump();
-        if(!this->moving)
-            this->Actions(2);
+        if(xDirection > 0)
+            MoveRight();
+        else if(xDirection < 0)
+            MoveLeft();
+
+        if(!jump)
+            Actions(1);
+        else
+            Actions(2);
+    }
+    else if(!moving && !jump)
+        Actions(0);
+
+    if(jump)
+    {
+        Jump();
+        if(!moving)
+            Actions(2);
     }
     else
-        this->ApplyGravity();
+        ApplyGravity();
 
-    if(this->slowDown)
-        this->StopMove();
+    if(slowDown)
+        StopMove();
 
-
+    if(!canPlay)
+        UpdateCooldownTimer();
 //    DrawPlayer();
 }
 
 
 void Player::StartJump()
 {
-    if(this->jump)
+    if(jump)
         return; // if we're already jumping, don't allow another jump
 
-    this->jump = true;
-    this->jumpVelocity = 6.0;
-    this->initialY = yPos;
+    jump = true;
+    jumpVelocity = 6.0;
+    initialY = yPos;
 }
 
 void Player::Jump()
@@ -264,8 +289,7 @@ void Player::Jump()
         return;
     }
     AudioEngine::SetPosition(xPos, yPos);
-    this->chord->SetPosition(this->xPos, this->yPos);
-    GLScene::UpdateModelPositions();
+    chord->SetPosition(xPos, yPos);
 }
 
 void Player::ApplyGravity()
@@ -290,8 +314,7 @@ void Player::ApplyGravity()
         return;
     }
     AudioEngine::SetPosition(xPos, yPos);
-    this->chord->SetPosition(this->xPos, this->yPos);
-    GLScene::UpdateModelPositions();
+    chord->SetPosition(xPos, yPos);
 }
 
 void Player::StartMove(float dir)
@@ -324,8 +347,7 @@ void Player::MoveLeft()
         return;
     }
     AudioEngine::SetPosition(xPos, yPos);
-    this->chord->SetPosition(this->xPos, this->yPos);
-    GLScene::UpdateModelPositions();
+    chord->SetPosition(xPos, yPos);
 }
 
 void Player::MoveRight()
@@ -353,9 +375,7 @@ void Player::MoveRight()
         return;
     }
     AudioEngine::SetPosition(xPos, yPos);
-    this->chord->SetPosition(this->xPos, this->yPos);
-    GLScene::UpdateModelPositions();
-
+    chord->SetPosition(xPos, yPos);
 }
 
 void Player::SlowDown()
@@ -393,9 +413,7 @@ void Player::StopMove()
             return;
         }
         AudioEngine::SetPosition(xPos, yPos);
-        this->chord->SetPosition(this->xPos, this->yPos);
-        GLScene::UpdateModelPositions();
-
+        chord->SetPosition(xPos, yPos);
     }
     else if(prevXDirection < 0)
     {
@@ -422,8 +440,7 @@ void Player::StopMove()
             return;
         }
         AudioEngine::SetPosition(xPos, yPos);
-        this->chord->SetPosition(this->xPos, this->yPos);
-        GLScene::UpdateModelPositions();
+        chord->SetPosition(xPos, yPos);
     }
 
 }
@@ -458,8 +475,75 @@ double Player::GetZoom()
 
 void Player::ShootProjectile(double x, double y)
 {
-    Projectile *newProjectile = new Projectile(this->xPos, this->yPos, 0.5, 0.5, 1, 4.0, "projectile", x + this->xPos, y + this->yPos); // sends relative mouse pointer location
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "projectile", x + xPos, y + yPos); // sends relative mouse pointer location
     newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord("ab9");
     GLScene::movableObjects.push_back(newProjectile);
 }
+
+void Player::UpdateIcons()
+{
+    icons[0]->SetPosition(xPos - width / 1.5, yPos);
+    icons[1]->SetPosition(xPos + width / 1.5, yPos);
+
+    if(playingChords)
+        icons[activeInput]->DrawModel();
+//    if(playingChords)
+//    {
+//        for(auto& icon : icons)
+//            icon->DrawModel();
+//    }
+}
+
+void Player::PlayChords(bool isPlaying)
+{
+    if(!canPlay)
+        return;
+
+    playingChords = isPlaying;
+
+    if(playingChords)
+    {
+        // set the active input user must press and start a timer.
+        srand(time(NULL));
+        activeInput = rand() % icons.size();
+
+        chordTimer->Start();
+    }
+    else
+        chordTimer->Stop();
+
+}
+
+void Player::CheckUserInput(int userInput)
+{
+    if(!canPlay)
+        // stop execution if waiting for cooldown
+        return;
+
+    if(activeInput == userInput)
+    {
+        cout << "Successful Input" << endl;
+    }
+    else
+    {
+        cout << "Failed Input" << endl;
+        // set a cooldown for player
+        cooldownTimer->Start();
+        cooldownTargetTime = chordTimingWindow;
+        PlayChords(false);
+        canPlay =  false;
+    }
+
+}
+
+void Player::UpdateCooldownTimer()
+{
+    if(cooldownTimer->GetTicks() > cooldownTargetTime)
+    {
+        canPlay = true;
+        cooldownTimer->Stop();
+        cooldownTargetTime = 0;
+    }
+}
+

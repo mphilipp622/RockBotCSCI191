@@ -6,6 +6,12 @@
 #include <TextureLoader.h>
 #include <DeltaTime.h>
 #include <AudioEngine.h>
+#include <vector>
+#include <cstdlib>
+#include <time.h>
+#include <Timer.h>
+
+using namespace std;
 
 typedef struct
 {
@@ -36,7 +42,6 @@ class Player : public Model
 
         // Character Controller Functions
         void Jump();
-        void Jump2();
         void ShootProjectile(double x, double y);
         void StartJump();
 
@@ -54,11 +59,17 @@ class Player : public Model
         double GetOffsetX();
         double GetOffsetY();
         double GetZoom();
-//        void SetVertices();
+
+        // Set boolean flags for playing chords and initiate user input check
+        void PlayChords(bool isPlaying);
+
+        // Checks whether user presses the proper input or not. Note that userInput must match the inputs assigned in Player::icons vector
+        void CheckUserInput(int userInput);
+
     protected:
 
     private:
-        bool jump, slowDown, moving, startGravity;
+        bool jump, slowDown, moving, startGravity, playingChords, canPlay;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
@@ -67,8 +78,23 @@ class Player : public Model
         float gravity;
         float playerZoom;
 
+        vector<Model*> icons;
+        int activeInput;
+        Timer* chordTimer;
+        double chordTimingWindow;
+        double cooldownTargetTime;
+        Timer* cooldownTimer;
+
         int idleFrame;
+        Timer* frameTimer;
+
         bool CheckCollision();
+
+        // Updates the positions of the input icons for chord playing. Also draws icons if chord button is held down. Called in Player whenever movements occur.
+        void UpdateIcons();
+
+        // Updates the canPlay boolean based on the cooldown timer
+        void UpdateCooldownTimer();
 
         AudioSource* chord;
 };

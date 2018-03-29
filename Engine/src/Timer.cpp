@@ -76,3 +76,8 @@ clock_t Timer::GetTicks()
 
     return clock() - startedAt;
 }
+
+clock_t Timer::GetTime()
+{
+    return clock();
+}

@@ -33,7 +33,6 @@ class GLScene
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static Inputs *keyboardAndMouse;
 
-        static void UpdateModelPositions();
     protected:
         unordered_map<string, AudioSource*> audioSources;
         Player* player;

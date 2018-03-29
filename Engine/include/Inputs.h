@@ -27,7 +27,7 @@ class Inputs
         double prevMouseX, prevMouseY;
 
         void SetKey(string keyName, bool status);
-        WPARAM wParam;
+        WPARAM wParamKeys, wParamMouse;
 
     protected:
 

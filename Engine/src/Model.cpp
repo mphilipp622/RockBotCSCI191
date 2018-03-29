@@ -30,75 +30,75 @@ Model::Model()
 
 Model::Model(float newWidth, float newHeight, double newX, double newY, string newName)
 {
-    this->width = newWidth;
-    this->height = newHeight;
+    width = newWidth;
+    height = newHeight;
 
-    this->name = newName;
+    name = newName;
 
-    this->rotateX = 0;
-    this->rotateY = 0;
-    this->rotateZ = 0;
+    rotateX = 0;
+    rotateY = 0;
+    rotateZ = 0;
 
     // translations
-    this->zoom = 0;
-    this->xPos = newX;
-    this->yPos = newY;
+    zoom = 0;
+    xPos = newX;
+    yPos = newY;
 
     // Initialize Quad
-    this->vertices[0].x = -this->width / 2;
-    this->vertices[0].y = -this->height / 2;
-    this->vertices[0].z = this->zoom;
+    vertices[0].x = -width / 2;
+    vertices[0].y = -height / 2;
+    vertices[0].z = zoom;
 
-    this->vertices[1].x = this->width / 2;
-    this->vertices[1].y = -this->height / 2;
-    this->vertices[1].z = this->zoom;
+    vertices[1].x = width / 2;
+    vertices[1].y = -height / 2;
+    vertices[1].z = zoom;
 
-    this->vertices[2].x = this->width / 2;
-    this->vertices[2].y = this->height / 2;
-    this->vertices[2].z = this->zoom;
+    vertices[2].x = width / 2;
+    vertices[2].y = height / 2;
+    vertices[2].z = zoom;
 
-    this->vertices[3].x = -this->width / 2;
-    this->vertices[3].y = this->height / 2;
-    this->vertices[3].z = this->zoom;
+    vertices[3].x = -width / 2;
+    vertices[3].y = height / 2;
+    vertices[3].z = zoom;
 
-    this->texture = new TextureLoader();
+    texture = new TextureLoader();
 }
 Model::Model(float newWidth, float newHeight, double newX, double newY, string newName, AudioSource* newSource)
 {
-    this->width = newWidth;
-    this->height = newHeight;
+    width = newWidth;
+    height = newHeight;
 
-    this->name = newName;
+    name = newName;
 
-    this->rotateX = 0;
-    this->rotateY = 0;
-    this->rotateZ = 0;
+    rotateX = 0;
+    rotateY = 0;
+    rotateZ = 0;
 
     // translations
-    this->zoom = 0;
-    this->xPos = newX;
-    this->yPos = newY;
+    zoom = 0;
+    xPos = newX;
+    yPos = newY;
 
     // Initialize Quad
-    this->vertices[0].x = -this->width / 2;
-    this->vertices[0].y = -this->height / 2;
-    this->vertices[0].z = this->zoom;
+    vertices[0].x = -width / 2;
+    vertices[0].y = -height / 2;
+    vertices[0].z = zoom;
 
-    this->vertices[1].x = this->width / 2;
-    this->vertices[1].y = -this->height / 2;
-    this->vertices[1].z = this->zoom;
+    vertices[1].x = width / 2;
+    vertices[1].y = -height / 2;
+    vertices[1].z = zoom;
 
-    this->vertices[2].x = this->width / 2;
-    this->vertices[2].y = this->height / 2;
-    this->vertices[2].z = this->zoom;
+    vertices[2].x = width / 2;
+    vertices[2].y = height / 2;
+    vertices[2].z = zoom;
 
-    this->vertices[3].x = -this->width / 2;
-    this->vertices[3].y = this->height / 2;
-    this->vertices[3].z = this->zoom;
+    vertices[3].x = -width / 2;
+    vertices[3].y = height / 2;
+    vertices[3].z = zoom;
 
-    this->texture = new TextureLoader();
+    texture = new TextureLoader();
 
-    this->audioSource = newSource;
+    audioSource = newSource;
 }
 
 
@@ -112,26 +112,26 @@ void Model::DrawModel()
     //render this model
     glPushMatrix();
     glColor3f(1.0, 1.0, 1.0);
-    this->texture->Binder(); // update texture
-//    if(this->name != "player")
-    glTranslated(this->xPos, this->yPos, this->zoom);
-    glRotated(this->rotateX, 1, 0, 0);
-    glRotated(this->rotateY, 0, 1, 0);
-    glRotated(this->rotateZ, 0, 0, 1);
+    texture->Binder(); // update texture
+//    if(name != "player")
+    glTranslated(xPos, yPos, zoom);
+    glRotated(rotateX, 1, 0, 0);
+    glRotated(rotateY, 0, 1, 0);
+    glRotated(rotateZ, 0, 0, 1);
 
     glBegin(GL_QUADS);
 
     glTexCoord2f(0.0, 1.0);
-    glVertex3f(this->vertices[0].x, this->vertices[0].y, this->vertices[0].z);
+    glVertex3f(vertices[0].x, vertices[0].y, vertices[0].z);
 
     glTexCoord2f(1.0, 1.0);
-    glVertex3f(this->vertices[1].x, this->vertices[1].y, this->vertices[1].z);
+    glVertex3f(vertices[1].x, vertices[1].y, vertices[1].z);
 
     glTexCoord2f(1.0, 0.0);
-    glVertex3f(this->vertices[2].x, this->vertices[2].y, this->vertices[2].z);
+    glVertex3f(vertices[2].x, vertices[2].y, vertices[2].z);
 
     glTexCoord2f(0.0, 0.0);
-    glVertex3f(this->vertices[3].x, this->vertices[3].y, this->vertices[3].z);
+    glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
 
     glEnd();
     glPopMatrix();
@@ -144,9 +144,8 @@ void Model::InitModel(string fileName, bool transparent)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead. Change it to mess with cool effects
     }
-    this->texture->Binder();
-     cout << "Loading Model: " << fileName << endl;
-    this->texture->BindTexture(fileName);
+    texture->Binder();
+    texture->BindTexture(fileName);
 
 }
 
@@ -159,9 +158,9 @@ bool Model::Collision(Model* collider)
         widthOffset = width / 4;
         heightOffset = width / 2.6;
     }
-    return Overlapping(this->xPos - widthOffset, this->xPos + widthOffset, collider->GetX() - collider->GetWidth() / 2,
+    return Overlapping(xPos - widthOffset, xPos + widthOffset, collider->GetX() - collider->GetWidth() / 2,
                        collider->GetX() + collider->GetWidth() / 2) &&
-           Overlapping(this->yPos - heightOffset, this->yPos + heightOffset, collider->GetY() - collider->GetHeight() / 2,
+           Overlapping(yPos - heightOffset, yPos + heightOffset, collider->GetY() - collider->GetHeight() / 2,
                        collider->GetY() + collider->GetHeight() / 2);
 }
 
@@ -183,46 +182,46 @@ bool Model::GroundCheck(Model* collider)
 
 double Model::GetX()
 {
-    return this->xPos;
+    return xPos;
 }
 
 double Model::GetY()
 {
-    return this->yPos;
+    return yPos;
 }
 
 float Model::GetWidth()
 {
-    return this->width;
+    return width;
 }
 
 float Model::GetHeight()
 {
-    return this->height;
+    return height;
 }
 
 string Model::GetName()
 {
-    return this->name;
+    return name;
 }
 
 void Model::SetPosition(double newX, double newY)
 {
-    this->xPos = newX;
-    this->yPos = newY;
+    xPos = newX;
+    yPos = newY;
 }
 
 void Model::SetWidth(double newWidth)
 {
-   this->width = newWidth;
+   width = newWidth;
 }
 
 void Model::Update()
 {
-    if(this->name != "Player")
-        this->DrawModel();
-    if(this->GetAudioSource())
-        this->GetAudioSource()->SetPosition(this->xPos, this->yPos);
+    if(name != "Player")
+        DrawModel();
+    if(GetAudioSource())
+        GetAudioSource()->SetPosition(xPos, yPos);
 }
 
 bool Model::CheckCollision()
@@ -232,5 +231,5 @@ bool Model::CheckCollision()
 
 AudioSource* Model::GetAudioSource()
 {
-    return this->audioSource;
+    return audioSource;
 }

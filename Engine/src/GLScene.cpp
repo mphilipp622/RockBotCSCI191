@@ -24,9 +24,9 @@ GLScene::GLScene()
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
+    player = new Player(0.0, 10.0);
     audioEngine = new AudioEngine();
     keyboardAndMouse = new Inputs();
-    player = new Player(0.0, 10.0);
     sceneTimer->Start();
 }
 
@@ -90,16 +90,11 @@ GLint GLScene::drawGLScene()
     glPopMatrix();
 
     for(auto& model : staticObjects)
-    {
-//        glPushMatrix();
         model->DrawModel();
-//        glPopMatrix();
-    }
 
     for(auto& model : movableObjects)
-    {
         model->Update();
-    }
+
     dTime->UpdateDeltaTime();
 
 	return 1;
@@ -126,13 +121,13 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //        testAudio->Update();
 //        testAudio->Play();
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
-        keyboardAndMouse->wParam = wParam;
+        keyboardAndMouse->wParamKeys = wParam;
         keyboardAndMouse->KeyPressed(player);
         keyboardAndMouse->KeyEnv(plx, 0.1);
     }
     if(uMsg == WM_KEYUP)
     {
-        keyboardAndMouse->wParam = wParam;
+        keyboardAndMouse->wParamKeys = wParam;
         keyboardAndMouse->KeyUp(player);
     }
     if(uMsg == WM_MOUSEMOVE)
@@ -141,51 +136,16 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     if(uMsg == WM_LBUTTONDOWN)
     {
         // left-click functionality
-        keyboardAndMouse->wParam = wParam;
+        keyboardAndMouse->wParamMouse = wParam;
+        keyboardAndMouse->MouseDown(player, lParam);
+    }
+    if(uMsg == WM_RBUTTONDOWN)
+    {
+        keyboardAndMouse->wParamMouse = wParam;
         keyboardAndMouse->MouseDown(player, lParam);
     }
     if(uMsg == WM_MOUSEWHEEL)
         keyboardAndMouse->WheelMove(player, GET_WHEEL_DELTA_WPARAM(wParam));
 
-//    switch (uMsg)									// Check For Windows Messages
-//	{
-//        case WM_KEYDOWN:
-//            keyboardAndMouse->wParam = wParam;
-//            keyboardAndMouse->KeyPressed(player);
-//            keyboardAndMouse->KeyEnv(plx, 0.1);
-//            break;
-//
-//        case WM_KEYUP:
-//            keyboardAndMouse->wParam = wParam;
-//            keyboardAndMouse->KeyUp(player);
-//            break;
-//
-//        case WM_MOUSEMOVE:
-//            keyboardAndMouse->wParam = wParam;
-//            keyboardAndMouse->MouseDown(player, LOWORD(lParam), HIWORD(lParam));
-//            break;
-//
-//        case WM_MOUSEWHEEL:
-//            keyboardAndMouse->WheelMove(player, GET_WHEEL_DELTA_WPARAM(wParam));
-//            break;
-//
-////        case WM_LBUTTONDOWN:
-////            keyboardAndMouse->MouseDown(modelTeapot, LOWORD(lParam), HIWORD(lParam));
-////            break;
-//
-//        case WM_RBUTTONDOWN:
-//            break;
-//	}
-
 	return 1;
-}
-
-void GLScene::UpdateModelPositions()
-{
-    return;
-//    for(auto& model : staticObjects)
-//        model->SetPosition(model->GetX() - player->GetOffsetX(), model->GetY() - player->GetOffsetY());
-    //for(auto& model : enemies)
-    //    model->SetPosition(model->GetX() + player->GetOffsetX(), model->GetY() + player->GetOffsetY());
-
 }
