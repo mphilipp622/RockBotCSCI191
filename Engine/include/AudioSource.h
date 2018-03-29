@@ -2,9 +2,9 @@
 #define AudioSource_H
 
 #include <string>
+#include "irrKlang.h"
 #include <windows.h>
-#include <MMSystem.h>
-#include <cmath>
+#include <AudioEngine.h>
 
 using namespace std;
 
@@ -13,20 +13,20 @@ class AudioSource
 {
     public:
         AudioSource();
-        AudioSource(string newName, string newFilePath, double newX, double newY, unsigned short newVolume, bool isLooping);
+        AudioSource(string newName, string newFilePath, double newX, double newY, float newVolume, bool isLooping);
         virtual ~AudioSource();
 
-        // plays chord using name that's passed in as argument
+        // Plays the sound from the filepath of the object
         void Play();
+
+        // Plays chord of the same name that's passed to function
+        void PlayChord(string chordName);
 
         // Stops playing any currently playing sound
         void Stop();
 
         // Sets the volume of this audio source
-        void SetVolume(unsigned short newVal);
-
-        // Sets l/r channel balance based on player position
-        void UpdateChannelBalance();
+        void SetVolume(float newVal);
 
         // Gets the name of this AudioSource
         string GetName();
@@ -43,10 +43,12 @@ class AudioSource
 
     private:
         string name, filePath;
-        DWORD volume, lChannel, rChannel;
-        unsigned short gain;
+        float volume;
         double xPos, yPos;
         bool loop;
+        ISoundSource* source;
+        ISound* sound;
+        vec3df* position;
 };
 
 #endif // AudioSource_H

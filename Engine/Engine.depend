@@ -240,7 +240,7 @@
 
 1519274979 e:\college\191\191\engine\common\include\soil.h
 
-1522205123 source:e:\college\191\191\engine\main.cpp
+1522272416 source:e:\college\191\191\engine\main.cpp
 	<windows.h>
 	<windows.h>
 	<GLScene.h>
@@ -248,7 +248,7 @@
 	<iostream>
 	<string>
 
-1522205434 e:\college\191\191\engine\include\glscene.h
+1522290219 e:\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -257,8 +257,9 @@
 	<Inputs.h>
 	<unordered_map>
 	<AudioSource.h>
+	<AudioEngine.h>
 
-1522205078 e:\college\191\191\engine\include\model.h
+1522290214 e:\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -271,7 +272,7 @@
 1522205072 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1522206132 source:e:\college\191\191\engine\src\glscene.cpp
+1522288356 source:e:\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<Parallax.h>
@@ -295,11 +296,12 @@
 	<GL\GL.h>
 	<string>
 
-1522205790 e:\college\191\191\engine\include\player.h
+1522290078 e:\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
+	<AudioEngine.h>
 
 1521777927 source:e:\college\191\191\engine\src\inputs.cpp
 	<Inputs.h>
@@ -307,7 +309,7 @@
 	<DeltaTime.h>
 	<string>
 
-1522205053 source:e:\college\191\191\engine\src\model.cpp
+1522288769 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -321,7 +323,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1522205907 source:e:\college\191\191\engine\src\player.cpp
+1522290226 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<Timer.h>
 	<TextureLoader.h>
@@ -633,16 +635,16 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1522211846 source:e:\college\191\191\engine\src\audiosource.cpp
+1522289758 source:e:\college\191\191\engine\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1522209726 e:\college\191\191\engine\include\audiosource.h
+1522290159 e:\college\191\191\engine\include\audiosource.h
 	<string>
+	"irrKlang.h"
 	<windows.h>
-	<MMSystem.h>
-	<cmath>
+	<AudioEngine.h>
 
 1522204547 source:e:\college\191\191\engine\src\scenemanager.cpp
 	"SceneManager.h"
@@ -670,4 +672,214 @@
 
 1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod.h
 	"fmod_common.h"
+
+1398523410 e:\college\191\191\engine\irrklang-1.5.0\include\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1394131454 e:\college\191\191\engine\irrklang-1.5.0\include\ik_irrklangtypes.h
+	<wchar.h>
+
+1399048338 e:\college\191\191\engine\irrklang-1.5.0\include\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1394121300 e:\college\191\191\engine\irrklang-1.5.0\include\ik_esoundoutputdrivers.h
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_esoundengineoptions.h
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_estreammodes.h
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1394128864 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1394128852 e:\college\191\191\engine\irrklang-1.5.0\include\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1394128848 e:\college\191\191\engine\irrklang-1.5.0\include\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1517335446 e:\college\191\191\engine\irrklang-1.6.0\include\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_irrklangtypes.h
+	<wchar.h>
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_esoundoutputdrivers.h
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_esoundengineoptions.h
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_estreammodes.h
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517256032 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1517256024 e:\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1522283586 e:\college\191\191\engine\include\audioengine.h
+	<irrKlang.h>
+	<windows.h>
+	<iostream>
+
+1522288815 source:e:\college\191\191\engine\src\audioengine.cpp
+	"AudioEngine.h"
+
+1522289524 e:\college\191\191\engine\include\chord.h
+	"irrKlang.h"
+	<string>
+	<AudioEngine.h>
+
+1522289982 source:e:\college\191\191\engine\src\chord.cpp
+	"Chord.h"
 

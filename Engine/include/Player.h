@@ -5,6 +5,7 @@
 #include <Model.h>
 #include <TextureLoader.h>
 #include <DeltaTime.h>
+#include <AudioEngine.h>
 
 typedef struct
 {
@@ -68,8 +69,8 @@ class Player : public Model
 
         int idleFrame;
         bool CheckCollision();
-//        bool CheckCollisionY();
-//        bool CheckCollisionX();
+
+        AudioSource* chord;
 };
 
 #endif // PLAYER_H

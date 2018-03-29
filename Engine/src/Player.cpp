@@ -65,7 +65,7 @@ Player::Player(double newX, double newY)
 
     this->name = "player";
 
-    this->audioSource = new AudioSource("PlayerSource", "Audio/Music/ab9.wav", this->xPos, this->yPos, 100, false);
+    this->chord = new AudioSource("PlayerSource", "Audio/Music/", this->xPos, this->yPos, 1.0, false);
 
 	T = new Timer();
     T->Start();
@@ -234,8 +234,6 @@ void Player::Update()
     if(this->slowDown)
         this->StopMove();
 
-    if(this->audioSource) // update audio source position
-        this->audioSource->SetPosition(this->xPos, this->yPos);
 
 //    DrawPlayer();
 }
@@ -265,7 +263,8 @@ void Player::Jump()
         yPos = prevYPos;
         return;
     }
-
+    AudioEngine::SetPosition(xPos, yPos);
+    this->chord->SetPosition(this->xPos, this->yPos);
     GLScene::UpdateModelPositions();
 }
 
@@ -290,6 +289,8 @@ void Player::ApplyGravity()
         yPos = prevYPos;
         return;
     }
+    AudioEngine::SetPosition(xPos, yPos);
+    this->chord->SetPosition(this->xPos, this->yPos);
     GLScene::UpdateModelPositions();
 }
 
@@ -322,6 +323,8 @@ void Player::MoveLeft()
         acceleration = 0;
         return;
     }
+    AudioEngine::SetPosition(xPos, yPos);
+    this->chord->SetPosition(this->xPos, this->yPos);
     GLScene::UpdateModelPositions();
 }
 
@@ -349,6 +352,8 @@ void Player::MoveRight()
         acceleration = 0;
         return;
     }
+    AudioEngine::SetPosition(xPos, yPos);
+    this->chord->SetPosition(this->xPos, this->yPos);
     GLScene::UpdateModelPositions();
 
 }
@@ -387,6 +392,8 @@ void Player::StopMove()
             acceleration = 0;
             return;
         }
+        AudioEngine::SetPosition(xPos, yPos);
+        this->chord->SetPosition(this->xPos, this->yPos);
         GLScene::UpdateModelPositions();
 
     }
@@ -414,6 +421,8 @@ void Player::StopMove()
             acceleration = 0;
             return;
         }
+        AudioEngine::SetPosition(xPos, yPos);
+        this->chord->SetPosition(this->xPos, this->yPos);
         GLScene::UpdateModelPositions();
     }
 
@@ -444,7 +453,6 @@ double Player::GetOffsetY()
 
 double Player::GetZoom()
 {
-
     return playerZoom;
 }
 
@@ -452,5 +460,6 @@ void Player::ShootProjectile(double x, double y)
 {
     Projectile *newProjectile = new Projectile(this->xPos, this->yPos, 0.5, 0.5, 1, 4.0, "projectile", x + this->xPos, y + this->yPos); // sends relative mouse pointer location
     newProjectile->InitModel("Images/Note.png", true);
+    chord->PlayChord("ab9");
     GLScene::movableObjects.push_back(newProjectile);
 }

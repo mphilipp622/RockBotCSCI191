@@ -11,6 +11,7 @@
 #include <Inputs.h>
 #include <unordered_map>
 #include <AudioSource.h>
+#include <AudioEngine.h>
 
 using namespace std;
 
@@ -36,6 +37,7 @@ class GLScene
     protected:
         unordered_map<string, AudioSource*> audioSources;
         Player* player;
+        AudioEngine* audioEngine;
 
 
     private:

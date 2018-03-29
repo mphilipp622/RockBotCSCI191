@@ -3,6 +3,7 @@
 #include <GLScene.h>
 
 using namespace std;
+using namespace irrklang;
 
 AudioSource::AudioSource()
 {
@@ -10,81 +11,52 @@ AudioSource::AudioSource()
 //    PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
 }
 
-AudioSource::AudioSource(string newName, string newFilePath, double newX, double newY, unsigned short newVolume, bool isLooping)
+AudioSource::AudioSource(string newName, string newFilePath, double newX, double newY, float newVolume, bool isLooping)
 {
     name = newName;
     filePath = newFilePath;
     xPos = newX;
     yPos = newY;
-    lChannel = 0xFFFF;
-    rChannel = 0xFFFF0000;
+    volume = newVolume;
     loop = isLooping;
-    SetVolume(newVolume);
 }
 
 AudioSource::~AudioSource()
 {
     //dtor
+    sound->drop();
 }
 
 void AudioSource::Update(double newX, double newY)
 {
-    SetPosition(newX, newY); // update x, y coordinates for the source. Only relevant for movable objects
-    UpdateChannelBalance(); // set L/R channel balance
 }
 
 void AudioSource::Play()
 {
-    if(loop)
-        PlaySound(filePath.c_str(), NULL, SND_ASYNC | SND_LOOP);
-    else
-        PlaySound(filePath.c_str(), NULL, SND_ASYNC);
+    sound = AudioEngine::engine->play3D(filePath.c_str(), vec3df(xPos, yPos, 0), loop, false);
+}
+
+void AudioSource::PlayChord(string newChord)
+{
+    string path = "Audio/Music/" + newChord + ".wav";
+//    string path = "Audio/Music/Chords/" + chordName + ".ogg";
+    AudioEngine::engine->play2D(path.c_str(), false);
 }
 
 void AudioSource::Stop()
 {
-    PlaySound(NULL, NULL, SND_ASYNC);
+    sound->stop();
 }
 
-void AudioSource::SetVolume(unsigned short newVal)
+void AudioSource::SetVolume(float newVal)
 {
-    if(newVal > 100)
-        newVal = 100; // clamp newVal to a max of 100
+    // clamp newVal to a max of 1.0 and minimum of 0
+    if(newVal > 1.0)
+        newVal = 1.0;
+    else if(newVal < 0)
+        newVal = 0;
 
-    // figure out the hex value of the new volume and scale it from 0 to 100.
-    lChannel = 0xFFFF & (newVal * 65535 / 100);
-    rChannel = 0xFFFF0000 & ((newVal * 65535 / 100) * 65535);
-    gain = newVal;
-
-    volume = lChannel + rChannel;
-
-    waveOutSetVolume(NULL, volume);
-}
-
-void AudioSource::UpdateChannelBalance()
-{
-    double xDist = xPos - Player::player->GetX();
-
-    if(xDist > 0)
-    {
-        // this source is to right of player so keep right channel the same and lower left channel
-        if(gain - (abs(xDist) * 20) > 0)
-            lChannel = 0xFFFF & (int)((gain - (abs(xDist) * 20)) * 65535 / 100);
-        else
-            lChannel = 0;
-    }
-    else if(xDist < 0)
-    {
-        // this source is to left of player so keep left channel the same and lower right channel
-        if(gain - (abs(xDist) * 20) > 0)
-            rChannel = 0xFFFF0000 & ((int)((gain - (abs(xDist) * 20)) * 65535 / 100) * 65535);
-        else
-            rChannel = 0;
-    }
-
-    volume = lChannel + rChannel;
-
-    waveOutSetVolume(NULL, volume);
+    source->setDefaultVolume(newVal);
 }
 
 string AudioSource::GetName()

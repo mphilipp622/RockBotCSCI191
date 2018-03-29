@@ -18,11 +18,10 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="include" />
-					<Add directory="C:/Program Files (x86)/OpenAL 1.1 SDK/include" />
+					<Add directory="irrKlang-1.6.0/include" />
 				</Compiler>
 				<Linker>
-					<Add library="C:/Program Files (x86)/OpenAL 1.1 SDK/libs/Win32/OpenAL32.lib" />
-					<Add directory="C:/Program Files (x86)/OpenAL 1.1 SDK/libs/Win32" />
+					<Add library="irrKlang-1.6.0/lib/Win32-gcc/libirrKlang.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -45,15 +44,18 @@
 			<Add option="-std=c++11" />
 			<Add directory="../Common/include/GL" />
 			<Add directory="Common/include" />
+			<Add directory="irrKlang-1.6.0/include" />
 		</Compiler>
 		<Linker>
 			<Add library="Common/lib/libSOIL.a" />
+			<Add library="irrKlang-1.6.0/lib/Win32-gcc/libirrKlang.a" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
 			<Add library="gdi32" />
 			<Add library="Common/lib/glut32.lib" />
 			<Add library="winmm" />
 		</Linker>
+		<Unit filename="include/AudioEngine.h" />
 		<Unit filename="include/AudioSource.h" />
 		<Unit filename="include/DeltaTime.h" />
 		<Unit filename="include/GLLight.h" />
@@ -67,6 +69,7 @@
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/Timer.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/AudioEngine.cpp" />
 		<Unit filename="src/AudioSource.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
 		<Unit filename="src/GLLight.cpp" />

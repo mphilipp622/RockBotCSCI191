@@ -152,9 +152,16 @@ void Model::InitModel(string fileName, bool transparent)
 
 bool Model::Collision(Model* collider)
 {
-    return Overlapping(this->xPos - this->width / 2, this->xPos + this->width / 2, collider->GetX() - collider->GetWidth() / 2,
+    double widthOffset = width / 2, heightOffset = height / 2;
+    if(name == "player")
+    {
+        // temporary workaround for player collision. Don't like this.
+        widthOffset = width / 4;
+        heightOffset = width / 2.6;
+    }
+    return Overlapping(this->xPos - widthOffset, this->xPos + widthOffset, collider->GetX() - collider->GetWidth() / 2,
                        collider->GetX() + collider->GetWidth() / 2) &&
-           Overlapping(this->yPos - this->height / 2, this->yPos + this->height / 2, collider->GetY() - collider->GetHeight() / 2,
+           Overlapping(this->yPos - heightOffset, this->yPos + heightOffset, collider->GetY() - collider->GetHeight() / 2,
                        collider->GetY() + collider->GetHeight() / 2);
 }
 
@@ -215,7 +222,7 @@ void Model::Update()
     if(this->name != "Player")
         this->DrawModel();
     if(this->GetAudioSource())
-        this->GetAudioSource()->Update(this->xPos, this->yPos);
+        this->GetAudioSource()->SetPosition(this->xPos, this->yPos);
 }
 
 bool Model::CheckCollision()
