@@ -9,6 +9,8 @@
 #include <string>
 #include <Player.h>
 
+class Player;
+
 class Inputs
 {
     public:

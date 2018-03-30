@@ -62,13 +62,15 @@ Player::Player(double newX, double newY)
     idleFrame = 0;
 
     playingChords = false;
+    chordDamage = 1;
 
     name = "player";
+    tag = "Player";
 
     chord = new AudioSource("PlayerSource", "Audio/Music/", xPos, yPos, 1.0, false);
 
     // create icons for left and right mouse. They will be placed on the left and right side of our player
-    icons = {new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon"), new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon")};
+    icons = {new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon", "HUD"), new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon", "HUD")};
 
 	frameTimer = new Timer();
     frameTimer->Start();
@@ -78,6 +80,11 @@ Player::Player(double newX, double newY)
     cooldownTargetTime = 0;
     chordTimingWindow = 2000; // chord timing window is 2 seconds. Might modify this later to fit with BPM
     canPlay = true;
+
+
+    drawCircle = false;
+    musicCircle = new Model(3, 3, xPos, yPos, "MusicCircle", "MusicHUD");
+    circleTimer = new Timer();
 
     player = this;
 }
@@ -156,6 +163,8 @@ void Player::InitPlayer()
 
     icons[0]->InitModel("Images/HUD/LeftMouse.png", true);
     icons[1]->InitModel("Images/HUD/RightMouse.png", true);
+
+    musicCircle->InitModel("Images/MusicSprites/MusicCircle.png", true);
 
 }
 
@@ -260,6 +269,12 @@ void Player::Update()
 
     if(!canPlay)
         UpdateCooldownTimer();
+
+    if(drawCircle)
+    {
+        ToggleMusicCircle();
+        DrawMusicCircle();
+    }
 //    DrawPlayer();
 }
 
@@ -447,16 +462,25 @@ void Player::StopMove()
 
 bool Player::CheckCollision()
 {
-
     for(auto& model : GLScene::staticObjects)
     {
         if(Collision(model))
             return true;
-
     }
 
     return false;
 }
+
+bool Player::CheckCircleCollision()
+{
+    return false;
+}
+
+bool Player::CheckCircleSquareCollision()
+{
+    return false;
+}
+
 
 double Player::GetOffsetX()
 {
@@ -523,7 +547,10 @@ void Player::CheckUserInput(int userInput)
 
     if(activeInput == userInput)
     {
-        cout << "Successful Input" << endl;
+        circleTimer->Start(); // start timer
+        musicCircle->SetPosition(xPos, yPos);
+        drawCircle = true; // used in Update()
+        CheckHit();
     }
     else
     {
@@ -547,3 +574,30 @@ void Player::UpdateCooldownTimer()
     }
 }
 
+void Player::ToggleMusicCircle()
+{
+    // if the circle has been drawn for 0.1 seconds, we want to stop drawing it.
+    if(circleTimer->GetTicks() > 100)
+    {
+        drawCircle = false;
+        circleTimer->Stop();
+    }
+}
+
+void Player::DrawMusicCircle()
+{
+    musicCircle->SetPosition(xPos, yPos);
+    musicCircle->DrawModel();
+}
+
+void Player::CheckHit()
+{
+    for(auto& enemy : GLScene::movableObjects)
+    {
+        if(enemy->GetTag() == "Player")
+            continue;
+
+        if(musicCircle->CollisionCircle(enemy)) // see if we collide with enemies
+            cout << "Chord Hit " << enemy->GetName() << endl;
+    }
+}

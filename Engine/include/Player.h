@@ -78,6 +78,8 @@ class Player : public Model
         float gravity;
         float playerZoom;
 
+        int chordDamage;
+
         vector<Model*> icons;
         int activeInput;
         Timer* chordTimer;
@@ -85,10 +87,23 @@ class Player : public Model
         double cooldownTargetTime;
         Timer* cooldownTimer;
 
+        // music circle variables
+        Model* musicCircle;
+        bool drawCircle;
+        Timer* circleTimer;
+
+        // will use timer to check when we should stop drawing music circle
+        void ToggleMusicCircle();
+        void DrawMusicCircle();
+
         int idleFrame;
         Timer* frameTimer;
 
         bool CheckCollision();
+        bool CheckCircleCollision();
+        bool CheckCircleSquareCollision();
+
+        void CheckHit();
 
         // Updates the positions of the input icons for chord playing. Also draws icons if chord button is held down. Called in Player whenever movements occur.
         void UpdateIcons();

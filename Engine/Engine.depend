@@ -248,7 +248,7 @@
 	<iostream>
 	<string>
 
-1522359006 e:\college\191\191\engine\include\glscene.h
+1522442271 e:\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -259,12 +259,13 @@
 	<AudioSource.h>
 	<AudioEngine.h>
 
-1522290214 e:\college\191\191\engine\include\model.h
+1522446690 e:\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
 	<TextureLoader.h>
 	<AudioSource.h>
+	<cmath>
 
 1522205046 source:e:\college\191\191\engine\src\gllight.cpp
 	<GLLight.h>
@@ -272,7 +273,7 @@
 1522205072 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1522364155 source:e:\college\191\191\engine\src\glscene.cpp
+1522440659 source:e:\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<Parallax.h>
@@ -281,7 +282,7 @@
 	<Skybox.h>
 	<Timer.h>
 
-1522364038 e:\college\191\191\engine\include\inputs.h
+1522442257 e:\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -296,7 +297,7 @@
 	<GL\GL.h>
 	<string>
 
-1522366624 e:\college\191\191\engine\include\player.h
+1522446731 e:\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -313,7 +314,7 @@
 	<DeltaTime.h>
 	<string>
 
-1522357906 source:e:\college\191\191\engine\src\model.cpp
+1522446890 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -327,7 +328,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1522366250 source:e:\college\191\191\engine\src\player.cpp
+1522446524 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -347,11 +348,11 @@
 1522363800 source:e:\college\191\191\engine\src\timer.cpp
 	<Timer.h>
 
-1522357981 source:e:\college\191\191\engine\src\projectile.cpp
+1522439689 source:e:\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
-1521778139 e:\college\191\191\engine\include\projectile.h
+1522439675 e:\college\191\191\engine\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
@@ -885,4 +886,12 @@
 
 1522289982 source:e:\college\191\191\engine\src\chord.cpp
 	"Chord.h"
+
+1522441907 e:\college\191\191\engine\include\musicmodel.h
+	<GLScene.h>
+	<Timer.h>
+	<Player.h>
+
+1522442118 source:e:\college\191\191\engine\src\musicmodel.cpp
+	"MusicModel.h"
 

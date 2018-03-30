@@ -28,12 +28,14 @@ Model::Model()
 
 }
 
-Model::Model(float newWidth, float newHeight, double newX, double newY, string newName)
+Model::Model(float newWidth, float newHeight, double newX, double newY, string newName, string newTag)
 {
     width = newWidth;
     height = newHeight;
+    radius = width / 2;
 
     name = newName;
+    tag = newTag;
 
     rotateX = 0;
     rotateY = 0;
@@ -63,12 +65,14 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
 
     texture = new TextureLoader();
 }
-Model::Model(float newWidth, float newHeight, double newX, double newY, string newName, AudioSource* newSource)
+Model::Model(float newWidth, float newHeight, double newX, double newY, string newName, string newTag, AudioSource* newSource)
 {
     width = newWidth;
     height = newHeight;
+    radius = width / 2;
 
     name = newName;
+    tag = newTag;
 
     rotateX = 0;
     rotateY = 0;
@@ -149,37 +153,6 @@ void Model::InitModel(string fileName, bool transparent)
 
 }
 
-bool Model::Collision(Model* collider)
-{
-    double widthOffset = width / 2, heightOffset = height / 2;
-    if(name == "player")
-    {
-        // temporary workaround for player collision. Don't like this.
-        widthOffset = width / 4;
-        heightOffset = width / 2.6;
-    }
-    return Overlapping(xPos - widthOffset, xPos + widthOffset, collider->GetX() - collider->GetWidth() / 2,
-                       collider->GetX() + collider->GetWidth() / 2) &&
-           Overlapping(yPos - heightOffset, yPos + heightOffset, collider->GetY() - collider->GetHeight() / 2,
-                       collider->GetY() + collider->GetHeight() / 2);
-}
-
-bool Model::Overlapping(double min0, double max0, double min1, double max1)
-{
-    return max0 >= min1 && min0 <= max1;
-}
-
-bool Model::OverlapGround(double maxY, double minY)
-{
-    return minY == maxY;
-}
-
-bool Model::GroundCheck(Model* collider)
-{
-    return Collision(collider) && OverlapGround(collider->GetY(), yPos + height);
-}
-
-
 double Model::GetX()
 {
     return xPos;
@@ -188,6 +161,11 @@ double Model::GetX()
 double Model::GetY()
 {
     return yPos;
+}
+
+double Model::GetRadius()
+{
+    return radius;
 }
 
 float Model::GetWidth()
@@ -203,6 +181,11 @@ float Model::GetHeight()
 string Model::GetName()
 {
     return name;
+}
+
+string Model::GetTag()
+{
+    return tag;
 }
 
 void Model::SetPosition(double newX, double newY)
@@ -232,4 +215,73 @@ bool Model::CheckCollision()
 AudioSource* Model::GetAudioSource()
 {
     return audioSource;
+}
+
+///////////////////////
+////// Collision //////
+///////////////////////
+
+bool Model::Collision(Model* collider)
+{
+    double widthOffset = width / 2, heightOffset = height / 2;
+    if(name == "player")
+    {
+        // temporary workaround for player collision. Don't like this.
+        widthOffset = width / 4;
+        heightOffset = width / 2.6;
+    }
+    return Overlapping(xPos - widthOffset, xPos + widthOffset, collider->GetX() - collider->GetWidth() / 2,
+                       collider->GetX() + collider->GetWidth() / 2) &&
+           Overlapping(yPos - heightOffset, yPos + heightOffset, collider->GetY() - collider->GetHeight() / 2,
+                       collider->GetY() + collider->GetHeight() / 2);
+}
+
+bool Model::CollisionCircle(Model* collider)
+{
+    return OverlappingCircles(xPos, yPos, collider->GetX(), collider->GetY(), radius, collider->GetRadius());
+}
+
+bool Model::CollisionCircleSquare(Model* collider)
+{
+    return false;
+}
+
+bool Model::CheckCircleCollision()
+{
+    return false;
+//    if(name == "MusicCircle")
+//    {
+//        for(auto& enemy : GLScene::movableObjects)
+//        {
+//            if(enemy->GetTag() == "Enemy")
+//            {
+//                if(CollisionCircle(enemy))
+//                    cout << "Music Hit " << enemy->GetName() << endl; // put enemy damage in here later.
+//            }
+//        }
+//    }
+}
+
+bool Model::CheckCircleSquareCollision()
+{
+    return false;
+}
+
+bool Model::Overlapping(double min0, double max0, double min1, double max1)
+{
+    // Square-square overlap
+    return max0 >= min1 && min0 <= max1;
+}
+
+bool Model::OverlappingCircles(double x0, double y0, double x1, double y1, double r0, double r1)
+{
+    // circle-to-circle overlap
+    double x = x1 - x0;
+    double y = y1 - y0;
+    double sumRadius = r0 + r1;
+
+    double distance = sqrt((x * x) + (y * y)); // pythagoran theorem to calculate distance between center points of both circles
+
+    return (distance <= sumRadius); // is the distance between both center points less than the sum of both radius's? If so, then we're overlapping with another circle.
+
 }

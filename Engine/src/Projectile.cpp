@@ -112,6 +112,17 @@ bool Projectile::CheckCollisionEnemy()
     return false;
 }
 
+bool Projectile::CheckCircleCollision()
+{
+    return false;
+}
+
+bool Projectile::CheckCircleSquareCollision()
+{
+    return false;
+}
+
+
 void Projectile::Destroy()
 {
     // find this projectile in the main vector and remove it. Then delete this projectile
