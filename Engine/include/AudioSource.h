@@ -46,6 +46,7 @@ class AudioSource
         float volume;
         double xPos, yPos;
         bool loop;
+
         ISoundSource* source;
         ISound* sound;
         vec3df* position;

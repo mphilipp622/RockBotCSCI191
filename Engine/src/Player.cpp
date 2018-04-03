@@ -67,7 +67,7 @@ Player::Player(double newX, double newY)
     name = "player";
     tag = "Player";
 
-    chord = new AudioSource("PlayerSource", "Audio/Music/", xPos, yPos, 1.0, false);
+    chord = new AudioSource("PlayerSource", "Audio/Music/Chords/E.ogg", xPos, yPos, 1.0, false);
 
     // create icons for left and right mouse. They will be placed on the left and right side of our player
     icons = {new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon", "HUD"), new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon", "HUD")};
@@ -80,7 +80,7 @@ Player::Player(double newX, double newY)
     cooldownTargetTime = 0;
     chordTimingWindow = 2000; // chord timing window is 2 seconds. Might modify this later to fit with BPM
     canPlay = true;
-
+    chordManager = new ChordManager();
 
     drawCircle = false;
     musicCircle = new Model(3, 3, xPos, yPos, "MusicCircle", "MusicHUD");
@@ -231,11 +231,8 @@ void Player::Update()
     if(playingChords)
     {
         if(chordTimer->GetTicks() > chordTimingWindow)
-        {
             // if user has exceeded their timing window, re-random the input. Might want to punish them and add a cooldown, not sure yet
-            PlayChords(false);
-            PlayChords(true);
-        }
+            NextInput();
 
         UpdateIcons();
     }
@@ -501,7 +498,7 @@ void Player::ShootProjectile(double x, double y)
 {
     Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "projectile", x + xPos, y + yPos); // sends relative mouse pointer location
     newProjectile->InitModel("Images/Note.png", true);
-    chord->PlayChord("ab9");
+    chord->PlayChord(chordManager->GetNextChord());
     GLScene::movableObjects.push_back(newProjectile);
 }
 
@@ -533,13 +530,26 @@ void Player::PlayChords(bool isPlaying)
         activeInput = rand() % icons.size();
 
         chordTimer->Start();
+
+        chordManager->StartNewSequence();
     }
     else
         chordTimer->Stop();
 
 }
 
-void Player::CheckUserInput(int userInput)
+// Used within Player class to re-random the next input, reset chordTimer, and grab the next chord.
+//Called when player inputs correctly or when timing window has passed while holding shift.
+void Player::NextInput()
+{
+    srand(time(NULL));
+    activeInput = rand() % icons.size();
+
+    chordTimer->Reset();
+}
+
+
+void Player::CheckUserInput(int userInput, LPARAM lParam)
 {
     if(!canPlay)
         // stop execution if waiting for cooldown
@@ -547,10 +557,21 @@ void Player::CheckUserInput(int userInput)
 
     if(activeInput == userInput)
     {
-        circleTimer->Start(); // start timer
-        musicCircle->SetPosition(xPos, yPos);
-        drawCircle = true; // used in Update()
-        CheckHit();
+        double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
+        double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
+        double aspectRatio = screenWidth / screenHeight;
+        double mousePosX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
+        double mousePosY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) * 3.33;
+        ShootProjectile(mousePosX, mousePosY);
+
+        // reset input check
+        NextInput();
+
+        // OLD CODE FOR CIRCLE AOE ATTACK
+//        circleTimer->Start(); // start timer
+//        musicCircle->SetPosition(xPos, yPos);
+//        drawCircle = true; // used in Update()
+//        CheckHit();
     }
     else
     {

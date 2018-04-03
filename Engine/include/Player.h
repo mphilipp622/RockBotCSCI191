@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <Timer.h>
+#include <ChordManager.h>
 
 using namespace std;
 
@@ -64,7 +65,7 @@ class Player : public Model
         void PlayChords(bool isPlaying);
 
         // Checks whether user presses the proper input or not. Note that userInput must match the inputs assigned in Player::icons vector
-        void CheckUserInput(int userInput);
+        void CheckUserInput(int userInput, LPARAM lParam);
 
     protected:
 
@@ -86,6 +87,7 @@ class Player : public Model
         double chordTimingWindow;
         double cooldownTargetTime;
         Timer* cooldownTimer;
+        void NextInput();
 
         // music circle variables
         Model* musicCircle;
@@ -112,6 +114,7 @@ class Player : public Model
         void UpdateCooldownTimer();
 
         AudioSource* chord;
+        ChordManager* chordManager;
 };
 
 #endif // PLAYER_H

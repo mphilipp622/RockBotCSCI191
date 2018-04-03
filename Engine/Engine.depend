@@ -273,7 +273,7 @@
 1522205072 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1522440659 source:e:\college\191\191\engine\src\glscene.cpp
+1522730058 source:e:\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<Parallax.h>
@@ -297,7 +297,7 @@
 	<GL\GL.h>
 	<string>
 
-1522446731 e:\college\191\191\engine\include\player.h
+1522727941 e:\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -307,14 +307,15 @@
 	<cstdlib>
 	<time.h>
 	<Timer.h>
+	<ChordManager.h>
 
-1522365244 source:e:\college\191\191\engine\src\inputs.cpp
+1522725823 source:e:\college\191\191\engine\src\inputs.cpp
 	<Inputs.h>
 	<iostream>
 	<DeltaTime.h>
 	<string>
 
-1522446890 source:e:\college\191\191\engine\src\model.cpp
+1522446963 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -328,7 +329,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1522446524 source:e:\college\191\191\engine\src\player.cpp
+1522730032 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -639,12 +640,12 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1522290237 source:e:\college\191\191\engine\src\audiosource.cpp
+1522731259 source:e:\college\191\191\engine\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1522290159 e:\college\191\191\engine\include\audiosource.h
+1522730570 e:\college\191\191\engine\include\audiosource.h
 	<string>
 	"irrKlang.h"
 	<windows.h>
@@ -894,4 +895,15 @@
 
 1522442118 source:e:\college\191\191\engine\src\musicmodel.cpp
 	"MusicModel.h"
+
+1522728315 e:\college\191\191\engine\include\chordmanager.h
+	<iostream>
+	<vector>
+	<unordered_map>
+	<string>
+	<cstdlib>
+	<time.h>
+
+1522728477 source:e:\college\191\191\engine\src\chordmanager.cpp
+	"ChordManager.h"
 

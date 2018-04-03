@@ -2,9 +2,54 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\Player.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\GLScene.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2680" topLine="75" />
+			<Cursor1 position="283" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\DeltaTime.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="260" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Parallax.h" open="1" top="0" tabpos="26" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="378" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Timer.cpp" open="1" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1079" topLine="43" />
+		</Cursor>
+	</File>
+	<File name="src\Projectile.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2555" topLine="83" />
+		</Cursor>
+	</File>
+	<File name="src\ChordManager.cpp" open="1" top="0" tabpos="25" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1803" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="include\Projectile.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="661" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10228" topLine="230" />
+		</Cursor>
+	</File>
+	<File name="include\Inputs.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="205" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Skybox.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2783" topLine="112" />
 		</Cursor>
 	</File>
 	<File name="include\AudioEngine.h" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -14,62 +59,42 @@
 	</File>
 	<File name="src\GLScene.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2201" topLine="45" />
+			<Cursor1 position="1041" topLine="72" />
 		</Cursor>
 	</File>
-	<File name="src\GLLight.cpp" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="src\TextureLoader.cpp" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="618" topLine="0" />
+			<Cursor1 position="1011" topLine="5" />
 		</Cursor>
 	</File>
-	<File name="include\TextureLoader.h" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\ChordManager.h" open="1" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="391" topLine="0" />
+			<Cursor1 position="1355" topLine="3" />
 		</Cursor>
 	</File>
-	<File name="include\Parallax.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Player.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="378" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Inputs.cpp" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1792" topLine="42" />
-		</Cursor>
-	</File>
-	<File name="src\Projectile.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2555" topLine="83" />
-		</Cursor>
-	</File>
-	<File name="src\Player.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="14062" topLine="566" />
-		</Cursor>
-	</File>
-	<File name="src\Model.cpp" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5898" topLine="247" />
-		</Cursor>
-	</File>
-	<File name="include\GLLight.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="80" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include\Projectile.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="661" topLine="0" />
+			<Cursor1 position="2283" topLine="64" />
 		</Cursor>
 	</File>
 	<File name="include\AudioSource.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="629" topLine="0" />
+			<Cursor1 position="1312" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Timer.h" open="1" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10228" topLine="230" />
+			<Cursor1 position="509" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Model.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1927" topLine="37" />
+		</Cursor>
+	</File>
+	<File name="src\Inputs.cpp" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="947" topLine="57" />
 		</Cursor>
 	</File>
 	<File name="src\AudioEngine.cpp" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -82,24 +107,19 @@
 			<Cursor1 position="811" topLine="28" />
 		</Cursor>
 	</File>
-	<File name="include\DeltaTime.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\AudioSource.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="260" topLine="0" />
+			<Cursor1 position="785" topLine="21" />
 		</Cursor>
 	</File>
-	<File name="src\Timer.cpp" open="1" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="include\GLLight.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1079" topLine="43" />
+			<Cursor1 position="80" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Skybox.h" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\TextureLoader.h" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="315" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\TextureLoader.cpp" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1011" topLine="5" />
+			<Cursor1 position="391" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\DeltaTime.cpp" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -107,34 +127,24 @@
 			<Cursor1 position="210" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Timer.h" open="1" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\GLLight.cpp" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="509" topLine="0" />
+			<Cursor1 position="618" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\GLScene.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Model.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="283" topLine="0" />
+			<Cursor1 position="5856" topLine="247" />
 		</Cursor>
 	</File>
-	<File name="src\AudioSource.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Skybox.h" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="644" topLine="12" />
+			<Cursor1 position="315" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Model.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Player.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1927" topLine="37" />
-		</Cursor>
-	</File>
-	<File name="include\Inputs.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="205" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Skybox.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2783" topLine="112" />
+			<Cursor1 position="1581" topLine="51" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -57,6 +57,7 @@
 		</Linker>
 		<Unit filename="include/AudioEngine.h" />
 		<Unit filename="include/AudioSource.h" />
+		<Unit filename="include/ChordManager.h" />
 		<Unit filename="include/DeltaTime.h" />
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
@@ -71,6 +72,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AudioEngine.cpp" />
 		<Unit filename="src/AudioSource.cpp" />
+		<Unit filename="src/ChordManager.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />

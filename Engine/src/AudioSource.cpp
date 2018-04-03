@@ -5,6 +5,7 @@
 using namespace std;
 using namespace irrklang;
 
+
 AudioSource::AudioSource()
 {
     //ctor
@@ -19,6 +20,9 @@ AudioSource::AudioSource(string newName, string newFilePath, double newX, double
     yPos = newY;
     volume = newVolume;
     loop = isLooping;
+
+    sound = 0;
+    source = 0;
 }
 
 AudioSource::~AudioSource()
@@ -38,9 +42,17 @@ void AudioSource::Play()
 
 void AudioSource::PlayChord(string newChord)
 {
-    string path = "Audio/Music/" + newChord + ".wav";
-//    string path = "Audio/Music/Chords/" + chordName + ".ogg";
-    AudioEngine::engine->play2D(path.c_str(), false);
+
+    if(sound)
+    {
+        // Have to pause it to drop it. Don't know why.
+        sound->setIsPaused(true);
+        sound->drop();
+    }
+
+    string path = "Audio/Music/Chords/" + newChord + ".ogg";
+    sound = AudioEngine::engine->play2D(path.c_str(), false, true);
+    sound->setIsPaused(false); // have to do this for some stupid reason.
 }
 
 void AudioSource::Stop()
