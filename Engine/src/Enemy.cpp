@@ -68,11 +68,6 @@ Enemy::~Enemy()
     //dtor
 }
 
-void Enemy::InitEnemy()
-{
-    return;
-}
-
 
 void Enemy::DrawEnemy()
 {
@@ -119,7 +114,6 @@ void Enemy::DrawEnemy()
 
 void Enemy::Update()
 {
-
     if(isDying)
     {
         Actions(3);
@@ -155,11 +149,6 @@ void Enemy::Update()
     if(slowDown)
         StopMove();
 
-}
-
-void Enemy::AIRoutine()
-{
-    // this will be defined in children classes
 }
 
 void Enemy::TakeDamage(int damageTaken)
@@ -333,7 +322,6 @@ void Enemy::Jump()
         return;
     }
     sound->SetPosition(xPos, yPos);
-
 }
 
 void Enemy::StartJump()
@@ -428,26 +416,3 @@ void Enemy::Actions(int newAction)
         break;
     }
 }
-
-
-bool Enemy::CheckCollision()
-{
-    for(auto& model : GLScene::staticObjects)
-    {
-        if(Collision(model))
-            return true;
-    }
-
-    return false;
-}
-
-bool Enemy::CheckCircleCollision()
-{
-    return false;
-}
-
-bool Enemy::CheckCircleSquareCollision()
-{
-    return false;
-}
-

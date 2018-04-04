@@ -13,19 +13,20 @@ Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
 Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 
+//MeleeEnemy* testEnemy;
+
 DeltaTime* dTime = new DeltaTime();
 //Skybox* sky = new Skybox();
 // Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
 Timer *sceneTimer = new Timer();
-Model* testEnemy;
 
 GLScene::GLScene()
 {
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
-    testEnemy = new Model(0.7, 0.7, 2, 0.5, "TestEnemy", "Enemy");
+//    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
     audioEngine = new AudioEngine();
     player = new Player(0.0, 10.0);
 
@@ -64,11 +65,11 @@ GLint GLScene::initGL()
     block2->InitModel("Images/Block2.png", true);
     ground->InitModel("Images/Block.png", true);
 
-    testEnemy->InitModel("Images/Player/play.png", true);
+//    testEnemy->InitModel("Images/Player/play.png", true);
     dTime ->UpdateDeltaTime();
 
     movableObjects.push_back(player);
-    movableObjects.push_back(testEnemy);
+//    movableObjects.push_back(testEnemy);
 
     staticObjects.push_back(block);
     staticObjects.push_back(ground);

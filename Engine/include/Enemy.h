@@ -6,7 +6,6 @@
 #include <Timer.h>
 #include <DeltaTime.h>
 #include <AudioSource.h>
-#include <GLScene.h>
 
 class Enemy : public Model
 {
@@ -16,7 +15,7 @@ class Enemy : public Model
         virtual ~Enemy();
 
         void Update();
-        virtual void InitEnemy(); // will be used by children classes so they have different sprites
+        virtual void InitEnemy() = 0; // will be used by children classes so they have different sprites
         void DrawEnemy();
 
         void TakeDamage(int damageTaken);
@@ -46,7 +45,7 @@ class Enemy : public Model
         bool isDying;
         void Die();
 
-        virtual void AIRoutine();
+        virtual void AIRoutine() = 0;
 
         int idleFrame, dyingFrame;
         int actionTrigger;
@@ -58,9 +57,9 @@ class Enemy : public Model
         vector<TextureLoader> deathAnim;
         void Actions(int);
 
-        virtual bool CheckCollision();
-        virtual bool CheckCircleCollision();
-        virtual bool CheckCircleSquareCollision();
+        virtual bool CheckCollision() = 0;
+        virtual bool CheckCircleCollision() = 0;
+        virtual bool CheckCircleSquareCollision() = 0;
 
         AudioSource* sound;
     private:

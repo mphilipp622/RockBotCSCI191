@@ -7,7 +7,7 @@
 	<iostream>
 	<string>
 
-1522714546 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1522870850 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -17,6 +17,8 @@
 	<unordered_map>
 	<AudioSource.h>
 	<AudioEngine.h>
+	<Enemy.h>
+	<MeleeEnemy.h>
 
 1519256343 c:\users\seapanda\documents\college\191\191\common\include\gl\glut.h
 	<windows.h>
@@ -24,7 +26,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1522799625 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1522872940 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<Parallax.h>
@@ -48,7 +50,7 @@
 	<Player.h>
 	<string>
 
-1522714546 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1522873454 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -187,7 +189,7 @@
 	"gl/gl.h"
 	<iostream>
 
-1522805678 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1522869051 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -195,7 +197,7 @@
 	<cmath>
 	<Projectile.h>
 
-1522803807 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1522869051 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -1021,7 +1023,7 @@
 	<windows.h>
 	<iostream>
 
-1522803082 c:\users\seapanda\documents\college\191\191\engine\include\chordmanager.h
+1522869064 c:\users\seapanda\documents\college\191\191\engine\include\chordmanager.h
 	<iostream>
 	<vector>
 	<unordered_map>
@@ -1032,13 +1034,23 @@
 1522714547 source:c:\users\seapanda\documents\college\191\191\engine\src\audioengine.cpp
 	"AudioEngine.h"
 
-1522803082 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
+1522869064 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
-1522803854 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
+1522873351 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
 	"Enemy.h"
 
-1522804415 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
+1522873377 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
 	<Model.h>
+	<vector>
 	<Timer.h>
+	<DeltaTime.h>
+	<AudioSource.h>
+
+1522873086 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
+	"MeleeEnemy.h"
+
+1522873093 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
+	<Enemy.h>
+	<GLScene.h>
 

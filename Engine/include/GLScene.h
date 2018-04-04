@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <AudioSource.h>
 #include <AudioEngine.h>
+#include <Enemy.h>
+#include <MeleeEnemy.h>
 
 using namespace std;
 
