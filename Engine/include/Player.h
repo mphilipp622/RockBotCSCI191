@@ -100,6 +100,9 @@ class Player : public Model
 
         int idleFrame;
         Timer* frameTimer;
+        TextureLoader run[4];
+        TextureLoader idle[5];
+        TextureLoader jumpAnim[4];
 
         bool CheckCollision();
         bool CheckCircleCollision();

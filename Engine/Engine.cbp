@@ -59,6 +59,7 @@
 		<Unit filename="include/AudioSource.h" />
 		<Unit filename="include/ChordManager.h" />
 		<Unit filename="include/DeltaTime.h" />
+		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/Inputs.h" />
@@ -74,6 +75,7 @@
 		<Unit filename="src/AudioSource.cpp" />
 		<Unit filename="src/ChordManager.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
+		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/Inputs.cpp" />

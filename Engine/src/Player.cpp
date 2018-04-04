@@ -5,10 +5,6 @@
 #include <cmath>
 #include <Projectile.h>
 
-TextureLoader run[4];
-TextureLoader idle[5];
-TextureLoader jumpAnim[4];
-
 Player* Player::player; // Global getter for the player object
 
 Player::Player(double newX, double newY)
@@ -288,14 +284,11 @@ void Player::StartJump()
 
 void Player::Jump()
 {
-    // Will probably move this into a player class later
-
     jumpVelocity += gravity * DeltaTime::GetDeltaTime();
     prevYPos = yPos;
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
     if(CheckCollision())
     {
-//        GLScene::keyboardAndMouse->SetKey("Jump", false);
         jump = false;
         yPos = prevYPos;
         return;
