@@ -51,10 +51,10 @@ class Enemy : public Model
         int actionTrigger;
         int moveSpeed, jumpSpeed;
         Timer* frameTimer;
-        vector<TextureLoader> moveAnim;
-        vector<TextureLoader> idleAnim;
-        vector<TextureLoader> jumpAnim;
-        vector<TextureLoader> deathAnim;
+        TextureLoader moveAnim[4];
+        TextureLoader idleAnim[1];
+        TextureLoader jumpAnim[1];
+        TextureLoader deathAnim[3];
         void Actions(int);
 
         virtual bool CheckCollision() = 0;

@@ -65,6 +65,7 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     frameTimer->Start();
 
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
+
 }
 
 void MeleeEnemy::InitEnemy()
@@ -75,6 +76,8 @@ void MeleeEnemy::InitEnemy()
 
 //    for(int i = 0; i < 10; i++)
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
+
+
     moveAnim[0].BindTexture("Images/Enemies/player0.png");
     moveAnim[1].BindTexture("Images/Enemies/player1.png");
     moveAnim[2].BindTexture("Images/Enemies/player2.png");
@@ -83,6 +86,7 @@ void MeleeEnemy::InitEnemy()
     idleAnim[0].BindTexture("Images/Enemies/play.png");
 
     jumpAnim[0].BindTexture("Images/Enemies/jump.png");
+
 }
 
 bool MeleeEnemy::CheckCollision()
@@ -98,4 +102,9 @@ bool MeleeEnemy::CheckCircleCollision()
 bool MeleeEnemy::CheckCircleSquareCollision()
 {
     return false;
+}
+
+void MeleeEnemy::AIRoutine()
+{
+    return;
 }

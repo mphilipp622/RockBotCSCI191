@@ -70,7 +70,7 @@ ChordManager::~ChordManager()
 
 void ChordManager::StartNewSequence()
 {
-    majorOrMinor = rand() % 2;
+//    majorOrMinor = rand() % 2;
     if(majorOrMinor == 0)
         // 0 is major
         currentRoot = majorRoots.at(rand() % majorRoots.size()); // randomize new root

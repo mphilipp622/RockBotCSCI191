@@ -4,8 +4,6 @@
 #include <Enemy.h>
 #include <GLScene.h>
 
-class Enemy;
-
 class MeleeEnemy : public Enemy
 {
     public:
@@ -13,11 +11,13 @@ class MeleeEnemy : public Enemy
         MeleeEnemy(double newX, double newY, double newWidth, double newHeight, string newName);
         virtual ~MeleeEnemy();
 
+        void InitEnemy();
 
     protected:
 
     private:
-        void InitEnemy();
+
+        void AIRoutine();
         bool CheckCollision();
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();

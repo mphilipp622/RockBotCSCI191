@@ -353,7 +353,7 @@ void Enemy::Actions(int newAction)
         if(frameTimer->GetTicks() > 60)
         {
             idleFrame++;
-            idleFrame %= idleAnim.size();
+            idleFrame %= 1;
             frameTimer->Reset();
         }
 
@@ -373,7 +373,7 @@ void Enemy::Actions(int newAction)
         if(frameTimer->GetTicks() > 60)
         {
             moveSpeed++;
-            moveSpeed %= moveAnim.size();
+            moveSpeed %= 4;
             frameTimer->Reset();
         }
 
@@ -401,7 +401,7 @@ void Enemy::Actions(int newAction)
         if(frameTimer->GetTicks() > 60)
         {
             dyingFrame++;
-            dyingFrame %= deathAnim.size();
+            dyingFrame %= 3;
             frameTimer->Reset();
         }
 

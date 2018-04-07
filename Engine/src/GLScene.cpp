@@ -12,7 +12,7 @@
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
 Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
-
+MeleeEnemy *testEnemy;
 //MeleeEnemy* testEnemy;
 
 DeltaTime* dTime = new DeltaTime();
@@ -29,6 +29,8 @@ GLScene::GLScene()
 //    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
     audioEngine = new AudioEngine();
     player = new Player(0.0, 10.0);
+
+    testEnemy = new MeleeEnemy(0.7, 2.0, 1.0, 1.0, "Enemy");
 
     keyboardAndMouse = new Inputs();
     sceneTimer->Start();
@@ -65,10 +67,11 @@ GLint GLScene::initGL()
     block2->InitModel("Images/Block2.png", true);
     ground->InitModel("Images/Block.png", true);
 
-//    testEnemy->InitModel("Images/Player/play.png", true);
+    testEnemy->InitEnemy();
     dTime ->UpdateDeltaTime();
 
     movableObjects.push_back(player);
+    movableObjects.push_back(testEnemy);
 //    movableObjects.push_back(testEnemy);
 
     staticObjects.push_back(block);
