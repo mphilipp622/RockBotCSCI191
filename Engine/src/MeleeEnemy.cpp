@@ -91,6 +91,12 @@ void MeleeEnemy::InitEnemy()
 
 bool MeleeEnemy::CheckCollision()
 {
+    for(auto& model : GLScene::staticObjects)
+    {
+        if(Collision(model))
+            return true;
+    }
+
     return false;
 }
 

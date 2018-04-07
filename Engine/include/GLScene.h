@@ -35,13 +35,18 @@ class GLScene
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static Inputs *keyboardAndMouse;
 
+        // Sets level state to loaded, which will set GLScene loaded boolean.
+        void SetLoaded(bool newState);
+
     protected:
         unordered_map<string, AudioSource*> audioSources;
         Player* player;
         AudioEngine* audioEngine;
+        bool isLoaded;
 
 
     private:
+        DeltaTime* dTime;
 };
 
 #endif // GLSCENE_H

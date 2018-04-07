@@ -14,8 +14,6 @@ Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 MeleeEnemy *testEnemy;
 //MeleeEnemy* testEnemy;
-
-DeltaTime* dTime = new DeltaTime();
 //Skybox* sky = new Skybox();
 // Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
@@ -23,14 +21,15 @@ Timer *sceneTimer = new Timer();
 
 GLScene::GLScene()
 {
+    isLoaded = false;
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
 //    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
     audioEngine = new AudioEngine();
-    player = new Player(0.0, 10.0);
+    player = new Player(0.0, 5);
 
-    testEnemy = new MeleeEnemy(0.7, 2.0, 1.0, 1.0, "Enemy");
+    testEnemy = new MeleeEnemy(0.7, 3, 1.0, 1.0, "Enemy");
 
     keyboardAndMouse = new Inputs();
     sceneTimer->Start();
@@ -68,7 +67,6 @@ GLint GLScene::initGL()
     ground->InitModel("Images/Block.png", true);
 
     testEnemy->InitEnemy();
-    dTime ->UpdateDeltaTime();
 
     movableObjects.push_back(player);
     movableObjects.push_back(testEnemy);
@@ -81,6 +79,7 @@ GLint GLScene::initGL()
 //    sky->LoadTextures();
 
     player->InitPlayer();
+    dTime = new DeltaTime();
     return true;
 }
 
@@ -159,4 +158,9 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         keyboardAndMouse->WheelMove(player, GET_WHEEL_DELTA_WPARAM(wParam));
 
 	return 1;
+}
+
+void GLScene::SetLoaded(bool newState)
+{
+    isLoaded = newState;
 }
