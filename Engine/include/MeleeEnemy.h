@@ -3,6 +3,7 @@
 
 #include <Enemy.h>
 #include <GLScene.h>
+#include <Player.h>
 
 class MeleeEnemy : public Enemy
 {

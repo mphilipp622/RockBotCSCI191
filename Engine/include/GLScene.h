@@ -44,10 +44,12 @@ class GLScene
         Player* player;
         AudioEngine* audioEngine;
         bool isLoaded;
+        AudioSource* BGM;
 
 
     private:
         DeltaTime* dTime;
+        Enemy* testEnemy;
 };
 
 #endif // GLSCENE_H

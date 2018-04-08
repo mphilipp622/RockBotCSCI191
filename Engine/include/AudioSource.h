@@ -22,6 +22,8 @@ class AudioSource
         // Plays chord of the same name that's passed to function
         void PlayChord(string chordName);
 
+        void PlayMusic();
+
         // Stops playing any currently playing sound
         void Stop();
 

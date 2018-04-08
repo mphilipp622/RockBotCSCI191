@@ -7,6 +7,7 @@
 #include <DeltaTime.h>
 #include <AudioSource.h>
 #include <algorithm>
+#include <Player.h>
 
 class Enemy : public Model
 {

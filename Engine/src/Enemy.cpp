@@ -60,6 +60,8 @@ Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string
 	frameTimer = new Timer();
     frameTimer->Start();
 
+    isDying = false;
+
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
 }
 
@@ -184,7 +186,7 @@ void Enemy::MoveLeft()
     {
 //        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
         xPos = prevXPos;
-        moving = false;
+//        moving = false;
         xDirection = 0;
         acceleration = 0;
         return;
@@ -212,7 +214,7 @@ void Enemy::MoveRight()
 
 //        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
         xPos = prevXPos;
-        moving = false;
+//        moving = false;
         xDirection = 0;
         acceleration = 0;
         return;
@@ -242,7 +244,7 @@ void Enemy::StopMove()
         if(CheckCollision())
         {
             xPos = prevXPos;
-            moving = false;
+//            moving = false;
             slowDown = false;
             xDirection = 0;
             acceleration = 0;
@@ -269,7 +271,7 @@ void Enemy::StopMove()
         if(CheckCollision())
         {
             xPos = prevXPos;
-            moving = false;
+//            moving = false;
             slowDown = false;
             xDirection = 0;
             acceleration = 0;

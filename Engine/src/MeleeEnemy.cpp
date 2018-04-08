@@ -46,13 +46,14 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     jumpSpeed = 1.0;
     hp = 3;
     actionTrigger = 0;
+    isDying = false;
 
      // physics
     gravity = 0.98;
     acceleration = 0.0;
     accelRate = 0.05;
     deceleration = 0.2; // rate of deceleration
-    maxAcceleration = 2.5;
+    maxAcceleration = 2.0;
     jump = false; // set true to avoid falling through earth on scene load
     slowDown = false;
     gravity = -9.80;
@@ -65,7 +66,6 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     frameTimer->Start();
 
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
-
 }
 
 void MeleeEnemy::InitEnemy()
@@ -112,5 +112,9 @@ bool MeleeEnemy::CheckCircleSquareCollision()
 
 void MeleeEnemy::AIRoutine()
 {
-    return;
+//    cout << Player::player->GetX() << " < " << xPos << " = " << (Player::player->GetX() < xPos) << endl;
+    if(Player::player->GetX() < xPos)
+        StartMove(-1.0); // move left
+    else if(Player::player->GetX() > xPos)
+        StartMove(1.0);
 }

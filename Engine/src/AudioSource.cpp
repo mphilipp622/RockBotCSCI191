@@ -40,6 +40,11 @@ void AudioSource::Play()
     sound = AudioEngine::engine->play3D(filePath.c_str(), vec3df(xPos, yPos, 0), loop, false);
 }
 
+void AudioSource::PlayMusic()
+{
+    sound = AudioEngine::engine->play2D(filePath.c_str(), loop);
+}
+
 void AudioSource::PlayChord(string newChord)
 {
 

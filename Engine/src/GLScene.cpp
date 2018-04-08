@@ -12,7 +12,6 @@
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
 Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
 Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
-MeleeEnemy *testEnemy;
 //MeleeEnemy* testEnemy;
 //Skybox* sky = new Skybox();
 // Can create multiple Parallax objects to create parallaxed backgrounds
@@ -26,13 +25,6 @@ GLScene::GLScene()
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
 //    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
-    audioEngine = new AudioEngine();
-    player = new Player(0.0, 5);
-
-    testEnemy = new MeleeEnemy(0.7, 3, 1.0, 1.0, "Enemy");
-
-    keyboardAndMouse = new Inputs();
-    sceneTimer->Start();
 }
 
 GLScene::~GLScene()
@@ -50,6 +42,13 @@ Inputs* GLScene::keyboardAndMouse;
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
+    audioEngine = new AudioEngine();
+    player = new Player(0.0, 5);
+    testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
+
+    keyboardAndMouse = new Inputs();
+    sceneTimer->Start();
+
     glShadeModel(GL_SMOOTH); // Shading mode
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background color to black
     glClearDepth(1.0f); // depth buffer
@@ -67,8 +66,6 @@ GLint GLScene::initGL()
     block2->InitModel("Images/Block2.png", true);
     ground->InitModel("Images/Block.png", true);
 
-    testEnemy->InitEnemy();
-
     movableObjects.push_back(player);
     enemies.push_back(testEnemy);
 //    movableObjects.push_back(testEnemy);
@@ -80,6 +77,11 @@ GLint GLScene::initGL()
 //    sky->LoadTextures();
 
     player->InitPlayer();
+    Player::player = player;
+    testEnemy->InitEnemy();
+
+    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
+    BGM->PlayMusic();
     dTime = new DeltaTime();
     return true;
 }
@@ -108,6 +110,7 @@ GLint GLScene::drawGLScene()
 
     for(auto& model : movableObjects)
         model->Update();
+
 
     dTime->UpdateDeltaTime();
 
