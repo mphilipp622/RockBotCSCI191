@@ -6,6 +6,7 @@
 #include <Timer.h>
 #include <DeltaTime.h>
 #include <AudioSource.h>
+#include <algorithm>
 
 class Enemy : public Model
 {

@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include <GLScene.h>
 
 Enemy::Enemy()
 {
@@ -336,6 +337,8 @@ void Enemy::StartJump()
 
 void Enemy::Die()
 {
+    auto finder = find(GLScene::enemies.begin(), GLScene::enemies.end(), this);
+    GLScene::enemies.erase(finder);
     delete this;
 }
 

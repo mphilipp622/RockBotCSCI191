@@ -85,8 +85,8 @@ void Projectile::Move()
     if(CheckCollision())
         // if we collide with something, destroy object. If object is enemy, we need to deal damage
         Destroy();
-    if(CheckCollisionEnemy())
-        return; // implement damage code here later
+    if(name == "PlayerProjectile" && CheckCollisionEnemy())
+        Destroy(); // implement damage code here later
 }
 
 bool Projectile::CheckCollision()
@@ -103,10 +103,14 @@ bool Projectile::CheckCollision()
 bool Projectile::CheckCollisionEnemy()
 {
     // check for collision with an enemy
-    for(auto& model : GLScene::movableObjects)
+    for(auto& enemy : GLScene::enemies)
     {
-        if(Collision(model) && model->GetName() != "player")
+        if(Collision(enemy))
+        {
+            enemy->TakeDamage(damage);
             return true; // will ignore player collision.
+        }
+
     }
 
     return false;

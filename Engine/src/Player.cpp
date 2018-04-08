@@ -489,7 +489,7 @@ double Player::GetZoom()
 
 void Player::ShootProjectile(double x, double y)
 {
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "projectile", x + xPos, y + yPos); // sends relative mouse pointer location
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
     newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord(chordManager->GetNextChord());
     GLScene::movableObjects.push_back(newProjectile);

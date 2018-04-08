@@ -42,6 +42,7 @@ GLScene::~GLScene()
 // Static Variables for use in player class to check collision
 vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
+vector<Enemy*> GLScene::enemies;
 
 // static input for player to use as well
 Inputs* GLScene::keyboardAndMouse;
@@ -69,7 +70,7 @@ GLint GLScene::initGL()
     testEnemy->InitEnemy();
 
     movableObjects.push_back(player);
-    movableObjects.push_back(testEnemy);
+    enemies.push_back(testEnemy);
 //    movableObjects.push_back(testEnemy);
 
     staticObjects.push_back(block);
@@ -101,6 +102,9 @@ GLint GLScene::drawGLScene()
 
     for(auto& model : staticObjects)
         model->DrawModel();
+
+    for(auto& enemy : enemies)
+        enemy->Update();
 
     for(auto& model : movableObjects)
         model->Update();
