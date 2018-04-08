@@ -30,8 +30,7 @@ class Player : public Model
         vec1 vertices[4]; // 4 vertices of xyz values
 
         // player stats
-        int hp;
-        int moveSpeed, jumpSpeed;
+
 
         void DrawPlayer();
         void InitPlayer();
@@ -67,9 +66,13 @@ class Player : public Model
         // Checks whether user presses the proper input or not. Note that userInput must match the inputs assigned in Player::icons vector
         void CheckUserInput(int userInput, LPARAM lParam);
 
+        void TakeDamage(int damage);
+
     protected:
 
     private:
+        int hp;
+        int moveSpeed, jumpSpeed;
         bool jump, slowDown, moving, startGravity, playingChords, canPlay;
         float jumpVelocity, fallVelocity;
         float initialY;
@@ -105,6 +108,7 @@ class Player : public Model
         TextureLoader jumpAnim[4];
 
         bool CheckCollision();
+        void CheckEnemyCollision();
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();
 

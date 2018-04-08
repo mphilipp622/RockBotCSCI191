@@ -40,7 +40,7 @@ Player::Player(double newX, double newY)
 
     moveSpeed = 1.0;
     jumpSpeed = 1.0;
-    hp = 3;
+    hp = 10;
     actionTrigger = 0;
 
      // physics
@@ -260,6 +260,8 @@ void Player::Update()
     if(slowDown)
         StopMove();
 
+    CheckEnemyCollision();
+
     if(!canPlay)
         UpdateCooldownTimer();
 
@@ -461,6 +463,25 @@ bool Player::CheckCollision()
     return false;
 }
 
+void Player::CheckEnemyCollision()
+{
+    for(auto& enemy : GLScene::enemies)
+    {
+        if(Collision(enemy))
+        {
+            TakeDamage(1);
+
+            if(enemy->GetX() >= xPos)
+                // if we're on left side of enemy and touch them, push back to the left
+                SetPosition(xPos - 1.0, yPos);
+            else if(enemy->GetX() < xPos)
+                // if we're on right side of enemy and touch them, push back right.
+                SetPosition(xPos + 1.0, yPos);
+        }
+    }
+}
+
+
 bool Player::CheckCircleCollision()
 {
     return false;
@@ -568,7 +589,6 @@ void Player::CheckUserInput(int userInput, LPARAM lParam)
     }
     else
     {
-        cout << "Failed Input" << endl;
         // set a cooldown for player
         cooldownTimer->Start();
         cooldownTargetTime = chordTimingWindow;
@@ -614,4 +634,12 @@ void Player::CheckHit()
         if(musicCircle->CollisionCircle(enemy)) // see if we collide with enemies
             cout << "Chord Hit " << enemy->GetName() << endl;
     }
+}
+
+void Player::TakeDamage(int damage)
+{
+    hp -= damage;
+
+//    if(hp <= 0)
+ //       GameOver();
 }
