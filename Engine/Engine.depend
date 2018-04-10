@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1523225372 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
 	<windows.h>
 	<windows.h>
 	<GLScene.h>
@@ -7,7 +7,7 @@
 	<iostream>
 	<string>
 
-1523226268 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -26,7 +26,8 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1523226377 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1523320796 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+	<LoadShader.h>
 	<GLScene.h>
 	<GLLight.h>
 	<Parallax.h>
@@ -189,7 +190,7 @@
 	"gl/gl.h"
 	<iostream>
 
-1523223132 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -197,7 +198,7 @@
 	<cmath>
 	<Projectile.h>
 
-1523160827 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -378,7 +379,7 @@
 	<algorithm>
 	<Timer.h>
 
-1523152270 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -421,12 +422,12 @@
 1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_errors.h
 	"fmod.h"
 
-1523226384 source:c:\users\seapanda\documents\college\191\191\engine\src\audiosource.cpp
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1523226327 c:\users\seapanda\documents\college\191\191\engine\include\audiosource.h
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\audiosource.h
 	<string>
 	"irrKlang.h"
 	<windows.h>
@@ -1034,14 +1035,14 @@
 1523226223 source:c:\users\seapanda\documents\college\191\191\engine\src\audioengine.cpp
 	"AudioEngine.h"
 
-1523129455 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
-1523226114 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
 	"Enemy.h"
 	<GLScene.h>
 
-1523223995 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
 	<Model.h>
 	<vector>
 	<Timer.h>
@@ -1050,11 +1051,29 @@
 	<algorithm>
 	<Player.h>
 
-1523226121 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
 	"MeleeEnemy.h"
 
-1523223141 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
+
+1523322930 source:c:\users\seapanda\documents\college\191\191\engine\src\loadshader.cpp
+	"LoadShader.h"
+
+1523323227 c:\users\seapanda\documents\college\191\191\engine\include\loadshader.h
+	<GL/glew.h>
+	<fstream>
+	<iostream>
+	<string>
+
+1501566382 c:\users\seapanda\documents\college\191\191\engine\common\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
 

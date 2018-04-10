@@ -1,5 +1,6 @@
 // updated 2/7/18
 
+#include <LoadShader.h>
 #include <GLScene.h>
 #include <GLLight.h>
 #include <Parallax.h>
@@ -42,6 +43,7 @@ Inputs* GLScene::keyboardAndMouse;
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
+    glewInit();
     audioEngine = new AudioEngine();
     player = new Player(0.0, 5);
     testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
