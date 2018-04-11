@@ -18,6 +18,7 @@ Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 // Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
 Timer *sceneTimer = new Timer();
+LoadShader* shader = new LoadShader();
 
 GLScene::GLScene()
 {
@@ -44,6 +45,7 @@ Inputs* GLScene::keyboardAndMouse;
 GLint GLScene::initGL()
 {
     glewInit();
+
     audioEngine = new AudioEngine();
     player = new Player(0.0, 5);
     testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
@@ -82,6 +84,8 @@ GLint GLScene::initGL()
     Player::player = player;
     testEnemy->InitEnemy();
 
+    shader->ShaderInit("Shaders/v.vs", "Shaders/f.fs");
+
     BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
     BGM->PlayMusic();
     dTime = new DeltaTime();
@@ -115,6 +119,17 @@ GLint GLScene::drawGLScene()
 
 
     dTime->UpdateDeltaTime();
+//    glPushMatrix();
+//    glUseProgram(shader->program);
+//
+//    glBegin(GL_TRIANGLES);
+//    glVertex3f(-3.0, 0.0, 0.0);
+//    glVertex3f(0.0, -2.0, 0);
+//    glVertex3f(0, 0, 0);
+//    glEnd();
+//
+//    glUseProgram(0);
+//    glPopMatrix();
 
 	return 1;
 }
