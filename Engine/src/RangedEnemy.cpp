@@ -1,16 +1,11 @@
-#include "MeleeEnemy.h"
+#include "RangedEnemy.h"
 
-MeleeEnemy::MeleeEnemy()
+RangedEnemy::RangedEnemy()
 {
-    //ctor
+
 }
 
-MeleeEnemy::~MeleeEnemy()
-{
-    //dtor
-}
-
-MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeight, string newName)
+RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHeight, string newName)
 {
     xPos = newX;
     yPos = newY;
@@ -68,9 +63,8 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
 }
 
-void MeleeEnemy::InitEnemy()
+void RangedEnemy::InitEnemy()
 {
-    // player must always render last in the scene
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -78,22 +72,40 @@ void MeleeEnemy::InitEnemy()
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
 
 
-    moveAnim[0].BindTexture("Images/Enemies/player0.png");
-    moveAnim[1].BindTexture("Images/Enemies/player1.png");
-    moveAnim[2].BindTexture("Images/Enemies/player2.png");
-    moveAnim[3].BindTexture("Images/Enemies/player3.png");
+    moveAnim[0].BindTexture("Images/Enemies/RangedWalk0.png");
+    moveAnim[1].BindTexture("Images/Enemies/RangedWalk1.png");
+    moveAnim[2].BindTexture("Images/Enemies/RangedWalk2.png");
+    moveAnim[3].BindTexture("Images/Enemies/RangedWalk3.png");
+    moveAnim[4].BindTexture("Images/Enemies/RangedWalk4.png");
+    moveAnim[5].BindTexture("Images/Enemies/RangedWalk5.png");
 
-    maxMoveFrame = 4;
+    maxMoveFrame = 6;
 
-    idleAnim[0].BindTexture("Images/Enemies/play.png");
+    idleAnim[0].BindTexture("Images/Enemies/RangedIdle0.png");
     maxIdleFrame = 1;
 
-    jumpAnim[0].BindTexture("Images/Enemies/jump.png");
-    maxJumpFrame = 1;
+    deathAnim[0].BindTexture("Images/Enemies/RangedDie0.png");
+    deathAnim[1].BindTexture("Images/Enemies/RangedDie1.png");
+    deathAnim[2].BindTexture("Images/Enemies/RangedDie2.png");
+    deathAnim[3].BindTexture("Images/Enemies/RangedDie3.png");
+    dyingFrame = 0;
+    maxDeathFrame = 4;
 
+    attackAnim[0].BindTexture("Images/Enemies/RangedIdle0.png");
+    attackAnim[1].BindTexture("Images/Enemies/RangedIdle1.png");
+    attackAnim[2].BindTexture("Images/Enemies/RangedIdle2.png");
+    maxAttackFrame = 3;
 }
 
-bool MeleeEnemy::CheckCollision()
+void RangedEnemy::AIRoutine()
+{
+//    if(Player::player->GetX() < xPos)
+//        StartMove(-1.0); // move left
+//    else if(Player::player->GetX() > xPos)
+//        StartMove(1.0);
+}
+
+bool RangedEnemy::CheckCollision()
 {
     for(auto& model : GLScene::staticObjects)
     {
@@ -104,21 +116,18 @@ bool MeleeEnemy::CheckCollision()
     return false;
 }
 
-bool MeleeEnemy::CheckCircleCollision()
+bool RangedEnemy::CheckCircleCollision()
 {
     return false;
 }
 
-bool MeleeEnemy::CheckCircleSquareCollision()
+bool RangedEnemy::CheckCircleSquareCollision()
 {
     return false;
 }
 
-void MeleeEnemy::AIRoutine()
+
+RangedEnemy::~RangedEnemy()
 {
-//    cout << Player::player->GetX() << " < " << xPos << " = " << (Player::player->GetX() < xPos) << endl;
-    if(Player::player->GetX() < xPos)
-        StartMove(-1.0); // move left
-    else if(Player::player->GetX() > xPos)
-        StartMove(1.0);
+    //dtor
 }

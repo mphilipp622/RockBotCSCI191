@@ -14,6 +14,7 @@
 #include <AudioEngine.h>
 #include <Enemy.h>
 #include <MeleeEnemy.h>
+#include <RangedEnemy.h>
 
 using namespace std;
 
@@ -50,6 +51,7 @@ class GLScene
     private:
         DeltaTime* dTime;
         Enemy* testEnemy;
+        Enemy* testRangedEnemy;
 };
 
 #endif // GLSCENE_H

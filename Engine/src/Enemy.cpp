@@ -358,7 +358,7 @@ void Enemy::Actions(int newAction)
         if(frameTimer->GetTicks() > 60)
         {
             idleFrame++;
-            idleFrame %= 1;
+            idleFrame %= maxIdleFrame;
             frameTimer->Reset();
         }
 
@@ -377,12 +377,12 @@ void Enemy::Actions(int newAction)
 
         if(frameTimer->GetTicks() > 60)
         {
-            moveSpeed++;
-            moveSpeed %= 4;
+            moveFrame++;
+            moveFrame %= maxMoveFrame;
             frameTimer->Reset();
         }
 
-        moveAnim[moveSpeed].Binder();
+        moveAnim[moveFrame].Binder();
         DrawEnemy();
 
         glPopMatrix();
@@ -394,7 +394,14 @@ void Enemy::Actions(int newAction)
 
         glTranslated(xPos, yPos, zoom);
 
-        jumpAnim[0].Binder();
+        if(frameTimer->GetTicks() > 60)
+        {
+            jumpFrame++;
+            jumpFrame %= maxJumpFrame;
+            frameTimer->Reset();
+        }
+
+        jumpAnim[jumpFrame].Binder();
         DrawEnemy();
 
         glPopMatrix();
@@ -403,14 +410,16 @@ void Enemy::Actions(int newAction)
     case 3:
         glPushMatrix();
 
+        glTranslated(xPos, yPos, zoom);
+
         if(frameTimer->GetTicks() > 60)
         {
             dyingFrame++;
-            dyingFrame %= 3;
+            dyingFrame %= maxDeathFrame;
             frameTimer->Reset();
         }
 
-        moveAnim[moveSpeed].Binder();
+        deathAnim[dyingFrame].Binder();
         DrawEnemy();
 
         glPopMatrix();
@@ -418,6 +427,24 @@ void Enemy::Actions(int newAction)
         if(dyingFrame == 0)
             // animation is over. Delete from game
             Die();
+        break;
+    case 4:
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        if(frameTimer->GetTicks() > 60)
+        {
+            attackFrame++;
+            attackFrame %= maxAttackFrame;
+            frameTimer->Reset();
+        }
+
+        attackAnim[attackFrame].Binder();
+        DrawEnemy();
+
+        glPopMatrix();
+
         break;
     }
 }

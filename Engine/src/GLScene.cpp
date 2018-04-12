@@ -45,6 +45,7 @@ GLint GLScene::initGL()
     audioEngine = new AudioEngine();
     player = new Player(0.0, 5);
     testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
+    testRangedEnemy = new RangedEnemy(1, 3, 1, 1, "Enemy");
 
     keyboardAndMouse = new Inputs();
     sceneTimer->Start();
@@ -68,6 +69,7 @@ GLint GLScene::initGL()
 
     movableObjects.push_back(player);
     enemies.push_back(testEnemy);
+    enemies.push_back(testRangedEnemy);
 //    movableObjects.push_back(testEnemy);
 
     staticObjects.push_back(block);
@@ -78,9 +80,14 @@ GLint GLScene::initGL()
 
     player->InitPlayer();
     Player::player = player;
-    testEnemy->InitEnemy();
 
-    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
+    for(auto& enemy : enemies)
+        enemy->InitEnemy();
+
+//    testEnemy->InitEnemy();
+//    testRangedEnemy->InitEnemy();
+
+    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, 0.8, true);
     BGM->PlayMusic();
     dTime = new DeltaTime();
     return true;

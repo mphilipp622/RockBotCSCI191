@@ -1,16 +1,16 @@
-#ifndef MELEEENEMY_H
-#define MELEEENEMY_H
+#ifndef RANGEDENEMY_H
+#define RANGEDENEMY_H
 
 #include <Enemy.h>
 #include <GLScene.h>
 #include <Player.h>
 
-class MeleeEnemy : public Enemy
+class RangedEnemy : public Enemy
 {
     public:
-        MeleeEnemy();
-        MeleeEnemy(double newX, double newY, double newWidth, double newHeight, string newName);
-        virtual ~MeleeEnemy();
+        RangedEnemy();
+        RangedEnemy(double newX, double newY, double newWidth, double newHeight, string newName);
+        virtual ~RangedEnemy();
 
         void InitEnemy();
 
@@ -23,4 +23,4 @@ class MeleeEnemy : public Enemy
         bool CheckCircleSquareCollision();
 };
 
-#endif // MELEEENEMY_H
+#endif // RANGEDENEMY_H
