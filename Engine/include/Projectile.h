@@ -24,6 +24,8 @@ class Projectile : public Model
         void Move();
         bool CheckCollision();
         bool CheckCollisionEnemy();
+        bool CheckCircleCollision();
+        bool CheckCircleSquareCollision();
 
     private:
         double vectorDist, normalizedX, normalizedY;

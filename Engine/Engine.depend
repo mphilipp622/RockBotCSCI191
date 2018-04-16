@@ -1,17 +1,35 @@
 # depslib dependency file v1.0
+<<<<<<< HEAD
 1520121029 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+=======
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+	<windows.h>
+>>>>>>> master
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
 	<iostream>
 	<windows.h>
 
+<<<<<<< HEAD
 1520318151 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+=======
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+>>>>>>> master
 	<windows.h>
 	<glut.h>
 	<iostream>
 	<vector>
 	<Model.h>
+<<<<<<< HEAD
+=======
+	<Inputs.h>
+	<unordered_map>
+	<AudioSource.h>
+	<AudioEngine.h>
+	<Enemy.h>
+	<MeleeEnemy.h>
+>>>>>>> master
 
 1519252743 c:\users\seapanda\documents\college\191\191\common\include\gl\glut.h
 	<windows.h>
@@ -19,8 +37,14 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
+<<<<<<< HEAD
 1520453623 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	"GLScene.h"
+=======
+1523493942 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+	<LoadShader.h>
+	<GLScene.h>
+>>>>>>> master
 	<GLLight.h>
 	<Inputs.h>
 	"Parallax.h"
@@ -33,25 +57,49 @@
 1519961014 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
+<<<<<<< HEAD
 1520454247 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	"Model.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
+=======
+1523223597 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+	<Model.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
+>>>>>>> master
 	<iostream>
 	<algorithm>
 
+<<<<<<< HEAD
 1520453578 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+=======
+1522873454 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+>>>>>>> master
 	<windows.h>
 	"glut.h"
 	<string>
+<<<<<<< HEAD
 
 1520378542 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	"Inputs.h"
+=======
+	<TextureLoader.h>
+	<AudioSource.h>
+	<cmath>
+
+1522799625 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+	<Inputs.h>
+>>>>>>> master
 	<iostream>
 	"DeltaTime.h"
 	<string>
 
+<<<<<<< HEAD
 1520299439 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+=======
+1522714546 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+>>>>>>> master
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -83,10 +131,17 @@
 	<glut.h>
 	<iostream>
 
+<<<<<<< HEAD
 1520121029 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
 	"Parallax.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
+=======
+1521930555 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
+	<Parallax.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
+>>>>>>> master
 
 1520121029 c:\users\seapanda\documents\college\191\191\engine\include\parallax.h
 	<string>
@@ -185,59 +240,117 @@
 	"gl/gl.h"
 	<iostream>
 
+<<<<<<< HEAD
 1520454373 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+=======
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+>>>>>>> master
 	<Player.h>
-	<Timer.h>
 	<TextureLoader.h>
 	<string>
 	<GLScene.h>
 
+<<<<<<< HEAD
 1520378542 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	"GL/gl.h"
+=======
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+	<GL\GL.h>
+>>>>>>> master
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
+	<AudioEngine.h>
+	<vector>
+	<cstdlib>
+	<time.h>
+	<Timer.h>
+	<ChordManager.h>
 
+<<<<<<< HEAD
 1519960999 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
 	"Timer.h"
 
 1519960999 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
+=======
+1522714547 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
+	<Timer.h>
+
+1522714546 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
+>>>>>>> master
 	<time.h>
 
 1520455316 c:\users\sesat\documents\github\191\engine\include\player.h
 	"GL/gl.h"
 	<Model.h>
 	<TextureLoader.h>
+<<<<<<< HEAD
+=======
+
+1521777892 source:e:\college\191\191\engine\src\deltatime.cpp
+>>>>>>> master
 	<DeltaTime.h>
 
+<<<<<<< HEAD
 1520455316 source:c:\users\sesat\documents\github\191\engine\src\player.cpp
 	<Player.h>
 	<Timer.h>
 	<TextureLoader.h>
+=======
+1521777892 source:e:\college\191\191\engine\src\skybox.cpp
+	<Skybox.h>
+
+1521777892 e:\college\191\191\engine\include\skybox.h
+	<GL\GL.h>
+	<TextureLoader.h>
+
+1521777892 e:\college\191\191\engine\include\textureloader.h
+	<SOIL.h>
+	<GL\GL.h>
+	<iostream>
+>>>>>>> master
 	<string>
 	<GLScene.h>
 
 1519971867 c:\users\sesat\documents\github\191\engine\include\timer.h
 	<time.h>
 
+<<<<<<< HEAD
 1519971867 source:c:\users\sesat\documents\github\191\engine\src\timer.cpp
 	"Timer.h"
 
 1520455316 source:c:\users\sesat\desktop\backup\191\engine\main.cpp
+=======
+1522272416 source:e:\college\191\191\engine\main.cpp
+	<windows.h>
+>>>>>>> master
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
 	<iostream>
 	<windows.h>
 
+<<<<<<< HEAD
 1520455316 c:\users\sesat\desktop\backup\191\engine\include\glscene.h
+=======
+1522442271 e:\college\191\191\engine\include\glscene.h
+>>>>>>> master
 	<windows.h>
 	<glut.h>
 	<iostream>
 	<vector>
 	<Model.h>
+<<<<<<< HEAD
 
 1519971867 c:\users\sesat\desktop\backup\191\common\include\gl\glut.h
+=======
+	<Inputs.h>
+	<unordered_map>
+	<AudioSource.h>
+	<AudioEngine.h>
+
+1522446690 e:\college\191\191\engine\include\model.h
+>>>>>>> master
 	<windows.h>
 	<stdlib.h>
 	<GL/gl.h>
@@ -247,6 +360,7 @@
 	<windows.h>
 	"glut.h"
 	<string>
+<<<<<<< HEAD
 
 1519971867 source:c:\users\sesat\desktop\backup\191\engine\src\deltatime.cpp
 	"DeltaTime.h"
@@ -260,6 +374,19 @@
 	"GLLight.h"
 
 1519971867 c:\users\sesat\desktop\backup\191\engine\include\gllight.h
+=======
+	<TextureLoader.h>
+	<AudioSource.h>
+	<cmath>
+
+1522205046 source:e:\college\191\191\engine\src\gllight.cpp
+	<GLLight.h>
+
+1522205072 e:\college\191\191\engine\include\gllight.h
+	<GLScene.h>
+
+1522731818 source:e:\college\191\191\engine\src\glscene.cpp
+>>>>>>> master
 	<GLScene.h>
 
 1520455316 source:c:\users\sesat\desktop\backup\191\engine\src\glscene.cpp
@@ -270,7 +397,11 @@
 	"DeltaTime.h"
 	<Player.h>
 
+<<<<<<< HEAD
 1520455316 c:\users\sesat\desktop\backup\191\engine\include\inputs.h
+=======
+1522442257 e:\college\191\191\engine\include\inputs.h
+>>>>>>> master
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -279,20 +410,43 @@
 	<string>
 	<Player.h>
 
+<<<<<<< HEAD
 1520455316 c:\users\sesat\desktop\backup\191\engine\include\parallax.h
+=======
+1521777892 e:\college\191\191\engine\include\parallax.h
+	<windows.h>
+	<string>
+	<GL\GL.h>
+>>>>>>> master
 	<string>
 	<GL/gl.h>
 	<windows.h>
 
+<<<<<<< HEAD
 1520455316 c:\users\sesat\desktop\backup\191\engine\include\player.h
 	"GL/gl.h"
+=======
+1522731818 e:\college\191\191\engine\include\player.h
+	<GL\GL.h>
+>>>>>>> master
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
+	<AudioEngine.h>
+	<vector>
+	<cstdlib>
+	<time.h>
+	<Timer.h>
+	<ChordManager.h>
 
+<<<<<<< HEAD
 1520455316 c:\users\sesat\desktop\backup\191\engine\include\textureloader.h
 	"SOIL.h"
 	"gl/gl.h"
+=======
+1522731818 source:e:\college\191\191\engine\src\inputs.cpp
+	<Inputs.h>
+>>>>>>> master
 	<iostream>
 
 1519971867 c:\users\sesat\desktop\backup\191\engine\common\include\soil.h
@@ -303,34 +457,778 @@
 	"DeltaTime.h"
 	<string>
 
+<<<<<<< HEAD
 1520455316 source:c:\users\sesat\desktop\backup\191\engine\src\model.cpp
 	"Model.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
+=======
+1522446963 source:e:\college\191\191\engine\src\model.cpp
+	<Model.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
+>>>>>>> master
 	<iostream>
 	<algorithm>
 
+<<<<<<< HEAD
 1520455316 source:c:\users\sesat\desktop\backup\191\engine\src\parallax.cpp
 	"Parallax.h"
 	"TextureLoader.h"
 	"DeltaTime.h"
 
 1520455316 source:c:\users\sesat\desktop\backup\191\engine\src\player.cpp
+=======
+1521777927 source:e:\college\191\191\engine\src\parallax.cpp
+	<Parallax.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
+
+1522731818 source:e:\college\191\191\engine\src\player.cpp
+>>>>>>> master
 	<Player.h>
-	<Timer.h>
 	<TextureLoader.h>
 	<string>
 	<GLScene.h>
 
+<<<<<<< HEAD
 1519971867 c:\users\sesat\desktop\backup\191\engine\include\timer.h
 	<time.h>
 
 1520455316 source:c:\users\sesat\desktop\backup\191\engine\src\textureloader.cpp
 	"TextureLoader.h"
+=======
+1522363790 e:\college\191\191\engine\include\timer.h
+	<time.h>
+
+1521777892 source:e:\college\191\191\engine\src\textureloader.cpp
+	<TextureLoader.h>
+>>>>>>> master
 	<SOIL.h>
 	"gl/gl.h"
 	<iostream>
 
+<<<<<<< HEAD
 1519971867 source:c:\users\sesat\desktop\backup\191\engine\src\timer.cpp
 	"Timer.h"
+=======
+1522363800 source:e:\college\191\191\engine\src\timer.cpp
+	<Timer.h>
+
+1522439689 source:e:\college\191\191\engine\src\projectile.cpp
+	"Projectile.h"
+	<cmath>
+
+1522439675 e:\college\191\191\engine\include\projectile.h
+	<Model.h>
+	<DeltaTime.h>
+	<GLScene.h>
+	<algorithm>
+	<Timer.h>
+
+1522714546 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
+	<Model.h>
+	<DeltaTime.h>
+	<GLScene.h>
+	<algorithm>
+	<Timer.h>
+
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
+	"Projectile.h"
+	<cmath>
+>>>>>>> master
+
+1521940313 source:c:\users\seapanda\documents\college\191\191\engine\src\audiomanager.cpp
+	"AudioManager.h"
+
+1521940329 c:\users\seapanda\documents\college\191\191\engine\include\audiomanager.h
+	<string>
+	<windows.h>
+	<mmsystem.h>
+
+1521940910 source:c:\users\seapanda\documents\college\191\191\engine\src\soundsystemclass.cpp
+	"SoundSystemClass.h"
+
+1521940995 c:\users\seapanda\documents\college\191\191\engine\include\soundsystemclass.h
+	"fmod.hpp"
+	"fmod_errors.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod.hpp
+	"fmod_common.h"
+	"fmod.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_common.h
+	"fmod_codec.h"
+	"fmod_dsp.h"
+	"fmod_output.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_codec.h
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_dsp.h
+	"fmod_dsp_effects.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_dsp_effects.h
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_output.h
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod.h
+	"fmod_common.h"
+
+1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_errors.h
+	"fmod.h"
+
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\audiosource.cpp
+	"AudioSource.h"
+	<iostream>
+	<GLScene.h>
+
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\audiosource.h
+	<string>
+	"irrKlang.h"
+	<windows.h>
+	<AudioEngine.h>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Err.hpp>
+	<SFML/System/FileInputStream.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Lock.hpp>
+	<SFML/System/MemoryInputStream.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Sleep.hpp>
+	<SFML/System/String.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Utf.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\config.hpp
+	"TargetConditionals.h"
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\clock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\export.hpp
+	<SFML/Config.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\time.hpp
+	<SFML/System/Export.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\err.hpp
+	<SFML/System/Export.hpp>
+	<ostream>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\fileinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdio>
+	<string>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\inputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+
+1486740055 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\noncopyable.hpp
+	<SFML/System/Export.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\lock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\memoryinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Export.hpp>
+	<cstdlib>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\mutex.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\sleep.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\string.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Utf.hpp>
+	<iterator>
+	<locale>
+	<string>
+	<SFML/System/String.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\utf.hpp
+	<SFML/Config.hpp>
+	<algorithm>
+	<locale>
+	<string>
+	<cstdlib>
+	<SFML/System/Utf.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\utf.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\string.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\thread.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+	<SFML/System/Thread.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\thread.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\threadlocal.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\threadlocalptr.hpp
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\threadlocalptr.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\vector2.inl
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1486739998 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\system\vector3.inl
+
+1486740055 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1486740055 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1486740055 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundfilefactory.inl
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1486739997 c:\users\seapanda\documents\college\191\191\engine\common\sfml-2.4.2\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1522731818 source:e:\college\191\191\engine\src\audiosource.cpp
+	"AudioSource.h"
+	<iostream>
+	<GLScene.h>
+
+1522731818 e:\college\191\191\engine\include\audiosource.h
+	<string>
+	"irrKlang.h"
+	<windows.h>
+	<AudioEngine.h>
+
+1522204547 source:e:\college\191\191\engine\src\scenemanager.cpp
+	"SceneManager.h"
+
+1522204626 e:\college\191\191\engine\include\scenemanager.h
+	<GLScene.h>
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod.hpp
+	"fmod_common.h"
+	"fmod.h"
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_common.h
+	"fmod_codec.h"
+	"fmod_dsp.h"
+	"fmod_output.h"
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_codec.h
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_dsp.h
+	"fmod_dsp_effects.h"
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_dsp_effects.h
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod_output.h
+
+1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod.h
+	"fmod_common.h"
+
+1398523410 e:\college\191\191\engine\irrklang-1.5.0\include\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1394131454 e:\college\191\191\engine\irrklang-1.5.0\include\ik_irrklangtypes.h
+	<wchar.h>
+
+1399048338 e:\college\191\191\engine\irrklang-1.5.0\include\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1394121300 e:\college\191\191\engine\irrklang-1.5.0\include\ik_esoundoutputdrivers.h
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_esoundengineoptions.h
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_estreammodes.h
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1394128864 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1394128852 e:\college\191\191\engine\irrklang-1.5.0\include\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 e:\college\191\191\engine\irrklang-1.5.0\include\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1394128848 e:\college\191\191\engine\irrklang-1.5.0\include\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1517335446 e:\college\191\191\engine\irrklang-1.6.0\include\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_irrklangtypes.h
+	<wchar.h>
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_esoundoutputdrivers.h
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_esoundengineoptions.h
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_estreammodes.h
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517256032 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 e:\college\191\191\engine\irrklang-1.6.0\include\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1517256024 e:\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1522283586 e:\college\191\191\engine\include\audioengine.h
+	<irrKlang.h>
+	<windows.h>
+	<iostream>
+
+1522288815 source:e:\college\191\191\engine\src\audioengine.cpp
+	"AudioEngine.h"
+
+1522289524 e:\college\191\191\engine\include\chord.h
+	"irrKlang.h"
+	<string>
+	<AudioEngine.h>
+
+1522289982 source:e:\college\191\191\engine\src\chord.cpp
+	"Chord.h"
+
+1522441907 e:\college\191\191\engine\include\musicmodel.h
+	<GLScene.h>
+	<Timer.h>
+	<Player.h>
+
+1522442118 source:e:\college\191\191\engine\src\musicmodel.cpp
+	"MusicModel.h"
+
+1522733972 e:\college\191\191\engine\include\chordmanager.h
+	<iostream>
+	<vector>
+	<unordered_map>
+	<string>
+	<cstdlib>
+	<time.h>
+
+1522734074 source:e:\college\191\191\engine\src\chordmanager.cpp
+	"ChordManager.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_irrklangtypes.h
+	<wchar.h>
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_esoundoutputdrivers.h
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_esoundengineoptions.h
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_estreammodes.h
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1523226218 c:\users\seapanda\documents\college\191\191\engine\include\audioengine.h
+	<irrKlang.h>
+	<windows.h>
+	<iostream>
+
+1523129451 c:\users\seapanda\documents\college\191\191\engine\include\chordmanager.h
+	<iostream>
+	<vector>
+	<unordered_map>
+	<string>
+	<cstdlib>
+	<time.h>
+
+1523226223 source:c:\users\seapanda\documents\college\191\191\engine\src\audioengine.cpp
+	"AudioEngine.h"
+
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
+	"ChordManager.h"
+
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
+	"Enemy.h"
+	<GLScene.h>
+
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
+	<Model.h>
+	<vector>
+	<Timer.h>
+	<DeltaTime.h>
+	<AudioSource.h>
+	<algorithm>
+	<Player.h>
+
+1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
+	"MeleeEnemy.h"
+
+1523318563 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
+	<Enemy.h>
+	<GLScene.h>
+	<Player.h>
+
+1523322930 source:c:\users\seapanda\documents\college\191\191\engine\src\loadshader.cpp
+	"LoadShader.h"
+
+1523492101 c:\users\seapanda\documents\college\191\191\engine\include\loadshader.h
+	<GL/glew.h>
+	<fstream>
+	<iostream>
+	<string>
+
+1501566382 c:\users\seapanda\documents\college\191\191\engine\common\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
 
