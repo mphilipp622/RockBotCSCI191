@@ -8,6 +8,7 @@
 #include <Player.h>
 #include <Skybox.h>
 #include <Timer.h>
+#include <Fonts.h>
 
 //Model *modelTeapot = new Model();
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
@@ -19,6 +20,8 @@ Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 Parallax *plx = new Parallax();
 Timer *sceneTimer = new Timer();
 LoadShader* shader = new LoadShader();
+
+Fonts* testFont = new Fonts();
 
 GLScene::GLScene()
 {
@@ -70,6 +73,9 @@ GLint GLScene::initGL()
     block2->InitModel("Images/Block2.png", true);
     ground->InitModel("Images/Block.png", true);
 
+    testFont->InitFonts("Images/Font/Alphabet.png");
+    testFont->BuildFont("aAaA");
+
     movableObjects.push_back(player);
     enemies.push_back(testEnemy);
 //    movableObjects.push_back(testEnemy);
@@ -117,6 +123,8 @@ GLint GLScene::drawGLScene()
     for(auto& model : movableObjects)
         model->Update();
 
+    for(int i = 0; i < testFont->charCount; i++)
+        testFont->DrawFont(i);
 
     dTime->UpdateDeltaTime();
 //    glPushMatrix();
