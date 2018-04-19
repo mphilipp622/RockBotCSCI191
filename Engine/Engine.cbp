@@ -49,7 +49,6 @@
 		<Linker>
 			<Add library="Common/lib/libSOIL.a" />
 			<Add library="irrKlang-1.6.0/lib/Win32-gcc/libirrKlang.a" />
-			<Add library="Common/lib/glew32.lib" />
 			<Add library="Common/lib/glew32s.lib" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
@@ -62,6 +61,7 @@
 		<Unit filename="include/ChordManager.h" />
 		<Unit filename="include/DeltaTime.h" />
 		<Unit filename="include/Enemy.h" />
+		<Unit filename="include/Fonts.h" />
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/Inputs.h" />
@@ -69,6 +69,7 @@
 		<Unit filename="include/MeleeEnemy.h" />
 		<Unit filename="include/Model.h" />
 		<Unit filename="include/Parallax.h" />
+		<Unit filename="include/Particles.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Projectile.h" />
 		<Unit filename="include/Skybox.h" />
@@ -80,6 +81,7 @@
 		<Unit filename="src/ChordManager.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
 		<Unit filename="src/Enemy.cpp" />
+		<Unit filename="src/Fonts.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/Inputs.cpp" />
@@ -87,6 +89,7 @@
 		<Unit filename="src/MeleeEnemy.cpp" />
 		<Unit filename="src/Model.cpp" />
 		<Unit filename="src/Parallax.cpp" />
+		<Unit filename="src/Particles.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Projectile.cpp" />
 		<Unit filename="src/Skybox.cpp" />

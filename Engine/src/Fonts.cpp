@@ -31,16 +31,23 @@ void Fonts::BuildFont(char* newLine)
         if(newLine[i] == 'a')
         {
             C[charCount].xMin = 0;
-            C[charCount].xMax = 1.0/16.0;
+            C[charCount].xMax = 1.0/17.0;
             C[charCount].yMin = 4.0;
             C[charCount].yMax = 5.0 / 6.0;
         }
         else if(newLine[i] == 'A')
         {
             C[charCount].xMin = 0;
-            C[charCount].xMax = 0/16.0;
+            C[charCount].xMax = 0/17.0;
             C[charCount].yMin = 2.0;
             C[charCount].yMax = 3.0 / 6.0;
+        }
+        else if(newLine[i] == '!')
+        {
+            C[charCount].xMin = 0;
+            C[charCount].xMax = 1.0 / 17.0;
+            C[charCount].yMin = 0;
+            C[charCount].yMax = 1.0 / 6.0;
         }
 
     }
@@ -49,18 +56,19 @@ void Fonts::BuildFont(char* newLine)
 void Fonts::DrawFont(int i)
 {
     xPos = Player::player->GetX();
-    yPos = Player::player->GetY();
+    yPos = Player::player->GetY() + 0.5;
     texture->Binder();
 
     glPushMatrix();
+    glTranslated(xPos, yPos, zoom);
     glBegin(GL_QUADS);
 
     glTexCoord2f(C[i].xMin, 1.0);
     glVertex3f(0.0, 0.0, 0.0);
     glTexCoord2f(C[i].xMax, 1.0);
-    glVertex3f(1.0/16.0, 0.0, 0.0);
+    glVertex3f(1.0/17.0, 0.0, 0.0);
     glTexCoord2f(C[i].xMax, 1.0);
-    glVertex3f(1.0/16.0, 1.0, 0.0);
+    glVertex3f(1.0/17.0, 1.0, 0.0);
     glTexCoord2f(C[i].xMin, 1.0);
     glVertex3f(0, 1.0, 0.0);
 

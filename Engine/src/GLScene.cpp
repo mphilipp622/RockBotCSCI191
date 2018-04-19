@@ -9,6 +9,7 @@
 #include <Skybox.h>
 #include <Timer.h>
 #include <Fonts.h>
+#include <Particles.h>
 
 //Model *modelTeapot = new Model();
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
@@ -19,9 +20,11 @@ Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 // Can create multiple Parallax objects to create parallaxed backgrounds
 Parallax *plx = new Parallax();
 Timer *sceneTimer = new Timer();
-LoadShader* shader = new LoadShader();
+//LoadShader* shader = new LoadShader();
 
 Fonts* testFont = new Fonts();
+
+Particles* particle = new Particles();
 
 GLScene::GLScene()
 {
@@ -50,7 +53,7 @@ GLint GLScene::initGL()
     glewInit();
 
     audioEngine = new AudioEngine();
-    player = new Player(0.0, 5);
+    player = new Player(0.0, 0);
     testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
 
     keyboardAndMouse = new Inputs();
@@ -74,7 +77,7 @@ GLint GLScene::initGL()
     ground->InitModel("Images/Block.png", true);
 
     testFont->InitFonts("Images/Font/Alphabet.png");
-    testFont->BuildFont("aAaA");
+    testFont->BuildFont("!!!");
 
     movableObjects.push_back(player);
     enemies.push_back(testEnemy);
@@ -90,7 +93,7 @@ GLint GLScene::initGL()
     Player::player = player;
     testEnemy->InitEnemy();
 
-    shader->ShaderInit("Shaders/v.vs", "Shaders/f.fs");
+//    shader->ShaderInit("Shaders/v.vs", "Shaders/f.fs");
 
     BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
     BGM->PlayMusic();
@@ -112,6 +115,12 @@ GLint GLScene::drawGLScene()
     glPushMatrix();
     glScaled(12, 12, 1);
     plx->DrawSquare(screenWidth, screenHeight); // draw background
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(player->GetX(), player->GetY(), 0);
+    particle->DrawParticles();
+    particle->LifeTime();
     glPopMatrix();
 
     for(auto& model : staticObjects)
