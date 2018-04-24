@@ -35,6 +35,8 @@ class Particles
         void GenerateParticles();
         double DoubleRandom();
 
+        void GenerateMusicParticles();
+
     protected:
 
     private:

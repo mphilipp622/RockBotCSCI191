@@ -3,6 +3,7 @@
 Particles::Particles()
 {
     //ctor
+    numDrops = 1;
 }
 
 Particles::~Particles()
@@ -12,7 +13,7 @@ Particles::~Particles()
 
 void Particles::DrawParticles()
 {
-    glColor3f(0.0, 0.0, 1.0);
+    glColor3f(1.0, 1.0 , 1.0);
     glPointSize(3); // pixel size of particle
 
     glBegin(GL_POINTS);
@@ -22,7 +23,8 @@ void Particles::DrawParticles()
     {
         if(drops[i].alive)
         {
-            glVertex3f(drops[i].xPos, drops[i].yPos, -1.0);
+
+            glVertex3f(drops[i].xPos, drops[i].yPos, 0);
         }
         i++;
     }
@@ -84,4 +86,9 @@ void Particles::GenerateParticles()
 double Particles::DoubleRandom()
 {
     return rand() % 1000 / 1000.0;
+}
+
+void Particles::GenerateMusicParticles()
+{
+
 }
