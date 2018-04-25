@@ -10,6 +10,7 @@
 #include <Timer.h>
 #include <Fonts.h>
 #include <Particles.h>
+#include <HUD.h>
 
 //Model *modelTeapot = new Model();
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
@@ -21,7 +22,7 @@ Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 Parallax *plx = new Parallax();
 Timer *sceneTimer = new Timer();
 LoadShader* shader = new LoadShader();
-
+HUD *displayHUD = new HUD();   //////////////////New line
 Fonts* testFont = new Fonts();
 
 Particles* particle = new Particles();
@@ -141,7 +142,7 @@ GLint GLScene::drawGLScene()
     particle->LifeTime();
 //    glUseProgram(0);
     glPopMatrix();
-
+    displayHUD->showHP(Player::player);
     for(auto& model : staticObjects)
         model->DrawModel();
 

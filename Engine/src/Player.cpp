@@ -643,3 +643,10 @@ void Player::TakeDamage(int damage)
 //    if(hp <= 0)
  //       GameOver();
 }
+
+int Player::getHP()
+{
+    return hp;
+}
+
+

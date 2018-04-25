@@ -64,6 +64,7 @@
 		<Unit filename="include/Fonts.h" />
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
+		<Unit filename="include/HUD.h" />
 		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/LoadShader.h" />
 		<Unit filename="include/MeleeEnemy.h" />
@@ -84,6 +85,7 @@
 		<Unit filename="src/Fonts.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
+		<Unit filename="src/HUD.cpp" />
 		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/LoadShader.cpp" />
 		<Unit filename="src/MeleeEnemy.cpp" />

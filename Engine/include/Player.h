@@ -65,8 +65,9 @@ class Player : public Model
 
         // Checks whether user presses the proper input or not. Note that userInput must match the inputs assigned in Player::icons vector
         void CheckUserInput(int userInput, LPARAM lParam);
-
         void TakeDamage(int damage);
+
+        int getHP();
 
     protected:
 

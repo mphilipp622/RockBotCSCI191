@@ -14,6 +14,7 @@
 #include <AudioEngine.h>
 #include <Enemy.h>
 #include <MeleeEnemy.h>
+#include <HUD.h>
 
 using namespace std;
 
@@ -45,6 +46,7 @@ class GLScene
         AudioEngine* audioEngine;
         bool isLoaded;
         AudioSource* BGM;
+        HUD* displayHUD;
 
 
     private:
