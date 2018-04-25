@@ -8,6 +8,8 @@
 #include <Player.h>
 #include <Skybox.h>
 #include <Timer.h>
+#include <Fonts.h>
+#include <Particles.h>
 
 //Model *modelTeapot = new Model();
 Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
@@ -19,6 +21,12 @@ Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 Parallax *plx = new Parallax();
 Timer *sceneTimer = new Timer();
 LoadShader* shader = new LoadShader();
+
+Fonts* testFont = new Fonts();
+
+Particles* particle = new Particles();
+
+TextureLoader* testShader = new TextureLoader();
 
 GLScene::GLScene()
 {
@@ -47,7 +55,7 @@ GLint GLScene::initGL()
     glewInit();
 
     audioEngine = new AudioEngine();
-    player = new Player(0.0, 5);
+    player = new Player(0.0, 0);
     testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
 
     keyboardAndMouse = new Inputs();
@@ -70,6 +78,9 @@ GLint GLScene::initGL()
     block2->InitModel("Images/Block2.png", true);
     ground->InitModel("Images/Block.png", true);
 
+    testFont->InitFonts("Images/Font/Alphabet.png");
+    testFont->BuildFont("!!!");
+
     movableObjects.push_back(player);
     enemies.push_back(testEnemy);
 //    movableObjects.push_back(testEnemy);
@@ -84,8 +95,10 @@ GLint GLScene::initGL()
     Player::player = player;
     testEnemy->InitEnemy();
 
-    shader->ShaderInit("Shaders/v.vs", "Shaders/f.fs");
+//    shader->ShaderInit("Shaders/v.vs", "Shaders/f.fs");
+//    shader->ShaderInit("Shaders/v1.vs", "Shaders/f1.fs");
 
+//    testShader->BindTexture("Images/MilkyWay.jpg");
     BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
     BGM->PlayMusic();
     dTime = new DeltaTime();
@@ -96,7 +109,7 @@ GLint GLScene::drawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    gluLookAt(player->GetX(), player->GetY(), 6.0,
+    gluLookAt(player->GetX(), player->GetY(), 6,
             player->GetX(), player->GetY(), player->GetZoom(),
             0.0f, 1.0f, 0.0f);
 //    glPushMatrix();
@@ -108,6 +121,27 @@ GLint GLScene::drawGLScene()
     plx->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
+//    glUseProgram(shader->program);
+//    glTranslated(0, 0, 0);
+//    testShader->Binder();
+//    glBegin(GL_TRIANGLES);
+//        glTexCoord2f(1, 1);
+//        glVertex3f(-3.0, 0, 0);
+//        glTexCoord2f(1, 0);
+//        glVertex3f(0, -2, 0);
+//        glTexCoord2f(0, 1);
+//        glVertex3f(0, 0, 0);
+//    glEnd();
+//    glUseProgram(0);
+    glPushMatrix();
+//    glUseProgram(shader->program);
+    glTranslated(player->GetX(), player->GetY(), 0); // sets particle to player x and y position.
+    particle->GenerateParticles();
+    particle->DrawParticles();
+    particle->LifeTime();
+//    glUseProgram(0);
+    glPopMatrix();
+
     for(auto& model : staticObjects)
         model->DrawModel();
 
@@ -117,19 +151,10 @@ GLint GLScene::drawGLScene()
     for(auto& model : movableObjects)
         model->Update();
 
+    for(int i = 0; i < testFont->charCount; i++)
+        testFont->DrawFont(i);
 
     dTime->UpdateDeltaTime();
-//    glPushMatrix();
-//    glUseProgram(shader->program);
-//
-//    glBegin(GL_TRIANGLES);
-//    glVertex3f(-3.0, 0.0, 0.0);
-//    glVertex3f(0.0, -2.0, 0);
-//    glVertex3f(0, 0, 0);
-//    glEnd();
-//
-//    glUseProgram(0);
-//    glPopMatrix();
 
 	return 1;
 }

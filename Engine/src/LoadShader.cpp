@@ -12,73 +12,71 @@ LoadShader::~LoadShader()
 
 void LoadShader::LoadFile(char* filename, string& str)
 {
-    char tmp[1024]; // one line at a time
+    char tmp[1024];
+
     ifstream in(filename);
 
-    if(!in.is_open())
-    {
-        cout << filename << " Does Not Exist in LoadShader::LoadFile()" << endl;
+    if(!in.is_open()) {
+
+        cout<<"File cannot be open"<<endl;
         return;
     }
 
-    while(!in.eof())
-    {
-        in.getline(tmp, 1024); // read a whole line of data and store it into tmp
-        str += tmp; // add the data to the string
-        str += '\n'; // add an endl
-    }
+    while(!in.eof()){
 
-    cout << str << endl;
+        in.getline(tmp,1024);
+        str +=tmp;
+        str +='\n';
+    }
+    cout<< str<<endl;
 
 }
 
 unsigned int LoadShader::ShaderLoad(string& source, unsigned int mode)
 {
     unsigned int id;
-    const char* csource;
+      const char*  csource;
+      char error[1024];
 
-    char error[1024];
-    csource = source.c_str();
+     id = glCreateShader(mode);
+      csource = source.c_str();
 
-    id = glCreateShader(mode); // what kind of shader is it? That's what mode does. Fragment or Vertex shader
+       glShaderSource(id,1,&csource, NULL);
+       glCompileShader(id);
 
-    glShaderSource(id, 1, &csource, NULL);
+       glGetShaderInfoLog(id,1024,NULL, error);
 
-    glCompileShader(id);
+       cout<<"Compile Statu \n"<< error<<endl;
 
-    glGetShaderInfoLog(id, 1024, NULL, error); // store shader error for debugging
-
-    cout << "Compile Status: " << error << endl; // output error
-
-    return id;
+      return id;
 }
 
 void LoadShader::ShaderInit(char* vFileName, char* fFileName)
 {
     string source;
 
-    LoadFile(vFileName, source);
-    vs = ShaderLoad(source, GL_VERTEX_SHADER); // vertex data is now in memory
+     LoadFile(vFileName,source);
+     vs = ShaderLoad(source,GL_VERTEX_SHADER);
 
-    source = "";
+     source ="";
 
-    LoadFile(fFileName, source);
-    fs = ShaderLoad(source, GL_FRAGMENT_SHADER); // fragment data is now in memory
+    LoadFile(fFileName,source);
+     fs = ShaderLoad(source,GL_FRAGMENT_SHADER);
 
-    program = glCreateProgram();
+     program =glCreateProgram();
 
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
+     glAttachShader(program,vs);
+     glAttachShader(program,fs);
 
-    glLinkProgram(program); // similar to assembly. Link data so GPU knows what to do
+     glLinkProgram(program);
+     //glUseProgram(program);
 }
 
 void LoadShader::CleanUp()
 {
-    glDetachShader(program, vs);
-    glDetachShader(program, fs);
-
-    glDeleteShader(vs);
-    glDeleteShader(fs);
-    glDeleteProgram(program);
+    glDetachShader(program,vs);
+  glDetachShader(program,fs);
+  glDeleteShader(vs);
+  glDeleteShader(fs);
+  glDeleteProgram(program);
 }
