@@ -27,6 +27,7 @@ class Timer
         void Reset();
 
         clock_t GetTicks(); // milliseconds
+        clock_t GetTime();
 
     protected:
 

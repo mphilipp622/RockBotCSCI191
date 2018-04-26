@@ -5,6 +5,14 @@
 #include <Model.h>
 #include <TextureLoader.h>
 #include <DeltaTime.h>
+#include <AudioEngine.h>
+#include <vector>
+#include <cstdlib>
+#include <time.h>
+#include <Timer.h>
+#include <ChordManager.h>
+
+using namespace std;
 
 typedef struct
 {
@@ -22,8 +30,7 @@ class Player : public Model
         vec1 vertices[4]; // 4 vertices of xyz values
 
         // player stats
-        int hp;
-        int moveSpeed, jumpSpeed;
+
 
         void DrawPlayer();
         void InitPlayer();
@@ -35,9 +42,7 @@ class Player : public Model
 
         // Character Controller Functions
         void Jump();
-        void Jump2();
         void ShootProjectile(double x, double y);
-        void NormalAttack(bool);
         void StartJump();
 
         // x Movement
@@ -50,14 +55,26 @@ class Player : public Model
         void ApplyGravity();
 
         static Player* player;
+
         double GetOffsetX();
         double GetOffsetY();
         double GetZoom();
-//        void SetVertices();
+
+        // Set boolean flags for playing chords and initiate user input check
+        void PlayChords(bool isPlaying);
+
+        // Checks whether user presses the proper input or not. Note that userInput must match the inputs assigned in Player::icons vector
+        void CheckUserInput(int userInput, LPARAM lParam);
+        void TakeDamage(int damage);
+
+        int getHP();
+
     protected:
 
     private:
-        bool jump, slowDown, moving, startGravity;
+        int hp;
+        int moveSpeed, jumpSpeed;
+        bool jump, slowDown, moving, startGravity, playingChords, canPlay;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
@@ -66,10 +83,46 @@ class Player : public Model
         float gravity;
         float playerZoom;
 
+        int chordDamage;
+
+        vector<Model*> icons;
+        int activeInput;
+        Timer* chordTimer;
+        double chordTimingWindow;
+        double cooldownTargetTime;
+        Timer* cooldownTimer;
+        void NextInput();
+
+        // music circle variables
+        Model* musicCircle;
+        bool drawCircle;
+        Timer* circleTimer;
+
+        // will use timer to check when we should stop drawing music circle
+        void ToggleMusicCircle();
+        void DrawMusicCircle();
+
         int idleFrame;
+        Timer* frameTimer;
+        TextureLoader run[4];
+        TextureLoader idle[5];
+        TextureLoader jumpAnim[4];
+
         bool CheckCollision();
-//        bool CheckCollisionY();
-//        bool CheckCollisionX();
+        void CheckEnemyCollision();
+        bool CheckCircleCollision();
+        bool CheckCircleSquareCollision();
+
+        void CheckHit();
+
+        // Updates the positions of the input icons for chord playing. Also draws icons if chord button is held down. Called in Player whenever movements occur.
+        void UpdateIcons();
+
+        // Updates the canPlay boolean based on the cooldown timer
+        void UpdateCooldownTimer();
+
+        AudioSource* chord;
+        ChordManager* chordManager;
 };
 
 #endif // PLAYER_H

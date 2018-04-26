@@ -9,6 +9,8 @@
 #include <string>
 #include <Player.h>
 
+class Player;
+
 class Inputs
 {
     public:
@@ -27,7 +29,7 @@ class Inputs
         double prevMouseX, prevMouseY;
 
         void SetKey(string keyName, bool status);
-        WPARAM wParam;
+        WPARAM wParamKeys, wParamMouse;
 
     protected:
 

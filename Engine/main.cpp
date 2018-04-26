@@ -32,7 +32,11 @@ bool	fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
+//SceneManager *SM = new SceneManager();
+//string activeScene = "TestLevel"; // will keep track of active scene
+
 GLScene *Scene = new GLScene();
+//SM->scenes.insert({activeScene, Scene});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //										THE KILL GL WINDOW
@@ -231,6 +235,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 		return FALSE;								// Return FALSE
 	}
 
+	Scene->SetLoaded(true);
 	return TRUE;									// Success
 }
 

@@ -14,70 +14,78 @@ Inputs::~Inputs()
 {
 }
 
-float acceleration = 0.0;
-//Global variable for acceleration, might want to
-//implement into the model class later on.
 void Inputs::KeyPressed(Player* model)
 {
     // Handle key presses for model passed to this function
     const int aKey = 0x41, dKey = 0x44, cKey = 0x43, bKey = 0x42;
 
     // Use the unordered map of booleans to keep track of which keys are pressed. This allows multiple keys being pressed at once
-    if(!keys["MoveLeft"] && wParam == aKey)
+    if(!keys["MoveLeft"] && wParamKeys == aKey)
     {
         model->StartMove(-1.0);
         keys["MoveLeft"] = true;
     }
-    if(!keys["MoveRight"] && wParam == dKey)
+    if(!keys["MoveRight"] && wParamKeys == dKey)
     {
         model->StartMove(1.0);
         keys["MoveRight"] = true;
     }
-    if (!keys["Jump"] && wParam == VK_SPACE)
+    if (!keys["Jump"] && wParamKeys == VK_SPACE)
     {
         model->StartJump();
         keys["Jump"] = true;
     }
-    if(wParam == VK_RIGHT)
-        model->ApplyGravity();
+    if(!keys["PlayChord"] && wParamKeys == VK_SHIFT)
+    {
+        model->PlayChords(true);
+        keys["PlayChord"] = true;
+    }
 }
 
 void Inputs::KeyUp(Player* model)
 {
     const int aKey = 0x41, dKey = 0x44, cKey = 0x43, bKey = 0x42;
 
-    if(keys["MoveLeft"] && wParam == aKey)
+    if(keys["MoveLeft"] && wParamKeys == aKey)
     {
         model->SlowDown();
         keys["MoveLeft"] = false;
     }
-    if (keys["MoveRight"] && wParam == dKey)
+    if (keys["MoveRight"] && wParamKeys == dKey)
     {
         model->SlowDown();
         keys["MoveRight"] = false;
     }
-    if(keys["Jump"] && wParam == VK_SPACE)
+    if(keys["Jump"] && wParamKeys == VK_SPACE)
     {
         keys["Jump"] = false;
+    }
+    if(keys["PlayChord"] && wParamKeys == VK_SHIFT)
+    {
+        model->PlayChords(false);
+        keys["PlayChord"] = false;
     }
 }
 
 void Inputs::MouseDown(Player* model, LPARAM lParam)
 {
-//    double currentX = xNew - prevMouseX;
-//    double currentY = yNew - prevMouseY;
-    if(wParam == VK_LBUTTON)
+    // using 0x5 for lmouse and 0x6 for rmouse. For some reason, windows is sending those values when shift is held down instead of 0x1 and 0x2
+    if(keys["PlayChord"] && wParamMouse == 0x5)
     {
+        model->CheckUserInput(0, lParam);
         // convert mouse X and Y to openGL coordinates
-        double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
-        double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
-        double aspectRatio = screenWidth / screenHeight;
-        mousePosX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
-        mousePosY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) * 3.33;
-        model->ShootProjectile(mousePosX, mousePosY);
+//        double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
+//        double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
+//        double aspectRatio = screenWidth / screenHeight;
+//        mousePosX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
+//        mousePosY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) * 3.33;
+//        model->ShootProjectile(mousePosX, mousePosY);
 //        model->rotateX += currentY;
 //        model->rotateY += currentX;
     }
+    if(keys["PlayChord"] && wParamMouse == 0x6)
+        model->CheckUserInput(1, lParam);
+
 
 //    prevMouseX = xNew;
 //    prevMouseY = yNew;

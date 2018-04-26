@@ -12,79 +12,81 @@ Projectile::~Projectile()
 }
 Projectile::Projectile(double newX, double newY, double newWidth, double newHeight, int newDamage, float newSpeed, string newName, double newTargetX, double newTargetY)
 {
-    this->xPos = newX;
-    this->yPos = newY;
+    xPos = newX;
+    yPos = newY;
 
-    this->prevX = newX;
-    this->prevY = newY;
+    prevX = newX;
+    prevY = newY;
 
-    this->targetX = newTargetX;
-    this->targetY = newTargetY;
+    targetX = newTargetX;
+    targetY = newTargetY;
 
-    this->damage = newDamage;
-    this->speed = newSpeed;
+    damage = newDamage;
+    speed = newSpeed;
 
-    this->name = newName;
+    name = newName;
 
-    this->vectorDist = sqrt(pow((this->targetX - this->xPos), 2) + pow((this->targetY - this->yPos), 2));
-    this->normalizedX = (this->targetX - this->xPos) / this->vectorDist;
-    this->normalizedY = (this->targetY - this->yPos) / this->vectorDist;
+    vectorDist = sqrt(pow((targetX - xPos), 2) + pow((targetY - yPos), 2));
+    normalizedX = (targetX - xPos) / vectorDist;
+    normalizedY = (targetY - yPos) / vectorDist;
 
-    this->width = newWidth;
-    this->height = newHeight;
+    width = newWidth;
+    height = newHeight;
 
-    this->endOfLifeTime = 5000; // 5 seconds
+    endOfLifeTime = 5000; // 5 seconds
 
-    this->rotateX = 0;
-    this->rotateY = 0;
-    this->rotateZ = 0;
+    rotateX = 0;
+    rotateY = 0;
+    rotateZ = 0;
 
     // translations
-    this->zoom = 0;
+    zoom = 0;
 
     // Initialize Quad
-    this->vertices[0].x = -this->width / 2;
-    this->vertices[0].y = -this->height / 2;
-    this->vertices[0].z = this->zoom;
+    vertices[0].x = -width / 2;
+    vertices[0].y = -height / 2;
+    vertices[0].z = zoom;
 
-    this->vertices[1].x = this->width / 2;
-    this->vertices[1].y = -this->height / 2;
-    this->vertices[1].z = this->zoom;
+    vertices[1].x = width / 2;
+    vertices[1].y = -height / 2;
+    vertices[1].z = zoom;
 
-    this->vertices[2].x = this->width / 2;
-    this->vertices[2].y = this->height / 2;
-    this->vertices[2].z = this->zoom;
+    vertices[2].x = width / 2;
+    vertices[2].y = height / 2;
+    vertices[2].z = zoom;
 
-    this->vertices[3].x = -this->width / 2;
-    this->vertices[3].y = this->height / 2;
-    this->vertices[3].z = this->zoom;
+    vertices[3].x = -width / 2;
+    vertices[3].y = height / 2;
+    vertices[3].z = zoom;
 
-    this->texture = new TextureLoader();
-    this->lifetime = new Timer();
-    this->lifetime->Start();
+    texture = new TextureLoader();
+    lifetime = new Timer();
+    lifetime->Start();
 }
 
 void Projectile::Update()
 {
-    this->Move();
+    Move();
 
-    if(this->lifetime->GetTicks() > this->endOfLifeTime)
-        this->Destroy();
+    DrawModel();
+
+    if(lifetime->GetTicks() > endOfLifeTime)
+        Destroy();
 }
 
 void Projectile::Move()
 {
-    this->prevX = this->xPos;
-    this->prevY = this->yPos;
+    prevX = xPos;
+    prevY = yPos;
 
-    this->xPos += this->normalizedX * this->speed * DeltaTime::GetDeltaTime();
-    this->yPos += this->normalizedY * this->speed * DeltaTime::GetDeltaTime();
+    xPos += normalizedX * speed * DeltaTime::GetDeltaTime();
+    yPos += normalizedY * speed * DeltaTime::GetDeltaTime();
 
-    if(this->CheckCollision())
+    if(CheckCollision())
         // if we collide with something, destroy object. If object is enemy, we need to deal damage
-        this->Destroy();
-    if(this->CheckCollisionEnemy())
-        return; // implement damage code here later
+        Destroy();
+    if(name == "PlayerProjectile" && CheckCollisionEnemy())
+        Destroy(); // implement damage code here later
 }
 
 bool Projectile::CheckCollision()
@@ -101,14 +103,29 @@ bool Projectile::CheckCollision()
 bool Projectile::CheckCollisionEnemy()
 {
     // check for collision with an enemy
-    for(auto& model : GLScene::movableObjects)
+    for(auto& enemy : GLScene::enemies)
     {
-        if(Collision(model) && model->GetName() != "player")
+        if(Collision(enemy))
+        {
+            enemy->TakeDamage(damage);
             return true; // will ignore player collision.
+        }
+
     }
 
     return false;
 }
+
+bool Projectile::CheckCircleCollision()
+{
+    return false;
+}
+
+bool Projectile::CheckCircleSquareCollision()
+{
+    return false;
+}
+
 
 void Projectile::Destroy()
 {
