@@ -139,6 +139,8 @@ void Model::DrawModel()
 
     glEnd();
     glPopMatrix();
+
+    cout << name << " Matrix Popped" << endl;
 }
 
 void Model::InitModel(string fileName, bool transparent)
@@ -201,10 +203,10 @@ void Model::SetWidth(double newWidth)
 
 void Model::Update()
 {
-    if(name != "Player")
-        DrawModel();
-    if(GetAudioSource())
-        GetAudioSource()->SetPosition(xPos, yPos);
+//    if(name != "Player")
+//        DrawModel();
+//    if(GetAudioSource())
+//        GetAudioSource()->SetPosition(xPos, yPos);
 }
 
 bool Model::CheckCollision()

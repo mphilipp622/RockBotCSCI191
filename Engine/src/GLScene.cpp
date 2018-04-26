@@ -82,7 +82,6 @@ GLint GLScene::initGL()
     testFont->InitFonts("Images/Font/Alphabet.png");
     testFont->BuildFont("!!!");
 
-    movableObjects.push_back(player);
     enemies.push_back(testEnemy);
     enemies.push_back(testRangedEnemy);
 //    movableObjects.push_back(testEnemy);
@@ -140,14 +139,20 @@ GLint GLScene::drawGLScene()
 //        glVertex3f(0, 0, 0);
 //    glEnd();
 //    glUseProgram(0);
-    glPushMatrix();
-//    glUseProgram(shader->program);
-    glTranslated(player->GetX(), player->GetY(), 0); // sets particle to player x and y position.
-    particle->GenerateParticles();
-    particle->DrawParticles();
-    particle->LifeTime();
-//    glUseProgram(0);
-    glPopMatrix();
+
+
+    for(auto& model : movableObjects)
+            model->Update();
+
+            glPushMatrix();
+    //    glUseProgram(shader->program);
+        glTranslated(Player::player->GetX(), Player::player->GetY(), 0); // sets particle to player x and y position.
+        particle->GenerateMusicParticles();
+        particle->DrawParticles();
+        particle->LifetimeMusic();
+    //    glUseProgram(0);
+        glPopMatrix();
+
 
     for(auto& model : staticObjects)
         model->DrawModel();
@@ -155,11 +160,11 @@ GLint GLScene::drawGLScene()
     for(auto& enemy : enemies)
         enemy->Update();
 
-    for(auto& model : movableObjects)
-        model->Update();
 
-    for(int i = 0; i < testFont->charCount; i++)
-        testFont->DrawFont(i);
+    Player::player->Update();
+
+//    for(int i = 0; i < testFont->charCount; i++)
+//        testFont->DrawFont(i);
 
     dTime->UpdateDeltaTime();
 

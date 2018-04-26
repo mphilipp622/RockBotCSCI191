@@ -92,6 +92,7 @@ Player::~Player()
 
 void Player::DrawPlayer()
 {
+//    glPushMatrix();
     glColor3f(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
@@ -130,7 +131,7 @@ void Player::DrawPlayer()
 	}
 
     glEnd();
-
+//    glPopMatrix();
 }
 
 void Player::InitPlayer()
@@ -186,6 +187,7 @@ void Player::Actions(int newAction)
         DrawPlayer();
 
         glPopMatrix();
+        cout << "Player Popped" << endl;
         break;
 
     case 1:

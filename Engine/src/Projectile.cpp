@@ -61,6 +61,7 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
 
     texture = new TextureLoader();
     lifetime = new Timer();
+    particle = new Particles();
     lifetime->Start();
 }
 
@@ -69,6 +70,7 @@ void Projectile::Update()
     Move();
 
     DrawModel();
+    DisplayParticles();
 
     if(lifetime->GetTicks() > endOfLifeTime)
         Destroy();
@@ -88,6 +90,19 @@ void Projectile::Move()
     if(name == "PlayerProjectile" && CheckCollisionEnemy())
         Destroy(); // implement damage code here later
 }
+
+void Projectile::DisplayParticles()
+{
+    glPushMatrix();
+//    glUseProgram(shader->program);
+    glTranslated(xPos, yPos, 0); // sets particle to player x and y position.
+    particle->GenerateMusicParticles();
+    particle->DrawParticles();
+    particle->LifetimeMusic();
+//    glUseProgram(0);
+    glPopMatrix();
+}
+
 
 bool Projectile::CheckCollision()
 {

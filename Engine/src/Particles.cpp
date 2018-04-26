@@ -13,7 +13,7 @@ Particles::~Particles()
 
 void Particles::DrawParticles()
 {
-    glColor3f(1.0, 1.0 , 1.0);
+    glColor3f(0, 1.0 , 0);
     glPointSize(3); // pixel size of particle
 
     glBegin(GL_POINTS);
@@ -58,6 +58,32 @@ void Particles::LifeTime()
     }
 }
 
+void Particles::LifetimeMusic()
+{
+    for(int i = 0; i < numDrops; i++)
+    {
+        if(drops[i].alive)
+        {
+            if(drops[i].yPos + GRAVITY * drops[i].mass < 0.0)
+            {
+                // make particle bounce
+                drops[i].directionY = -drops[i].directionY;
+            }
+            else
+            {
+                drops[i].directionY += GRAVITY * drops[i].mass;
+            }
+
+            drops[i].xPos += drops[i].directionX;
+            drops[i].yPos += drops[i].directionY;
+
+//            if(drops[i].yPos < -5.0 && drops[i].xPos > 5.0)
+//                drops[i].alive = false; // bounds checking to destroy particle. Probably change later.
+        }
+    }
+}
+
+
 void Particles::GenerateParticles()
 {
     int i = 0;
@@ -90,5 +116,25 @@ double Particles::DoubleRandom()
 
 void Particles::GenerateMusicParticles()
 {
+    int i = 0;
 
+    int newDrops = DoubleRandom() * 60; // 60 is arbitrary. Could put anything
+
+    if(numDrops + newDrops > MAX_MUSIC_DROPS)
+        newDrops = MAX_MUSIC_DROPS - numDrops;
+
+    for(int i = numDrops; i < numDrops + newDrops; i++)
+    {
+        drops[i].alive = true;
+        drops[i].xPos = -0.8 + 0.1 * DoubleRandom();
+        drops[i].yPos = 0.8 + 0.1 * DoubleRandom();
+        drops[i].directionX = 0.0075 + 0.025 * DoubleRandom(); // these constant values are pretty much test and check
+        drops[i].directionY = 0;
+        drops[i].mass = 0.5 + 0.5 * DoubleRandom();
+    }
+
+    numDrops += newDrops;
+
+    if(numDrops >= MAX_MUSIC_DROPS)
+        numDrops = 0;
 }

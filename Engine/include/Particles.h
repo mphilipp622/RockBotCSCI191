@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <iostream>
 
+#define MAX_MUSIC_DROPS 50000
 #define MAX_DROPS 50000
 #define GRAVITY -0.001
 
@@ -36,6 +37,7 @@ class Particles
         double DoubleRandom();
 
         void GenerateMusicParticles();
+        void LifetimeMusic();
 
     protected:
 

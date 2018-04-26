@@ -5,6 +5,7 @@
 #include <GLScene.h>
 #include <algorithm>
 #include <Timer.h>
+#include <Particles.h>
 
 using namespace std;
 
@@ -35,6 +36,9 @@ class Projectile : public Model
 
         // will remove projectile from gl scene vector and delete it
         void Destroy();
+
+        Particles* particle;
+        void DisplayParticles();
 };
 
 #endif // PROJECTILE_H
