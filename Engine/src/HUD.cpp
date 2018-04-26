@@ -3,9 +3,14 @@
 
 //Player *playerStats;
 
+
 HUD::HUD()
 {
     //ctor
+    //headIcon = new TextureLoader();
+    glEnable(GL_TEXTURE_2D);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    iconImage[1].BindTexture("Images/head_icon2.png");
 }
 
 HUD::~HUD()
@@ -23,10 +28,12 @@ void HUD::showHP(Player *playerStats)
     playerStats->getHP();
 
     double BarSize = 3.0*(playerStats->getHP()/10.0);
-    cout << playerStats->getHP() << " " << BarSize << endl;
-    glColor3f(1,0,0);
-    glPushMatrix();
+  //  cout << playerStats->getHP() << " " << BarSize << endl;
 
+
+
+    glPushMatrix();
+    glColor3f(1,0,0);
     glTranslatef(-4.5+tempX,2+tempY,0);
     glBegin(GL_QUADS);
     glVertex3f(0,0,0);
@@ -39,21 +46,58 @@ void HUD::showHP(Player *playerStats)
 
 
 
-    glColor3f(1,1,1);
     glPushMatrix();
+    glColor3f(1,1,1);
     glTranslatef(-4.5+tempX,2+tempY,-0.1);
     glBegin(GL_QUADS);
     glVertex3f(0,0,0);
     glVertex3f(3,0,0);
     glVertex3f(3,0.5,0);
     glVertex3f(0,0.5,0);
-    //width*(currHP/maxHP);
+    glEnd();
+    glPopMatrix();
+
+    //Head Icon
+
+    glPushMatrix();
+    glColor3f(1,1,1);
+    glTranslatef(-4.5+tempX,1+tempY,-0.1);
+    iconImage[1].Binder();
+
+    glBegin(GL_QUADS);
+
+    glTexCoord2f(0,0);
+    glVertex3f(0,0,0);
+
+    glTexCoord2f(1,0);
+    glVertex3f(1,0,0);
+
+    glTexCoord2f(1,1);
+    glVertex3f(1,1,0);
+
+    glTexCoord2f(0,1);
+    glVertex3f(0,1,0);
+
+    glEnd();
+
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glColor3f(0,0,0);
+    glTranslatef(-4.49+tempX,0.99+tempY,-0.11);
+    glBegin(GL_QUADS);
+    glVertex3f(0,0,0);
+    glVertex3f(1,0,0);
+    glVertex3f(1,1,0);
+    glVertex3f(0,1,0);
     glEnd();
     glPopMatrix();
 }
 
 void HUD::showHeadIcon()
 {
+
     //Display head icon, changes depending on effects.
     //Like taking damage, etc.
 }

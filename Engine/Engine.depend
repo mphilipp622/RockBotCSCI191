@@ -153,7 +153,7 @@
 1519975467 c:\users\sesat\documents\github\191\engine\include\gllight.h
 	<GLScene.h>
 
-1524703354 source:c:\users\sesat\documents\github\191\engine\src\glscene.cpp
+1524784958 source:c:\users\sesat\documents\github\191\engine\src\glscene.cpp
 	<LoadShader.h>
 	<GLScene.h>
 	<GLLight.h>
@@ -1356,10 +1356,11 @@
 	<cmath>
 	<Projectile.h>
 
-1524703245 c:\users\sesat\documents\github\191\engine\include\hud.h
+1524786541 c:\users\sesat\documents\github\191\engine\include\hud.h
 	<Player.h>
+	<TextureLoader.h>
 
-1524703858 source:c:\users\sesat\documents\github\191\engine\src\hud.cpp
+1524786013 source:c:\users\sesat\documents\github\191\engine\src\hud.cpp
 	"HUD.h"
 	"Player.h"
 

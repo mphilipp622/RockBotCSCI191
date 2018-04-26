@@ -22,7 +22,7 @@ Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 Parallax *plx = new Parallax();
 Timer *sceneTimer = new Timer();
 LoadShader* shader = new LoadShader();
-HUD *displayHUD = new HUD();   //////////////////New line
+ //////////////////New line
 Fonts* testFont = new Fonts();
 
 Particles* particle = new Particles();
@@ -58,7 +58,7 @@ GLint GLScene::initGL()
     audioEngine = new AudioEngine();
     player = new Player(0.0, 0);
     testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
-
+    displayHUD = new HUD();
     keyboardAndMouse = new Inputs();
     sceneTimer->Start();
 
