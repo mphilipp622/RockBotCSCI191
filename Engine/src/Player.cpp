@@ -187,7 +187,6 @@ void Player::Actions(int newAction)
         DrawPlayer();
 
         glPopMatrix();
-        cout << "Player Popped" << endl;
         break;
 
     case 1:

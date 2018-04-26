@@ -139,8 +139,6 @@ void Model::DrawModel()
 
     glEnd();
     glPopMatrix();
-
-    cout << name << " Matrix Popped" << endl;
 }
 
 void Model::InitModel(string fileName, bool transparent)

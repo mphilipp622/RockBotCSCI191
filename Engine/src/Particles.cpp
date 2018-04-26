@@ -114,7 +114,7 @@ double Particles::DoubleRandom()
     return rand() % 1000 / 1000.0;
 }
 
-void Particles::GenerateMusicParticles()
+void Particles::GenerateMusicParticles(double width, double height)
 {
     int i = 0;
 
@@ -125,10 +125,11 @@ void Particles::GenerateMusicParticles()
 
     for(int i = numDrops; i < numDrops + newDrops; i++)
     {
+        cout << ((rand() % 3) - 1) << endl;
         drops[i].alive = true;
-        drops[i].xPos = -0.8 + 0.1 * DoubleRandom();
+        drops[i].xPos = (width / 2 + (0.1 * DoubleRandom())) * ((rand() % 3) - 1);
         drops[i].yPos = 0.8 + 0.1 * DoubleRandom();
-        drops[i].directionX = 0.0075 + 0.025 * DoubleRandom(); // these constant values are pretty much test and check
+        drops[i].directionX = 0; // these constant values are pretty much test and check
         drops[i].directionY = 0;
         drops[i].mass = 0.5 + 0.5 * DoubleRandom();
     }

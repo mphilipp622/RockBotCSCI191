@@ -97,7 +97,7 @@ void Projectile::DisplayParticles()
     glPushMatrix();
 //    glUseProgram(shader->program);
     glTranslated(xPos, yPos, 0); // sets particle to player x and y position.
-    particle->GenerateMusicParticles();
+    particle->GenerateMusicParticles(width, height);
     particle->DrawParticles();
     particle->LifetimeMusic();
 //    glUseProgram(0);

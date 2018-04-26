@@ -36,7 +36,7 @@ class Particles
         void GenerateParticles();
         double DoubleRandom();
 
-        void GenerateMusicParticles();
+        void GenerateMusicParticles(double width, double height);
         void LifetimeMusic();
 
     protected:
