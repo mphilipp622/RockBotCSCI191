@@ -69,8 +69,9 @@ void Projectile::Update()
 {
     Move();
 
-    DrawModel();
     DisplayParticles();
+    DrawModel();
+
 
     if(lifetime->GetTicks() > endOfLifeTime)
         Destroy();

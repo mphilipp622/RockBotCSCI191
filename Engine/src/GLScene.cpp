@@ -24,7 +24,7 @@ LoadShader* shader = new LoadShader();
 
 Fonts* testFont = new Fonts();
 
-Particles* particle = new Particles();
+Particles* testParticles = new Particles();
 
 TextureLoader* testShader = new TextureLoader();
 
@@ -142,16 +142,8 @@ GLint GLScene::drawGLScene()
 
 
     for(auto& model : movableObjects)
-            model->Update();
+        model->Update();
 
-            glPushMatrix();
-    //    glUseProgram(shader->program);
-        glTranslated(Player::player->GetX(), Player::player->GetY(), 0); // sets particle to player x and y position.
-        particle->GenerateMusicParticles();
-        particle->DrawParticles();
-        particle->LifetimeMusic();
-    //    glUseProgram(0);
-        glPopMatrix();
 
 
     for(auto& model : staticObjects)
