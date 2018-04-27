@@ -1,5 +1,6 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
+
 #include <Model.h>
 #include <DeltaTime.h>
 #include <GLScene.h>
@@ -39,6 +40,10 @@ class Projectile : public Model
 
         Particles* particle;
         void DisplayParticles();
+
+        double xDir, yDir;
+
+//        LoadShader* musicShader;
 };
 
 #endif // PROJECTILE_H

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1523318563 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
 	<windows.h>
 	<windows.h>
 	<GLScene.h>
@@ -7,7 +7,7 @@
 	<iostream>
 	<string>
 
-1524701452 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -27,7 +27,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1524705728 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1524787754 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	<LoadShader.h>
 	<GLScene.h>
 	<GLLight.h>
@@ -45,7 +45,7 @@
 1519964614 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1524780735 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -54,7 +54,7 @@
 	<Player.h>
 	<string>
 
-1522873454 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1524787731 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -62,13 +62,13 @@
 	<AudioSource.h>
 	<cmath>
 
-1522799625 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	<Inputs.h>
 	<iostream>
 	<DeltaTime.h>
 	<string>
 
-1522714546 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\inputs.h
 	<windows.h>
 	<iostream>
 	<Model.h>
@@ -101,7 +101,7 @@
 	<glut.h>
 	<iostream>
 
-1521930555 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
 	<Parallax.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -193,7 +193,7 @@
 	"gl/gl.h"
 	<iostream>
 
-1524780670 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -201,7 +201,7 @@
 	<cmath>
 	<Projectile.h>
 
-1523318563 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -213,10 +213,10 @@
 	<Timer.h>
 	<ChordManager.h>
 
-1522714547 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
 	<Timer.h>
 
-1522714546 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\timer.h
 	<time.h>
 
 1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\skybox.cpp
@@ -375,7 +375,7 @@
 	<algorithm>
 	<Timer.h>
 
-1524702344 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
+1524789039 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
@@ -383,7 +383,7 @@
 	<Timer.h>
 	<Particles.h>
 
-1524785805 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
+1524790767 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -426,12 +426,12 @@
 1520253454 c:\users\seapanda\documents\college\191\191\engine\fmod studio api windows\api\lowlevel\inc\fmod_errors.h
 	"fmod.h"
 
-1524701452 source:c:\users\seapanda\documents\college\191\191\engine\src\audiosource.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1523318563 c:\users\seapanda\documents\college\191\191\engine\include\audiosource.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\audiosource.h
 	<string>
 	"irrKlang.h"
 	<windows.h>
@@ -926,7 +926,7 @@
 1522734074 source:e:\college\191\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\irrklang.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\irrklang.h
 	"ik_irrKlangTypes.h"
 	"ik_vec3d.h"
 	"ik_IRefCounted.h"
@@ -948,29 +948,29 @@
 	"ik_IAudioRecorder.h"
 	"ik_ISoundMixedOutputReceiver.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_irrklangtypes.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_irrklangtypes.h
 	<wchar.h>
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_vec3d.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_vec3d.h
 	<math.h>
 	"ik_irrKlangTypes.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_irefcounted.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_irefcounted.h
 	"ik_irrKlangTypes.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ivirtualrefcounted.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ivirtualrefcounted.h
 	"ik_irrKlangTypes.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_esoundoutputdrivers.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_esoundoutputdrivers.h
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_esoundengineoptions.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_esoundengineoptions.h
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_estreammodes.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_estreammodes.h
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_saudiostreamformat.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_saudiostreamformat.h
 	"ik_IRefCounted.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundengine.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundengine.h
 	"ik_IRefCounted.h"
 	"ik_vec3d.h"
 	"ik_ISoundSource.h"
@@ -979,56 +979,56 @@
 	"ik_IFileFactory.h"
 	"ik_ISoundMixedOutputReceiver.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundsource.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundsource.h
 	"ik_IVirtualRefCounted.h"
 	"ik_vec3d.h"
 	"ik_EStreamModes.h"
 	"ik_SAudioStreamFormat.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isound.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isound.h
 	"ik_IVirtualRefCounted.h"
 	"ik_ISoundEffectControl.h"
 	"ik_vec3d.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundeffectcontrol.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundeffectcontrol.h
 	"ik_IVirtualRefCounted.h"
 	"ik_vec3d.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ifilefactory.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ifilefactory.h
 	"ik_IRefCounted.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundmixedoutputreceiver.h
-	"ik_IRefCounted.h"
-	"ik_SAudioStreamFormat.h"
-
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostream.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundmixedoutputreceiver.h
 	"ik_IRefCounted.h"
 	"ik_SAudioStreamFormat.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostreamloader.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiostreamloader.h
 	"ik_IRefCounted.h"
 	"ik_IFileReader.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ifilereader.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_ifilereader.h
 	"ik_IRefCounted.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundstopeventreceiver.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isoundstopeventreceiver.h
 	"ik_IRefCounted.h"
 	"ik_SAudioStreamFormat.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isounddevicelist.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_isounddevicelist.h
 	"ik_IRefCounted.h"
 
-1522714547 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiorecorder.h
+1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\ik_iaudiorecorder.h
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1523226218 c:\users\seapanda\documents\college\191\191\engine\include\audioengine.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\audioengine.h
 	<irrKlang.h>
 	<windows.h>
 	<iostream>
 
-1523129451 c:\users\seapanda\documents\college\191\191\engine\include\chordmanager.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\chordmanager.h
 	<iostream>
 	<vector>
 	<unordered_map>
@@ -1036,17 +1036,17 @@
 	<cstdlib>
 	<time.h>
 
-1524504499 source:c:\users\seapanda\documents\college\191\191\engine\src\audioengine.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\audioengine.cpp
 	"AudioEngine.h"
 
-1523318563 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
-1524704597 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
 	"Enemy.h"
 	<GLScene.h>
 
-1524701452 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
 	<Model.h>
 	<vector>
 	<Timer.h>
@@ -1055,41 +1055,41 @@
 	<algorithm>
 	<Player.h>
 
-1524701452 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
 	"MeleeEnemy.h"
 
-1524701452 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
 
-1524701452 c:\users\seapanda\documents\college\191\191\engine\include\rangedenemy.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\rangedenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
 
-1524701452 source:c:\users\seapanda\documents\college\191\191\engine\src\rangedenemy.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\rangedenemy.cpp
 	"RangedEnemy.h"
 
-1524701458 source:c:\users\seapanda\documents\college\191\191\engine\src\fonts.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\fonts.cpp
 	"Fonts.h"
 	<Player.h>
 
-1524701458 c:\users\seapanda\documents\college\191\191\engine\include\fonts.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\fonts.h
 	<string>
 	<iostream>
 	<TextureLoader.h>
 
-1524701458 source:c:\users\seapanda\documents\college\191\191\engine\src\loadshader.cpp
+1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\loadshader.cpp
 	"LoadShader.h"
 
-1524701458 c:\users\seapanda\documents\college\191\191\engine\include\loadshader.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\include\loadshader.h
 	<GL/glew.h>
 	<fstream>
 	<iostream>
 	<string>
 
-1524701458 c:\users\seapanda\documents\college\191\191\engine\common\include\gl\glew.h
+1524785970 c:\users\seapanda\documents\college\191\191\engine\common\include\gl\glew.h
 	<stddef.h>
 	<inttypes.h>
 	<stdint.h>
@@ -1098,12 +1098,14 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1524783936 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
+1524790712 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
 	<GL/gl.h>
 	<math.h>
 	<stdlib.h>
 	<iostream>
+	<Timer.h>
 
-1524785700 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
+1524790731 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
 	"Particles.h"
+	<iomanip>
 

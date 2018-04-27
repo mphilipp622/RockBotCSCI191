@@ -61,7 +61,12 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
 
     texture = new TextureLoader();
     lifetime = new Timer();
+//    shader = new LoadShader();
+//    shader->ShaderInit("Shaders/v1.vs", "Shaders/f1.fs");
+
+//    testShader->BindTexture("Images/MilkyWay.jpg");
     particle = new Particles();
+    particle->GenerateMusicParticles(xPos, yPos, width, height);
     lifetime->Start();
 }
 
@@ -69,7 +74,7 @@ void Projectile::Update()
 {
     Move();
 
-    DisplayParticles();
+//    DisplayParticles();
     DrawModel();
 
 
@@ -85,6 +90,9 @@ void Projectile::Move()
     xPos += normalizedX * speed * DeltaTime::GetDeltaTime();
     yPos += normalizedY * speed * DeltaTime::GetDeltaTime();
 
+    xDir = xPos - prevX;
+    yDir = yPos - prevY;
+
     if(CheckCollision())
         // if we collide with something, destroy object. If object is enemy, we need to deal damage
         Destroy();
@@ -97,9 +105,9 @@ void Projectile::DisplayParticles()
     glPushMatrix();
 //    glUseProgram(shader->program);
     glTranslated(xPos, yPos, 0); // sets particle to player x and y position.
-    particle->GenerateMusicParticles(width, height);
+
     particle->DrawParticles();
-    particle->LifetimeMusic();
+    particle->LifetimeMusic(xPos, yPos, xDir, yDir);
 //    glUseProgram(0);
     glPopMatrix();
 }
