@@ -116,8 +116,8 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0);
 
         if(CheckPointerCollision(exit, mouseX, mouseY))
-            cout << "COLLIDE EXIT" << endl;
-//            killGame = true;
+//            cout << "COllide exit" << endl;
+            killGame = true;
     }
 //    if(uMsg == WM_KEYDOWN)
 //    {

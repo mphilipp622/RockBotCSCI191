@@ -189,13 +189,15 @@ bool GLScene::CheckPointerCollision(Model* button, double mouseX, double mouseY)
     // Don't know where these constant values came from. Eyeballed the coordinates of my mouse and took the difference due to the z-position versus screen coordinates.
     double minX = (button->GetX() - button->GetWidth() / 2) + 0.198148;
     double maxX = (button->GetX() + button->GetWidth() / 2) - 0.198148;
-    double minY = (button->GetY() - button->GetHeight() / 2) + 0.0694444;
-    double maxY = (button->GetY() + button->GetHeight() / 2) - 0.0694444;
+    double minY = (button->GetY() - button->GetHeight() / 2) + .0963542; // old value 0.0694444
+    double maxY = (button->GetY() + button->GetHeight() / 2) - .0572917;
 
+    cout << "Button: " << minY << "    " << maxY << endl;
     // scale mouse x and y values by aspect ratio
 
     double newMouseX = mouseX * aspectRatio;
     double newMouseY = mouseY /  aspectRatio;
+    cout << "Mouse: " << newMouseX << "    " << newMouseY << endl;
 
     return Overlap (newMouseX, minX, maxX) && Overlap (newMouseY, minY, maxY);
 }
