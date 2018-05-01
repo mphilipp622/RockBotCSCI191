@@ -16,6 +16,15 @@ GLScene::GLScene()
 //    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
 }
 
+GLScene::GLScene(string newName)
+{
+    screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
+    screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
+
+    sceneName = newName;
+}
+
+
 GLScene::~GLScene()
 {
 }

@@ -87,14 +87,14 @@ void MainMenu::LoadScene(string sceneName)
         auto finder = SceneManager::scenes.find(sceneName); // find the scene in scene manager
 
         if(finder != SceneManager::scenes.end())
-            delete SceneManager::scenes["Game" + to_string(num)]; // if hashtable already has map loaded, delete it
+            delete SceneManager::scenes[sceneName]; // if hashtable already has map loaded, delete it
 
-        GLScene* newMap = new GLScene("Game" + to_string(num), "Maps/Map" + to_string(num) + ".txt"); // create new map
+        GLScene* newGame = new GLScene(sceneName); // create new map
 
-        SceneManager::scenes.insert( {"Game" + to_string(num), newMap} ); // insert map into hash table
-        newMap->initGL(); // initialize map
+        SceneManager::scenes.insert( {sceneName, newGame} ); // insert map into hash table
+        newGame->initGL(); // initialize map
 
-        SceneManager::activeScene = "Game" + to_string(num); // set active scene to the new scene.
+        SceneManager::activeScene = sceneName; // set active scene to the new scene.
 
 //    // Handle map loading. We pass an int so we can load a txt file that contains the same int number in the filename.
 //    if(num == 0)
@@ -111,43 +111,28 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     double mouseX, mouseY;
 
-    if(uMsg == WM_LBUTTONDOWN)
-    {
-        mouseX = LOWORD(lParam) / (screenWidth / 2) - 1.0;
-        mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0);
-
-        if(CheckPointerCollision(exit, mouseX, mouseY))
-//            cout << "COllide exit" << endl;
-            killGame = true;
-        else if(CheckPointerCollision(startGame, mouseX, mouseY))
-            LoadScene("Game");
-    }
-//    if(uMsg == WM_KEYDOWN)
+//    if(uMsg == WM_LBUTTONDOWN)
 //    {
-//        // Handle keyboard input. User can select options 0 - 9. Hex values represent numbers 0 - 9 at top of keyboard
+//        mouseX = LOWORD(lParam) / (screenWidth / 2) - 1.0;
+//        mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0);
 //
-//        if(wParam == VK_NUMPAD0 || wParam == 0x30)
-//            LoadScene(0);
-//        else if(wParam == VK_NUMPAD1 || wParam == 0x31)
-//            LoadScene(1);
-//        else if(wParam == VK_NUMPAD2 || wParam == 0x32)
-//            LoadScene(2);
-//        else if(wParam == VK_NUMPAD3 || wParam == 0x33)
-//            LoadScene(3);
-//        else if(wParam == VK_NUMPAD4 || wParam == 0x34)
-//            LoadScene(4);
-//        else if(wParam == VK_NUMPAD5 || wParam == 0x35)
-//            LoadScene(5);
-//        else if(wParam == VK_NUMPAD6 || wParam == 0x36)
-//            LoadScene(6);
-//        else if(wParam == VK_NUMPAD7 || wParam == 0x37)
-//            LoadScene(7);
-//        else if(wParam == VK_NUMPAD8 || wParam == 0x38)
-//            LoadScene(8);
-//        else if(wParam == VK_NUMPAD9 || wParam == 0x39)
-//            LoadScene(9);
-//
+//        if(CheckPointerCollision(exit, mouseX, mouseY))
+////            cout << "COllide exit" << endl;
+//            killGame = true;
+//        else if(CheckPointerCollision(startGame, mouseX, mouseY))
+//            cout << "Collide start" << endl;
+////            LoadScene("Game");
 //    }
+    if(uMsg == WM_KEYDOWN)
+    {
+        // Handle keyboard input. User can select options 0 - 9. Hex values represent numbers 0 - 9 at top of keyboard
+
+        const int nKey = 0x4E;
+
+        if(wParam == nKey)
+            LoadScene("Game");
+
+    }
 
 	return 1;
 }

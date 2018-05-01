@@ -23,6 +23,7 @@ class GLScene
 {
     public:
         GLScene();
+        GLScene(string newName);
         virtual ~GLScene();
 
         // openGL rendering functions
