@@ -41,6 +41,9 @@ class Model
         void SetPosition(double, double);
         void SetWidth(double);
 
+        // Sets the z-position of the model
+        void SetZoom(double newZoom);
+
         virtual void Update();
 
         AudioSource* GetAudioSource();

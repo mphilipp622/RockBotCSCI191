@@ -57,10 +57,16 @@ class GLScene
 
         Timer* sceneTimer;
 
+        // Checks mouse pointer collision. Mainly used for checking mouse input on UI elements like buttons
+        bool CheckPointerCollision(Model* button, double mouseX, double mouseY);
+
     private:
         DeltaTime* dTime;
         Enemy* testEnemy;
         Enemy* testRangedEnemy;
+
+        // Checks if position is overlapping specified min and max values. Used by CheckPointerCollision()
+        bool Overlap(double pos, double min, double max);
 };
 
 #endif // GLSCENE_H

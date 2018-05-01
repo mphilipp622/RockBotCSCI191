@@ -125,6 +125,7 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
     glViewport(0, 0, width, height); // window for our game
     glMatrixMode(GL_PROJECTION); // set the projection type for 3D space
     glLoadIdentity(); // loads identity matrix
+//    glOrtho(0, width, 0, height, -1, 1);
     gluPerspective(45.0, aspectRatio, 0.1, 100); // 45 degree angle, aspect ratio, 0.1 near to 100 far. Sets the perspective of our renderer
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity(); // loads identity matrix for modelview
@@ -176,4 +177,30 @@ string GLScene::GetSceneName()
 void GLScene::LoadScene(string name)
 {
     return;
+}
+
+bool GLScene::CheckPointerCollision(Model* button, double mouseX, double mouseY)
+{
+    // Check to see if the user's mouse pointer has overlapped with the button's collider.
+
+    double aspectRatio = screenWidth / screenHeight;
+    // get model boundaries
+
+    // Don't know where these constant values came from. Eyeballed the coordinates of my mouse and took the difference due to the z-position versus screen coordinates.
+    double minX = (button->GetX() - button->GetWidth() / 2) + 0.198148;
+    double maxX = (button->GetX() + button->GetWidth() / 2) - 0.198148;
+    double minY = (button->GetY() - button->GetHeight() / 2) + 0.0694444;
+    double maxY = (button->GetY() + button->GetHeight() / 2) - 0.0694444;
+
+    // scale mouse x and y values by aspect ratio
+
+    double newMouseX = mouseX * aspectRatio;
+    double newMouseY = mouseY /  aspectRatio;
+
+    return Overlap (newMouseX, minX, maxX) && Overlap (newMouseY, minY, maxY);
+}
+
+bool GLScene::Overlap(double pos, double min, double max)
+{
+    return pos >= min && pos <= max;
 }

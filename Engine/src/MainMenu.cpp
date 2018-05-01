@@ -17,6 +17,8 @@ MainMenu::MainMenu()
     audioEngine = new AudioEngine();
 
     killGame = false;
+
+    zPosButtonUI = -4.0;
 }
 
 MainMenu::~MainMenu()
@@ -44,11 +46,14 @@ void MainMenu::InitModels()
 {
     // instantiate UI elements
     background = new Parallax();
-    exit = new Model(1.0, 0.25, 0, 1.4 - (0.3 * 9), "ExitButton", "Button");
-//    exit->SetZoom(-4.0); // set the Z position. UI elements will be at -4
+    startGame = new Model(1.0, 0.25, 0, 0.5, "NewGameButton", "Button");
+    startGame->SetZoom(zPosButtonUI);
+    exit = new Model(1.0, .25, 0, 0, "ExitButton", "Button");
+    exit->SetZoom(zPosButtonUI); // set the Z position. UI elements will be at -4
 
     // Bind textures for UI elements
     background->ParallaxInit("Images/MenuBackground.jpg");
+    startGame->InitModel("Images/UI/NewGame.png", true);
     exit->InitModel("Images/UI/Exit.png", true);
 
 }
@@ -67,7 +72,7 @@ GLint MainMenu::drawGLScene()
     background->DrawSquare(screenWidth, screenHeight);
     glPopMatrix();
 
-    exit->DrawModel(); // render exit button
+    DrawButtons();
 
 //    for(auto& button : maps)
 //        // draw all the UI elements
@@ -103,6 +108,17 @@ void MainMenu::LoadScene(int num)
 
 int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    double mouseX, mouseY;
+
+    if(uMsg == WM_LBUTTONDOWN)
+    {
+        mouseX = LOWORD(lParam) / (screenWidth / 2) - 1.0;
+        mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0);
+
+        if(CheckPointerCollision(exit, mouseX, mouseY))
+            cout << "COLLIDE EXIT" << endl;
+//            killGame = true;
+    }
 //    if(uMsg == WM_KEYDOWN)
 //    {
 //        // Handle keyboard input. User can select options 0 - 9. Hex values represent numbers 0 - 9 at top of keyboard
@@ -131,4 +147,10 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //    }
 
 	return 1;
+}
+
+void MainMenu::DrawButtons()
+{
+    startGame->DrawModel();
+    exit->DrawModel(); // render exit button
 }

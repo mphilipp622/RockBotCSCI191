@@ -255,15 +255,17 @@
 
 1519274979 e:\college\191\191\engine\common\include\soil.h
 
-1522272416 source:e:\college\191\191\engine\main.cpp
+1525140565 source:e:\college\191\191\engine\main.cpp
 	<windows.h>
 	<windows.h>
-	<GLScene.h>
 	<stdlib.h>
 	<iostream>
+	<SceneManager.h>
+	<GLScene.h>
+	<MainMenu.h>
 	<string>
 
-1522442271 e:\college\191\191\engine\include\glscene.h
+1525145625 e:\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -273,8 +275,12 @@
 	<unordered_map>
 	<AudioSource.h>
 	<AudioEngine.h>
+	<Enemy.h>
+	<MeleeEnemy.h>
+	<RangedEnemy.h>
+	<SceneManager.h>
 
-1522446690 e:\college\191\191\engine\include\model.h
+1525143801 e:\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -282,20 +288,20 @@
 	<AudioSource.h>
 	<cmath>
 
-1522205046 source:e:\college\191\191\engine\src\gllight.cpp
+1525140565 source:e:\college\191\191\engine\src\gllight.cpp
 	<GLLight.h>
-
-1522205072 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1522731818 source:e:\college\191\191\engine\src\glscene.cpp
+1525140565 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
-	<GLLight.h>
+
+1525147241 source:e:\college\191\191\engine\src\glscene.cpp
+	<GLScene.h>
 	<Parallax.h>
 	<DeltaTime.h>
 	<Player.h>
-	<Skybox.h>
 	<Timer.h>
+	<GLLight.h>
 
 1522442257 e:\college\191\191\engine\include\inputs.h
 	<windows.h>
@@ -312,7 +318,7 @@
 	<GL\GL.h>
 	<string>
 
-1522731818 e:\college\191\191\engine\include\player.h
+1524859177 e:\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -330,7 +336,7 @@
 	<DeltaTime.h>
 	<string>
 
-1522446963 source:e:\college\191\191\engine\src\model.cpp
+1525143815 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -344,7 +350,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1522731818 source:e:\college\191\191\engine\src\player.cpp
+1524859177 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -364,16 +370,17 @@
 1522363800 source:e:\college\191\191\engine\src\timer.cpp
 	<Timer.h>
 
-1522439689 source:e:\college\191\191\engine\src\projectile.cpp
+1524859177 source:e:\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
-1522439675 e:\college\191\191\engine\include\projectile.h
+1524859177 e:\college\191\191\engine\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
 	<algorithm>
 	<Timer.h>
+	<Particles.h>
 
 1525134178 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
 	<Model.h>
@@ -659,22 +666,24 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1522731818 source:e:\college\191\191\engine\src\audiosource.cpp
+1524859177 source:e:\college\191\191\engine\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1522731818 e:\college\191\191\engine\include\audiosource.h
+1523308559 e:\college\191\191\engine\include\audiosource.h
 	<string>
 	"irrKlang.h"
 	<windows.h>
 	<AudioEngine.h>
 
-1522204547 source:e:\college\191\191\engine\src\scenemanager.cpp
+1525140565 source:e:\college\191\191\engine\src\scenemanager.cpp
 	"SceneManager.h"
-
-1522204626 e:\college\191\191\engine\include\scenemanager.h
 	<GLScene.h>
+
+1525140565 e:\college\191\191\engine\include\scenemanager.h
+	<string>
+	<unordered_map>
 
 1520253454 c:\program files (x86)\fmod soundsystem\fmod studio api windows\api\lowlevel\inc\fmod.hpp
 	"fmod_common.h"
@@ -915,7 +924,7 @@
 1522442118 source:e:\college\191\191\engine\src\musicmodel.cpp
 	"MusicModel.h"
 
-1522733972 e:\college\191\191\engine\include\chordmanager.h
+1523052383 e:\college\191\191\engine\include\chordmanager.h
 	<iostream>
 	<vector>
 	<unordered_map>
@@ -923,7 +932,7 @@
 	<cstdlib>
 	<time.h>
 
-1522734074 source:e:\college\191\191\engine\src\chordmanager.cpp
+1523216092 source:e:\college\191\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
 1524785972 c:\users\seapanda\documents\college\191\191\engine\irrklang-1.6.0\include\irrklang.h
@@ -1124,4 +1133,79 @@
 1525134860 source:c:\users\seapanda\documents\college\191\191\engine\src\scenemanager.cpp
 	"SceneManager.h"
 	<GLScene.h>
+
+1524859177 e:\college\191\191\engine\include\enemy.h
+	<Model.h>
+	<vector>
+	<Timer.h>
+	<DeltaTime.h>
+	<AudioSource.h>
+	<algorithm>
+	<Player.h>
+
+1524859177 e:\college\191\191\engine\include\meleeenemy.h
+	<Enemy.h>
+	<GLScene.h>
+	<Player.h>
+
+1524859177 e:\college\191\191\engine\include\rangedenemy.h
+	<Enemy.h>
+	<GLScene.h>
+	<Player.h>
+
+1525145525 e:\college\191\191\engine\include\mainmenu.h
+	<GLScene.h>
+	<Parallax.h>
+
+1524859177 source:e:\college\191\191\engine\src\enemy.cpp
+	"Enemy.h"
+	<GLScene.h>
+
+1524535281 source:e:\college\191\191\engine\src\fonts.cpp
+	"Fonts.h"
+	<Player.h>
+
+1524535281 e:\college\191\191\engine\include\fonts.h
+	<string>
+	<iostream>
+	<TextureLoader.h>
+
+1524535281 source:e:\college\191\191\engine\src\loadshader.cpp
+	"LoadShader.h"
+
+1524535281 e:\college\191\191\engine\include\loadshader.h
+	<GL/glew.h>
+	<fstream>
+	<iostream>
+	<string>
+
+1524535281 e:\college\191\191\engine\common\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1524859177 source:e:\college\191\191\engine\src\meleeenemy.cpp
+	"MeleeEnemy.h"
+
+1524859177 source:e:\college\191\191\engine\src\particles.cpp
+	"Particles.h"
+	<iomanip>
+
+1524859177 e:\college\191\191\engine\include\particles.h
+	<GL/gl.h>
+	<math.h>
+	<stdlib.h>
+	<iostream>
+	<Timer.h>
+
+1524859177 source:e:\college\191\191\engine\src\rangedenemy.cpp
+	"RangedEnemy.h"
+
+1525147471 source:e:\college\191\191\engine\src\mainmenu.cpp
+	"MainMenu.h"
+	<GLLight.h>
 

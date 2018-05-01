@@ -40,6 +40,13 @@ class MainMenu : public GLScene
 
         // Audio Engine is created when main menu is loaded. Used by other classes in game
         AudioEngine* audioEngine;
+
+        float zPosButtonUI; // used for setting z position of all UI Button elements
+
+        // draws UI buttons
+        void DrawButtons();
+
+
 };
 
 #endif // MAINMENU_H
