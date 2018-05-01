@@ -2,7 +2,7 @@
 #define MAINMENU_H
 
 #include <GLScene.h>
-#include <GLLight.h>
+#include <Parallax.h>
 
 // Inherits from GLScene and will be used as the main screen
 class MainMenu : public GLScene
@@ -28,7 +28,7 @@ class MainMenu : public GLScene
     private:
         Model* startGame; // start game button image
         Model* howToPlay; // how to play button image
-        Model* background; // background image for menu.
+        Parallax* background; // background image for menu.
         Model* exit; // exit UI element for menu.
 
         // Screen width and height in pixels

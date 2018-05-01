@@ -2,9 +2,10 @@
 #define SCENEMANAGER_H
 #include <string>
 #include <unordered_map>
-#include <GLScene.h>
 
 using namespace std;
+
+class GLScene; // forward declaration of GLScene. This is due to header files being included at wrong times.
 
 // Handles Scene Loading.
 class SceneManager

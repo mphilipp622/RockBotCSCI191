@@ -1,6 +1,7 @@
 // updated 2/7/18
 
 #include <GLLight.h>
+#include <GLScene.h>
 
 GLLight :: GLLight(GLenum Light)
 {

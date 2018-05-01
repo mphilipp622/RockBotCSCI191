@@ -11,10 +11,10 @@
 #pragma comment(lib, "glu32.lib")
 
 #include <windows.h>		// Header File For Windows
-#include <GLScene.h>
 #include <stdlib.h>
 #include <iostream>
 #include <SceneManager.h>
+#include <GLScene.h>
 #include <MainMenu.h>
 
 //#include "DeltaTime.h"
@@ -38,9 +38,8 @@ LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 //string activeScene = "TestLevel"; // will keep track of active scene
 
 SceneManager *SM = new SceneManager();
-string activeScene = "MainMenu"; // will keep track of active scene
 MainMenu* menu = new MainMenu();
-GLScene *Scene = new GLScene();
+//GLScene *Scene = new GLScene();
 //SM->scenes.insert({activeScene, Scene});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -231,16 +230,15 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	ShowWindow(hWnd,SW_SHOW);						// Show The Window
 	SetForegroundWindow(hWnd);						// Slightly Higher Priority
 	SetFocus(hWnd);									// Sets Keyboard Focus To The Window
-	Scene->resizeGLScene(width, height);			// Set Up Our Perspective GL Screen
+	SM->scenes[SM->activeScene]->resizeGLScene(width, height);			// Set Up Our Perspective GL Screen
 
-	if (!Scene->initGL())							// Initialize Our Newly Created GL Window
+	if (!SM->scenes[SM->activeScene]->initGL())							// Initialize Our Newly Created GL Window
 	{
 		KillGLWindow();								// Reset The Display
 		MessageBox(NULL,"Initialization Failed.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 		return FALSE;								// Return FALSE
 	}
 
-	Scene->SetLoaded(true);
 	return TRUE;									// Success
 }
 
@@ -254,7 +252,7 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 							WPARAM	wParam,			// Additional Message Information
 							LPARAM	lParam)			// Additional Message Information
 {
-    Scene->windowsMsg(hWnd, uMsg, wParam, lParam);
+    SM->scenes[SM->activeScene]->windowsMsg(hWnd, uMsg, wParam, lParam);
 
 	switch (uMsg)									// Check For Windows Messages
 	{
@@ -305,9 +303,9 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 		case WM_SIZE:								// Resize The OpenGL Window
 		{
                                                     // LoWord=Width, HiWord=Height
-			//Scene->ReSizeGLScene(GetSystemMetrics(SM_CXSCREEN),HIWORD(lParam));
+			//SM->scenes[SM->activeScene]->ReSizeGLScene(GetSystemMetrics(SM_CXSCREEN),HIWORD(lParam));
 
-			Scene->resizeGLScene(LOWORD(lParam),HIWORD(lParam));
+			SM->scenes[SM->activeScene]->resizeGLScene(LOWORD(lParam),HIWORD(lParam));
 			return 0;								// Jump Back
 		}
 	}
@@ -365,7 +363,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 		else										// If There Are No Messages
 		{
 			// Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
-			if ((active && !Scene->drawGLScene()) || keys[VK_ESCAPE])	// Active?  Was There A Quit Received?
+			if ((active && !SM->scenes[SM->activeScene]->drawGLScene()) || keys[VK_ESCAPE])	// Active?  Was There A Quit Received?
 			{
 				done=TRUE;							// ESC or DrawGLScene Signalled A Quit
 			}
