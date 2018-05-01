@@ -81,8 +81,21 @@ GLint MainMenu::drawGLScene()
     return 1;
 }
 
-void MainMenu::LoadScene(int num)
+void MainMenu::LoadScene(string sceneName)
 {
+        // if we already have the level loaded, we want to delete it
+        auto finder = SceneManager::scenes.find(sceneName); // find the scene in scene manager
+
+        if(finder != SceneManager::scenes.end())
+            delete SceneManager::scenes["Game" + to_string(num)]; // if hashtable already has map loaded, delete it
+
+        GLScene* newMap = new GLScene("Game" + to_string(num), "Maps/Map" + to_string(num) + ".txt"); // create new map
+
+        SceneManager::scenes.insert( {"Game" + to_string(num), newMap} ); // insert map into hash table
+        newMap->initGL(); // initialize map
+
+        SceneManager::activeScene = "Game" + to_string(num); // set active scene to the new scene.
+
 //    // Handle map loading. We pass an int so we can load a txt file that contains the same int number in the filename.
 //    if(num == 0)
 //        // if user selects to exit, end the game
@@ -91,18 +104,6 @@ void MainMenu::LoadScene(int num)
 //    {
 //        // If user selects a map, we need to load it and play it.
 //
-//        // if we already have the selected map loaded, we want to delete it
-//        auto finder = SceneManager::scenes.find("Game" + to_string(num)); // find the scene in scene manager
-//
-//        if(finder != SceneManager::scenes.end())
-//            delete SceneManager::scenes["Game" + to_string(num)]; // if hashtable already has map loaded, delete it
-//
-//        GLScene* newMap = new GLScene("Game" + to_string(num), "Maps/Map" + to_string(num) + ".txt"); // create new map
-//
-//        SceneManager::scenes.insert( {"Game" + to_string(num), newMap} ); // insert map into hash table
-//        newMap->initGL(); // initialize map
-//
-//        SceneManager::activeScene = "Game" + to_string(num); // set active scene to the new scene.
 //    }
 }
 
@@ -118,6 +119,8 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         if(CheckPointerCollision(exit, mouseX, mouseY))
 //            cout << "COllide exit" << endl;
             killGame = true;
+        else if(CheckPointerCollision(startGame, mouseX, mouseY))
+            LoadScene("Game");
     }
 //    if(uMsg == WM_KEYDOWN)
 //    {

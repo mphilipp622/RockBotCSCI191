@@ -18,7 +18,7 @@ class MainMenu : public GLScene
         GLint drawGLScene();
 
         // Loads scenes from this scene
-        void LoadScene(int num);
+        void LoadScene(string sceneName);
 
         // Handles keyboard input
         int windowsMsg(HWND,UINT, WPARAM,LPARAM);
