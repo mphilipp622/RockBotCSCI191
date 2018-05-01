@@ -230,9 +230,9 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	ShowWindow(hWnd,SW_SHOW);						// Show The Window
 	SetForegroundWindow(hWnd);						// Slightly Higher Priority
 	SetFocus(hWnd);									// Sets Keyboard Focus To The Window
-	SM->scenes[SM->activeScene]->resizeGLScene(width, height);			// Set Up Our Perspective GL Screen
+	SM->GetActiveScene()->resizeGLScene(width, height);			// Set Up Our Perspective GL Screen
 
-	if (!SM->scenes[SM->activeScene]->initGL())							// Initialize Our Newly Created GL Window
+	if (!SM->GetActiveScene()->initGL())							// Initialize Our Newly Created GL Window
 	{
 		KillGLWindow();								// Reset The Display
 		MessageBox(NULL,"Initialization Failed.","ERROR",MB_OK|MB_ICONEXCLAMATION);
@@ -252,7 +252,7 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 							WPARAM	wParam,			// Additional Message Information
 							LPARAM	lParam)			// Additional Message Information
 {
-    SM->scenes[SM->activeScene]->windowsMsg(hWnd, uMsg, wParam, lParam);
+    SM->GetActiveScene()->windowsMsg(hWnd, uMsg, wParam, lParam);
 
 	switch (uMsg)									// Check For Windows Messages
 	{
@@ -303,9 +303,9 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 		case WM_SIZE:								// Resize The OpenGL Window
 		{
                                                     // LoWord=Width, HiWord=Height
-			//SM->scenes[SM->activeScene]->ReSizeGLScene(GetSystemMetrics(SM_CXSCREEN),HIWORD(lParam));
+			//SM->GetActiveScene()->ReSizeGLScene(GetSystemMetrics(SM_CXSCREEN),HIWORD(lParam));
 
-			SM->scenes[SM->activeScene]->resizeGLScene(LOWORD(lParam),HIWORD(lParam));
+			SM->GetActiveScene()->resizeGLScene(LOWORD(lParam),HIWORD(lParam));
 			return 0;								// Jump Back
 		}
 	}
@@ -363,7 +363,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 		else										// If There Are No Messages
 		{
 			// Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
-			if ((active && !SM->scenes[SM->activeScene]->drawGLScene()) || keys[VK_ESCAPE])	// Active?  Was There A Quit Received?
+			if ((active && !SM->GetActiveScene()->drawGLScene()) || keys[VK_ESCAPE])	// Active?  Was There A Quit Received?
 			{
 				done=TRUE;							// ESC or DrawGLScene Signalled A Quit
 			}

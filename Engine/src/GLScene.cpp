@@ -34,9 +34,6 @@ vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
 vector<Enemy*> GLScene::enemies;
 
-// static input for player to use as well
-Inputs* GLScene::keyboardAndMouse;
-
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
@@ -214,4 +211,16 @@ bool GLScene::CheckPointerCollision(Model* button, double mouseX, double mouseY)
 bool GLScene::Overlap(double pos, double min, double max)
 {
     return pos >= min && pos <= max;
+}
+
+void GLScene::CleanStaticData()
+{
+    if(enemies.size() > 0)
+        enemies.clear();
+
+    if(movableObjects.size() > 0)
+        movableObjects.clear();
+
+    if(staticObjects.size() > 0)
+        staticObjects.clear();
 }

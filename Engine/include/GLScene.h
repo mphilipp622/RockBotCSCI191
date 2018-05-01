@@ -43,7 +43,6 @@ class GLScene
         static vector<Model*> movableObjects; // only moving objects will check for collision
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static vector<Enemy*> enemies;
-        static Inputs *keyboardAndMouse;
 
         //returns scene name
         string GetSceneName();
@@ -60,6 +59,11 @@ class GLScene
 
         // Checks mouse pointer collision. Mainly used for checking mouse input on UI elements like buttons
         bool CheckPointerCollision(Model* button, double mouseX, double mouseY);
+
+        // called in GLscene and children classes to clear out staticObjects, movableObjects, and enemies
+        void CleanStaticData();
+
+        Inputs *keyboardAndMouse;
 
     private:
         DeltaTime* dTime;

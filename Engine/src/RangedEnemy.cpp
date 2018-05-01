@@ -107,7 +107,7 @@ void RangedEnemy::AIRoutine()
 
 bool RangedEnemy::CheckCollision()
 {
-    for(auto& model : GLScene::staticObjects)
+    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
     {
         if(Collision(model))
             return true;

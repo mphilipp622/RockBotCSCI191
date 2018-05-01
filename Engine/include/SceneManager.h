@@ -20,6 +20,8 @@ class SceneManager
         // Hashtable of scenes. Each scene must have a unique name and is hashed into the table using the name
         static unordered_map<string, GLScene*> scenes;
 
+        static GLScene* GetActiveScene();
+
     protected:
 
     private:

@@ -16,3 +16,8 @@ SceneManager::~SceneManager()
 {
     //dtor
 }
+
+GLScene* SceneManager::GetActiveScene()
+{
+    return scenes[activeScene];
+}
