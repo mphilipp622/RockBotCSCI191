@@ -46,6 +46,12 @@ LevelCreator::~LevelCreator()
     //dtor
 }
 
+
+
+//////////////////////
+// OPENGL FUNCTIONS //
+//////////////////////
+
 GLint LevelCreator::initGL()
 {
 
@@ -100,16 +106,28 @@ GLint LevelCreator::drawGLScene()
     if(player)
         player->DrawModel();
 
+    if(nextLevelTrigger)
+        nextLevelTrigger->DrawModel();
+
     dTime->UpdateDeltaTime();
 
     return 1;
 }
+
+
 
 void LevelCreator::LoadScene(string sceneName)
 {
 
 
 }
+
+
+
+
+//////////////////////////////////////////////
+//         KEYBOARD AND MOUSE INPUT         //
+//////////////////////////////////////////////
 
 int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -202,19 +220,12 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             SetForegroundWindow(hWnd); // set the game window back to front
         }
 
+        /////////////////////////
+        // LEVEL TRIGGER CREATION
+        /////////////////////////
 
-        //////////////////////////////////
-        // DESELECT MODEL OR BRING UP MENU
-//        //////////////////////////////////
-//        else if(wParam == VK_ESCAPE)
-//        {
-//            // If user presses escape and a model is selected, de-select it
-//            if(selectedModel)
-//                SetSelectedModel(nullptr);
-////            else
-////                // otherwise, bring up menu
-////                LoadMenu();
-//        }
+        else if(wParam == 0x4C)
+            CreateLevelTrigger();
     }
 
 
@@ -256,6 +267,13 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         prevMouseY = mouseY;
     }
 }
+
+
+
+
+////////////////////////////////////////////////////
+// MODEL CREATION FUNCTIONS
+////////////////////////////////////////////////////
 
 void LevelCreator::CreateBackground()
 {
@@ -339,15 +357,26 @@ void LevelCreator::CreateEnemy()
     waitingForConsoleInput = false;
 }
 
-string LevelCreator::GetFilenameFromInput()
+void LevelCreator::CreateLevelTrigger()
 {
-    string path;
+    if(nextLevelTrigger)
+        return; // don't allow user to put more than 1 level trigger
 
-    cout << "Input texture file name (don't input full path): ";
-    getline(cin, path);
+    cout << "Making Trigger..." << endl;
 
-    return path;
+    // instantiate model with default Width and Height of 1 and spawned at camera's center
+    nextLevelTrigger = new Model(1.0, 1.0, cameraPosX, cameraPosY, "LevelTrigger", "Trigger");
+    nextLevelTrigger->InitModel("Images/LevelTrigger.png", true);
+
+    SetSelectedModel(nextLevelTrigger);
 }
+
+
+
+
+////////////////////////////////////////////////////////////
+//  OBJECT MANIPULATION FUNCTIONS
+////////////////////////////////////////////////////////////
 
 void LevelCreator::ModifyModelDimensions(double widthScale, double heightScale)
 {
@@ -408,23 +437,6 @@ void LevelCreator::MoveObject(double mouseX, double mouseY)
     selectedModel->SetPosition(finalX, finalY);
 }
 
-void LevelCreator::ShowConsoleWindow()
-{
-    ShowWindow(consoleWindow, SW_RESTORE);
-    SetForegroundWindow(consoleWindow);
-}
-
-void LevelCreator::SetSelectedModel(Model* newModel)
-{
-    if(selectedModel)
-        selectedModel->SetColor(1.0, 1.0, 1.0); // if selected model exists, set its color back to normal
-
-    selectedModel = newModel;
-
-    if(selectedModel)
-        selectedModel->SetColor(1.0, 0, 0);
-}
-
 void LevelCreator::SelectModel(double mouseX, double mouseY)
 {
     // Alter mouse x and y so it is relative to the camera's position in the scene
@@ -460,5 +472,38 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
         if(CheckPointerCollision(player, mouseX, mouseY))
             SetSelectedModel(player);
     }
+}
 
+
+
+
+/////////////////////////////////////////////////////
+//       HELPER FUNCTIONS                          //
+/////////////////////////////////////////////////////
+
+string LevelCreator::GetFilenameFromInput()
+{
+    string path;
+
+    cout << "Input texture file name (don't input full path): ";
+    getline(cin, path);
+
+    return path;
+}
+
+void LevelCreator::ShowConsoleWindow()
+{
+    ShowWindow(consoleWindow, SW_RESTORE);
+    SetForegroundWindow(consoleWindow);
+}
+
+void LevelCreator::SetSelectedModel(Model* newModel)
+{
+    if(selectedModel)
+        selectedModel->SetColor(1.0, 1.0, 1.0); // if selected model exists, set its color back to normal
+
+    selectedModel = newModel;
+
+    if(selectedModel)
+        selectedModel->SetColor(1.0, 0, 0);
 }

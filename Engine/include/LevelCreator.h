@@ -39,6 +39,7 @@ class LevelCreator : public GLScene
         Model* player; // Player only needs to be a model for the level creator. We'll grab the positions for the actual game scene
         Parallax* background; // background image for menu.
         Model* selectedModel; // user selects this with the mouse and can then manipulate the model
+        Model* nextLevelTrigger; // allows user to move and scale the nextLevelTrigger
 
         double backgroundScaleX, backgroundScaleY;
 
@@ -77,6 +78,9 @@ class LevelCreator : public GLScene
 
         // Places an enemy
         void CreateEnemy();
+
+        // Places a level trigger in the scene
+        void CreateLevelTrigger();
 
         // gets filename from user input. relativePath will be passed by the CreateBackground, CreatePlatform, etc. functions
         string GetFilenameFromInput();
