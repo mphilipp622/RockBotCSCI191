@@ -118,11 +118,17 @@ double Particles::DoubleRandom()
     return rand() % 1000 / 1000.0;
 }
 
+
+
+
+////////////////////////////////////////////
+// MUSIC NOTE PARTICLE GENERATION
+///////////////////////////////////////////
+
 void Particles::GenerateMusicParticles(int x, int y, double width, double height)
 {
     int i = 0;
 
-//    double radius = (height / 2) + ((width * width) / (8 * height));
     double radius = width / 2;
 
     int newDrops = DoubleRandom() * 60; // 60 is arbitrary. Could put anything
@@ -133,6 +139,7 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
 
     for(int i = numDrops; i < numDrops + newDrops; i++)
     {
+        // This equation will create a circle of particles around the boundaries of the music note
         double newX = x + radius * cos(theta);
         double newY = y + radius * sin(theta);
 
@@ -145,8 +152,9 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
         drops[i].time = new Timer();
         drops[i].time->Start();
 
-        theta += 1;
-        if(theta > 360)
+        theta += 1; // move onto the next part of the circle
+
+        if(theta > 360) // if we've exceeded a full circle of particles, then stop generating
             break;
     }
 

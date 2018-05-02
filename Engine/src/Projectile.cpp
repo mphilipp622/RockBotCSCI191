@@ -65,6 +65,10 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
 //    shader->ShaderInit("Shaders/v1.vs", "Shaders/f1.fs");
 
 //    testShader->BindTexture("Images/MilkyWay.jpg");
+
+
+
+    // PARTICLE CREATION
     particle = new Particles();
     particle->GenerateMusicParticles(xPos, yPos, width, height);
     lifetime->Start();
@@ -100,8 +104,13 @@ void Projectile::Move()
         Destroy(); // implement damage code here later
 }
 
+///////////////////////////////////
+// RENDER PARTICLES
+///////////////////////////////////
 void Projectile::DisplayParticles()
 {
+    // This is called in DrawGLScene. Make sure it is uncommented in DrawGLScene
+
     glPushMatrix();
 //    glUseProgram(shader->program);
     glTranslated(xPos, yPos, 0); // sets particle to player x and y position.

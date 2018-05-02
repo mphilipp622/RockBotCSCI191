@@ -100,11 +100,18 @@ GLint LevelCreator::drawGLScene()
     for(auto& platform : platforms)
         platform->DrawModel();
 
-    for(auto& enemy : enemies)
-        enemy->DrawModel();
+    if(enemies.size() > 0)
+    {
+        for(auto& enemy : enemies)
+            enemy->DrawModel();
+    }
+
 
     if(player)
+    {
         player->DrawModel();
+    }
+
 
     if(nextLevelTrigger)
         nextLevelTrigger->DrawModel();
@@ -226,6 +233,13 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         else if(wParam == 0x4C)
             CreateLevelTrigger();
+
+
+        ////////////////////////
+        // MODEL DELETION
+        ////////////////////////
+        else if(wParam == VK_DELETE)
+            DeleteObject();
     }
 
 
@@ -318,6 +332,7 @@ void LevelCreator::CreatePlayer()
     player->InitModel("Images/Player/Test_Idle_0000.png", true);
 
     SetSelectedModel(player);
+    cout << player << "    " << selectedModel << endl;
 }
 
 void LevelCreator::CreateEnemy()
@@ -474,6 +489,42 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
     }
 }
 
+void LevelCreator::DeleteObject()
+{
+    if(!selectedModel)
+        return; // don't allow deletion to occur if nothing is selected.
+
+    if(selectedModel == player)
+    {
+        cout << "DELETE PLAYER" << endl;
+         // If we're deleting the player, then just remove the player pointer
+        delete player;
+        player = nullptr;
+    }
+
+    else if(selectedModel == nextLevelTrigger)
+    {
+        // Remove next level trigger since there's only one of them
+        delete nextLevelTrigger;
+        nextLevelTrigger = nullptr;
+    }
+    else
+    {
+        // otherwise, we need to look through platforms and enemies, find the model, and remove it
+        auto finderPlatform = find(platforms.begin(), platforms.end(), selectedModel);
+        auto finderEnemy = find(enemies.begin(), enemies.end(), selectedModel);
+
+        if(finderPlatform != platforms.end())
+            // we found the selected model in platforms. Now remove it
+            platforms.erase(finderPlatform);
+        else if(finderEnemy != enemies.end())
+             // we found selected model in enemies. Remove it
+            enemies.erase(finderEnemy);
+
+    }
+
+    SetSelectedModel(nullptr);
+}
 
 
 

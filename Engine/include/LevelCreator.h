@@ -82,6 +82,9 @@ class LevelCreator : public GLScene
         // Places a level trigger in the scene
         void CreateLevelTrigger();
 
+        // Deletes the selectedObject from the scene
+        void DeleteObject();
+
         // gets filename from user input. relativePath will be passed by the CreateBackground, CreatePlatform, etc. functions
         string GetFilenameFromInput();
 
