@@ -1,10 +1,12 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
+
 #include <Model.h>
 #include <DeltaTime.h>
 #include <GLScene.h>
 #include <algorithm>
 #include <Timer.h>
+#include <Particles.h>
 
 using namespace std;
 
@@ -35,6 +37,13 @@ class Projectile : public Model
 
         // will remove projectile from gl scene vector and delete it
         void Destroy();
+
+        Particles* particle;
+        void DisplayParticles();
+
+        double xDir, yDir;
+
+//        LoadShader* musicShader;
 };
 
 #endif // PROJECTILE_H

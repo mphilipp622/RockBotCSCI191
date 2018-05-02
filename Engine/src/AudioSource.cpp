@@ -42,7 +42,9 @@ void AudioSource::Play()
 
 void AudioSource::PlayMusic()
 {
-    sound = AudioEngine::engine->play2D(filePath.c_str(), loop);
+    sound = AudioEngine::engine->play2D(filePath.c_str(), loop, true);
+    sound->setVolume(volume);
+    sound->setIsPaused(false);
 }
 
 void AudioSource::PlayChord(string newChord)
@@ -73,7 +75,9 @@ void AudioSource::SetVolume(float newVal)
     else if(newVal < 0)
         newVal = 0;
 
-    source->setDefaultVolume(newVal);
+    if(sound)
+        sound->setVolume(newVal);
+//    source->setDefaultVolume(newVal);
 }
 
 string AudioSource::GetName()

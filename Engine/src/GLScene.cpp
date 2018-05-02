@@ -1,42 +1,30 @@
 // updated 2/7/18
 
-#include <LoadShader.h>
 #include <GLScene.h>
-#include <GLLight.h>
 #include <Parallax.h>
 #include <DeltaTime.h>
 #include <Player.h>
-#include <Skybox.h>
 #include <Timer.h>
-#include <Fonts.h>
-#include <Particles.h>
 #include <HUD.h>
-
-//Model *modelTeapot = new Model();
-Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
-Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
-Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
-//MeleeEnemy* testEnemy;
-//Skybox* sky = new Skybox();
-// Can create multiple Parallax objects to create parallaxed backgrounds
-Parallax *plx = new Parallax();
-Timer *sceneTimer = new Timer();
-LoadShader* shader = new LoadShader();
- //////////////////New line
-Fonts* testFont = new Fonts();
-
-Particles* particle = new Particles();
-
-TextureLoader* testShader = new TextureLoader();
+#include <GLLight.h>
 
 GLScene::GLScene()
 {
-    isLoaded = false;
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
+    sceneName = "Game";
 //    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
 }
+
+GLScene::GLScene(string newName)
+{
+    screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
+    screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
+
+    sceneName = newName;
+}
+
 
 GLScene::~GLScene()
 {
@@ -47,19 +35,17 @@ vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
 vector<Enemy*> GLScene::enemies;
 
-// static input for player to use as well
-Inputs* GLScene::keyboardAndMouse;
-
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
-    glewInit();
-
-    audioEngine = new AudioEngine();
     player = new Player(0.0, 0);
     testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
     displayHUD = new HUD();
+    testRangedEnemy = new RangedEnemy(1, 3, 1, 1, "Enemy");
+
     keyboardAndMouse = new Inputs();
+    sceneTimer = new Timer();
+
     sceneTimer->Start();
 
     glShadeModel(GL_SMOOTH); // Shading mode
@@ -73,28 +59,33 @@ GLint GLScene::initGL()
 
     // Initialize Models Here
     cout << "Parallax Initializing" << endl;
-    plx->ParallaxInit("Images/BGSciFi.jpg");
+    background = new Parallax();
+    background->ParallaxInit("Images/Backgrounds/BGSciFi.jpg");
 
-    block->InitModel("Images/Block.png", true);
-    block2->InitModel("Images/Block2.png", true);
-    ground->InitModel("Images/Block.png", true);
-
-    testFont->InitFonts("Images/Font/Alphabet.png");
-    testFont->BuildFont("!!!");
-
-    movableObjects.push_back(player);
     enemies.push_back(testEnemy);
+    enemies.push_back(testRangedEnemy);
 //    movableObjects.push_back(testEnemy);
 
-    staticObjects.push_back(block);
-    staticObjects.push_back(ground);
-    staticObjects.push_back(block2);
+    Model* tempBlock = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
+    tempBlock->InitModel("Images/Platforms/Block.png", true);
+    staticObjects.push_back(tempBlock);
 
-//    sky->LoadTextures();
+    tempBlock = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
+    tempBlock->InitModel("Images/Platforms/Block.png", true);
+    staticObjects.push_back(tempBlock);
+
+    tempBlock = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
+    tempBlock->InitModel("Images/Platforms/Block2.png", true);
+    staticObjects.push_back(tempBlock);
 
     player->InitPlayer();
     Player::player = player;
-    testEnemy->InitEnemy();
+
+    for(auto& enemy : enemies)
+        enemy->InitEnemy();
+
+//    testEnemy->InitEnemy();
+//    testRangedEnemy->InitEnemy();
 
 //    shader->ShaderInit("Shaders/v.vs", "Shaders/f.fs");
 //    shader->ShaderInit("Shaders/v1.vs", "Shaders/f1.fs");
@@ -113,47 +104,24 @@ GLint GLScene::drawGLScene()
     gluLookAt(player->GetX(), player->GetY(), 6,
             player->GetX(), player->GetY(), player->GetZoom(),
             0.0f, 1.0f, 0.0f);
-//    glPushMatrix();
-////    glScaled(3.33, 3.33, 1);
-//    sky->DrawBox();
-//    glPopMatrix();
+
     glPushMatrix();
     glScaled(12, 12, 1);
-    plx->DrawSquare(screenWidth, screenHeight); // draw background
+    background->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
-//    glUseProgram(shader->program);
-//    glTranslated(0, 0, 0);
-//    testShader->Binder();
-//    glBegin(GL_TRIANGLES);
-//        glTexCoord2f(1, 1);
-//        glVertex3f(-3.0, 0, 0);
-//        glTexCoord2f(1, 0);
-//        glVertex3f(0, -2, 0);
-//        glTexCoord2f(0, 1);
-//        glVertex3f(0, 0, 0);
-//    glEnd();
-//    glUseProgram(0);
-    glPushMatrix();
-//    glUseProgram(shader->program);
-    glTranslated(player->GetX(), player->GetY(), 0); // sets particle to player x and y position.
-    particle->GenerateParticles();
-    particle->DrawParticles();
-    particle->LifeTime();
-//    glUseProgram(0);
-    glPopMatrix();
     displayHUD->showHP(Player::player);
+    
+	for(auto& model : movableObjects)
+        model->Update();
+
     for(auto& model : staticObjects)
         model->DrawModel();
 
     for(auto& enemy : enemies)
         enemy->Update();
 
-    for(auto& model : movableObjects)
-        model->Update();
-
-    for(int i = 0; i < testFont->charCount; i++)
-        testFont->DrawFont(i);
+    Player::player->Update();
 
     dTime->UpdateDeltaTime();
 
@@ -167,6 +135,7 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
     glViewport(0, 0, width, height); // window for our game
     glMatrixMode(GL_PROJECTION); // set the projection type for 3D space
     glLoadIdentity(); // loads identity matrix
+//    glOrtho(0.0f, width, 0.0f, height, 0.0f, 1.0f);
     gluPerspective(45.0, aspectRatio, 0.1, 100); // 45 degree angle, aspect ratio, 0.1 near to 100 far. Sets the perspective of our renderer
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity(); // loads identity matrix for modelview
@@ -183,7 +152,7 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
         keyboardAndMouse->wParamKeys = wParam;
         keyboardAndMouse->KeyPressed(player);
-        keyboardAndMouse->KeyEnv(plx, 0.1);
+//        keyboardAndMouse->KeyEnv(background, 0.1);
     }
     if(uMsg == WM_KEYUP)
     {
@@ -210,7 +179,44 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return 1;
 }
 
-void GLScene::SetLoaded(bool newState)
+string GLScene::GetSceneName()
 {
-    isLoaded = newState;
+    return sceneName;
+}
+
+void GLScene::LoadScene(string name)
+{
+    return;
+}
+
+bool GLScene::CheckPointerCollision(Model* button, double mouseX, double mouseY)
+{
+    // Check to see if the user's mouse pointer has overlapped with the button's collider.
+
+    // get model boundaries
+
+    // Don't know where these constant values came from. Eyeballed the coordinates of my mouse and took the difference due to the z-position versus screen coordinates.
+    double minX = (button->GetX() - button->GetWidth() / 2); // 0.198148
+    double maxX = (button->GetX() + button->GetWidth() / 2);
+    double minY = (button->GetY() - button->GetHeight() / 2); // old value 0.0694444 .0963542
+    double maxY = (button->GetY() + button->GetHeight() / 2); // 0572917
+
+    return Overlap (mouseX, minX, maxX) && Overlap (mouseY, minY, maxY);
+}
+
+bool GLScene::Overlap(double pos, double min, double max)
+{
+    return pos >= min && pos <= max;
+}
+
+void GLScene::CleanStaticData()
+{
+    if(enemies.size() > 0)
+        enemies.clear();
+
+    if(movableObjects.size() > 0)
+        movableObjects.clear();
+
+    if(staticObjects.size() > 0)
+        staticObjects.clear();
 }

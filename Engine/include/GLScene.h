@@ -3,6 +3,7 @@
 #ifndef GLSCENE_H
 #define GLSCENE_H
 
+#define _WIN32_WINNT 0x0500 // need this for controlling console window
 #include <windows.h>
 #include <glut.h>
 #include <iostream>
@@ -15,6 +16,8 @@
 #include <Enemy.h>
 #include <MeleeEnemy.h>
 #include <HUD.h>
+#include <RangedEnemy.h>
+#include <SceneManager.h>
 
 using namespace std;
 
@@ -22,36 +25,58 @@ class GLScene
 {
     public:
         GLScene();
+        GLScene(string newName);
         virtual ~GLScene();
-        GLint initGL();
-        GLint drawGLScene();
+
+        // openGL rendering functions
+        virtual GLint initGL();
+        virtual GLint drawGLScene();
         GLvoid resizeGLScene(GLsizei, GLsizei);
 
-        int windowsMsg(HWND, UINT, WPARAM, LPARAM);
+        // keyboard and mouse inputs
+        virtual int windowsMsg(HWND, UINT, WPARAM, LPARAM);
 
-        WPARAM wParam;
+        // used for loading into a scene from this scene
+        virtual void LoadScene(string name);
+
+//        WPARAM wParam;
         float screenHeight, screenWidth;
 
         static vector<Model*> movableObjects; // only moving objects will check for collision
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static vector<Enemy*> enemies;
-        static Inputs *keyboardAndMouse;
 
-        // Sets level state to loaded, which will set GLScene loaded boolean.
-        void SetLoaded(bool newState);
+        //returns scene name
+        string GetSceneName();
 
     protected:
-        unordered_map<string, AudioSource*> audioSources;
+        unordered_map<string, AudioSource*> audioSources; // map of all environmental sounds in scene
         Player* player;
         AudioEngine* audioEngine;
-        bool isLoaded;
-        AudioSource* BGM;
-        HUD* displayHUD;
+        AudioSource* BGM; // background music for this scene
+        string sceneName; // keeps track of the name of the scene. Used by SceneManager
+        Parallax* background; // background image for this scene
+		HUD* displayHUD;
 
+        Timer* sceneTimer;
+
+        // Checks mouse pointer collision. Mainly used for checking mouse input on UI elements like buttons
+        bool CheckPointerCollision(Model* button, double mouseX, double mouseY);
+
+        // called in GLscene and children classes to clear out staticObjects, movableObjects, and enemies
+        void CleanStaticData();
+
+        Inputs *keyboardAndMouse;
+
+        DeltaTime* dTime;
 
     private:
-        DeltaTime* dTime;
+
         Enemy* testEnemy;
+        Enemy* testRangedEnemy;
+
+        // Checks if position is overlapping specified min and max values. Used by CheckPointerCollision()
+        bool Overlap(double pos, double min, double max);
 };
 
 #endif // GLSCENE_H

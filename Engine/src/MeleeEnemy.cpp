@@ -78,20 +78,24 @@ void MeleeEnemy::InitEnemy()
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
 
 
-    moveAnim[0].BindTexture("Images/Enemies/player0.png");
-    moveAnim[1].BindTexture("Images/Enemies/player1.png");
-    moveAnim[2].BindTexture("Images/Enemies/player2.png");
-    moveAnim[3].BindTexture("Images/Enemies/player3.png");
+    moveAnim[0].BindTexture("Images/Enemies/Melee0.png");
+    moveAnim[1].BindTexture("Images/Enemies/Melee1.png");
+    moveAnim[2].BindTexture("Images/Enemies/Melee2.png");
+    moveAnim[3].BindTexture("Images/Enemies/Melee3.png");
 
-    idleAnim[0].BindTexture("Images/Enemies/play.png");
+    maxMoveFrame = 4;
 
-    jumpAnim[0].BindTexture("Images/Enemies/jump.png");
+    idleAnim[0].BindTexture("Images/Enemies/MeleeIdle.png");
+    maxIdleFrame = 1;
+
+    jumpAnim[0].BindTexture("Images/Enemies/MeleeJump.png");
+    maxJumpFrame = 1;
 
 }
 
 bool MeleeEnemy::CheckCollision()
 {
-    for(auto& model : GLScene::staticObjects)
+    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
     {
         if(Collision(model))
             return true;

@@ -17,7 +17,6 @@ class MeleeEnemy : public Enemy
     protected:
 
     private:
-
         void AIRoutine();
         bool CheckCollision();
         bool CheckCircleCollision();

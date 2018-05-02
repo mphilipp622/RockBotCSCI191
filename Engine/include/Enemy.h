@@ -49,14 +49,16 @@ class Enemy : public Model
 
         virtual void AIRoutine() = 0;
 
-        int idleFrame, dyingFrame;
+        int idleFrame, dyingFrame, jumpFrame, moveFrame, attackFrame;
         int actionTrigger;
         int moveSpeed, jumpSpeed;
         Timer* frameTimer;
-        TextureLoader moveAnim[4];
-        TextureLoader idleAnim[1];
-        TextureLoader jumpAnim[1];
-        TextureLoader deathAnim[3];
+        TextureLoader moveAnim[10];
+        TextureLoader idleAnim[10];
+        TextureLoader jumpAnim[10];
+        TextureLoader deathAnim[10];
+        TextureLoader attackAnim[10];
+        int maxIdleFrame, maxMoveFrame, maxJumpFrame, maxDeathFrame, maxAttackFrame;
         void Actions(int);
 
         virtual bool CheckCollision() = 0;

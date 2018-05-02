@@ -74,7 +74,7 @@ class Player : public Model
     private:
         int hp;
         int moveSpeed, jumpSpeed;
-        bool jump, slowDown, moving, startGravity, playingChords, canPlay;
+        bool jump, slowDown, moving, playingChords, canPlay;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;

@@ -92,6 +92,7 @@ Player::~Player()
 
 void Player::DrawPlayer()
 {
+//    glPushMatrix();
     glColor3f(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
@@ -130,7 +131,7 @@ void Player::DrawPlayer()
 	}
 
     glEnd();
-
+//    glPopMatrix();
 }
 
 void Player::InitPlayer()
@@ -301,7 +302,6 @@ void Player::Jump()
 
 void Player::ApplyGravity()
 {
-//    jumpVelocity += gravity * DeltaTime::GetDeltaTime();
 
     if(DeltaTime::GetDeltaTime() > 1)
         return; // kill if delta time is too high
@@ -454,7 +454,7 @@ void Player::StopMove()
 
 bool Player::CheckCollision()
 {
-    for(auto& model : GLScene::staticObjects)
+    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
     {
         if(Collision(model))
             return true;
@@ -465,7 +465,7 @@ bool Player::CheckCollision()
 
 void Player::CheckEnemyCollision()
 {
-    for(auto& enemy : GLScene::enemies)
+    for(auto& enemy : SceneManager::GetActiveScene()->enemies)
     {
         if(Collision(enemy))
         {
@@ -513,7 +513,7 @@ void Player::ShootProjectile(double x, double y)
     Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
     newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord(chordManager->GetNextChord());
-    GLScene::movableObjects.push_back(newProjectile);
+    SceneManager::GetActiveScene()->movableObjects.push_back(newProjectile);
 }
 
 void Player::UpdateIcons()
@@ -626,7 +626,7 @@ void Player::DrawMusicCircle()
 
 void Player::CheckHit()
 {
-    for(auto& enemy : GLScene::movableObjects)
+    for(auto& enemy : SceneManager::GetActiveScene()->movableObjects)
     {
         if(enemy->GetTag() == "Player")
             continue;

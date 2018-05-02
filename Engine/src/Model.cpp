@@ -46,6 +46,10 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
     xPos = newX;
     yPos = newY;
 
+    red = 1.0;
+    green = 1.0;
+    blue = 1.0;
+
     // Initialize Quad
     vertices[0].x = -width / 2;
     vertices[0].y = -height / 2;
@@ -77,6 +81,10 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
     rotateX = 0;
     rotateY = 0;
     rotateZ = 0;
+
+    red = 1.0;
+    green = 1.0;
+    blue = 1.0;
 
     // translations
     zoom = 0;
@@ -115,7 +123,7 @@ void Model::DrawModel()
 {
     //render this model
     glPushMatrix();
-    glColor3f(1.0, 1.0, 1.0);
+    glColor3f(red, green, blue);
     texture->Binder(); // update texture
 //    if(name != "player")
     glTranslated(xPos, yPos, zoom);
@@ -196,15 +204,39 @@ void Model::SetPosition(double newX, double newY)
 
 void Model::SetWidth(double newWidth)
 {
-   width = newWidth;
+    width = newWidth;
+
+    // update x vertices
+    vertices[0].x = -width / 2;
+
+    vertices[1].x = width / 2;
+
+    vertices[2].x = width / 2;
+
+    vertices[3].x = -width / 2;
 }
+
+void Model::SetHeight(double newHeight)
+{
+    height = newHeight;
+
+    // update y vertices
+    vertices[0].y = -height / 2;
+
+    vertices[1].y = -height / 2;
+
+    vertices[2].y = height / 2;
+
+    vertices[3].y = height / 2;
+}
+
 
 void Model::Update()
 {
-    if(name != "Player")
-        DrawModel();
-    if(GetAudioSource())
-        GetAudioSource()->SetPosition(xPos, yPos);
+//    if(name != "Player")
+//        DrawModel();
+//    if(GetAudioSource())
+//        GetAudioSource()->SetPosition(xPos, yPos);
 }
 
 bool Model::CheckCollision()
@@ -284,4 +316,16 @@ bool Model::OverlappingCircles(double x0, double y0, double x1, double y1, doubl
 
     return (distance <= sumRadius); // is the distance between both center points less than the sum of both radius's? If so, then we're overlapping with another circle.
 
+}
+
+void Model::SetZoom(double newZoom)
+{
+    zoom = newZoom;
+}
+
+void Model::SetColor(float newR, float newG, float newB)
+{
+    red = newR;
+    green = newG;
+    blue = newB;
 }
