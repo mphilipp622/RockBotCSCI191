@@ -30,6 +30,7 @@ class MainMenu : public GLScene
         Model* howToPlay; // how to play button image
         Parallax* background; // background image for menu.
         Model* exit; // exit UI element for menu.
+        Model* levelCreator;
 
         // Screen width and height in pixels
         double screenWidth, screenHeight;

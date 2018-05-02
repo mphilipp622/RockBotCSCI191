@@ -37,7 +37,7 @@ class GLScene
         // used for loading into a scene from this scene
         virtual void LoadScene(string name);
 
-        WPARAM wParam;
+//        WPARAM wParam;
         float screenHeight, screenWidth;
 
         static vector<Model*> movableObjects; // only moving objects will check for collision

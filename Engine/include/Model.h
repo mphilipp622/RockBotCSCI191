@@ -40,6 +40,7 @@ class Model
         float GetHeight();
         void SetPosition(double, double);
         void SetWidth(double);
+        void SetHeight(double newHeight);
 
         // Sets the z-position of the model
         void SetZoom(double newZoom);

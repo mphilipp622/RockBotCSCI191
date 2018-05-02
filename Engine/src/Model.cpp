@@ -196,8 +196,32 @@ void Model::SetPosition(double newX, double newY)
 
 void Model::SetWidth(double newWidth)
 {
-   width = newWidth;
+    width = newWidth;
+
+    // update x vertices
+    vertices[0].x = -width / 2;
+
+    vertices[1].x = width / 2;
+
+    vertices[2].x = width / 2;
+
+    vertices[3].x = -width / 2;
 }
+
+void Model::SetHeight(double newHeight)
+{
+    height = newHeight;
+
+    // update y vertices
+    vertices[0].y = -height / 2;
+
+    vertices[1].y = -height / 2;
+
+    vertices[2].y = height / 2;
+
+    vertices[3].y = height / 2;
+}
+
 
 void Model::Update()
 {

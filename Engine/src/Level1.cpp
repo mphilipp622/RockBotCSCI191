@@ -23,7 +23,7 @@ GLint Level1::drawGLScene()
 
 }
 
-int Level1::windowsMsg(HWND, UINT, WPARAM, LPARAM)
+int Level1::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 
 }

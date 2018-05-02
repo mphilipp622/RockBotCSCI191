@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include <GLLight.h>
+#include <LevelCreator.h>
 
 MainMenu::MainMenu()
 {
@@ -18,7 +19,7 @@ MainMenu::MainMenu()
 
     killGame = false;
 
-    zPosButtonUI = -4.0;
+    zPosButtonUI = 0;
 }
 
 MainMenu::~MainMenu()
@@ -46,15 +47,18 @@ void MainMenu::InitModels()
 {
     // instantiate UI elements
     background = new Parallax();
-    startGame = new Model(1.0, 0.25, 0, 0.5, "NewGameButton", "Button");
+    startGame = new Model(2.0, 0.5, 0, 1.0, "NewGameButton", "Button");
     startGame->SetZoom(zPosButtonUI);
-    exit = new Model(1.0, .25, 0, 0, "ExitButton", "Button");
-    exit->SetZoom(zPosButtonUI); // set the Z position. UI elements will be at -4
+    exit = new Model(2.0, 0.5, 0, -1.0, "ExitButton", "Button");
+    exit->SetZoom(zPosButtonUI); // set the Z position. UI elements will be at 0
+    levelCreator = new Model(2.0, 0.5, 0, 0, "LevelCreatorButton", "Button");
+    levelCreator->SetZoom(zPosButtonUI);
 
     // Bind textures for UI elements
-    background->ParallaxInit("Images/MenuBackground.jpg");
+    background->ParallaxInit("Images/Backgrounds/MenuBackground.jpg");
     startGame->InitModel("Images/UI/NewGame.png", true);
     exit->InitModel("Images/UI/Exit.png", true);
+    levelCreator->InitModel("Images/UI/LevelCreator.png", true);
 
 }
 
@@ -63,12 +67,15 @@ GLint MainMenu::drawGLScene()
     // Main loop. Render openGL elements to window every frame
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	glLoadIdentity();									// Reset The Current Modelview Matrix
+	gluLookAt(0, 0, 6,
+            0, 0, 0,
+            0.0f, 1.0f, 0.0f);
 
     if(killGame) // exit game
         return 0;
 
     glPushMatrix();
-    glScaled(3.33,3.33,1.0); // Scale the background image
+    glScaled(6.66, 6.66, 1.0); // Scale the background image
     background->DrawSquare(screenWidth, screenHeight);
     glPopMatrix();
 
@@ -89,10 +96,21 @@ void MainMenu::LoadScene(string sceneName)
         if(finder != SceneManager::scenes.end())
             delete SceneManager::scenes[sceneName]; // if hashtable already has map loaded, delete it
 
-        GLScene* newGame = new GLScene(sceneName); // create new map
+        if(sceneName == "LevelCreator")
+        {
+            LevelCreator* creatorScene = new LevelCreator();
 
-        SceneManager::scenes.insert( {sceneName, newGame} ); // insert map into hash table
-        newGame->initGL(); // initialize map
+            SceneManager::scenes.insert( {sceneName, creatorScene} );
+            creatorScene->initGL();
+        }
+        else if(sceneName == "Game")
+        {
+            GLScene* newGame = new GLScene(sceneName); // create new map
+
+            SceneManager::scenes.insert( {sceneName, newGame} ); // insert map into hash table
+            newGame->initGL(); // initialize map
+        }
+
 
         SceneManager::activeScene = sceneName; // set active scene to the new scene.
 
@@ -109,28 +127,32 @@ void MainMenu::LoadScene(string sceneName)
 
 int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    double mouseX, mouseY;
 
-//    if(uMsg == WM_LBUTTONDOWN)
-//    {
-//        mouseX = LOWORD(lParam) / (screenWidth / 2) - 1.0;
-//        mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0);
-//
-//        if(CheckPointerCollision(exit, mouseX, mouseY))
-////            cout << "COllide exit" << endl;
-//            killGame = true;
-//        else if(CheckPointerCollision(startGame, mouseX, mouseY))
-//            cout << "Collide start" << endl;
-////            LoadScene("Game");
-//    }
+    if(uMsg == WM_LBUTTONDOWN)
+    {
+        double aspectRatio = screenWidth / screenHeight;
+        double mouseX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
+        double mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) / aspectRatio * 3.33;
+
+        if(CheckPointerCollision(exit, mouseX, mouseY))
+            killGame = true;
+        else if(CheckPointerCollision(startGame, mouseX, mouseY))
+            LoadScene("Game");
+        else if(CheckPointerCollision(levelCreator, mouseX, mouseY))
+            LoadScene("LevelCreator");
+    }
     if(uMsg == WM_KEYDOWN)
     {
         // Handle keyboard input. User can select options 0 - 9. Hex values represent numbers 0 - 9 at top of keyboard
 
-        const int nKey = 0x4E;
+        const int oneKey = 0x31, twoKey = 0x32, threeKey = 0x33;
 
-        if(wParam == nKey)
+        if(wParam == oneKey || wParam == VK_NUMPAD1)
             LoadScene("Game");
+        else if(wParam == twoKey || wParam == VK_NUMPAD2)
+            LoadScene("LevelCreator");
+        else if(wParam == threeKey || wParam == VK_NUMPAD3)
+            killGame = true;
 
     }
 
@@ -141,4 +163,5 @@ void MainMenu::DrawButtons()
 {
     startGame->DrawModel();
     exit->DrawModel(); // render exit button
+    levelCreator->DrawModel();
 }
