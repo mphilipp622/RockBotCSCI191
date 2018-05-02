@@ -12,3 +12,23 @@ Level1::~Level1()
 {
     //dtor
 }
+
+GLint Level1::initGL()
+{
+
+}
+
+GLint Level1::drawGLScene()
+{
+
+}
+
+int Level1::windowsMsg(HWND, UINT, WPARAM, LPARAM)
+{
+
+}
+
+void Level1::LoadScene(string name)
+{
+
+}

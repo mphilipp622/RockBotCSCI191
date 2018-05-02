@@ -9,6 +9,15 @@ class Level1 : public GLScene
         Level1();
         virtual ~Level1();
 
+        virtual GLint initGL();
+        virtual GLint drawGLScene();
+
+         // keyboard and mouse inputs
+        virtual int windowsMsg(HWND, UINT, WPARAM, LPARAM);
+
+        // used for loading into a scene from this scene
+        virtual void LoadScene(string name);
+
     protected:
 
     private:

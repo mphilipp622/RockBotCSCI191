@@ -65,6 +65,7 @@
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/Inputs.h" />
+		<Unit filename="include/Level1.h" />
 		<Unit filename="include/LoadShader.h" />
 		<Unit filename="include/MainMenu.h" />
 		<Unit filename="include/MeleeEnemy.h" />
@@ -88,6 +89,7 @@
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/Inputs.cpp" />
+		<Unit filename="src/Level1.cpp" />
 		<Unit filename="src/LoadShader.cpp" />
 		<Unit filename="src/MainMenu.cpp" />
 		<Unit filename="src/MeleeEnemy.cpp" />

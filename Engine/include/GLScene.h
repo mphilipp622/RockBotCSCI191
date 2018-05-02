@@ -65,8 +65,10 @@ class GLScene
 
         Inputs *keyboardAndMouse;
 
-    private:
         DeltaTime* dTime;
+
+    private:
+
         Enemy* testEnemy;
         Enemy* testRangedEnemy;
 

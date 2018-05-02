@@ -131,7 +131,7 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
     glViewport(0, 0, width, height); // window for our game
     glMatrixMode(GL_PROJECTION); // set the projection type for 3D space
     glLoadIdentity(); // loads identity matrix
-//    glOrtho(0, width, 0, height, -1, 1);
+//    glOrtho(0.0f, width, 0.0f, height, 0.0f, 1.0f);
     gluPerspective(45.0, aspectRatio, 0.1, 100); // 45 degree angle, aspect ratio, 0.1 near to 100 far. Sets the perspective of our renderer
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity(); // loads identity matrix for modelview
