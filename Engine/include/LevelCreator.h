@@ -27,11 +27,16 @@ class LevelCreator : public GLScene
     private:
         bool killGame;
 
+        // used for minimizing and restoring the console window when input is needed
+        HWND consoleWindow;
+
+        bool mouseDown; // tracks if mouse is held down.
         double prevMouseX, prevMouseY; // used for tracking mouse motion
+        double mouseMoveSpeed, mouseIncrement;
 
         vector<Model*> platforms;
-        vector<Enemy*> enemies;
-        Player* player;
+        vector<Model*> enemies; // enemies will be models since we only need x, y positions
+        Model* player; // Player only needs to be a model for the level creator. We'll grab the positions for the actual game scene
         Parallax* background; // background image for menu.
         Model* selectedModel; // user selects this with the mouse and can then manipulate the model
 
@@ -71,7 +76,7 @@ class LevelCreator : public GLScene
         void CreatePlayer();
 
         // Places an enemy
-        void CreateEnemy(int type);
+        void CreateEnemy();
 
         // gets filename from user input. relativePath will be passed by the CreateBackground, CreatePlatform, etc. functions
         string GetFilenameFromInput();
@@ -82,6 +87,14 @@ class LevelCreator : public GLScene
         // Moves the camera position.
         void MoveCamera(double xMove, double yMove);
 
+        // Brings console window to front and activates it for user input
+        void ShowConsoleWindow();
+
+        // Sets colors on previous selected model and new selected model and updates the selectedModel pointer.
+        void SetSelectedModel(Model* newModel);
+
+        // Checks pointer collision against a model and selects it if collision happens
+        void SelectModel(double mouseX, double mouseY);
 };
 
 

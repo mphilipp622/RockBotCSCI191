@@ -56,11 +56,16 @@ class Model
         string GetName();
         string GetTag();
 
+        // Color setter. Currently only used by LevelCreator class
+        void SetColor(float newR, float newG, float newB);
+
     protected:
         float width, height, radius;
         double xPos, yPos;
         string name, tag;
         TextureLoader *texture;
+
+        float red, green, blue;
 
         // This model will check square-to-square collision with other objects. Useful for certain types of environmental collision maybe
         virtual bool CheckCollision();

@@ -46,6 +46,10 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
     xPos = newX;
     yPos = newY;
 
+    red = 1.0;
+    green = 1.0;
+    blue = 1.0;
+
     // Initialize Quad
     vertices[0].x = -width / 2;
     vertices[0].y = -height / 2;
@@ -77,6 +81,10 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
     rotateX = 0;
     rotateY = 0;
     rotateZ = 0;
+
+    red = 1.0;
+    green = 1.0;
+    blue = 1.0;
 
     // translations
     zoom = 0;
@@ -115,7 +123,7 @@ void Model::DrawModel()
 {
     //render this model
     glPushMatrix();
-    glColor3f(1.0, 1.0, 1.0);
+    glColor3f(red, green, blue);
     texture->Binder(); // update texture
 //    if(name != "player")
     glTranslated(xPos, yPos, zoom);
@@ -313,4 +321,11 @@ bool Model::OverlappingCircles(double x0, double y0, double x1, double y1, doubl
 void Model::SetZoom(double newZoom)
 {
     zoom = newZoom;
+}
+
+void Model::SetColor(float newR, float newG, float newB)
+{
+    red = newR;
+    green = newG;
+    blue = newB;
 }

@@ -302,7 +302,6 @@ void Player::Jump()
 
 void Player::ApplyGravity()
 {
-//    jumpVelocity += gravity * DeltaTime::GetDeltaTime();
 
     if(DeltaTime::GetDeltaTime() > 1)
         return; // kill if delta time is too high

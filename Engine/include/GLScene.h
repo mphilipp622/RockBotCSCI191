@@ -3,6 +3,7 @@
 #ifndef GLSCENE_H
 #define GLSCENE_H
 
+#define _WIN32_WINNT 0x0500 // need this for controlling console window
 #include <windows.h>
 #include <glut.h>
 #include <iostream>
