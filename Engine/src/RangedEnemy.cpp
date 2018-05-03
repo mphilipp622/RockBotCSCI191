@@ -61,6 +61,11 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
 	frameTimer = new Timer();
     frameTimer->Start();
 
+    moveFrame = 0;
+    attackFrame = 0;
+    idleFrame = 0;
+    jumpFrame = 0;
+
     ignoreGravity = true;
 
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
@@ -68,6 +73,10 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     xPathDistance = 3.0;
     xPatrolCenter = xPos; // set patrol center to the starting position. This could also be changed later if needed
     aggroRadius = 2.0;
+
+    attackSpeed = 2.0;
+    attackTimer = new Timer();
+    attackTimer->Start();
 }
 
 void RangedEnemy::InitEnemy()
@@ -98,10 +107,9 @@ void RangedEnemy::InitEnemy()
     dyingFrame = 0;
     maxDeathFrame = 4;
 
-    attackAnim[0].BindTexture("Images/Enemies/RangedIdle0.png");
-    attackAnim[1].BindTexture("Images/Enemies/RangedIdle1.png");
-    attackAnim[2].BindTexture("Images/Enemies/RangedIdle2.png");
-    maxAttackFrame = 3;
+    attackAnim[0].BindTexture("Images/Enemies/RangedAttack0.png");
+    attackAnim[1].BindTexture("Images/Enemies/RangedAttack1.png");
+    maxAttackFrame = 2;
 }
 
 
@@ -116,6 +124,8 @@ void RangedEnemy::AIRoutine()
     else
     {
         StopMove();
+        if(attackTimer->GetTicks() > attackSpeed * 1000) // convert to MS using 1000
+            ShootProjectile(Player::player->GetX(), Player::player->GetY());
     }
 }
 
@@ -132,6 +142,8 @@ void RangedEnemy::Patrol()
 
 void RangedEnemy::ShootProjectile(double xTarget, double yTarget)
 {
+    Actions(4);
+
     Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "DroneProjectile", "EnemyProjectile", xTarget + xPos, yTarget + yPos); // sends relative mouse pointer location
     vector<string> animations;
     for(int i = 0; i < 4; i++)
@@ -139,6 +151,8 @@ void RangedEnemy::ShootProjectile(double xTarget, double yTarget)
 
     newProjectile->InitAnimations(animations);
     SceneManager::GetActiveScene()->movableObjects.push_back(newProjectile);
+
+    attackTimer->Reset();
 }
 
 

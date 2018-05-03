@@ -9,7 +9,7 @@
 	<MainMenu.h>
 	<string>
 
-1525293904 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1525373073 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -24,6 +24,7 @@
 	<HUD.h>
 	<RangedEnemy.h>
 	<SceneManager.h>
+	<tinyxml2.h>
 
 1519256343 c:\users\seapanda\documents\college\191\191\common\include\gl\glut.h
 	<windows.h>
@@ -31,7 +32,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1525293904 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1525373418 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<Parallax.h>
 	<DeltaTime.h>
@@ -47,7 +48,7 @@
 1525137170 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1525307622 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+1525373073 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -56,7 +57,7 @@
 	<Player.h>
 	<string>
 
-1525307587 c:\users\seapanda\documents\college\191\191\engine\include\model.h
+1525373073 c:\users\seapanda\documents\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -83,7 +84,7 @@
 
 1519258448 c:\users\seapanda\documents\college\191\191\engine\include\deltatime.h
 
-1520900072 source:c:\users\seapanda\documents\college\191\191\engine\src\textureloader.cpp
+1525379160 source:c:\users\seapanda\documents\college\191\191\engine\src\textureloader.cpp
 	<TextureLoader.h>
 	<SOIL.h>
 	<GL\GL.h>
@@ -226,7 +227,7 @@
 	<GL\GL.h>
 	<iostream>
 
-1525293904 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1525373073 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -418,7 +419,7 @@
 	<Timer.h>
 	<Particles.h>
 
-1525134178 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
+1525374851 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
@@ -426,7 +427,7 @@
 	<Timer.h>
 	<Particles.h>
 
-1525293901 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
+1525374895 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -1087,11 +1088,11 @@
 1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
-1525134178 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
+1525375148 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
 	"Enemy.h"
 	<GLScene.h>
 
-1525134178 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
+1525373073 c:\users\seapanda\documents\college\191\191\engine\include\enemy.h
 	<Model.h>
 	<vector>
 	<Timer.h>
@@ -1100,20 +1101,21 @@
 	<algorithm>
 	<Player.h>
 
-1525293901 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
+1525373073 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
 	"MeleeEnemy.h"
 
-1525134178 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
+1525373073 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
 
-1525134178 c:\users\seapanda\documents\college\191\191\engine\include\rangedenemy.h
+1525374247 c:\users\seapanda\documents\college\191\191\engine\include\rangedenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
+	<Projectile.h>
 
-1525222281 source:c:\users\seapanda\documents\college\191\191\engine\src\rangedenemy.cpp
+1525379211 source:c:\users\seapanda\documents\college\191\191\engine\src\rangedenemy.cpp
 	"RangedEnemy.h"
 
 1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\fonts.cpp
@@ -1162,7 +1164,7 @@
 	<GLScene.h>
 	<Parallax.h>
 
-1525306355 source:c:\users\seapanda\documents\college\191\191\engine\src\mainmenu.cpp
+1525373073 source:c:\users\seapanda\documents\college\191\191\engine\src\mainmenu.cpp
 	"MainMenu.h"
 	<GLLight.h>
 	<LevelCreator.h>
@@ -1512,10 +1514,9 @@
 	"HUD.h"
 	"Player.h"
 
-1525309257 c:\users\seapanda\documents\college\191\191\engine\include\levelcreator.h
+1525373073 c:\users\seapanda\documents\college\191\191\engine\include\levelcreator.h
 	<GLScene.h>
 	<iostream>
-	"tinyxml2.h"
 
 1523058586 c:\users\seapanda\documents\college\191\191\engine\tinyxml2-master\tinyxml2.h
 	<ctype.h>
@@ -1541,7 +1542,7 @@
 	<cstddef>
 	<cstdarg>
 
-1525309656 source:c:\users\seapanda\documents\college\191\191\engine\src\levelcreator.cpp
+1525373073 source:c:\users\seapanda\documents\college\191\191\engine\src\levelcreator.cpp
 	"LevelCreator.h"
 	<GLLight.h>
 

@@ -26,6 +26,12 @@ class Projectile : public Model
         float speed;
         double targetX, targetY;
         void Move();
+
+        int frame;
+        Timer* frameTimer;
+        void Animate();
+        void DrawProjectile();
+
         bool CheckCollision();
         bool CheckCollisionEnemy();
         bool CheckCircleCollision();

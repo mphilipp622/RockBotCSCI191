@@ -22,6 +22,9 @@ class RangedEnemy : public Enemy
         double xPathDistance; // the distance the drone will travel in one direction before turning around
         double xPatrolCenter; // used for determining the patrol area of the drone
 
+        Timer* attackTimer; // will track attack speed time
+        double attackSpeed; // attack speed of the drone. Will be used to implement a cooldown period. Consider this attack per second
+
         // AI Functions
         void AIRoutine();
         void Patrol(); // Patrol back and forth on x axis
