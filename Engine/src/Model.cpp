@@ -69,6 +69,45 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
 
     texture = new TextureLoader();
 }
+Model::Model(float newWidth, float newHeight, double newX, double newY, double newZ)
+{
+    width = newWidth;
+    height = newHeight;
+    radius = width / 2;
+
+    rotateX = 0;
+    rotateY = 0;
+    rotateZ = 0;
+
+    // translations
+    zoom = newZ;
+    xPos = newX;
+    yPos = newY;
+
+    red = 1.0;
+    green = 1.0;
+    blue = 1.0;
+
+    // Initialize Quad
+    vertices[0].x = -width / 2;
+    vertices[0].y = -height / 2;
+    vertices[0].z = zoom;
+
+    vertices[1].x = width / 2;
+    vertices[1].y = -height / 2;
+    vertices[1].z = zoom;
+
+    vertices[2].x = width / 2;
+    vertices[2].y = height / 2;
+    vertices[2].z = zoom;
+
+    vertices[3].x = -width / 2;
+    vertices[3].y = height / 2;
+    vertices[3].z = zoom;
+
+    texture = new TextureLoader();
+}
+
 Model::Model(float newWidth, float newHeight, double newX, double newY, string newName, string newTag, AudioSource* newSource)
 {
     width = newWidth;

@@ -20,6 +20,7 @@ class Model
     public:
         Model();
         Model(float, float, double, double, string, string);
+        Model(float, float, double, double, double); // constructor for raycasting the mouse
         Model(float, float, double, double, string, string, AudioSource*);
         virtual ~Model();
         void DrawModel();

@@ -1,19 +1,15 @@
 <Level1>
     <Platforms>
-        <Platform Width="1" Height="1" xPos="-0.78499999999999992" yPos="-0.77999999999999992">
-            <Texture>Images/Platforms/block.png</Texture>
+        <Platform Width="1.7000002" Height="0.19999993" xPos="-0.5300000000000008" yPos="-2.0049999999999994">
+            <Texture>Images/Platforms/block2.png</Texture>
         </Platform>
     </Platforms>
-    <Player xPos="0.63" yPos="1.4200000000000002"/>
-    <Trigger Width="1" Height="1" xPos="2.9750000000000014" yPos="-0.055000000000000007"/>
+    <Player xPos="-0.035000000000000059" yPos="1.0000000000000002"/>
+    <Trigger Width="1" Height="1" xPos="3.9800000000000013" yPos="1.02"/>
     <Background Width="12.1" Height="12.499999999999998">
-        <Texture>Images/Backgrounds/BGSciFi.jpg</Texture>
+        <Texture>Images/Backgrounds/</Texture>
     </Background>
     <Enemies>
-        <Enemy xPos="-2.2650000000000006" yPos="0.47500000000000003">
-            <Name>Enemy0</Name>
-            <Tag>MeleeEnemy</Tag>
-        </Enemy>
         <Enemy xPos="1.2449999999999999" yPos="0.23500000000000004">
             <Name>Enemy1</Name>
             <Tag>RangedEnemy</Tag>

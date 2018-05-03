@@ -29,6 +29,7 @@ class LevelCreator : public GLScene
 
     private:
         bool killGame;
+        string playerTexturePath;
 
         // used for minimizing and restoring the console window when input is needed
         HWND consoleWindow;
@@ -48,7 +49,7 @@ class LevelCreator : public GLScene
         string backgroundTexture;
 
         // will be used for moving the camera around the scene
-        double cameraPosX, cameraPosY, cameraSpeed, cameraMoveIncrement;
+        double cameraPosX, cameraPosY, cameraPosZ, cameraSpeed, cameraMoveIncrement;
 
         // these strings represent the relative file paths to the folders containing their textures
         string backgroundRelativeFilePath, platformRelativeFilePath, playerRelativeFilePath, enemyRelativeFilePath;
@@ -123,6 +124,15 @@ class LevelCreator : public GLScene
 
         // gets filename from user input. relativePath will be passed by the CreateBackground, CreatePlatform, etc. functions
         string GetFilenameFromInput();
+
+        // Cleans out all pointers and data structures
+        void ClearScene();
+
+        // Zooms camera in and out
+        void ZoomCamera(int delta);
+
+        // Takes mouseX and mouseY screen pixel c oordinates as input, converts them to OpenGL World coordinates, and sends them out using xOut and yOut. Pass reference parameters for xOut and yOut
+        void ConvertMouseToWorld(double mouseX, double mouseY, double& xOut, double& yOut);
 
 
         //////////////////////

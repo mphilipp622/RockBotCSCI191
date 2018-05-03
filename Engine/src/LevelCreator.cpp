@@ -21,6 +21,7 @@ LevelCreator::LevelCreator()
     platformRelativeFilePath = "Images/Platforms/";
     playerRelativeFilePath = "Images/Player/";
     enemyRelativeFilePath = "Images/Enemies/";
+    playerTexturePath = "Images/Player/Test_Idle_0000.png";
 
     waitingForConsoleInput = false;
     mouseDown = false;
@@ -35,6 +36,7 @@ LevelCreator::LevelCreator()
 
     cameraPosX = 0;
     cameraPosY = 0;
+    cameraPosZ = 6;
     cameraSpeed = 100.0;
     cameraMoveIncrement = 0.4; // this is the base unit that the camera will move when user presses WASD
 
@@ -43,15 +45,6 @@ LevelCreator::LevelCreator()
     background = nullptr;
     player = nullptr;
     selectedModel = nullptr;
-
-
-
-    /* DATA LOADING
-    XMLDocument doc;
-    doc.LoadFile("Test.xml");
-    string temp = doc.FirstChildElement("Model")->FirstChildElement("Name")->GetText();
-    cout << temp<<endl;
-    */
 }
 
 LevelCreator::~LevelCreator()
@@ -95,7 +88,7 @@ GLint LevelCreator::drawGLScene()
     // Main loop. Render openGL elements to window every frame
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	glLoadIdentity();									// Reset The Current Modelview Matrix
-	gluLookAt(cameraPosX, cameraPosY, 6,
+	gluLookAt(cameraPosX, cameraPosY, cameraPosZ,
             cameraPosX, cameraPosY, 0,
             0.0f, 1.0f, 0.0f);
 
@@ -281,7 +274,7 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         double mouseX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
         double mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) / aspectRatio * 3.33;
 
-        SelectModel(mouseX, mouseY);
+        SelectModel(LOWORD(lParam), HIWORD(lParam));
     }
 
 
@@ -308,6 +301,13 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         prevMouseX = mouseX;
         prevMouseY = mouseY;
     }
+
+    ////////////////////////////////
+    // CAMERA ZOOM WITH MOUSE WHEEL
+    ////////////////////////////////
+
+    if(uMsg == WM_MOUSEWHEEL)
+        ZoomCamera(GET_WHEEL_DELTA_WPARAM(wParam));
 }
 
 
@@ -358,7 +358,7 @@ void LevelCreator::CreatePlayer()
     cout << "Making Player..." << endl;
 
     player = new Model(1.0, 1.0, cameraPosX, cameraPosY, "Player", "Player"); // spawn player in middle of screen
-    player->InitModel("Images/Player/Test_Idle_0000.png", true);
+    player->InitModel(playerTexturePath, true);
 
     SetSelectedModel(player);
     cout << player << "    " << selectedModel << endl;
@@ -483,9 +483,10 @@ void LevelCreator::MoveObject(double mouseX, double mouseY)
 
 void LevelCreator::SelectModel(double mouseX, double mouseY)
 {
-    // Alter mouse x and y so it is relative to the camera's position in the scene
-    mouseX += cameraPosX;
-    mouseY += cameraPosY;
+    double convertedX, convertedY;
+
+    // convert mouse coordinates and put them into convertedX and convertedY
+    ConvertMouseToWorld(mouseX, mouseY, convertedX, convertedY);
 
     // This will deselect the selectedModel. Allowing user to right-click empty space to deselect.
     SetSelectedModel(nullptr);
@@ -493,7 +494,7 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
     // Iterate through all the models in the scene and check for mouse pointer collision.
     for(auto& platform : platforms)
     {
-        if(CheckPointerCollision(platform, mouseX, mouseY))
+        if(CheckPointerCollision(platform, convertedX, convertedY))
         {
             // Set the new selected model
             SetSelectedModel(platform);
@@ -503,7 +504,7 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
 
     for(auto& enemy : enemies)
     {
-        if(CheckPointerCollision(enemy, mouseX, mouseY))
+        if(CheckPointerCollision(enemy, convertedX, convertedY))
         {
             // Set the new selected model
             SetSelectedModel(enemy);
@@ -513,8 +514,14 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
 
     if(player)
     {
-        if(CheckPointerCollision(player, mouseX, mouseY))
+        if(CheckPointerCollision(player, convertedX, convertedY))
             SetSelectedModel(player);
+    }
+
+    if(nextLevelTrigger)
+    {
+        if(CheckPointerCollision(nextLevelTrigger, convertedX, convertedY))
+            SetSelectedModel(nextLevelTrigger);
     }
 }
 
@@ -586,6 +593,63 @@ void LevelCreator::SetSelectedModel(Model* newModel)
 
     if(selectedModel)
         selectedModel->SetColor(1.0, 0, 0);
+}
+
+void LevelCreator::ClearScene()
+{
+    // iterate through vectors and delete pointers then clear the vectors
+    for(auto& platform : platforms)
+        delete platform;
+
+    platforms.clear();
+
+    for(auto& enemy : enemies)
+        delete enemy;
+
+    enemies.clear();
+
+    delete player;
+    player = nullptr;
+
+    delete background;
+    background = nullptr;
+
+    delete nextLevelTrigger;
+    nextLevelTrigger = nullptr;
+
+    selectedModel = nullptr;
+}
+
+void LevelCreator::ZoomCamera(int delta)
+{
+    cameraPosZ -= 0.5 * (delta / 120);
+}
+
+
+void LevelCreator::ConvertMouseToWorld(double mouseX, double mouseY, double& xOut, double& yOut)
+{
+    double modelMatrix[16];
+    double projMatrix[16];
+    GLint viewport[4];
+    GLfloat newX, newY, newZ;
+
+    glGetDoublev(GL_MODELVIEW_MATRIX,modelMatrix);
+    glGetDoublev(GL_PROJECTION_MATRIX,projMatrix);
+    glGetIntegerv(GL_VIEWPORT,viewport);
+
+    newX = (float) mouseX;
+    newY = (float) viewport[3] - (GLint) mouseY - 1;
+
+    glReadPixels( newX, int(newY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &newZ );
+
+    double convertedX, convertedY, convertedZ;
+    gluUnProject(newX, newY, newZ, modelMatrix, projMatrix, viewport, &convertedX, &convertedY, &convertedZ);
+
+    convertedX += cameraPosX;
+    convertedY += cameraPosY;
+
+    xOut = (double) convertedX;
+    yOut = (double) convertedY;
 }
 
 
@@ -783,20 +847,116 @@ void LevelCreator::LoadLevelFromXML()
 {
     ShowConsoleWindow();
 
-    cout << "Input Filename for level (include .xml extension): ";
+    cout << "Input a level numebr to load (0 - 9): ";
 
-    string filename;
+    char num;
 
-    getline(cin, filename);
+    cin >> num;
+
+    int convertNum = num - 48;
+
+    string filepath = "LevelData/Level" + to_string(convertNum) + ".xml";
+
+    ClearScene();
 
     XMLDocument xmlDoc;
-    xmlDoc.LoadFile(("LevelData/" + filename).c_str());
+    xmlDoc.LoadFile(filepath.c_str());
 
-    const XMLElement* element = xmlDoc.FirstChildElement();
-    for (const XMLElement* child = element->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+    const XMLElement* root = xmlDoc.FirstChildElement(); // gets root node
+
+
+
+    /////////////////
+    // LOAD PLATFORMS
+    /////////////////
+
+    const XMLElement* mainElements = root->FirstChildElement();
+    for (const XMLElement* child = mainElements->FirstChildElement(); child != 0; child=child->NextSiblingElement())
     {
-        double temp;
-        child->QueryAttribute("Width", &temp);
-        cout << temp << endl;
+        double newWidth, newHeight, newX, newY;
+        child->QueryAttribute("Width", &newWidth);
+        child->QueryAttribute("Height", &newHeight);
+        child->QueryAttribute("xPos", &newX);
+        child->QueryAttribute("yPos", &newY);
+
+        string newTexture = child->FirstChildElement()->GetText();
+
+        platforms.push_back(new Model(newWidth, newHeight, newX, newY, "Platform", "Platform"));
+        platforms.back()->InitModel(newTexture, true);
     }
+
+    //////////////
+    // LOAD PLAYER
+    //////////////
+
+    mainElements = mainElements->NextSiblingElement();
+    double playerX, playerY;
+    mainElements->QueryAttribute("xPos", &playerX);
+    mainElements->QueryAttribute("yPos", &playerY);
+
+    player = new Model(1.0, 1.0, playerX, playerY, "Player", "Player");
+    player->InitModel(playerTexturePath, true);
+
+    ///////////////
+    // LOAD TRIGGER
+    ///////////////
+
+    mainElements = mainElements->NextSiblingElement();
+    double newWidth, newHeight, newX, newY;
+    mainElements->QueryAttribute("Width", &newWidth);
+    mainElements->QueryAttribute("Height", &newHeight);
+    mainElements->QueryAttribute("xPos", &newX);
+    mainElements->QueryAttribute("yPos", &newY);
+
+    nextLevelTrigger = new Model(newWidth, newHeight, newX, newY, "LevelTrigger", "Trigger");
+    nextLevelTrigger->InitModel("Images/LevelTrigger.png", true);
+
+    //////////////////
+    // LOAD BACKGROUND
+    //////////////////
+
+    mainElements = mainElements->NextSiblingElement();
+
+    // Need to store element name into a string due to the return type being const char*
+    string checkName = mainElements->Name();
+
+    if(checkName == "Background")
+    {
+        // LevelCreator class has variables for background scale x and y, which is where we'll dump width and height.
+        mainElements->QueryAttribute("Width", &backgroundScaleX);
+        mainElements->QueryAttribute("Height", &backgroundScaleY);
+        string texturePath = mainElements->FirstChildElement()->GetText();
+
+        background = new Parallax();
+
+        mainElements = mainElements->NextSiblingElement();
+        checkName = mainElements->Name();
+    }
+
+    if(checkName == "Enemies")
+    {
+        for (const XMLElement* child = mainElements->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+        {
+            double newX, newY;
+            child->QueryAttribute("xPos", &newX);
+            child->QueryAttribute("yPos", &newY);
+
+            string newName, newTag;
+
+            newName = child->FirstChildElement()->GetText(); // get the name of the enemy
+            newTag = child->LastChildElement()->GetText(); // get the tag of the enemy
+
+            enemies.push_back(new Model(1.0, 1.0, newX, newY, newName, newTag));
+
+            string texturePath;
+
+            if(newTag == "MeleeEnemy")
+                texturePath = "Images/Enemies/MeleeIdle.png";
+            else if(newTag == "RangedEnemy")
+                texturePath = "Images/Enemies/RangedIdle0.png";
+
+            enemies.back()->InitModel(texturePath, true);
+        }
+    }
+
 }

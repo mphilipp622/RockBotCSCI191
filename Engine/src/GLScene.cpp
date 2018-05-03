@@ -111,7 +111,7 @@ GLint GLScene::drawGLScene()
     glPopMatrix();
 
     displayHUD->showHP(Player::player);
-    
+
 	for(auto& model : movableObjects)
         model->Update();
 
@@ -201,6 +201,7 @@ bool GLScene::CheckPointerCollision(Model* button, double mouseX, double mouseY)
     double minY = (button->GetY() - button->GetHeight() / 2); // old value 0.0694444 .0963542
     double maxY = (button->GetY() + button->GetHeight() / 2); // 0572917
 
+    cout << "(" << minX << ", " << minY << ")    (" << maxX << ", " << maxY << ")" << endl;
     return Overlap (mouseX, minX, maxX) && Overlap (mouseY, minY, maxY);
 }
 
