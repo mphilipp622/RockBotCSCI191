@@ -58,6 +58,7 @@ class GLScene
         string sceneName; // keeps track of the name of the scene. Used by SceneManager
         Parallax* background; // background image for this scene
 		HUD* displayHUD;
+		Model* nextLevelTrigger;
 
         double backgroundScaleX, backgroundScaleY;
 
@@ -79,11 +80,9 @@ class GLScene
         // Loads player, enemy, platform, trigger data into the scene
         void LoadLevelFromXML();
 
+
     private:
 
-        Enemy* testEnemy;
-        Enemy* testRangedEnemy;
-        Model* nextLevelTrigger;
 
         // Empty out the static data. Useful for loading new data
         void ClearStaticData();

@@ -71,6 +71,9 @@ class Model
 
         float red, green, blue;
 
+        // Checks if this trigger has collided with the player
+        void CheckTriggerCollision();
+
         // This model will check square-to-square collision with other objects. Useful for certain types of environmental collision maybe
         virtual bool CheckCollision();
 

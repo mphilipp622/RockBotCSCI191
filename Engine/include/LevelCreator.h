@@ -36,9 +36,8 @@ class LevelCreator : public GLScene
         vector<Model*> platforms;
         vector<Model*> enemies; // enemies will be models since we only need x, y positions
         Model* player; // Player only needs to be a model for the level creator. We'll grab the positions for the actual game scene
-        Parallax* background; // background image for menu.
+//        Parallax* background; // background image for menu.
         Model* selectedModel; // user selects this with the mouse and can then manipulate the model
-        Model* nextLevelTrigger; // allows user to move and scale the nextLevelTrigger
 
         string backgroundTexture;
 

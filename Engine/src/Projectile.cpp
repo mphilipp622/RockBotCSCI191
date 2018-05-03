@@ -64,11 +64,12 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
     lifetime = new Timer();
     frameTimer = new Timer();
 
+    frame = 0;
+
 //    shader = new LoadShader();
 //    shader->ShaderInit("Shaders/v1.vs", "Shaders/f1.fs");
 
 //    testShader->BindTexture("Images/MilkyWay.jpg");
-
 
 
     // PARTICLE CREATION
@@ -139,6 +140,8 @@ void Projectile::InitAnimations(vector<string> names)
 {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    frame = 0;
 
     for(int i = 0; i < names.size(); i++)
         animation[i].BindTexture(names.at(i));
@@ -231,5 +234,5 @@ void Projectile::Destroy()
     // find this projectile in the main vector and remove it. Then delete this projectile
     auto finder = find(GLScene::movableObjects.begin(), GLScene::movableObjects.end(), this);
     GLScene::movableObjects.erase(finder);
-    delete this;
+//    delete this;
 }

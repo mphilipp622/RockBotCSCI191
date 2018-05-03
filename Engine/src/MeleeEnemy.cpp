@@ -65,6 +65,12 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
 	frameTimer = new Timer();
     frameTimer->Start();
 
+    moveFrame = 0;
+    jumpFrame = 0;
+    attackFrame = 0;
+    idleFrame = 0;
+    dyingFrame = 0;
+
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
 
     aggroRadius = 3;
@@ -92,6 +98,9 @@ void MeleeEnemy::InitEnemy()
 
     jumpAnim[0].BindTexture("Images/Enemies/MeleeJump.png");
     maxJumpFrame = 1;
+
+    deathAnim[0].BindTexture("Images/Enemies/MeleeIdle.png");
+    maxDeathFrame = 1;
 
 }
 

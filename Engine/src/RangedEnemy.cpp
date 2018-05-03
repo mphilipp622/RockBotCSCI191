@@ -65,6 +65,7 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     attackFrame = 0;
     idleFrame = 0;
     jumpFrame = 0;
+    dyingFrame = 0;
 
     ignoreGravity = true;
 
@@ -77,6 +78,8 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     attackSpeed = 2.0;
     attackTimer = new Timer();
     attackTimer->Start();
+
+    cout << "HELLO" << endl;
 }
 
 void RangedEnemy::InitEnemy()
@@ -123,7 +126,8 @@ void RangedEnemy::AIRoutine()
         Patrol(); // if we haven't detected player, then patrol.
     else
     {
-        StopMove();
+        if(moving)
+             StopMove();
         if(attackTimer->GetTicks() > attackSpeed * 1000) // convert to MS using 1000
             ShootProjectile(Player::player->GetX(), Player::player->GetY());
     }
@@ -142,9 +146,9 @@ void RangedEnemy::Patrol()
 
 void RangedEnemy::ShootProjectile(double xTarget, double yTarget)
 {
-    Actions(4);
+    isAttacking = true;
 
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "DroneProjectile", "EnemyProjectile", xTarget + xPos, yTarget + yPos); // sends relative mouse pointer location
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "DroneProjectile", "EnemyProjectile", xTarget, yTarget); // sends relative mouse pointer location
     vector<string> animations;
     for(int i = 0; i < 4; i++)
         animations.push_back("Images/Projectiles/Bullet" + to_string(i) + ".png");

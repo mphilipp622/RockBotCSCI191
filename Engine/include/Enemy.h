@@ -49,6 +49,8 @@ class Enemy : public Model
         bool isDying;
         void Die();
 
+        bool isAttacking;
+
         virtual void AIRoutine() = 0;
 
         int idleFrame, dyingFrame, jumpFrame, moveFrame, attackFrame;

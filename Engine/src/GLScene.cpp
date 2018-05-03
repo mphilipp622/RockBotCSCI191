@@ -14,7 +14,6 @@ GLScene::GLScene()
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
     sceneName = "Game";
-//    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
 }
 
 GLScene::GLScene(string newName)
@@ -39,10 +38,6 @@ vector<Enemy*> GLScene::enemies;
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
-//    player = new Player(0.0, 0);
-//    testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
-
-//    testRangedEnemy = new RangedEnemy(1, 3, 1, 1, "Enemy");
 
     glShadeModel(GL_SMOOTH); // Shading mode
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background color to black
@@ -61,42 +56,6 @@ GLint GLScene::initGL()
 
     sceneTimer->Start();
 
-
-
-    // Initialize Models Here
-//    cout << "Parallax Initializing" << endl;
-//    background = new Parallax();
-//    background->ParallaxInit("Images/Backgrounds/BGSciFi.jpg");
-//
-//    enemies.push_back(testEnemy);
-//    enemies.push_back(testRangedEnemy);
-////    movableObjects.push_back(testEnemy);
-//
-//    Model* tempBlock = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
-//    tempBlock->InitModel("Images/Platforms/Block.png", true);
-//    staticObjects.push_back(tempBlock);
-//
-//    tempBlock = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
-//    tempBlock->InitModel("Images/Platforms/Block.png", true);
-//    staticObjects.push_back(tempBlock);
-//
-//    tempBlock = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
-//    tempBlock->InitModel("Images/Platforms/Block2.png", true);
-//    staticObjects.push_back(tempBlock);
-//
-//    player->InitPlayer();
-//    Player::player = player;
-//
-//    for(auto& enemy : enemies)
-//        enemy->InitEnemy();
-
-//    testEnemy->InitEnemy();
-//    testRangedEnemy->InitEnemy();
-
-//    shader->ShaderInit("Shaders/v.vs", "Shaders/f.fs");
-//    shader->ShaderInit("Shaders/v1.vs", "Shaders/f1.fs");
-
-//    testShader->BindTexture("Images/MilkyWay.jpg");
     BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
     BGM->PlayMusic();
     dTime = new DeltaTime();
@@ -167,8 +126,9 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         keyboardAndMouse->KeyUp(Player::player);
     }
     if(uMsg == WM_MOUSEMOVE)
-    // should constantly update mouse pointer x and y positions
+        // should constantly update mouse pointer x and y positions
         keyboardAndMouse->SetMousePointer(LOWORD(lParam), HIWORD(lParam));
+
     if(uMsg == WM_LBUTTONDOWN)
     {
         // left-click functionality

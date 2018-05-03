@@ -40,6 +40,7 @@ LevelCreator::LevelCreator()
     background = nullptr;
     player = nullptr;
     selectedModel = nullptr;
+    nextLevelTrigger = nullptr;
 }
 
 LevelCreator::~LevelCreator()

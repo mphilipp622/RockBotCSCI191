@@ -282,6 +282,7 @@ void Model::Update()
 
 bool Model::CheckCollision()
 {
+
     return false;
 }
 

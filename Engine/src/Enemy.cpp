@@ -63,6 +63,8 @@ Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string
     isDying = false;
     ignoreGravity = false;
 
+    isAttacking = false;
+
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
 }
 
@@ -124,8 +126,6 @@ void Enemy::Update()
         return;
     }
 
-    AIRoutine();
-
     if(moving)
     {
         if(xDirection > 0)
@@ -138,7 +138,7 @@ void Enemy::Update()
         else
             Actions(2);
     }
-    else if(!moving && !jump)
+    else if(!moving && !jump && !isAttacking)
         Actions(0);
 
     if(jump)
@@ -153,6 +153,10 @@ void Enemy::Update()
     if(slowDown)
         StopMove();
 
+    if(isAttacking && !moving)
+        Actions(4);
+
+    AIRoutine();
 }
 
 void Enemy::TakeDamage(int damageTaken)
@@ -444,6 +448,10 @@ void Enemy::Actions(int newAction)
         {
             attackFrame++;
             attackFrame %= maxAttackFrame;
+
+            if(attackFrame == 0) // only show the attack animation one time before stopping.
+                isAttacking = false;
+
             frameTimer->Reset();
         }
 
