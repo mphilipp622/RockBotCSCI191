@@ -23,6 +23,7 @@ GLScene::GLScene(string newName)
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
     sceneName = newName;
+    ClearStaticData();
 }
 
 
@@ -38,15 +39,10 @@ vector<Enemy*> GLScene::enemies;
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
-    player = new Player(0.0, 0);
-    testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
-    displayHUD = new HUD();
-    testRangedEnemy = new RangedEnemy(1, 3, 1, 1, "Enemy");
+//    player = new Player(0.0, 0);
+//    testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
 
-    keyboardAndMouse = new Inputs();
-    sceneTimer = new Timer();
-
-    sceneTimer->Start();
+//    testRangedEnemy = new RangedEnemy(1, 3, 1, 1, "Enemy");
 
     glShadeModel(GL_SMOOTH); // Shading mode
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background color to black
@@ -57,32 +53,42 @@ GLint GLScene::initGL()
     glEnable(GL_COLOR_MATERIAL); // allows texture to have color
     GLLight Light(GL_LIGHT0);
 
+    LoadLevelFromXML();
+
+    displayHUD = new HUD();
+    keyboardAndMouse = new Inputs();
+    sceneTimer = new Timer();
+
+    sceneTimer->Start();
+
+
+
     // Initialize Models Here
-    cout << "Parallax Initializing" << endl;
-    background = new Parallax();
-    background->ParallaxInit("Images/Backgrounds/BGSciFi.jpg");
-
-    enemies.push_back(testEnemy);
-    enemies.push_back(testRangedEnemy);
-//    movableObjects.push_back(testEnemy);
-
-    Model* tempBlock = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
-    tempBlock->InitModel("Images/Platforms/Block.png", true);
-    staticObjects.push_back(tempBlock);
-
-    tempBlock = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
-    tempBlock->InitModel("Images/Platforms/Block.png", true);
-    staticObjects.push_back(tempBlock);
-
-    tempBlock = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
-    tempBlock->InitModel("Images/Platforms/Block2.png", true);
-    staticObjects.push_back(tempBlock);
-
-    player->InitPlayer();
-    Player::player = player;
-
-    for(auto& enemy : enemies)
-        enemy->InitEnemy();
+//    cout << "Parallax Initializing" << endl;
+//    background = new Parallax();
+//    background->ParallaxInit("Images/Backgrounds/BGSciFi.jpg");
+//
+//    enemies.push_back(testEnemy);
+//    enemies.push_back(testRangedEnemy);
+////    movableObjects.push_back(testEnemy);
+//
+//    Model* tempBlock = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
+//    tempBlock->InitModel("Images/Platforms/Block.png", true);
+//    staticObjects.push_back(tempBlock);
+//
+//    tempBlock = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
+//    tempBlock->InitModel("Images/Platforms/Block.png", true);
+//    staticObjects.push_back(tempBlock);
+//
+//    tempBlock = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
+//    tempBlock->InitModel("Images/Platforms/Block2.png", true);
+//    staticObjects.push_back(tempBlock);
+//
+//    player->InitPlayer();
+//    Player::player = player;
+//
+//    for(auto& enemy : enemies)
+//        enemy->InitEnemy();
 
 //    testEnemy->InitEnemy();
 //    testRangedEnemy->InitEnemy();
@@ -101,12 +107,13 @@ GLint GLScene::drawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    gluLookAt(player->GetX(), player->GetY(), 6,
-            player->GetX(), player->GetY(), player->GetZoom(),
+
+    gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
+            Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
             0.0f, 1.0f, 0.0f);
 
     glPushMatrix();
-    glScaled(12, 12, 1);
+    glScaled(backgroundScaleX, backgroundScaleY, 1);
     background->DrawSquare(screenWidth, screenHeight); // draw background
     glPopMatrix();
 
@@ -151,13 +158,13 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //        testAudio->Play();
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
         keyboardAndMouse->wParamKeys = wParam;
-        keyboardAndMouse->KeyPressed(player);
+        keyboardAndMouse->KeyPressed(Player::player);
 //        keyboardAndMouse->KeyEnv(background, 0.1);
     }
     if(uMsg == WM_KEYUP)
     {
         keyboardAndMouse->wParamKeys = wParam;
-        keyboardAndMouse->KeyUp(player);
+        keyboardAndMouse->KeyUp(Player::player);
     }
     if(uMsg == WM_MOUSEMOVE)
     // should constantly update mouse pointer x and y positions
@@ -166,15 +173,15 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         // left-click functionality
         keyboardAndMouse->wParamMouse = wParam;
-        keyboardAndMouse->MouseDown(player, lParam);
+        keyboardAndMouse->MouseDown(Player::player, lParam);
     }
     if(uMsg == WM_RBUTTONDOWN)
     {
         keyboardAndMouse->wParamMouse = wParam;
-        keyboardAndMouse->MouseDown(player, lParam);
+        keyboardAndMouse->MouseDown(Player::player, lParam);
     }
     if(uMsg == WM_MOUSEWHEEL)
-        keyboardAndMouse->WheelMove(player, GET_WHEEL_DELTA_WPARAM(wParam));
+        keyboardAndMouse->WheelMove(Player::player, GET_WHEEL_DELTA_WPARAM(wParam));
 
 	return 1;
 }
@@ -201,7 +208,6 @@ bool GLScene::CheckPointerCollision(Model* button, double mouseX, double mouseY)
     double minY = (button->GetY() - button->GetHeight() / 2); // old value 0.0694444 .0963542
     double maxY = (button->GetY() + button->GetHeight() / 2); // 0572917
 
-    cout << "(" << minX << ", " << minY << ")    (" << maxX << ", " << maxY << ")" << endl;
     return Overlap (mouseX, minX, maxX) && Overlap (mouseY, minY, maxY);
 }
 
@@ -221,3 +227,151 @@ void GLScene::CleanStaticData()
     if(staticObjects.size() > 0)
         staticObjects.clear();
 }
+
+void GLScene::ConvertMouseToWorld(double mouseX, double mouseY, double cameraX, double cameraY, double &xOut, double &yOut)
+{
+    double modelMatrix[16];
+    double projMatrix[16];
+    GLint viewport[4];
+    GLfloat newX, newY, newZ;
+
+    glGetDoublev(GL_MODELVIEW_MATRIX,modelMatrix);
+    glGetDoublev(GL_PROJECTION_MATRIX,projMatrix);
+    glGetIntegerv(GL_VIEWPORT,viewport);
+
+    newX = (float) mouseX;
+    newY = (float) viewport[3] - (GLfloat) mouseY - 1;
+
+    glReadPixels( newX, float(newY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &newZ );
+
+    double convertedX, convertedY, convertedZ;
+    gluUnProject(newX, newY, newZ, modelMatrix, projMatrix, viewport, &convertedX, &convertedY, &convertedZ);
+
+    convertedX += cameraX;
+    convertedY += cameraY;
+
+    cout << convertedX << "    " << convertedY << endl;
+
+    xOut = (double) convertedX;
+    yOut = (double) convertedY;
+}
+void GLScene::LoadLevelFromXML()
+{
+    XMLDocument xmlDoc;
+    xmlDoc.LoadFile(("LevelData/" + sceneName + ".xml").c_str());
+
+    const XMLElement* root = xmlDoc.FirstChildElement(); // gets root node
+
+    /////////////////
+    // LOAD PLATFORMS
+    /////////////////
+
+    const XMLElement* mainElements = root->FirstChildElement();
+    for (const XMLElement* child = mainElements->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+    {
+        double newWidth, newHeight, newX, newY;
+        child->QueryAttribute("Width", &newWidth);
+        child->QueryAttribute("Height", &newHeight);
+        child->QueryAttribute("xPos", &newX);
+        child->QueryAttribute("yPos", &newY);
+
+        string newTexture = child->FirstChildElement()->GetText();
+
+        staticObjects.push_back(new Model(newWidth, newHeight, newX, newY, "Platform", "Platform"));
+        staticObjects.back()->InitModel(newTexture, true);
+    }
+
+    //////////////
+    // LOAD PLAYER
+    //////////////
+
+    mainElements = mainElements->NextSiblingElement();
+    double playerX, playerY;
+    mainElements->QueryAttribute("xPos", &playerX);
+    mainElements->QueryAttribute("yPos", &playerY);
+
+
+    Player::player = new Player(playerX, playerY);
+    Player::player->InitPlayer();
+
+    ///////////////
+    // LOAD TRIGGER
+    ///////////////
+
+    mainElements = mainElements->NextSiblingElement();
+    double newWidth, newHeight, newX, newY;
+    mainElements->QueryAttribute("Width", &newWidth);
+    mainElements->QueryAttribute("Height", &newHeight);
+    mainElements->QueryAttribute("xPos", &newX);
+    mainElements->QueryAttribute("yPos", &newY);
+
+    nextLevelTrigger = new Model(newWidth, newHeight, newX, newY, "LevelTrigger", "Trigger");
+    nextLevelTrigger->InitModel("Images/LevelTrigger.png", true);
+
+    //////////////////
+    // LOAD BACKGROUND
+    //////////////////
+
+    mainElements = mainElements->NextSiblingElement();
+
+    // Need to store element name into a string due to the return type being const char*
+    string checkName = mainElements->Name();
+
+    if(checkName == "Background")
+    {
+        // LevelCreator class has variables for background scale x and y, which is where we'll dump width and height.
+        mainElements->QueryAttribute("Width", &backgroundScaleX);
+        mainElements->QueryAttribute("Height", &backgroundScaleY);
+        string texturePath = mainElements->FirstChildElement()->GetText();
+
+        background = new Parallax();
+
+        mainElements = mainElements->NextSiblingElement();
+        checkName = mainElements->Name();
+    }
+
+    if(checkName == "Enemies")
+    {
+        for (const XMLElement* child = mainElements->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+        {
+            double newX, newY;
+            child->QueryAttribute("xPos", &newX);
+            child->QueryAttribute("yPos", &newY);
+
+            string newName, newTag;
+
+            newName = child->FirstChildElement()->GetText(); // get the name of the enemy
+            newTag = child->LastChildElement()->GetText(); // get the tag of the enemy
+
+            if(newTag == "MeleeEnemy")
+                enemies.push_back(new MeleeEnemy(newX, newY, 1.0, 1.0, newName));
+            else if(newTag == "RangedEnemy")
+                enemies.push_back(new RangedEnemy(newX, newY, 1.0, 1.0, newName));
+
+            if(enemies.back())
+                enemies.back()->InitEnemy();
+        }
+    }
+}
+
+void GLScene::ClearStaticData()
+{
+    for(auto& enemy : enemies)
+        delete enemy;
+
+    enemies.clear();
+
+    for(auto& platform : staticObjects)
+        delete platform;
+
+    staticObjects.clear();
+
+    for(auto& obj : movableObjects)
+        delete obj;
+
+    movableObjects.clear();
+
+    delete Player::player;
+    Player::player = nullptr;
+}
+

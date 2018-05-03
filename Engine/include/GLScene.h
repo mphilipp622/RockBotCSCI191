@@ -18,8 +18,10 @@
 #include <HUD.h>
 #include <RangedEnemy.h>
 #include <SceneManager.h>
+#include <tinyxml2.h>
 
 using namespace std;
+using namespace tinyxml2;
 
 class GLScene
 {
@@ -51,12 +53,13 @@ class GLScene
 
     protected:
         unordered_map<string, AudioSource*> audioSources; // map of all environmental sounds in scene
-        Player* player;
         AudioEngine* audioEngine;
         AudioSource* BGM; // background music for this scene
         string sceneName; // keeps track of the name of the scene. Used by SceneManager
         Parallax* background; // background image for this scene
 		HUD* displayHUD;
+
+        double backgroundScaleX, backgroundScaleY;
 
         Timer* sceneTimer;
 
@@ -70,10 +73,20 @@ class GLScene
 
         DeltaTime* dTime;
 
+        // Takes mouseX and mouseY screen pixel c oordinates as input, converts them to OpenGL World coordinates, and sends them out using xOut and yOut. Pass reference parameters for xOut and yOut
+        void ConvertMouseToWorld(double mouseX, double mouseY, double cameraX, double cameraY, double &xOut, double &yOut);
+
+        // Loads player, enemy, platform, trigger data into the scene
+        void LoadLevelFromXML();
+
     private:
 
         Enemy* testEnemy;
         Enemy* testRangedEnemy;
+        Model* nextLevelTrigger;
+
+        // Empty out the static data. Useful for loading new data
+        void ClearStaticData();
 
         // Checks if position is overlapping specified min and max values. Used by CheckPointerCollision()
         bool Overlap(double pos, double min, double max);

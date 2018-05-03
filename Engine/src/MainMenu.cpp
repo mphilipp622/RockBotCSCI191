@@ -105,7 +105,7 @@ void MainMenu::LoadScene(string sceneName)
             SceneManager::scenes.insert( {sceneName, creatorScene} );
             creatorScene->initGL();
         }
-        else if(sceneName == "Game")
+        else if(sceneName == "Level1")
         {
             GLScene* newGame = new GLScene(sceneName); // create new map
 
@@ -115,16 +115,6 @@ void MainMenu::LoadScene(string sceneName)
 
 
         SceneManager::activeScene = sceneName; // set active scene to the new scene.
-
-//    // Handle map loading. We pass an int so we can load a txt file that contains the same int number in the filename.
-//    if(num == 0)
-//        // if user selects to exit, end the game
-//        killGame = true;
-//    else
-//    {
-//        // If user selects a map, we need to load it and play it.
-//
-//    }
 }
 
 int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -132,14 +122,14 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     if(uMsg == WM_LBUTTONDOWN)
     {
-        double aspectRatio = screenWidth / screenHeight;
-        double mouseX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
-        double mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) / aspectRatio * 3.33;
+        double mouseX, mouseY;
+
+        ConvertMouseToWorld(LOWORD(lParam), HIWORD(lParam), 0, 0, mouseX, mouseY);
 
         if(CheckPointerCollision(exit, mouseX, mouseY))
             killGame = true;
         else if(CheckPointerCollision(startGame, mouseX, mouseY))
-            LoadScene("Game");
+            LoadScene("Level1");
         else if(CheckPointerCollision(levelCreator, mouseX, mouseY))
             LoadScene("LevelCreator");
     }
@@ -150,7 +140,7 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         const int oneKey = 0x31, twoKey = 0x32, threeKey = 0x33;
 
         if(wParam == oneKey || wParam == VK_NUMPAD1)
-            LoadScene("Game");
+            LoadScene("Level1");
         else if(wParam == twoKey || wParam == VK_NUMPAD2)
             LoadScene("LevelCreator");
         else if(wParam == threeKey || wParam == VK_NUMPAD3)

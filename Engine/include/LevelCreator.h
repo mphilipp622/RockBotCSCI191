@@ -3,9 +3,6 @@
 
 #include <GLScene.h>
 #include <iostream>
-#include "tinyxml2.h"
-
-using namespace tinyxml2;
 
 class LevelCreator : public GLScene
 {
@@ -35,8 +32,6 @@ class LevelCreator : public GLScene
         HWND consoleWindow;
 
         bool mouseDown; // tracks if mouse is held down.
-        double prevMouseX, prevMouseY; // used for tracking mouse motion
-        double mouseMoveSpeed, mouseIncrement;
 
         vector<Model*> platforms;
         vector<Model*> enemies; // enemies will be models since we only need x, y positions
@@ -45,7 +40,6 @@ class LevelCreator : public GLScene
         Model* selectedModel; // user selects this with the mouse and can then manipulate the model
         Model* nextLevelTrigger; // allows user to move and scale the nextLevelTrigger
 
-        double backgroundScaleX, backgroundScaleY;
         string backgroundTexture;
 
         // will be used for moving the camera around the scene
@@ -67,7 +61,6 @@ class LevelCreator : public GLScene
 
         // draws UI buttons
         void DrawButtons();
-
 
 
         ///////////////////////////////
@@ -130,10 +123,6 @@ class LevelCreator : public GLScene
 
         // Zooms camera in and out
         void ZoomCamera(int delta);
-
-        // Takes mouseX and mouseY screen pixel c oordinates as input, converts them to OpenGL World coordinates, and sends them out using xOut and yOut. Pass reference parameters for xOut and yOut
-        void ConvertMouseToWorld(double mouseX, double mouseY, double& xOut, double& yOut);
-
 
         //////////////////////
         // XML SAVING/LOADING

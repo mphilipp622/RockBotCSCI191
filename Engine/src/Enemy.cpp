@@ -6,7 +6,7 @@ Enemy::Enemy()
     //ctor
 }
 
-Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string newName)
+Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string newName, string newTag)
 {
     xPos = newX;
     yPos = newY;
@@ -15,7 +15,7 @@ Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string
     zoom = 0;
 
     name = newName;
-    tag = "Enemy";
+    tag = newTag;
 
     // set previous positions to our starting position
     prevXPos = xPos;

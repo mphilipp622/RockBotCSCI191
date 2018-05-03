@@ -14,7 +14,7 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     zoom = 0;
 
     name = newName;
-    tag = "Enemy";
+    tag = "RangedEnemy";
 
     // set previous positions to our starting position
     prevXPos = xPos;

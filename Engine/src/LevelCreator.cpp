@@ -25,11 +25,6 @@ LevelCreator::LevelCreator()
 
     waitingForConsoleInput = false;
     mouseDown = false;
-    mouseMoveSpeed = 10.0;
-    mouseIncrement = 0.5;
-
-    prevMouseX = 0;
-    prevMouseY = 0;
 
     backgroundScaleX = 12.0;
     backgroundScaleY = 12.0;
@@ -117,7 +112,6 @@ GLint LevelCreator::drawGLScene()
     {
         player->DrawModel();
     }
-
 
     if(nextLevelTrigger)
         nextLevelTrigger->DrawModel();
@@ -263,44 +257,25 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         }
     }
 
-
-    //////////////////////////////////////
-    //   MODEL SELECTION WITH RIGHT MOUSE
-    //////////////////////////////////////
-
-    if(uMsg == WM_RBUTTONDOWN)
-    {
-        double aspectRatio = screenWidth / screenHeight;
-        double mouseX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
-        double mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) / aspectRatio * 3.33;
-
-        SelectModel(LOWORD(lParam), HIWORD(lParam));
-    }
-
-
     ////////////////////////////////////
     //  MODEL MOVEMENT WITH LEFT MOUSE
     ////////////////////////////////////
 
-    if(uMsg == WM_LBUTTONDOWN || mouseDown)
+    if(uMsg == WM_LBUTTONDOWN && !mouseDown)
     {
         mouseDown = true;
+        SelectModel(LOWORD(lParam), HIWORD(lParam));
     }
-
     if(uMsg == WM_LBUTTONUP)
         mouseDown = false;
 
-    if(uMsg == WM_MOUSEMOVE && mouseDown)
-    {
-        // Allows user to move the selectedModel by clicking and dragging in the scene
-        double aspectRatio = screenWidth / screenHeight;
-        double mouseX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
-        double mouseY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) / aspectRatio * 3.33;
+    if(uMsg == WM_RBUTTONDOWN)
+        // If user right-clicks, deselect models.
+        SetSelectedModel(nullptr);
 
-        MoveObject(mouseX, mouseY);
-        prevMouseX = mouseX;
-        prevMouseY = mouseY;
-    }
+    if(uMsg == WM_MOUSEMOVE && mouseDown)
+        MoveObject(LOWORD(lParam), HIWORD(lParam));
+
 
     ////////////////////////////////
     // CAMERA ZOOM WITH MOUSE WHEEL
@@ -461,24 +436,12 @@ void LevelCreator::MoveObject(double mouseX, double mouseY)
     if(!selectedModel)
         return; // if no model is selected, leave the function
 
-    double xDir = mouseX - prevMouseX;
-    double yDir = mouseY - prevMouseY;
+    double convertedX, convertedY;
 
-    // initialize final values to the current X and Y values in case we don't move anywhere on the mouse
-    double finalX = selectedModel->GetX();
-    double finalY = selectedModel->GetY();
+    // convert mouse coordinates
+    ConvertMouseToWorld(mouseX, mouseY, cameraPosX, cameraPosY, convertedX, convertedY);
 
-    if(xDir > 0)
-        finalX = selectedModel->GetX() + (mouseIncrement * mouseMoveSpeed * dTime->GetDeltaTime());
-    else if(xDir < 0)
-        finalX = selectedModel->GetX() - (mouseIncrement * mouseMoveSpeed * dTime->GetDeltaTime());
-
-    if(yDir > 0)
-        finalY = selectedModel->GetY() + (mouseIncrement * mouseMoveSpeed * dTime->GetDeltaTime());
-    else if(yDir < 0)
-        finalY = selectedModel->GetY() - (mouseIncrement * mouseMoveSpeed * dTime->GetDeltaTime());
-
-    selectedModel->SetPosition(finalX, finalY);
+    selectedModel->SetPosition(convertedX, convertedY);
 }
 
 void LevelCreator::SelectModel(double mouseX, double mouseY)
@@ -486,7 +449,7 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
     double convertedX, convertedY;
 
     // convert mouse coordinates and put them into convertedX and convertedY
-    ConvertMouseToWorld(mouseX, mouseY, convertedX, convertedY);
+    ConvertMouseToWorld(mouseX, mouseY, cameraPosX, cameraPosY, convertedX, convertedY);
 
     // This will deselect the selectedModel. Allowing user to right-click empty space to deselect.
     SetSelectedModel(nullptr);
@@ -623,33 +586,6 @@ void LevelCreator::ClearScene()
 void LevelCreator::ZoomCamera(int delta)
 {
     cameraPosZ -= 0.5 * (delta / 120);
-}
-
-
-void LevelCreator::ConvertMouseToWorld(double mouseX, double mouseY, double& xOut, double& yOut)
-{
-    double modelMatrix[16];
-    double projMatrix[16];
-    GLint viewport[4];
-    GLfloat newX, newY, newZ;
-
-    glGetDoublev(GL_MODELVIEW_MATRIX,modelMatrix);
-    glGetDoublev(GL_PROJECTION_MATRIX,projMatrix);
-    glGetIntegerv(GL_VIEWPORT,viewport);
-
-    newX = (float) mouseX;
-    newY = (float) viewport[3] - (GLint) mouseY - 1;
-
-    glReadPixels( newX, int(newY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &newZ );
-
-    double convertedX, convertedY, convertedZ;
-    gluUnProject(newX, newY, newZ, modelMatrix, projMatrix, viewport, &convertedX, &convertedY, &convertedZ);
-
-    convertedX += cameraPosX;
-    convertedY += cameraPosY;
-
-    xOut = (double) convertedX;
-    yOut = (double) convertedY;
 }
 
 
@@ -958,5 +894,4 @@ void LevelCreator::LoadLevelFromXML()
             enemies.back()->InitModel(texturePath, true);
         }
     }
-
 }

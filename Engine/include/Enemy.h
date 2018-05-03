@@ -13,7 +13,7 @@ class Enemy : public Model
 {
     public:
         Enemy();
-        Enemy(double newX, double newY, double newWidth, double newHeight, string newName);
+        Enemy(double newX, double newY, double newWidth, double newHeight, string newName, string newTag);
         virtual ~Enemy();
 
         void Update();

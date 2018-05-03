@@ -19,7 +19,7 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     zoom = 0;
 
     name = newName;
-    tag = "Enemy";
+    tag = "MeleeEnemy";
 
     // set previous positions to our starting position
     prevXPos = xPos;
