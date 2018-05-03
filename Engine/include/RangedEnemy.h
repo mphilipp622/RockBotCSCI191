@@ -4,7 +4,9 @@
 #include <Enemy.h>
 #include <GLScene.h>
 #include <Player.h>
+#include <Projectile.h>
 
+// The ranged enemy will patrol back and forth on the x axis and stop to shoot at player when the player is in aggro range
 class RangedEnemy : public Enemy
 {
     public:
@@ -17,10 +19,21 @@ class RangedEnemy : public Enemy
     protected:
 
     private:
+        double xPathDistance; // the distance the drone will travel in one direction before turning around
+        double xPatrolCenter; // used for determining the patrol area of the drone
+
+        // AI Functions
         void AIRoutine();
+        void Patrol(); // Patrol back and forth on x axis
+        void ShootProjectile(double xTarget, double yTarget);
+
+        // Collision Functions
         bool CheckCollision();
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();
+        bool CheckForwardCollision();
+
+
 };
 
 #endif // RANGEDENEMY_H

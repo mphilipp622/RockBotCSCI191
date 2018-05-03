@@ -66,6 +66,8 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     frameTimer->Start();
 
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
+
+    aggroRadius = 3;
 }
 
 void MeleeEnemy::InitEnemy()
@@ -114,9 +116,36 @@ bool MeleeEnemy::CheckCircleSquareCollision()
     return false;
 }
 
+bool MeleeEnemy::CheckForwardCollision()
+{
+    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
+    {
+        // directions will be - or + 1 and will therefore modify how this calculation happens.
+        double tempX = xPos + (0.5 * xDirection);
+        double tempY = yPos + (0.5 * yDirection);
+
+        for(auto& model : SceneManager::GetActiveScene()->staticObjects)
+        {
+            if(Collision(model, tempX, tempY))
+                return true;
+        }
+
+        return false;
+    }
+}
+
+
 void MeleeEnemy::AIRoutine()
 {
-//    cout << Player::player->GetX() << " < " << xPos << " = " << (Player::player->GetX() < xPos) << endl;
+    // check if player is in aggro radius. If not, then enemy should stop if they're moving and stop the AI routine.
+    if(!AggroOverlap())
+    {
+        if(moving)
+            StopMove();
+
+        return;
+    }
+
     if(Player::player->GetX() < xPos)
         StartMove(-1.0); // move left
     else if(Player::player->GetX() > xPos)

@@ -1,16 +1,32 @@
 <Level1>
     <Platforms>
-        <Platform Width="1.7000002" Height="0.19999993" xPos="-0.5300000000000008" yPos="-2.0049999999999994">
+        <Platform Width="7.4999952" Height="0.19999993" xPos="-2.7683289087412102" yPos="-2.09868321642977">
             <Texture>Images/Platforms/block2.png</Texture>
         </Platform>
+        <Platform Width="2.2" Height="0.19999993" xPos="2.3564162947223579" yPos="-0.34978053607162801">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="1.5000001" Height="0.19999993" xPos="-0.23318591835938143" yPos="-0.82228716774783883">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="5.6999969" Height="0.19999993" xPos="3.8291582383224738" yPos="-2.0986732191773196">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="0.79999995" xPos="-2.8595957356703088" yPos="-1.6016190356879547">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
     </Platforms>
-    <Player xPos="-0.035000000000000059" yPos="1.0000000000000002"/>
-    <Trigger Width="1" Height="1" xPos="3.9800000000000013" yPos="1.02"/>
-    <Background Width="12.1" Height="12.499999999999998">
+    <Player xPos="-4.0592952577053119" yPos="-1.5141815311521791"/>
+    <Trigger Width="1" Height="1" xPos="6.1925018680045119" yPos="-1.4860269624341103"/>
+    <Background Width="17.500000000000007" Height="16.399999999999991">
         <Texture>Images/Backgrounds/</Texture>
     </Background>
     <Enemies>
-        <Enemy xPos="1.2449999999999999" yPos="0.23500000000000004">
+        <Enemy xPos="2.5650451019531957" yPos="0.39273416967060959">
+            <Name>Enemy0</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="0.29915441241592433" yPos="1.8869739445969407">
             <Name>Enemy1</Name>
             <Tag>RangedEnemy</Tag>
         </Enemy>

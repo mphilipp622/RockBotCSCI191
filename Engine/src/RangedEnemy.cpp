@@ -12,6 +12,7 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     width = newWidth;
     height = newHeight;
     zoom = 0;
+    xDirection = 1.0;
 
     name = newName;
     tag = "RangedEnemy";
@@ -60,7 +61,13 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
 	frameTimer = new Timer();
     frameTimer->Start();
 
+    ignoreGravity = true;
+
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
+
+    xPathDistance = 3.0;
+    xPatrolCenter = xPos; // set patrol center to the starting position. This could also be changed later if needed
+    aggroRadius = 2.0;
 }
 
 void RangedEnemy::InitEnemy()
@@ -97,13 +104,48 @@ void RangedEnemy::InitEnemy()
     maxAttackFrame = 3;
 }
 
+
+/////////////////////////////////
+// AI FUNCTIONS
+/////////////////////////////////
+
 void RangedEnemy::AIRoutine()
 {
-//    if(Player::player->GetX() < xPos)
-//        StartMove(-1.0); // move left
-//    else if(Player::player->GetX() > xPos)
-//        StartMove(1.0);
+    if(!AggroOverlap())
+        Patrol(); // if we haven't detected player, then patrol.
+    else
+    {
+        StopMove();
+    }
 }
+
+void RangedEnemy::Patrol()
+{
+    if(!moving)
+        StartMove(xDirection); // move in the previous direction
+
+    if(xPos >= xPatrolCenter + xPathDistance)
+        StartMove(-1.0); // If drone has gone too far right, turn around
+    else if(xPos <= xPatrolCenter - xPathDistance)
+        StartMove(1.0); // if drone has gone too far left, turn around
+}
+
+void RangedEnemy::ShootProjectile(double xTarget, double yTarget)
+{
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "DroneProjectile", "EnemyProjectile", xTarget + xPos, yTarget + yPos); // sends relative mouse pointer location
+    vector<string> animations;
+    for(int i = 0; i < 4; i++)
+        animations.push_back("Images/Projectiles/Bullet" + to_string(i) + ".png");
+
+    newProjectile->InitAnimations(animations);
+    SceneManager::GetActiveScene()->movableObjects.push_back(newProjectile);
+}
+
+
+
+///////////////////////////////////
+// COLLISION
+///////////////////////////////////
 
 bool RangedEnemy::CheckCollision()
 {
@@ -115,6 +157,25 @@ bool RangedEnemy::CheckCollision()
 
     return false;
 }
+
+bool RangedEnemy::CheckForwardCollision()
+{
+    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
+    {
+        // directions will be - or + 1 and will therefore modify how this calculation happens.
+        double tempX = xPos + (0.5 * xDirection);
+        double tempY = yPos + (0.5 * yDirection);
+
+        for(auto& model : SceneManager::GetActiveScene()->staticObjects)
+        {
+            if(Collision(model, tempX, tempY))
+                return true;
+        }
+
+        return false;
+    }
+}
+
 
 bool RangedEnemy::CheckCircleCollision()
 {

@@ -261,7 +261,7 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     //  MODEL MOVEMENT WITH LEFT MOUSE
     ////////////////////////////////////
 
-    if(uMsg == WM_LBUTTONDOWN && !mouseDown)
+    if(uMsg == WM_LBUTTONDOWN)
     {
         mouseDown = true;
         SelectModel(LOWORD(lParam), HIWORD(lParam));
@@ -441,6 +441,8 @@ void LevelCreator::MoveObject(double mouseX, double mouseY)
     // convert mouse coordinates
     ConvertMouseToWorld(mouseX, mouseY, cameraPosX, cameraPosY, convertedX, convertedY);
 
+    convertedX = fmod(convertedX, 0.5f);
+    convertedY = fmod(convertedY, 0.5f);
     selectedModel->SetPosition(convertedX, convertedY);
 }
 

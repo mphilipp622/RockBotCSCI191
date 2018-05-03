@@ -298,7 +298,7 @@
 	<MainMenu.h>
 	<string>
 
-1525328934 e:\college\191\191\engine\include\glscene.h
+1525329461 e:\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -315,7 +315,7 @@
 	<SceneManager.h>
 	<tinyxml2.h>
 
-1525320008 e:\college\191\191\engine\include\model.h
+1525366447 e:\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -330,7 +330,7 @@
 1525290471 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1525328962 source:e:\college\191\191\engine\src\glscene.cpp
+1525363795 source:e:\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<Parallax.h>
 	<DeltaTime.h>
@@ -372,7 +372,7 @@
 	<DeltaTime.h>
 	<string>
 
-1525320433 source:e:\college\191\191\engine\src\model.cpp
+1525366423 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -386,7 +386,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1525314102 source:e:\college\191\191\engine\src\player.cpp
+1525368142 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -406,11 +406,11 @@
 1522363800 source:e:\college\191\191\engine\src\timer.cpp
 	<Timer.h>
 
-1525290471 source:e:\college\191\191\engine\src\projectile.cpp
+1525368203 source:e:\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
-1525290471 e:\college\191\191\engine\include\projectile.h
+1525368088 e:\college\191\191\engine\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
@@ -1171,7 +1171,7 @@
 	"SceneManager.h"
 	<GLScene.h>
 
-1525328417 e:\college\191\191\engine\include\enemy.h
+1525366705 e:\college\191\191\engine\include\enemy.h
 	<Model.h>
 	<vector>
 	<Timer.h>
@@ -1180,21 +1180,22 @@
 	<algorithm>
 	<Player.h>
 
-1525290471 e:\college\191\191\engine\include\meleeenemy.h
+1525365513 e:\college\191\191\engine\include\meleeenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
 
-1525290471 e:\college\191\191\engine\include\rangedenemy.h
+1525368223 e:\college\191\191\engine\include\rangedenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
+	<Projectile.h>
 
 1525327486 e:\college\191\191\engine\include\mainmenu.h
 	<GLScene.h>
 	<Parallax.h>
 
-1525328430 source:e:\college\191\191\engine\src\enemy.cpp
+1525366597 source:e:\college\191\191\engine\src\enemy.cpp
 	"Enemy.h"
 	<GLScene.h>
 
@@ -1225,7 +1226,7 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1525328530 source:e:\college\191\191\engine\src\meleeenemy.cpp
+1525366743 source:e:\college\191\191\engine\src\meleeenemy.cpp
 	"MeleeEnemy.h"
 
 1525290471 source:e:\college\191\191\engine\src\particles.cpp
@@ -1239,10 +1240,10 @@
 	<iostream>
 	<Timer.h>
 
-1525328538 source:e:\college\191\191\engine\src\rangedenemy.cpp
+1525365385 source:e:\college\191\191\engine\src\rangedenemy.cpp
 	"RangedEnemy.h"
 
-1525328041 source:e:\college\191\191\engine\src\mainmenu.cpp
+1525329461 source:e:\college\191\191\engine\src\mainmenu.cpp
 	"MainMenu.h"
 	<GLLight.h>
 	<LevelCreator.h>
@@ -1259,11 +1260,11 @@
 1525290471 e:\college\191\191\engine\include\level1.h
 	<GLScene.h>
 
-1525326948 source:e:\college\191\191\engine\src\levelcreator.cpp
+1525364093 source:e:\college\191\191\engine\src\levelcreator.cpp
 	"LevelCreator.h"
 	<GLLight.h>
 
-1525328307 e:\college\191\191\engine\include\levelcreator.h
+1525329461 e:\college\191\191\engine\include\levelcreator.h
 	<GLScene.h>
 	<iostream>
 

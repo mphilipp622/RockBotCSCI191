@@ -21,6 +21,7 @@ class MeleeEnemy : public Enemy
         bool CheckCollision();
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();
+        bool CheckForwardCollision();
 };
 
 #endif // MELEEENEMY_H

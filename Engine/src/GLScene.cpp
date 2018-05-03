@@ -250,11 +250,12 @@ void GLScene::ConvertMouseToWorld(double mouseX, double mouseY, double cameraX, 
     convertedX += cameraX;
     convertedY += cameraY;
 
-    cout << convertedX << "    " << convertedY << endl;
+//    cout << convertedX << "    " << convertedY << endl;
 
     xOut = (double) convertedX;
     yOut = (double) convertedY;
 }
+
 void GLScene::LoadLevelFromXML()
 {
     XMLDocument xmlDoc;

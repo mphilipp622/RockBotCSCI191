@@ -12,6 +12,7 @@ Player::Player(double newX, double newY)
     // Collision
     width = 1.0;
     height = 1.0;
+    radius = width / 2;
 
     xPos = newX;
     yPos = newY;
@@ -510,7 +511,7 @@ double Player::GetZoom()
 
 void Player::ShootProjectile(double x, double y)
 {
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
     newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord(chordManager->GetNextChord());
     SceneManager::GetActiveScene()->movableObjects.push_back(newProjectile);

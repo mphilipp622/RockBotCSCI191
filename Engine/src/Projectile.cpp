@@ -10,7 +10,7 @@ Projectile::~Projectile()
 {
     //dtor
 }
-Projectile::Projectile(double newX, double newY, double newWidth, double newHeight, int newDamage, float newSpeed, string newName, double newTargetX, double newTargetY)
+Projectile::Projectile(double newX, double newY, double newWidth, double newHeight, int newDamage, float newSpeed, string newName, string newTag, double newTargetX, double newTargetY)
 {
     xPos = newX;
     yPos = newY;
@@ -25,6 +25,7 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
     speed = newSpeed;
 
     name = newName;
+    tag = newTag;
 
     vectorDist = sqrt(pow((targetX - xPos), 2) + pow((targetY - yPos), 2));
     normalizedX = (targetX - xPos) / vectorDist;
@@ -119,6 +120,16 @@ void Projectile::DisplayParticles()
     particle->LifetimeMusic(xPos, yPos, xDir, yDir);
 //    glUseProgram(0);
     glPopMatrix();
+}
+
+
+void Projectile::InitAnimations(vector<string> names)
+{
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    for(int i = 0; i < names.size(); i++)
+        animation[i].BindTexture(names.at(i));
 }
 
 

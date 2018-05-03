@@ -14,10 +14,12 @@ class Projectile : public Model
 {
     public:
         Projectile();
-        Projectile(double newX, double newY, double newWidth, double newHeight, int newDamage, float newSpeed, string newName, double newTargetX, double newTargetY);
+        Projectile(double newX, double newY, double newWidth, double newHeight, int newDamage, float newSpeed, string newName, string newTag, double newTargetX, double newTargetY);
         virtual ~Projectile();
 
         void Update();
+
+        void InitAnimations(vector<string>); // used for initializing this projectile with animations
 
     protected:
         int damage;
@@ -34,6 +36,8 @@ class Projectile : public Model
         double prevX, prevY;
         Timer *lifetime;
         double endOfLifeTime; // lifetime of 5 seconxs max
+
+        TextureLoader animation[4];
 
         // will remove projectile from gl scene vector and delete it
         void Destroy();

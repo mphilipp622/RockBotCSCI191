@@ -309,10 +309,22 @@ bool Model::Collision(Model* collider)
                        collider->GetY() + collider->GetHeight() / 2);
 }
 
+bool Model::Collision(Model* collider, double aheadX, double aheadY)
+{
+    double widthOffset = width / 2, heightOffset = height / 2;
+
+    return Overlapping(aheadX - widthOffset, aheadX + widthOffset, collider->GetX() - collider->GetWidth() / 2,
+                       collider->GetX() + collider->GetWidth() / 2) &&
+           Overlapping(aheadY - heightOffset, aheadY + heightOffset, collider->GetY() - collider->GetHeight() / 2,
+                       collider->GetY() + collider->GetHeight() / 2);
+}
+
+
 bool Model::CollisionCircle(Model* collider)
 {
     return OverlappingCircles(xPos, yPos, collider->GetX(), collider->GetY(), radius, collider->GetRadius());
 }
+
 
 bool Model::CollisionCircleSquare(Model* collider)
 {

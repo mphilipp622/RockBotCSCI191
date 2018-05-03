@@ -53,6 +53,7 @@ class Model
         AudioSource* GetAudioSource();
 
         bool Collision(Model*);
+        bool Collision(Model* collider, double aheadX, double aheadY); // used by enemy AI to look ahead of their position for collision.
         bool CollisionCircle(Model*);
         bool CollisionCircleSquare(Model*);
 
@@ -81,9 +82,11 @@ class Model
 
         AudioSource* audioSource;
 
+        bool OverlappingCircles(double x0, double y0, double x1, double y1, double r0, double r1);
+
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);
-        bool OverlappingCircles(double x0, double y0, double x1, double y1, double r0, double r1);
+
 };
 
 #endif // MODEL_H

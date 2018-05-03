@@ -61,6 +61,7 @@ Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string
     frameTimer->Start();
 
     isDying = false;
+    ignoreGravity = false;
 
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
 }
@@ -182,15 +183,18 @@ void Enemy::MoveLeft()
 
     prevXPos = xPos;
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
     if(CheckCollision())
     {
-//        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
+        jump = true;
         xPos = prevXPos;
-//        moving = false;
         xDirection = 0;
         acceleration = 0;
         return;
     }
+
+    if(CheckForwardCollision())
+        jump = true;
 
     sound->SetPosition(xPos, yPos);
 }
@@ -211,14 +215,16 @@ void Enemy::MoveRight()
     xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
     if(CheckCollision())
     {
-
-//        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
+        jump = true;
         xPos = prevXPos;
-//        moving = false;
         xDirection = 0;
         acceleration = 0;
         return;
     }
+
+    if(CheckForwardCollision())
+        jump = true;
+
     sound->SetPosition(xPos, yPos);
 
 }
@@ -244,7 +250,6 @@ void Enemy::StopMove()
         if(CheckCollision())
         {
             xPos = prevXPos;
-//            moving = false;
             slowDown = false;
             xDirection = 0;
             acceleration = 0;
@@ -271,7 +276,6 @@ void Enemy::StopMove()
         if(CheckCollision())
         {
             xPos = prevXPos;
-//            moving = false;
             slowDown = false;
             xDirection = 0;
             acceleration = 0;
@@ -291,6 +295,9 @@ void Enemy::SlowDown()
 
 void Enemy::ApplyGravity()
 {
+    if(ignoreGravity)
+        return;
+
     if(DeltaTime::GetDeltaTime() > 1)
         return; // kill if delta time is too high
 
@@ -447,4 +454,9 @@ void Enemy::Actions(int newAction)
 
         break;
     }
+}
+
+bool Enemy::AggroOverlap()
+{
+    return OverlappingCircles(xPos, yPos, Player::player->GetX(), Player::player->GetY(), aggroRadius, Player::player->GetRadius());
 }
