@@ -41,6 +41,8 @@ GLint MainMenu::initGL()
     GLLight Light(GL_LIGHT0);
 
     InitModels(); // initialize UI Elements
+
+    return 1;
 }
 
 void MainMenu::InitModels()

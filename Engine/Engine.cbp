@@ -81,6 +81,7 @@
 		<Unit filename="include/Skybox.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/Timer.h" />
+		<Unit filename="include/tinyxml2.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AudioEngine.cpp" />
 		<Unit filename="src/AudioSource.cpp" />
@@ -107,6 +108,7 @@
 		<Unit filename="src/Skybox.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
 		<Unit filename="src/Timer.cpp" />
+		<Unit filename="src/tinyxml2.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

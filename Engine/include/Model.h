@@ -42,6 +42,8 @@ class Model
         void SetWidth(double);
         void SetHeight(double newHeight);
 
+        string GetTextureName();
+
         // Sets the z-position of the model
         void SetZoom(double newZoom);
 
@@ -62,7 +64,7 @@ class Model
     protected:
         float width, height, radius;
         double xPos, yPos;
-        string name, tag;
+        string name, tag, textureName;
         TextureLoader *texture;
 
         float red, green, blue;

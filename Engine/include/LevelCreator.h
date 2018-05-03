@@ -3,6 +3,9 @@
 
 #include <GLScene.h>
 #include <iostream>
+#include "tinyxml2.h"
+
+using namespace tinyxml2;
 
 class LevelCreator : public GLScene
 {
@@ -42,6 +45,7 @@ class LevelCreator : public GLScene
         Model* nextLevelTrigger; // allows user to move and scale the nextLevelTrigger
 
         double backgroundScaleX, backgroundScaleY;
+        string backgroundTexture;
 
         // will be used for moving the camera around the scene
         double cameraPosX, cameraPosY, cameraSpeed, cameraMoveIncrement;
@@ -64,6 +68,11 @@ class LevelCreator : public GLScene
         void DrawButtons();
 
 
+
+        ///////////////////////////////
+        // OBJECT CREATION/DELETION
+        ///////////////////////////////
+
         // Gets filename from input and instantiates a background model
         void CreateBackground();
 
@@ -85,8 +94,11 @@ class LevelCreator : public GLScene
         // Deletes the selectedObject from the scene
         void DeleteObject();
 
-        // gets filename from user input. relativePath will be passed by the CreateBackground, CreatePlatform, etc. functions
-        string GetFilenameFromInput();
+
+
+        //////////////////////
+        // OBJECT MODIFICATION
+        //////////////////////
 
         // Modifies the scale of the currently selected model in the scene. Passing a negative value to either parameter will decrease the associated scale. Passing a positive value will increase the associated scale.
         void ModifyModelDimensions(double widthScale, double heightScale);
@@ -94,14 +106,34 @@ class LevelCreator : public GLScene
         // Moves the camera position.
         void MoveCamera(double xMove, double yMove);
 
+        // Checks pointer collision against a model and selects it if collision happens
+        void SelectModel(double mouseX, double mouseY);
+
+
+
+        /////////////////////
+        // HELPER FUNCTIONS
+        /////////////////////
+
         // Brings console window to front and activates it for user input
         void ShowConsoleWindow();
 
         // Sets colors on previous selected model and new selected model and updates the selectedModel pointer.
         void SetSelectedModel(Model* newModel);
 
-        // Checks pointer collision against a model and selects it if collision happens
-        void SelectModel(double mouseX, double mouseY);
+        // gets filename from user input. relativePath will be passed by the CreateBackground, CreatePlatform, etc. functions
+        string GetFilenameFromInput();
+
+
+        //////////////////////
+        // XML SAVING/LOADING
+        //////////////////////
+
+        // Saves all the model positions in the scene into an xml document
+        void SaveLevelToXML();
+
+        // Loads Level for editing
+        void LoadLevelFromXML();
 };
 
 

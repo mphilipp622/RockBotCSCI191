@@ -38,6 +38,7 @@ void Parallax::DrawSquare(float width, float height)
 
 void Parallax::ParallaxInit(string fileName)
 {
+    textureName = fileName;
     backgroundTexture->Binder();
     cout << "Loading Parallax: " << fileName << endl;
     backgroundTexture->BindTexture(fileName);
@@ -70,4 +71,9 @@ void Parallax::Scroll(bool Auto, string dir, float speed)
             xMax += speed * DeltaTime::GetDeltaTime();;
         }
     }
+}
+
+string Parallax::GetTextureName()
+{
+    return textureName;
 }

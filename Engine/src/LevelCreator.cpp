@@ -39,6 +39,19 @@ LevelCreator::LevelCreator()
     cameraMoveIncrement = 0.4; // this is the base unit that the camera will move when user presses WASD
 
     consoleWindow = GetConsoleWindow();
+
+    background = nullptr;
+    player = nullptr;
+    selectedModel = nullptr;
+
+
+
+    /* DATA LOADING
+    XMLDocument doc;
+    doc.LoadFile("Test.xml");
+    string temp = doc.FirstChildElement("Model")->FirstChildElement("Name")->GetText();
+    cout << temp<<endl;
+    */
 }
 
 LevelCreator::~LevelCreator()
@@ -240,6 +253,21 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         ////////////////////////
         else if(wParam == VK_DELETE)
             DeleteObject();
+
+        ////////////////////////
+        // SAVE / LOAD
+        ////////////////////////
+
+        else if(wParam == VK_RETURN)
+        {
+            SaveLevelToXML();
+            SetForegroundWindow(hWnd); // set the game window back to front
+        }
+        else if(wParam == VK_SHIFT)
+        {
+            LoadLevelFromXML();
+            SetForegroundWindow(hWnd);
+        }
     }
 
 
@@ -300,6 +328,7 @@ void LevelCreator::CreateBackground()
         background = new Parallax();
 
     string filename = GetFilenameFromInput();
+    backgroundTexture = filename;
     background->ParallaxInit(backgroundRelativeFilePath + filename);
 
     waitingForConsoleInput = false; // unlock input
@@ -557,4 +586,217 @@ void LevelCreator::SetSelectedModel(Model* newModel)
 
     if(selectedModel)
         selectedModel->SetColor(1.0, 0, 0);
+}
+
+
+//////////////////////////////
+// XML SAVING AND LOADING
+/////////////////////////////
+
+void LevelCreator::SaveLevelToXML()
+{
+    /*
+    XML Structure is as follows
+
+    <LevelNum>
+        <Platforms>
+            <Platform>
+                <data/>
+            </Platform>
+            ...
+        </Platforms>
+
+        <Enemies>
+            <Enemy>
+                <data/>
+            </Enemy>
+            ...
+        </Enemies>
+
+        <Player>
+            <data>
+            ...
+        </Player>
+
+        <Background>
+            <data/>
+        </Background>
+
+        <LevelTrigger>
+            <data/>
+        </LevelTrigger>
+    </LevelNum>
+    */
+
+    ShowConsoleWindow();
+
+    if(!player || !nextLevelTrigger || platforms.size() <= 0)
+    {
+        cout << "ERROR SAVING FILE: Scene must have a player, a next level trigger, and at least one platform" << endl;
+        return;
+    }
+
+    cout << "Input a number for the level (0 - 9): ";
+
+    char num;
+
+    cin >> num;
+
+    int convertNum = num - 48;
+
+    string filepath = "LevelData/Level" + to_string(convertNum) + ".xml";
+
+    XMLDocument xmlDoc;
+
+    // establish root node for the document
+    XMLNode * pRoot = xmlDoc.NewElement(("Level" + to_string(convertNum)).c_str());
+    xmlDoc.InsertFirstChild(pRoot);
+    XMLElement* endElement; // tracks the ending element in the doc
+
+
+    ///////////////////
+    // PLATFORMS
+    ///////////////////
+
+    // Create child Element Platforms, which will contain all the platforms
+    XMLElement * platformsElement = xmlDoc.NewElement("Platforms");
+    XMLElement * pChild;
+
+    for(auto& platform : platforms)
+    {
+        XMLElement* newPlatform = xmlDoc.NewElement("Platform");
+        newPlatform->SetAttribute("Width", platform->GetWidth());
+        newPlatform->SetAttribute("Height", platform->GetHeight());
+        newPlatform->SetAttribute("xPos", platform->GetX());
+        newPlatform->SetAttribute("yPos", platform->GetY());
+
+        // Put texture name as a child of this platform element
+        XMLElement* platformTexture = xmlDoc.NewElement("Texture");
+        platformTexture->SetText(platform->GetTextureName().c_str());
+
+        newPlatform->InsertEndChild(platformTexture);
+
+        if(!platformsElement->FirstChild())
+            platformsElement->InsertFirstChild(newPlatform);
+        else
+            platformsElement->InsertAfterChild(pChild, newPlatform);
+
+        pChild = newPlatform;
+    }
+
+    pRoot->InsertFirstChild(platformsElement);
+    platformsElement->InsertEndChild(pChild);
+
+
+
+    ////////////////////////
+    // PLAYER
+    ////////////////////////
+    XMLElement* playerElement = xmlDoc.NewElement("Player");
+    playerElement->SetAttribute("xPos", player->GetX());
+    playerElement->SetAttribute("yPos", player->GetY());
+
+    pRoot->InsertAfterChild(platformsElement, playerElement); // insert player after platforms
+
+
+    ////////////////////////
+    // LEVEL TRIGGER
+    ////////////////////////
+
+    XMLElement* trigger = xmlDoc.NewElement("Trigger");
+    trigger->SetAttribute("Width", nextLevelTrigger->GetWidth());
+    trigger->SetAttribute("Height", nextLevelTrigger->GetHeight());
+    trigger->SetAttribute("xPos", nextLevelTrigger->GetX());
+    trigger->SetAttribute("yPos", nextLevelTrigger->GetY());
+
+    pRoot->InsertAfterChild(playerElement, trigger);
+    endElement = trigger;
+
+    ////////////////////////
+    //  BACKGROUND
+    ////////////////////////
+
+    if(background)
+    {
+        XMLElement* backgroundElement = xmlDoc.NewElement("Background");
+        backgroundElement->SetAttribute("Width", backgroundScaleX);
+        backgroundElement->SetAttribute("Height", backgroundScaleY);
+
+        XMLElement* bgTexture = xmlDoc.NewElement("Texture");
+        bgTexture->SetText((backgroundRelativeFilePath + backgroundTexture).c_str());
+
+        backgroundElement->InsertEndChild(bgTexture);
+
+        pRoot->InsertAfterChild(trigger, backgroundElement);
+
+        endElement = backgroundElement;
+    }
+
+    ////////////////////
+    // ENEMIES
+    ////////////////////
+
+    if(enemies.size() > 0)
+    {
+        XMLElement* enemiesElement = xmlDoc.NewElement("Enemies");
+
+        for(auto& enemy : enemies)
+        {
+            // enemies always have width and height of 1.0 each. Don't need attributes for them.
+            XMLElement* newEnemy = xmlDoc.NewElement("Enemy");
+            newEnemy->SetAttribute("xPos", enemy->GetX());
+            newEnemy->SetAttribute("yPos", enemy->GetY());
+
+            XMLElement* enemyName = xmlDoc.NewElement("Name");
+            enemyName->SetText(enemy->GetName().c_str());
+            XMLElement* enemyTag = xmlDoc.NewElement("Tag");
+            enemyTag->SetText(enemy->GetTag().c_str());
+
+            newEnemy->InsertFirstChild(enemyName);
+            newEnemy->InsertEndChild(enemyTag);
+
+            if(!enemiesElement->FirstChild())
+                enemiesElement->InsertFirstChild(newEnemy);
+            else
+                enemiesElement->InsertAfterChild(pChild, newEnemy);
+
+            pChild = newEnemy;
+        }
+
+        enemiesElement->InsertEndChild(pChild);
+
+        endElement = enemiesElement; // update end element pointer
+
+    }
+
+    // Determine what the end child should be for the doc.
+    // If there are no enemies but a backgroudn exists, set to background
+    // If there are no enemies and no background, set to trigger
+    // Otherwise, we set to enemies
+    pRoot->InsertEndChild(endElement);
+
+    xmlDoc.SaveFile(filepath.c_str()); // save the xml file
+}
+
+
+void LevelCreator::LoadLevelFromXML()
+{
+    ShowConsoleWindow();
+
+    cout << "Input Filename for level (include .xml extension): ";
+
+    string filename;
+
+    getline(cin, filename);
+
+    XMLDocument xmlDoc;
+    xmlDoc.LoadFile(("LevelData/" + filename).c_str());
+
+    const XMLElement* element = xmlDoc.FirstChildElement();
+    for (const XMLElement* child = element->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+    {
+        double temp;
+        child->QueryAttribute("Width", &temp);
+        cout << temp << endl;
+    }
 }

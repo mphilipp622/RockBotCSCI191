@@ -151,6 +151,8 @@ void Model::DrawModel()
 
 void Model::InitModel(string fileName, bool transparent)
 {
+    textureName = fileName;
+
     if(transparent)
     {
         glEnable(GL_BLEND);
@@ -328,4 +330,9 @@ void Model::SetColor(float newR, float newG, float newB)
     red = newR;
     green = newG;
     blue = newB;
+}
+
+string Model::GetTextureName()
+{
+    return textureName;
 }
