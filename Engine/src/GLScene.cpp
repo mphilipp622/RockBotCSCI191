@@ -267,15 +267,40 @@ void GLScene::LoadLevelFromXML()
     nextLevelTrigger = new Model(newWidth, newHeight, newX, newY, "LevelTrigger", "Trigger");
     nextLevelTrigger->InitModel("Images/LevelTrigger.png", true);
 
-    //////////////////
-    // LOAD BACKGROUND
-    //////////////////
+
+
 
     mainElements = mainElements->NextSiblingElement();
 
     // Need to store element name into a string due to the return type being const char*
     string checkName = mainElements->Name();
 
+    if(checkName == "TextTriggers")
+    {
+        for (const XMLElement* child = mainElements->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+        {
+            double newX, newY, newWidth, newHeight;
+            child->QueryAttribute("xPos", &newX);
+            child->QueryAttribute("yPos", &newY);
+            child->QueryAttribute("Width", &newWidth);
+            child->QueryAttribute("Height", &newHeight);
+
+            string newText;
+
+            newText = child->FirstChildElement()->GetText(); // get the name of the enemy
+
+            Player::player->AddTextTrigger(new Trigger(newX, newY, newWidth, newHeight, "TextTrigger"));
+        }
+
+
+        mainElements = mainElements->NextSiblingElement();
+        checkName = mainElements->Name();
+    }
+
+
+    //////////////////
+    // LOAD BACKGROUND
+    //////////////////
     if(checkName == "Background")
     {
         // LevelCreator class has variables for background scale x and y, which is where we'll dump width and height.

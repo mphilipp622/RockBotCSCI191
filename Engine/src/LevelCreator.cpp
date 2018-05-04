@@ -222,7 +222,7 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         /////////////////
         // ENEMY CREATION
         /////////////////
-        else if(wParam == eKey && selectedModel->GetTag() != "TextTrigger")
+        else if(wParam == eKey && !selectedModel)
         {
             ShowConsoleWindow();
 
@@ -255,14 +255,17 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         // TEXT TRIGGER EDITING
         ////////////////////////
 
-        if(wParam == eKey && selectedModel->GetTag() == "TextTrigger")
+        if(wParam == eKey && selectedModel)
         {
-            // Edit text
-            ShowConsoleWindow();
+            if(selectedModel->GetTag() == "TextTrigger")
+            {
+                // Edit text
+                ShowConsoleWindow();
 
-            EditTextTrigger();
+                EditTextTrigger();
 
-            SetForegroundWindow(hWnd);
+                SetForegroundWindow(hWnd);
+            }
         }
 
         ////////////////////////
@@ -779,14 +782,50 @@ void LevelCreator::SaveLevelToXML()
     // LEVEL TRIGGER
     ////////////////////////
 
-    XMLElement* trigger = xmlDoc.NewElement("Trigger");
+    XMLElement* trigger = xmlDoc.NewElement("LevelTrigger");
     trigger->SetAttribute("Width", nextLevelTrigger->GetWidth());
     trigger->SetAttribute("Height", nextLevelTrigger->GetHeight());
     trigger->SetAttribute("xPos", nextLevelTrigger->GetX());
     trigger->SetAttribute("yPos", nextLevelTrigger->GetY());
 
-    pRoot->InsertAfterChild(playerElement, trigger);
     endElement = trigger;
+    pRoot->InsertAfterChild(playerElement, trigger); // insert player after platforms
+
+
+    XMLElement* triggerElement;
+
+    if(triggers.size() > 0)
+    {
+        triggerElement = xmlDoc.NewElement("TextTriggers");
+        XMLElement* tChild;
+
+        for(auto& trigger : triggers)
+        {
+            XMLElement* newTrigger = xmlDoc.NewElement("Trigger");
+            newTrigger->SetAttribute("Width", trigger->GetWidth());
+            newTrigger->SetAttribute("Height", trigger->GetHeight());
+            newTrigger->SetAttribute("xPos", trigger->GetX());
+            newTrigger->SetAttribute("yPos", trigger->GetY());
+
+            XMLElement* triggerChild = xmlDoc.NewElement("Text");
+            triggerChild->SetText(trigger->GetName().c_str());
+            newTrigger->InsertEndChild(triggerChild);
+
+            if(!triggerElement->FirstChild())
+                triggerElement->InsertFirstChild(newTrigger);
+            else
+                triggerElement->InsertAfterChild(tChild, newTrigger);
+
+            tChild = newTrigger;
+        }
+
+        pRoot->InsertAfterChild(trigger, triggerElement);
+        triggerElement->InsertEndChild(tChild);
+        endElement = triggerElement;
+    }
+
+
+
 
     ////////////////////////
     //  BACKGROUND
@@ -803,7 +842,7 @@ void LevelCreator::SaveLevelToXML()
 
         backgroundElement->InsertEndChild(bgTexture);
 
-        pRoot->InsertAfterChild(trigger, backgroundElement);
+        pRoot->InsertAfterChild(endElement, backgroundElement);
 
         endElement = backgroundElement;
     }
@@ -909,9 +948,9 @@ void LevelCreator::LoadLevelFromXML()
     player = new Model(1.0, 1.0, playerX, playerY, "Player", "Player");
     player->InitModel(playerTexturePath, true);
 
-    ///////////////
-    // LOAD TRIGGER
-    ///////////////
+    /////////////////////
+    // LOAD LEVEL TRIGGER
+    /////////////////////
 
     mainElements = mainElements->NextSiblingElement();
     double newWidth, newHeight, newX, newY;
@@ -931,6 +970,30 @@ void LevelCreator::LoadLevelFromXML()
 
     // Need to store element name into a string due to the return type being const char*
     string checkName = mainElements->Name();
+
+    if(checkName == "TextTriggers")
+    {
+        for (const XMLElement* child = mainElements->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+        {
+            double newX, newY, newWidth, newHeight;
+            child->QueryAttribute("xPos", &newX);
+            child->QueryAttribute("yPos", &newY);
+            child->QueryAttribute("Width", &newWidth);
+            child->QueryAttribute("Height", &newHeight);
+
+            string newText;
+
+            newText = child->FirstChildElement()->GetText(); // get the name of the enemy
+
+            triggers.push_back(new Model(newWidth, newHeight, newX, newY, newText, "TextTrigger"));
+
+            triggers.back()->InitModel("Images/TextTrigger.png", true);
+        }
+
+
+        mainElements = mainElements->NextSiblingElement();
+        checkName = mainElements->Name();
+    }
 
     if(checkName == "Background")
     {
