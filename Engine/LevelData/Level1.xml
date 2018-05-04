@@ -8,9 +8,16 @@
         </Platform>
     </Platforms>
     <Player xPos="-3.4337131089149207" yPos="-1.3401258573187731"/>
-    <LevelTrigger Width="1" Height="1" xPos="1.173329102543792" yPos="-1.2365968211310565"/>
+    <LevelTrigger Width="1" Height="1" xPos="1.2938067190474443" yPos="-1.2614614870872516">
+        <Texture>Images/LevelTrigger.png</Texture>
+    </LevelTrigger>
+    <TextTriggers>
+        <Trigger Width="1" Height="1" xPos="-3.3476939670042842" yPos="-0.092138364042285772">
+            <Text>Hello</Text>
+        </Trigger>
+    </TextTriggers>
     <Background Width="12" Height="12">
-        <Texture>Images/Backgrounds/BGSciFi.jpg</Texture>
+        <Texture>Images/Backgrounds/</Texture>
     </Background>
     <Enemies>
         <Enemy xPos="0.79372262819138872" yPos="0.75346131892171364">

@@ -83,6 +83,9 @@ Player::Player(double newX, double newY)
     musicCircle = new Model(3, 3, xPos, yPos, "MusicCircle", "MusicHUD");
     circleTimer = new Timer();
 
+    if(player)
+        delete player;
+
     player = this;
 }
 
@@ -291,6 +294,9 @@ void Player::Jump()
     jumpVelocity += gravity * DeltaTime::GetDeltaTime();
     prevYPos = yPos;
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
+
+    CheckTriggerCollision(); // check for text or level triggers
+
     if(CheckCollision())
     {
         jump = false;
@@ -314,6 +320,8 @@ void Player::ApplyGravity()
 
     prevYPos = yPos;
     yPos += fallVelocity * DeltaTime::GetDeltaTime();
+
+    CheckTriggerCollision(); // check for text or level triggers
 
     if(CheckCollision())
     {
@@ -345,6 +353,8 @@ void Player::MoveLeft()
 
     prevXPos = xPos;
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    CheckTriggerCollision(); // check for text or level triggers
     if(CheckCollision())
     {
 //        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
@@ -372,6 +382,9 @@ void Player::MoveRight()
 
     prevXPos = xPos;
     xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    CheckTriggerCollision(); // check for text or level triggers
+
     if(CheckCollision())
     {
 
@@ -411,6 +424,8 @@ void Player::StopMove()
         prevXPos = xPos;
         xPos += (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
 
+        CheckTriggerCollision(); // check for text or level triggers
+
         if(CheckCollision())
         {
             xPos = prevXPos;
@@ -437,6 +452,9 @@ void Player::StopMove()
 
         prevXPos = xPos;
         xPos -= (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+
+        CheckTriggerCollision(); // check for text or level triggers
 
         if(CheckCollision())
         {
@@ -468,28 +486,42 @@ void Player::CheckTriggerCollision()
 {
     double widthOffset = width / 2, heightOffset = height / 2;
 
+    bool collideLevelTrigger = false;
 
-//    if(Overlapping(xPos - widthOffset, xPos + widthOffset, nextLevelTrigger->GetX() - nextLevelTrigger->GetWidth() / 2,
-//                       nextLevelTrigger->GetX() + nextLevelTrigger->GetWidth() / 2) &&
-//           Overlapping(yPos - heightOffset, yPos + heightOffset, nextLevelTrigger->GetY() - nextLevelTrigger->GetHeight() / 2,
-//                       nextLevelTrigger->GetY() + nextLevelTrigger->GetHeight() / 2))
-//                       {
-//                           // If player overlaps with the level trigger, we want to load a new level.
-////                           SceneManager::GetActiveScene()
-//                       }
-
-//    for(auto& trigger : textTriggers)
+//    if(nextLevelTrigger)
 //    {
-//        bool overlap = (Overlapping(xPos - widthOffset, xPos + widthOffset, trigger->GetX() - trigger->GetWidth() / 2,
-//                       trigger->GetX() + trigger->GetWidth() / 2) &&
-//           Overlapping(yPos - heightOffset, yPos + heightOffset, trigger->GetY() - trigger->GetHeight() / 2,
-//                       trigger->GetY() + trigger->GetHeight() / 2));
-//
-//        if(overlap)
-//        {
-//            // DISPLAY TEXT
-//        }
+//        // Check level trigger collision
+//        collideLevelTrigger = (OverlapTrigger(xPos - widthOffset, xPos + widthOffset,
+//                                    nextLevelTrigger->GetX() - nextLevelTrigger->GetWidth() / 2,
+//                                    nextLevelTrigger->GetX() + nextLevelTrigger->GetWidth() / 2) &&
+//                                    OverlapTrigger(yPos - heightOffset, yPos + heightOffset,
+//                                    nextLevelTrigger->GetY() - nextLevelTrigger->GetHeight() / 2,
+//                                    nextLevelTrigger->GetY() + nextLevelTrigger->GetHeight() / 2));
 //    }
+
+    if(collideLevelTrigger)
+    {
+        // If player overlaps with the level trigger, we want to load a new level.
+        SceneManager::LoadNextLevel();
+//                           SceneManager::GetActiveScene()
+    }
+
+
+    for(auto& trigger : textTriggers)
+    {
+        bool overlapTrigger = (OverlapTrigger(xPos - widthOffset, xPos + widthOffset,
+                                trigger->GetX() - trigger->GetWidth() / 2,
+                                trigger->GetX() + trigger->GetWidth() / 2) &&
+                                OverlapTrigger(yPos - heightOffset, yPos + heightOffset,
+                                trigger->GetY() - trigger->GetHeight() / 2,
+                                trigger->GetY() + trigger->GetHeight() / 2));
+
+        if(overlapTrigger)
+        {
+            // DISPLAY TEXT
+            cout << "DISPLAY TEXT" << endl;
+        }
+    }
 }
 
 void Player::CheckEnemyCollision()

@@ -22,6 +22,12 @@ class SceneManager
 
         static GLScene* GetActiveScene();
 
+        // Loads a scene by name using sceneName parameter
+        static void LoadScene(string sceneName);
+
+        // Called by Player::CheckTriggerCollision(). Will load the next level from the current level.
+        static void LoadNextLevel();
+
     protected:
 
     private:

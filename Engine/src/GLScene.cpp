@@ -18,11 +18,11 @@ GLScene::GLScene()
 
 GLScene::GLScene(string newName)
 {
+    ClearStaticData();
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
     sceneName = newName;
-    ClearStaticData();
 }
 
 
@@ -39,6 +39,7 @@ vector<Enemy*> GLScene::enemies;
 GLint GLScene::initGL()
 {
 
+    loadNewLevel = false;
     glShadeModel(GL_SMOOTH); // Shading mode
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background color to black
     glClearDepth(1.0f); // depth buffer
@@ -48,11 +49,14 @@ GLint GLScene::initGL()
     glEnable(GL_COLOR_MATERIAL); // allows texture to have color
     GLLight Light(GL_LIGHT0);
 
+    nextLevelTrigger = nullptr;
+
     LoadLevelFromXML();
 
     displayHUD = new HUD();
     keyboardAndMouse = new Inputs();
     sceneTimer = new Timer();
+
 
     sceneTimer->Start();
 
@@ -67,6 +71,9 @@ GLint GLScene::drawGLScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
+    if(loadNewLevel)
+        return 1; // stop rendering the scene while next level loads.
+
     gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
             Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
             0.0f, 1.0f, 0.0f);
@@ -78,6 +85,9 @@ GLint GLScene::drawGLScene()
 
     displayHUD->showHP(Player::player);
 
+    if(nextLevelTrigger)
+        nextLevelTrigger->DrawModel();
+
 	for(auto& model : movableObjects)
         model->Update();
 
@@ -87,7 +97,8 @@ GLint GLScene::drawGLScene()
     for(auto& enemy : enemies)
         enemy->Update();
 
-    Player::player->Update();
+    if(Player::player)
+        Player::player->Update();
 
     dTime->UpdateDeltaTime();
 
@@ -151,11 +162,6 @@ string GLScene::GetSceneName()
     return sceneName;
 }
 
-void GLScene::LoadScene(string name)
-{
-    return;
-}
-
 bool GLScene::CheckPointerCollision(Model* button, double mouseX, double mouseY)
 {
     // Check to see if the user's mouse pointer has overlapped with the button's collider.
@@ -186,9 +192,12 @@ void GLScene::CleanStaticData()
 
     if(staticObjects.size() > 0)
         staticObjects.clear();
+
+    delete Player::player;
+    Player::player = nullptr;
 }
 
-void GLScene::ConvertMouseToWorld(double mouseX, double mouseY, double cameraX, double cameraY, double &xOut, double &yOut)
+void GLScene::ConvertMouseToWorld(double mouseX, double mouseY, double &xOut, double &yOut)
 {
     double modelMatrix[16];
     double projMatrix[16];
@@ -207,8 +216,8 @@ void GLScene::ConvertMouseToWorld(double mouseX, double mouseY, double cameraX, 
     double convertedX, convertedY, convertedZ;
     gluUnProject(newX, newY, newZ, modelMatrix, projMatrix, viewport, &convertedX, &convertedY, &convertedZ);
 
-    convertedX += cameraX;
-    convertedY += cameraY;
+//    convertedX += cameraX;
+//    convertedY += cameraY;
 
     xOut = (double) convertedX;
     yOut = (double) convertedY;
@@ -264,11 +273,14 @@ void GLScene::LoadLevelFromXML()
     mainElements->QueryAttribute("xPos", &newX);
     mainElements->QueryAttribute("yPos", &newY);
 
-    nextLevelTrigger = new Model(newWidth, newHeight, newX, newY, "LevelTrigger", "Trigger");
-    nextLevelTrigger->InitModel("Images/LevelTrigger.png", true);
+    string nextLevelTexture = mainElements->LastChildElement()->GetText();
 
+    nextLevelTrigger = new Model(newWidth, newHeight, newX, newY, "NextLevel", "LevelTrigger");
+    nextLevelTrigger->InitModel(nextLevelTexture, true);
 
-
+    /////////////////////
+    // LOAD TEXT TRIGGERS
+    /////////////////////
 
     mainElements = mainElements->NextSiblingElement();
 
@@ -287,11 +299,11 @@ void GLScene::LoadLevelFromXML()
 
             string newText;
 
-            newText = child->FirstChildElement()->GetText(); // get the name of the enemy
+            if(child->FirstChildElement())
+                newText = child->FirstChildElement()->GetText(); // get the name of the enemy
 
             Player::player->AddTextTrigger(new Trigger(newX, newY, newWidth, newHeight, "TextTrigger"));
         }
-
 
         mainElements = mainElements->NextSiblingElement();
         checkName = mainElements->Name();
@@ -359,3 +371,7 @@ void GLScene::ClearStaticData()
     Player::player = nullptr;
 }
 
+void GLScene::LoadNewLevel()
+{
+    loadNewLevel = true;
+}

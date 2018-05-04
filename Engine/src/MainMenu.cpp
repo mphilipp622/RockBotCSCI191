@@ -90,33 +90,6 @@ GLint MainMenu::drawGLScene()
     return 1;
 }
 
-void MainMenu::LoadScene(string sceneName)
-{
-        // if we already have the level loaded, we want to delete it
-        auto finder = SceneManager::scenes.find(sceneName); // find the scene in scene manager
-
-        if(finder != SceneManager::scenes.end())
-            delete SceneManager::scenes[sceneName]; // if hashtable already has map loaded, delete it
-
-        if(sceneName == "LevelCreator")
-        {
-            LevelCreator* creatorScene = new LevelCreator();
-
-            SceneManager::scenes.insert( {sceneName, creatorScene} );
-            creatorScene->initGL();
-        }
-        else if(sceneName == "Level1")
-        {
-            GLScene* newGame = new GLScene(sceneName); // create new map
-
-            SceneManager::scenes.insert( {sceneName, newGame} ); // insert map into hash table
-            newGame->initGL(); // initialize map
-        }
-
-
-        SceneManager::activeScene = sceneName; // set active scene to the new scene.
-}
-
 int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 
@@ -124,14 +97,14 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         double mouseX, mouseY;
 
-        ConvertMouseToWorld(LOWORD(lParam), HIWORD(lParam), 0, 0, mouseX, mouseY);
+        ConvertMouseToWorld(LOWORD(lParam), HIWORD(lParam), mouseX, mouseY);
 
         if(CheckPointerCollision(exit, mouseX, mouseY))
             killGame = true;
         else if(CheckPointerCollision(startGame, mouseX, mouseY))
-            LoadScene("Level1");
+            SceneManager::LoadScene("Level1");
         else if(CheckPointerCollision(levelCreator, mouseX, mouseY))
-            LoadScene("LevelCreator");
+            SceneManager::LoadScene("LevelCreator");
     }
     if(uMsg == WM_KEYDOWN)
     {
@@ -140,9 +113,9 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         const int oneKey = 0x31, twoKey = 0x32, threeKey = 0x33;
 
         if(wParam == oneKey || wParam == VK_NUMPAD1)
-            LoadScene("Level1");
+            SceneManager::LoadScene("Level1");
         else if(wParam == twoKey || wParam == VK_NUMPAD2)
-            LoadScene("LevelCreator");
+            SceneManager::LoadScene("LevelCreator");
         else if(wParam == threeKey || wParam == VK_NUMPAD3)
             killGame = true;
 

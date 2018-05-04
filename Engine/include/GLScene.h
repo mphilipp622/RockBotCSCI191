@@ -38,9 +38,6 @@ class GLScene
         // keyboard and mouse inputs
         virtual int windowsMsg(HWND, UINT, WPARAM, LPARAM);
 
-        // used for loading into a scene from this scene
-        virtual void LoadScene(string name);
-
 //        WPARAM wParam;
         float screenHeight, screenWidth;
 
@@ -50,6 +47,9 @@ class GLScene
 
         //returns scene name
         string GetSceneName();
+
+        // flags level loading, which will prevent rendering in the scene to avoid seg faults
+        void LoadNewLevel();
 
     protected:
         unordered_map<string, AudioSource*> audioSources; // map of all environmental sounds in scene
@@ -75,7 +75,7 @@ class GLScene
         DeltaTime* dTime;
 
         // Takes mouseX and mouseY screen pixel c oordinates as input, converts them to OpenGL World coordinates, and sends them out using xOut and yOut. Pass reference parameters for xOut and yOut
-        void ConvertMouseToWorld(double mouseX, double mouseY, double cameraX, double cameraY, double &xOut, double &yOut);
+        void ConvertMouseToWorld(double mouseX, double mouseY, double &xOut, double &yOut);
 
         // Loads player, enemy, platform, trigger data into the scene
         void LoadLevelFromXML();
@@ -83,7 +83,7 @@ class GLScene
 
     private:
 
-
+        bool loadNewLevel; // flag for stopping the rendering of everything while new level loads.
         // Empty out the static data. Useful for loading new data
         void ClearStaticData();
 

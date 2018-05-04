@@ -12,6 +12,7 @@
 #include <Timer.h>
 #include <ChordManager.h>
 #include <Trigger.h>
+#include <SceneManager.h>
 
 using namespace std;
 
@@ -120,7 +121,6 @@ class Player : public Model
         void CheckTriggerCollision();
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();
-
         bool OverlapTrigger(double min0, double max0, double min1, double max1);
 
         void CheckHit();

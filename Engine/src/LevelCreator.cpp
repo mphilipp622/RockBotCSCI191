@@ -32,7 +32,7 @@ LevelCreator::LevelCreator()
     cameraPosX = 0;
     cameraPosY = 0;
     cameraPosZ = 6;
-    cameraSpeed = 100.0;
+    cameraSpeed = 4.0;
     cameraMoveIncrement = 0.4; // this is the base unit that the camera will move when user presses WASD
 
     consoleWindow = GetConsoleWindow();
@@ -236,7 +236,12 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         /////////////////////////
 
         else if(wParam == 0x4C)
+        {
+            ShowConsoleWindow();
             CreateLevelTrigger();
+            SetForegroundWindow(hWnd); // set the game window back to front
+        }
+
 
         /////////////////////////
         // TEXT TRIGGER CREATION
@@ -414,11 +419,15 @@ void LevelCreator::CreateLevelTrigger()
     if(nextLevelTrigger)
         return; // don't allow user to put more than 1 level trigger
 
-    cout << "Making Trigger..." << endl;
+    cout << "Insert the filename for the level trigger texture: " << endl;
+
+    string newPath;
+
+    getline(cin, newPath);
 
     // instantiate model with default Width and Height of 1 and spawned at camera's center
-    nextLevelTrigger = new Model(1.0, 1.0, cameraPosX, cameraPosY, "LevelTrigger", "Trigger");
-    nextLevelTrigger->InitModel("Images/LevelTrigger.png", true);
+    nextLevelTrigger = new Model(1.0, 1.0, cameraPosX, cameraPosY, "Images/" + newPath, "LevelTrigger");
+    nextLevelTrigger->InitModel("Images/" + newPath, true);
 
     SetSelectedModel(nextLevelTrigger);
 }
@@ -473,8 +482,9 @@ void LevelCreator::MoveCamera(double xMove, double yMove)
     // Pass + 1 for xMove or yMove to increase the position of the axis.
     // Pass -1 for xMove or yMove to decrease the position of the axis.
 
-    cameraPosX += cameraMoveIncrement * xMove * cameraSpeed * dTime->GetDeltaTime();
-    cameraPosY += cameraMoveIncrement * yMove * cameraSpeed * dTime->GetDeltaTime();
+    cout << "MOVING" << endl;
+    cameraPosX += cameraMoveIncrement * xMove * cameraSpeed;
+    cameraPosY += cameraMoveIncrement * yMove * cameraSpeed;
 }
 
 void LevelCreator::MoveObject(double mouseX, double mouseY)
@@ -485,7 +495,7 @@ void LevelCreator::MoveObject(double mouseX, double mouseY)
     double convertedX, convertedY;
 
     // convert mouse coordinates
-    ConvertMouseToWorld(mouseX, mouseY, cameraPosX, cameraPosY, convertedX, convertedY);
+    ConvertMouseToWorld(mouseX, mouseY, convertedX, convertedY);
 
     selectedModel->SetPosition(convertedX, convertedY);
 }
@@ -495,7 +505,7 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
     double convertedX, convertedY;
 
     // convert mouse coordinates and put them into convertedX and convertedY
-    ConvertMouseToWorld(mouseX, mouseY, cameraPosX, cameraPosY, convertedX, convertedY);
+    ConvertMouseToWorld(mouseX, mouseY, convertedX, convertedY);
 
     // This will deselect the selectedModel. Allowing user to right-click empty space to deselect.
     SetSelectedModel(nullptr);
@@ -787,6 +797,10 @@ void LevelCreator::SaveLevelToXML()
     trigger->SetAttribute("Height", nextLevelTrigger->GetHeight());
     trigger->SetAttribute("xPos", nextLevelTrigger->GetX());
     trigger->SetAttribute("yPos", nextLevelTrigger->GetY());
+
+    XMLElement* levelTriggerTexture = xmlDoc.NewElement("Texture");
+    levelTriggerTexture->SetText(nextLevelTrigger->GetName().c_str());
+    trigger->InsertEndChild(levelTriggerTexture);
 
     endElement = trigger;
     pRoot->InsertAfterChild(playerElement, trigger); // insert player after platforms

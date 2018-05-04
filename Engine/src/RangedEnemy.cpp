@@ -78,8 +78,6 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     attackSpeed = 2.0;
     attackTimer = new Timer();
     attackTimer->Start();
-
-    cout << "HELLO" << endl;
 }
 
 void RangedEnemy::InitEnemy()
