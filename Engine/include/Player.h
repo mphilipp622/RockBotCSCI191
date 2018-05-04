@@ -79,12 +79,12 @@ class Player : public Model
     private:
         int hp;
         int moveSpeed, jumpSpeed;
-        bool jump, slowDown, moving, playingChords, canPlay;
+        bool jump, slowDown, moving, playingChords, canPlay, pushBack;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
         float prevXPos, prevYPos;
-        float acceleration, accelRate, maxAcceleration, deceleration;
+        float acceleration, accelRate, maxAcceleration, deceleration, pushAccel;
         float gravity;
         float playerZoom;
 
@@ -127,6 +127,9 @@ class Player : public Model
 
         // Updates the canPlay boolean based on the cooldown timer
         void UpdateCooldownTimer();
+
+        // Pushes player back when getting hit by a melee enemy
+        void PushBack(double direction);
 
         AudioSource* chord;
         ChordManager* chordManager;

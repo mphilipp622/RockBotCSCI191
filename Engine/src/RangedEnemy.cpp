@@ -146,7 +146,7 @@ void RangedEnemy::ShootProjectile(double xTarget, double yTarget)
 {
     isAttacking = true;
 
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "DroneProjectile", "EnemyProjectile", xTarget, yTarget); // sends relative mouse pointer location
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.3, 0.3, 1, 4.0, "DroneProjectile", "EnemyProjectile", xTarget, yTarget); // sends relative mouse pointer location
     vector<string> animations;
     for(int i = 0; i < 4; i++)
         animations.push_back("Images/Projectiles/Bullet" + to_string(i) + ".png");

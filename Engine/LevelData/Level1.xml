@@ -1,22 +1,57 @@
 <Level1>
     <Platforms>
-        <Platform Width="3.9999986" Height="0.19999993" xPos="-2.1124903892139892" yPos="-1.7443003048835133">
+        <Platform Width="10.900005" Height="0.39999992" xPos="-0.1173608567089985" yPos="-1.8256132865198336">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
-        <Platform Width="2.7999995" Height="0.29999992" xPos="1.1966176496636973" yPos="-0.10125226044178705">
+        <Platform Width="2.7999995" Height="0.19999993" xPos="2.0081746592428638" yPos="-0.13692099648898753">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="1.3000001" Height="3.1999991" xPos="-4.9291559817779378" yPos="-0.026080189807426195">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="1.9000002" Height="0.19999993" xPos="-0.84108613974782265" yPos="-0.76284555186721625">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="4.0999985" Height="0.19999993" xPos="7.232555015203002" yPos="-0.12349689139502304">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="10.400003" Height="0.39999992" xPos="10.523258419243469" yPos="-1.8256132865198336">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="0.79999995" Height="1" xPos="8.4587027495338383" yPos="0.47634515252366039">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="4.0999985" Height="0.19999993" xPos="11.788147652662675" yPos="1.4865708190232931">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
     </Platforms>
     <Player xPos="-2.9501227439785773" yPos="-1.1229796158089109"/>
-    <LevelTrigger Width="1" Height="1" xPos="1.7535050943148798" yPos="1.2288342517253246">
-        <Texture>LevelTrigger</Texture>
+    <LevelTrigger Width="1" Height="1" xPos="13.469148167518842" yPos="2.1611955994129044">
+        <Texture>Images/Misc/Portal.png</Texture>
     </LevelTrigger>
+    <TextTriggers>
+        <Trigger Width="2.9999993" Height="1" xPos="6.5709645110676584" yPos="0.48516635905187616">
+            <Text>This is seriously trippin' me out...</Text>
+        </Trigger>
+    </TextTriggers>
     <Background Width="12" Height="12">
         <Texture>Images/Backgrounds/</Texture>
     </Background>
     <Enemies>
-        <Enemy xPos="1.3346889169325855" yPos="0.71336819856713596">
+        <Enemy xPos="3.0057419412693509" yPos="0.54116393850409361">
             <Name>Enemy0</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="-0.9454069012669325" yPos="0.87368635854877752">
+            <Name>Enemy1</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="7.9680810181379753" yPos="2.4549940172201334">
+            <Name>Enemy2</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="12.463530601233117" yPos="2.293513697336143">
+            <Name>Enemy3</Name>
             <Tag>MeleeEnemy</Tag>
         </Enemy>
     </Enemies>

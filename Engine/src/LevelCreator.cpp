@@ -405,7 +405,7 @@ void LevelCreator::CreateEnemy()
     // Enemy tags will be used in the XML file to determine which class to spawn
     if(type == 1)
     {
-        filepath = enemyRelativeFilePath + "MeleeIdle.png";
+        filepath = enemyRelativeFilePath + "MeleeIdle0.png";
         temp = new Model(1.0, 1.0, cameraPosX, cameraPosY, "Enemy" + to_string(enemies.size()), "MeleeEnemy");
     }
     else if(type == 2)
@@ -1015,7 +1015,7 @@ void LevelCreator::LoadLevelFromXML()
 
             triggers.push_back(new Model(newWidth, newHeight, newX, newY, newText, "TextTrigger"));
 
-            triggers.back()->InitModel("Images/TextTrigger.png", true);
+            triggers.back()->InitModel("Images/Misc/TextTrigger.png", true);
         }
 
 

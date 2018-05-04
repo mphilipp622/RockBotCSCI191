@@ -50,10 +50,12 @@ Player::Player(double newX, double newY)
     accelRate = 0.05;
     deceleration = 0.2; // rate of deceleration
     maxAcceleration = 2.5;
+    pushAccel = 10.0; // used for push back
     jump = false; // set true to avoid falling through earth on scene load
     slowDown = false;
     gravity = -9.80;
     moving = false;
+    pushBack = false;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
     idleFrame = 0;
@@ -522,17 +524,48 @@ void Player::CheckEnemyCollision()
     {
         if(Collision(enemy))
         {
+            pushBack = true;
             TakeDamage(1);
 
             if(enemy->GetX() >= xPos)
                 // if we're on left side of enemy and touch them, push back to the left
-                SetPosition(xPos - 1.0, yPos);
+                PushBack(-1.0);
             else if(enemy->GetX() < xPos)
                 // if we're on right side of enemy and touch them, push back right.
-                SetPosition(xPos + 1.0, yPos);
+                PushBack(1.0);
         }
     }
 }
+
+void Player::PushBack(double direction)
+{
+    slowDown = false;
+
+    xDirection = direction;
+
+    acceleration = pushAccel;
+
+    prevXPos = xPos;
+    xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    CheckTriggerCollision(); // check for text or level triggers
+
+    if(CheckCollision())
+    {
+
+//        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
+        xPos = prevXPos;
+        moving = false;
+        xDirection = 0;
+        acceleration = 0;
+        return;
+    }
+    AudioEngine::SetPosition(xPos, yPos);
+    chord->SetPosition(xPos, yPos);
+
+    slowDown = true;
+}
+
 
 
 bool Player::CheckCircleCollision()
