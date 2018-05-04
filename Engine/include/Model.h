@@ -60,6 +60,8 @@ class Model
         string GetName();
         string GetTag();
 
+        void SetName(string newName);
+
         // Color setter. Currently only used by LevelCreator class
         void SetColor(float newR, float newG, float newB);
 

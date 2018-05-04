@@ -464,6 +464,34 @@ bool Player::CheckCollision()
     return false;
 }
 
+void Player::CheckTriggerCollision()
+{
+    double widthOffset = width / 2, heightOffset = height / 2;
+
+
+//    if(Overlapping(xPos - widthOffset, xPos + widthOffset, nextLevelTrigger->GetX() - nextLevelTrigger->GetWidth() / 2,
+//                       nextLevelTrigger->GetX() + nextLevelTrigger->GetWidth() / 2) &&
+//           Overlapping(yPos - heightOffset, yPos + heightOffset, nextLevelTrigger->GetY() - nextLevelTrigger->GetHeight() / 2,
+//                       nextLevelTrigger->GetY() + nextLevelTrigger->GetHeight() / 2))
+//                       {
+//                           // If player overlaps with the level trigger, we want to load a new level.
+////                           SceneManager::GetActiveScene()
+//                       }
+
+//    for(auto& trigger : textTriggers)
+//    {
+//        bool overlap = (Overlapping(xPos - widthOffset, xPos + widthOffset, trigger->GetX() - trigger->GetWidth() / 2,
+//                       trigger->GetX() + trigger->GetWidth() / 2) &&
+//           Overlapping(yPos - heightOffset, yPos + heightOffset, trigger->GetY() - trigger->GetHeight() / 2,
+//                       trigger->GetY() + trigger->GetHeight() / 2));
+//
+//        if(overlap)
+//        {
+//            // DISPLAY TEXT
+//        }
+//    }
+}
+
 void Player::CheckEnemyCollision()
 {
     for(auto& enemy : SceneManager::GetActiveScene()->enemies)
@@ -492,6 +520,12 @@ bool Player::CheckCircleSquareCollision()
 {
     return false;
 }
+
+bool Player::OverlapTrigger(double min0, double max0, double min1, double max1)
+{
+    return max0 >= min1 && min0 <= max1;
+}
+
 
 
 double Player::GetOffsetX()
@@ -650,4 +684,13 @@ int Player::getHP()
     return hp;
 }
 
+void Player::AddTextTrigger(Trigger* newTrigger)
+{
+    textTriggers.push_back(newTrigger);
+}
+
+void Player::SetNextLevelTrigger(Trigger* newTrigger)
+{
+    nextLevelTrigger = newTrigger;
+}
 

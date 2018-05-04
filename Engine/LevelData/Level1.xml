@@ -15,6 +15,9 @@
         <Platform Width="1" Height="0.79999995" xPos="-2.8595957356703088" yPos="-1.6016190356879547">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
+        <Platform Width="1.6000001" Height="0.39999992" xPos="-2.399423369869806" yPos="0.90272418772910556">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
     </Platforms>
     <Player xPos="-4.0592952577053119" yPos="-1.5141815311521791"/>
     <Trigger Width="1" Height="1" xPos="6.1925018680045119" yPos="-1.4860269624341103"/>
@@ -28,6 +31,10 @@
         </Enemy>
         <Enemy xPos="0.29915441241592433" yPos="1.8869739445969407">
             <Name>Enemy1</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="-3.0874933068177652" yPos="1.9142457531324031">
+            <Name>Enemy2</Name>
             <Tag>RangedEnemy</Tag>
         </Enemy>
     </Enemies>

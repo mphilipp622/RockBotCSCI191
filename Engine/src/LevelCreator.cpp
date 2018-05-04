@@ -108,6 +108,9 @@ GLint LevelCreator::drawGLScene()
             enemy->DrawModel();
     }
 
+    for(auto& trigger : triggers)
+        trigger->DrawModel();
+
 
     if(player)
     {
@@ -139,7 +142,7 @@ void LevelCreator::LoadScene(string sceneName)
 
 int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    const int bKey = 0x42, wKey = 0x57, sKey = 0x53, aKey = 0x41, dKey = 0x44, mKey = 0x4D, pKey = 0x50, eKey = 0x45;
+    const int bKey = 0x42, wKey = 0x57, sKey = 0x53, aKey = 0x41, dKey = 0x44, mKey = 0x4D, pKey = 0x50, eKey = 0x45, tKey = 0x54;
 
     if(uMsg == WM_KEYDOWN)
     {
@@ -219,7 +222,7 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         /////////////////
         // ENEMY CREATION
         /////////////////
-        else if(wParam == eKey)
+        else if(wParam == eKey && selectedModel->GetTag() != "TextTrigger")
         {
             ShowConsoleWindow();
 
@@ -235,6 +238,32 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         else if(wParam == 0x4C)
             CreateLevelTrigger();
 
+        /////////////////////////
+        // TEXT TRIGGER CREATION
+        /////////////////////////
+
+        else if(wParam == tKey)
+        {
+            ShowConsoleWindow();
+
+            CreateTextTrigger();
+
+            SetForegroundWindow(hWnd); // set the game window back to front
+        }
+
+        ////////////////////////
+        // TEXT TRIGGER EDITING
+        ////////////////////////
+
+        if(wParam == eKey && selectedModel->GetTag() == "TextTrigger")
+        {
+            // Edit text
+            ShowConsoleWindow();
+
+            EditTextTrigger();
+
+            SetForegroundWindow(hWnd);
+        }
 
         ////////////////////////
         // MODEL DELETION
@@ -391,6 +420,19 @@ void LevelCreator::CreateLevelTrigger()
     SetSelectedModel(nextLevelTrigger);
 }
 
+void LevelCreator::CreateTextTrigger()
+{
+    cout << "Input the text for this trigger: " << endl;
+    string newText;
+
+    getline(cin, newText);
+
+    // We'll use the model's name for storing the text in the level creator. This avoids making a hashtable or something.
+    triggers.push_back(new Model(1.0, 1.0, cameraPosX, cameraPosY, newText, "TextTrigger"));
+    triggers.back()->InitModel("Images/TextTrigger.png", true);
+
+    SetSelectedModel(triggers.back());
+}
 
 
 
@@ -442,8 +484,6 @@ void LevelCreator::MoveObject(double mouseX, double mouseY)
     // convert mouse coordinates
     ConvertMouseToWorld(mouseX, mouseY, cameraPosX, cameraPosY, convertedX, convertedY);
 
-    convertedX = fmod(convertedX, 0.5f);
-    convertedY = fmod(convertedY, 0.5f);
     selectedModel->SetPosition(convertedX, convertedY);
 }
 
@@ -474,6 +514,15 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
         {
             // Set the new selected model
             SetSelectedModel(enemy);
+            return;
+        }
+    }
+
+    for(auto& trigger : triggers)
+    {
+        if(CheckPointerCollision(trigger, convertedX, convertedY))
+        {
+            SetSelectedModel(trigger);
             return;
         }
     }
@@ -527,6 +576,30 @@ void LevelCreator::DeleteObject()
 
     SetSelectedModel(nullptr);
 }
+
+void LevelCreator::EditTextTrigger()
+{
+    if(!selectedModel)
+        return; // this should never be called but just in case
+
+    cout << "This Trigger's Current Text is:" << endl << "\"" + selectedModel->GetName() + "\"" << endl << "Do you wish to change it? (y/n): ";
+
+    char input;
+
+    cin >> input;
+
+    if(input == 'y' || input == 'Y')
+    {
+        cout << "Input new Text:" << endl;
+        string newText;
+
+        // Need to do this twice to flush the buffer from previous character input.
+        getline(cin, newText);
+        getline(cin, newText);
+        selectedModel->SetName(newText);
+    }
+}
+
 
 
 

@@ -388,3 +388,8 @@ string Model::GetTextureName()
 {
     return textureName;
 }
+
+void Model::SetName(string newName)
+{
+    name = newName;
+}

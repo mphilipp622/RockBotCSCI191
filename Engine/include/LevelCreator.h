@@ -3,6 +3,7 @@
 
 #include <GLScene.h>
 #include <iostream>
+#include <Trigger.h>
 
 class LevelCreator : public GLScene
 {
@@ -38,6 +39,7 @@ class LevelCreator : public GLScene
         Model* player; // Player only needs to be a model for the level creator. We'll grab the positions for the actual game scene
 //        Parallax* background; // background image for menu.
         Model* selectedModel; // user selects this with the mouse and can then manipulate the model
+        vector<Model*> triggers;
 
         string backgroundTexture;
 
@@ -84,6 +86,9 @@ class LevelCreator : public GLScene
         // Places a level trigger in the scene
         void CreateLevelTrigger();
 
+        // Places a text trigger in the scene
+        void CreateTextTrigger();
+
         // Deletes the selectedObject from the scene
         void DeleteObject();
 
@@ -102,7 +107,7 @@ class LevelCreator : public GLScene
         // Checks pointer collision against a model and selects it if collision happens
         void SelectModel(double mouseX, double mouseY);
 
-
+        void EditTextTrigger();
 
         /////////////////////
         // HELPER FUNCTIONS
