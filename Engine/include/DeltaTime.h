@@ -14,6 +14,7 @@ class DeltaTime
 
     private:
         double oldTime;
+        static double deltaTime;
 };
 
 #endif // DELTATIME_H

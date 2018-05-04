@@ -75,7 +75,7 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     xPatrolCenter = xPos; // set patrol center to the starting position. This could also be changed later if needed
     aggroRadius = 2.0;
 
-    attackSpeed = 2.0;
+    attackSpeed = 1.0;
     attackTimer = new Timer();
     attackTimer->Start();
 }
@@ -182,15 +182,18 @@ bool RangedEnemy::CheckForwardCollision()
         double tempX = xPos + (0.5 * xDirection);
         double tempY = yPos + (0.5 * yDirection);
 
-        for(auto& model : SceneManager::GetActiveScene()->staticObjects)
-        {
-            if(Collision(model, tempX, tempY))
-                return true;
-        }
+        if(Collision(model, tempX, tempY))
+            return true;
 
-        return false;
     }
+    return false;
 }
+
+bool RangedEnemy::CheckForPit()
+{
+    return false;
+}
+
 
 
 bool RangedEnemy::CheckCircleCollision()

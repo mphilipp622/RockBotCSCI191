@@ -42,6 +42,9 @@ void AudioSource::Play()
 
 void AudioSource::PlayMusic()
 {
+    if(AudioEngine::engine->isCurrentlyPlaying(filePath.c_str()))
+        return; // keep playing music if we haven't changed the song from level to level
+
     sound = AudioEngine::engine->play2D(filePath.c_str(), loop, true);
     sound->setVolume(volume);
     sound->setIsPaused(false);

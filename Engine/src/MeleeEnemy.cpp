@@ -86,18 +86,27 @@ void MeleeEnemy::InitEnemy()
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
 
 
-    moveAnim[0].BindTexture("Images/Enemies/Melee0.png");
-    moveAnim[1].BindTexture("Images/Enemies/Melee1.png");
-    moveAnim[2].BindTexture("Images/Enemies/Melee2.png");
-    moveAnim[3].BindTexture("Images/Enemies/Melee3.png");
+    moveAnim[0].BindTexture("Images/Enemies/MeleeWalk0.png");
+    moveAnim[1].BindTexture("Images/Enemies/MeleeWalk1.png");
+    moveAnim[2].BindTexture("Images/Enemies/MeleeWalk2.png");
+    moveAnim[3].BindTexture("Images/Enemies/MeleeWalk3.png");
+    moveAnim[4].BindTexture("Images/Enemies/MeleeWalk4.png");
+    moveAnim[5].BindTexture("Images/Enemies/MeleeWalk5.png");
+    moveAnim[6].BindTexture("Images/Enemies/MeleeWalk6.png");
 
-    maxMoveFrame = 4;
+    maxMoveFrame = 7;
 
-    idleAnim[0].BindTexture("Images/Enemies/MeleeIdle.png");
-    maxIdleFrame = 1;
+    idleAnim[0].BindTexture("Images/Enemies/MeleeIdle0.png");
+    idleAnim[1].BindTexture("Images/Enemies/MeleeIdle1.png");
+    idleAnim[2].BindTexture("Images/Enemies/MeleeIdle2.png");
+    idleAnim[3].BindTexture("Images/Enemies/MeleeIdle3.png");
+    idleAnim[4].BindTexture("Images/Enemies/MeleeIdle4.png");
 
-    jumpAnim[0].BindTexture("Images/Enemies/MeleeJump.png");
-    maxJumpFrame = 1;
+    maxIdleFrame = 5;
+
+    jumpAnim[0].BindTexture("Images/Enemies/MeleeJump0.png");
+    jumpAnim[1].BindTexture("Images/Enemies/MeleeJump1.png");
+    maxJumpFrame = 2;
 
     deathAnim[0].BindTexture("Images/Enemies/MeleeIdle.png");
     maxDeathFrame = 1;
@@ -133,14 +142,29 @@ bool MeleeEnemy::CheckForwardCollision()
         double tempX = xPos + (0.5 * xDirection);
         double tempY = yPos + (0.5 * yDirection);
 
-        for(auto& model : SceneManager::GetActiveScene()->staticObjects)
-        {
-            if(Collision(model, tempX, tempY))
-                return true;
-        }
+        if(Collision(model, tempX, tempY))
+            return true;
 
-        return false;
+
     }
+
+    return false;
+}
+
+bool MeleeEnemy::CheckForPit()
+{
+    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
+    {
+        // directions will be - or + 1 and will therefore modify how this calculation happens.
+        double tempX = xPos + (0.3 * xDirection);
+        double tempY = yPos - 0.1;
+
+        if(Collision(model, tempX, tempY))
+            return false;
+
+
+    }
+    return true;
 }
 
 

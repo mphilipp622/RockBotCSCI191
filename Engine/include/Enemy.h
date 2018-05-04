@@ -23,7 +23,7 @@ class Enemy : public Model
         void TakeDamage(int damageTaken);
 
     protected:
-        bool jump, slowDown, moving, ignoreGravity;
+        bool jump, slowDown, moving, ignoreGravity, falling;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection, yDirection;
@@ -69,6 +69,7 @@ class Enemy : public Model
         virtual bool CheckCircleCollision() = 0;
         virtual bool CheckCircleSquareCollision() = 0;
         virtual bool CheckForwardCollision() = 0;
+        virtual bool CheckForPit() = 0; // will be implemented in melee player for checking if they should jump over a pit.
 
         bool AggroOverlap();
 

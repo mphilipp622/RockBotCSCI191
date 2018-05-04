@@ -309,8 +309,7 @@ void Player::Jump()
 
 void Player::ApplyGravity()
 {
-
-    if(DeltaTime::GetDeltaTime() > 1)
+    if(DeltaTime::GetDeltaTime() > 0.2f)
         return; // kill if delta time is too high
 
     fallVelocity += gravity * DeltaTime::GetDeltaTime();
@@ -498,13 +497,6 @@ void Player::CheckTriggerCollision()
 //                                    nextLevelTrigger->GetY() - nextLevelTrigger->GetHeight() / 2,
 //                                    nextLevelTrigger->GetY() + nextLevelTrigger->GetHeight() / 2));
 //    }
-
-    if(collideLevelTrigger)
-    {
-        // If player overlaps with the level trigger, we want to load a new level.
-        SceneManager::LoadNextLevel();
-//                           SceneManager::GetActiveScene()
-    }
 
 
     for(auto& trigger : textTriggers)
@@ -719,10 +711,5 @@ int Player::getHP()
 void Player::AddTextTrigger(Trigger* newTrigger)
 {
     textTriggers.push_back(newTrigger);
-}
-
-void Player::SetNextLevelTrigger(Trigger* newTrigger)
-{
-    nextLevelTrigger = newTrigger;
 }
 

@@ -38,8 +38,6 @@ vector<Enemy*> GLScene::enemies;
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
-
-    loadNewLevel = false;
     glShadeModel(GL_SMOOTH); // Shading mode
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background color to black
     glClearDepth(1.0f); // depth buffer
@@ -51,6 +49,7 @@ GLint GLScene::initGL()
 
     nextLevelTrigger = nullptr;
 
+    loadNewLevel = true;
     LoadLevelFromXML();
 
     displayHUD = new HUD();
@@ -63,6 +62,8 @@ GLint GLScene::initGL()
     BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
     BGM->PlayMusic();
     dTime = new DeltaTime();
+    loadNewLevel = false;
+
     return true;
 }
 
@@ -85,8 +86,7 @@ GLint GLScene::drawGLScene()
 
     displayHUD->showHP(Player::player);
 
-    if(nextLevelTrigger)
-        nextLevelTrigger->DrawModel();
+
 
 	for(auto& model : movableObjects)
         model->Update();
@@ -99,6 +99,18 @@ GLint GLScene::drawGLScene()
 
     if(Player::player)
         Player::player->Update();
+
+    if(nextLevelTrigger)
+    {
+        nextLevelTrigger->DrawModel();
+        if(nextLevelTrigger->LevelTriggerCollision())
+        {
+            loadNewLevel = true;
+            SceneManager::LoadNextLevel();
+            delete this;
+        }
+
+    }
 
     dTime->UpdateDeltaTime();
 
@@ -258,7 +270,6 @@ void GLScene::LoadLevelFromXML()
     mainElements->QueryAttribute("xPos", &playerX);
     mainElements->QueryAttribute("yPos", &playerY);
 
-
     Player::player = new Player(playerX, playerY);
     Player::player->InitPlayer();
 
@@ -352,6 +363,7 @@ void GLScene::LoadLevelFromXML()
 
 void GLScene::ClearStaticData()
 {
+    delete dTime;
     for(auto& enemy : enemies)
         delete enemy;
 

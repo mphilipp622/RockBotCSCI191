@@ -35,6 +35,7 @@ class RangedEnemy : public Enemy
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();
         bool CheckForwardCollision();
+        bool CheckForPit();
 
 
 };

@@ -353,6 +353,22 @@ bool Model::CheckCircleSquareCollision()
     return false;
 }
 
+bool Model::LevelTriggerCollision()
+{
+    // Called on in GLScene::DrawGLScene by nextLevelTrigger object. Checks to see if player has touched the next level trigger
+    double widthOffset = width / 2, heightOffset = height / 2;
+    double playerX = Player::player->GetX();
+    double playerY = Player::player->GetY();
+    double playerWidthOffset = Player::player->GetWidth() / 2;
+    double playerHeightOffset = Player::player->GetHeight() / 2;
+
+    return Overlapping(xPos - widthOffset, xPos + widthOffset, playerX - playerWidthOffset,
+                       playerX + playerWidthOffset) &&
+           Overlapping(yPos - heightOffset, yPos + heightOffset, playerY - playerHeightOffset,
+                       playerY + playerHeightOffset);
+}
+
+
 bool Model::Overlapping(double min0, double max0, double min1, double max1)
 {
     // Square-square overlap

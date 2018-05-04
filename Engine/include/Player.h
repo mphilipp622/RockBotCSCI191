@@ -74,9 +74,6 @@ class Player : public Model
         // Will be called on by GLScene when loading happens. WIll push new triggers into the trigger vector so player knows where all triggers are in the scene.
         void AddTextTrigger(Trigger* newTrigger);
 
-        // Sets the next level trigger in player. Used by GLScene when loading occurs.
-        void SetNextLevelTrigger(Trigger* newTrigger);
-
     protected:
 
     private:
@@ -118,7 +115,7 @@ class Player : public Model
 
         bool CheckCollision();
         void CheckEnemyCollision();
-        void CheckTriggerCollision();
+        void CheckTriggerCollision(); // Used for checking text trigger collision
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();
         bool OverlapTrigger(double min0, double max0, double min1, double max1);
@@ -135,7 +132,6 @@ class Player : public Model
         ChordManager* chordManager;
 
         vector<Trigger*> textTriggers;
-        Trigger* nextLevelTrigger;
 };
 
 #endif // PLAYER_H

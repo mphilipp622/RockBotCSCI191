@@ -25,15 +25,20 @@
             <Texture>Images/Platforms/block2.png</Texture>
         </Platform>
     </Platforms>
-    <Player xPos="-3.8927234791834668" yPos="-1.4519679410565347"/>
-    <LevelTrigger Width="1" Height="1" xPos="3.7429221204620857" yPos="4.248177323143473"/>
+    <Player xPos="-3.9304287415876833" yPos="-1.4267363971342719"/>
+    <LevelTrigger Width="1" Height="1" xPos="4.218067168459398" yPos="4.2000411482156945">
+        <Texture>LevelTrigger</Texture>
+    </LevelTrigger>
     <TextTriggers>
+        <Trigger Width="2.5999997" Height="1.6000001" xPos="-1.6819487347616777" yPos="-0.061749863004271065">
+            <Text>What a Strange Place</Text>
+        </Trigger>
         <Trigger Width="2.5999997" Height="1.6000001" xPos="-1.6819487347616777" yPos="-0.061749863004271065">
             <Text>What a Strange Place</Text>
         </Trigger>
     </TextTriggers>
     <Background Width="15.399999999999988" Height="14.79999999999999">
-        <Texture>Images/Backgrounds/MenuBackground.jpg</Texture>
+        <Texture>Images/Backgrounds/</Texture>
     </Background>
     <Enemies>
         <Enemy xPos="4.1989908972721608" yPos="0.3910824656937168">

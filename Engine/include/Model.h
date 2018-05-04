@@ -56,6 +56,7 @@ class Model
         bool Collision(Model* collider, double aheadX, double aheadY); // used by enemy AI to look ahead of their position for collision.
         bool CollisionCircle(Model*);
         bool CollisionCircleSquare(Model*);
+        bool LevelTriggerCollision();
 
         string GetName();
         string GetTag();

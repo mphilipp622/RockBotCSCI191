@@ -293,6 +293,16 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             LoadLevelFromXML();
             SetForegroundWindow(hWnd);
         }
+
+        ////////////////////////
+        // RETURN TO MAIN MENU
+        ////////////////////////
+
+        else if(wParam == VK_BACK)
+        {
+            SceneManager::LoadScene("MainMenu");
+        }
+
     }
 
     ////////////////////////////////////
@@ -426,8 +436,8 @@ void LevelCreator::CreateLevelTrigger()
     getline(cin, newPath);
 
     // instantiate model with default Width and Height of 1 and spawned at camera's center
-    nextLevelTrigger = new Model(1.0, 1.0, cameraPosX, cameraPosY, "Images/" + newPath, "LevelTrigger");
-    nextLevelTrigger->InitModel("Images/" + newPath, true);
+    nextLevelTrigger = new Model(1.0, 1.0, cameraPosX, cameraPosY, "Images/Misc/" + newPath, "LevelTrigger");
+    nextLevelTrigger->InitModel("Images/Misc/" + newPath, true);
 
     SetSelectedModel(nextLevelTrigger);
 }
@@ -577,6 +587,7 @@ void LevelCreator::DeleteObject()
         // otherwise, we need to look through platforms and enemies, find the model, and remove it
         auto finderPlatform = find(platforms.begin(), platforms.end(), selectedModel);
         auto finderEnemy = find(enemies.begin(), enemies.end(), selectedModel);
+        auto finderTrigger = find(triggers.begin(), triggers.end(), selectedModel);
 
         if(finderPlatform != platforms.end())
             // we found the selected model in platforms. Now remove it
@@ -584,6 +595,9 @@ void LevelCreator::DeleteObject()
         else if(finderEnemy != enemies.end())
              // we found selected model in enemies. Remove it
             enemies.erase(finderEnemy);
+        else if(finderTrigger != triggers.end())
+            // found trigger, erase it
+            triggers.erase(finderTrigger);
 
     }
 
@@ -1040,7 +1054,7 @@ void LevelCreator::LoadLevelFromXML()
             string texturePath;
 
             if(newTag == "MeleeEnemy")
-                texturePath = "Images/Enemies/MeleeIdle.png";
+                texturePath = "Images/Enemies/MeleeIdle0.png";
             else if(newTag == "RangedEnemy")
                 texturePath = "Images/Enemies/RangedIdle0.png";
 

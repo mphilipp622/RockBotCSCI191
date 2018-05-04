@@ -62,6 +62,7 @@ Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string
 
     isDying = false;
     ignoreGravity = false;
+    falling = false;
 
     isAttacking = false;
 
@@ -198,7 +199,7 @@ void Enemy::MoveLeft()
     }
 
     if(CheckForwardCollision())
-        jump = true;
+        StartJump();
 
     sound->SetPosition(xPos, yPos);
 }
@@ -227,7 +228,7 @@ void Enemy::MoveRight()
     }
 
     if(CheckForwardCollision())
-        jump = true;
+        StartJump();
 
     sound->SetPosition(xPos, yPos);
 
@@ -302,9 +303,10 @@ void Enemy::ApplyGravity()
     if(ignoreGravity)
         return;
 
-    if(DeltaTime::GetDeltaTime() > 1)
+    if(DeltaTime::GetDeltaTime() > 0.2)
         return; // kill if delta time is too high
 
+    falling = true;
     fallVelocity += gravity * DeltaTime::GetDeltaTime();
 
     if(fallVelocity < sqrt(2 * gravity))
@@ -313,10 +315,21 @@ void Enemy::ApplyGravity()
     prevYPos = yPos;
     yPos += fallVelocity * DeltaTime::GetDeltaTime();
 
+    // Check Pit Collision
+
     if(CheckCollision())
     {
+        if(CheckForPit() && Player::player->GetY() >= yPos)
+        {
+            cout << " JUMP " << endl;
+            // If a pit is ahead of us, and player is at enemy's y position or greater, then jump
+            StartJump();
+        }
+
+
         fallVelocity = 0;
         yPos = prevYPos;
+        falling = false;
         return;
     }
 
