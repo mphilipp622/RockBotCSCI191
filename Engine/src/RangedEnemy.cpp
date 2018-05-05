@@ -120,7 +120,7 @@ void RangedEnemy::InitEnemy()
 
 void RangedEnemy::AIRoutine()
 {
-    if(!AggroOverlap())
+    if(!PlayerInRange(aggroRadius))
         Patrol(); // if we haven't detected player, then patrol.
     else
     {

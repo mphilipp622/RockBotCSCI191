@@ -477,7 +477,8 @@ void Enemy::Actions(int newAction)
     }
 }
 
-bool Enemy::AggroOverlap()
+bool Enemy::PlayerInRange(double checkRadius)
 {
-    return OverlappingCircles(xPos, yPos, Player::player->GetX(), Player::player->GetY(), aggroRadius, Player::player->GetRadius());
+    return OverlappingCircles(xPos, yPos, Player::player->GetX(), Player::player->GetY(), checkRadius, Player::player->GetRadius());
+
 }

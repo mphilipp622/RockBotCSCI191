@@ -50,12 +50,11 @@ Player::Player(double newX, double newY)
     accelRate = 0.05;
     deceleration = 0.2; // rate of deceleration
     maxAcceleration = 2.5;
-    pushAccel = 10.0; // used for push back
+    pushAccel = 20.0; // used for push back
     jump = false; // set true to avoid falling through earth on scene load
     slowDown = false;
     gravity = -9.80;
     moving = false;
-    pushBack = false;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
     idleFrame = 0;
@@ -81,6 +80,11 @@ Player::Player(double newX, double newY)
     canPlay = true;
     chordManager = new ChordManager();
 
+    invincible = false;
+    invincibleTime = 1.0; // player can be invincible for 1 second.
+    invincibleTimer = new Timer();
+    invincibleFrameTimer = new Timer();
+
     drawCircle = false;
     musicCircle = new Model(3, 3, xPos, yPos, "MusicCircle", "MusicHUD");
     circleTimer = new Timer();
@@ -99,7 +103,22 @@ Player::~Player()
 void Player::DrawPlayer()
 {
 //    glPushMatrix();
-    glColor3f(1.0, 1.0, 1.0);
+    if(invincible)
+    {
+        // Change the player's alpha transparency to make him flicker.
+        if(invincibleFrameTimer->GetTicks() > 100)
+        {
+            invincibleFrame += 1;
+            invincibleFrame %= 2;
+            glColor4f(1.0, 1.0, 1.0, invincibleFrame); // if the player is invincible from taking damage, color him red
+            invincibleFrameTimer->Reset();
+        }
+        else
+            glColor4f(1.0, 1.0, 1.0, invincibleFrame);
+    }
+
+    else
+        glColor3f(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
 
@@ -231,6 +250,10 @@ void Player::Actions(int newAction)
 
 void Player::Update()
 {
+    if(invincible)
+        // check if timer has expired for invincibility.
+        CheckInvincible();
+
     if(playingChords)
     {
         if(chordTimer->GetTicks() > chordTimingWindow)
@@ -242,6 +265,7 @@ void Player::Update()
 
     if(moving)
     {
+
         if(xDirection > 0)
             MoveRight();
         else if(xDirection < 0)
@@ -520,11 +544,13 @@ void Player::CheckTriggerCollision()
 
 void Player::CheckEnemyCollision()
 {
+    if(invincible)
+        return; // if player is invincible, then we don't check for enemy collision
+
     for(auto& enemy : SceneManager::GetActiveScene()->enemies)
     {
         if(Collision(enemy))
         {
-            pushBack = true;
             TakeDamage(1);
 
             if(enemy->GetX() >= xPos)
@@ -539,9 +565,10 @@ void Player::CheckEnemyCollision()
 
 void Player::PushBack(double direction)
 {
-    slowDown = false;
+    slowDown = true;
 
     xDirection = direction;
+    cout << "Pushed Back X Direction: " << xDirection << endl;
 
     acceleration = pushAccel;
 
@@ -552,7 +579,6 @@ void Player::PushBack(double direction)
 
     if(CheckCollision())
     {
-
 //        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
         xPos = prevXPos;
         moving = false;
@@ -562,8 +588,6 @@ void Player::PushBack(double direction)
     }
     AudioEngine::SetPosition(xPos, yPos);
     chord->SetPosition(xPos, yPos);
-
-    slowDown = true;
 }
 
 
@@ -732,6 +756,7 @@ void Player::TakeDamage(int damage)
 {
     hp -= damage;
 
+    SetInvincible(); // set player to invincible after taking damage
 //    if(hp <= 0)
  //       GameOver();
 }
@@ -746,3 +771,23 @@ void Player::AddTextTrigger(Trigger* newTrigger)
     textTriggers.push_back(newTrigger);
 }
 
+void Player::CheckInvincible()
+{
+    if(invincibleTimer->GetTicks() > invincibleTime * 1000)
+    {
+        invincible = false;
+        invincibleTimer->Stop();
+        invincibleFrameTimer->Stop();
+    }
+}
+
+void Player::SetInvincible()
+{
+    if(invincible)
+        return; // safety check to make sure we aren't already invincible.
+
+    invincible = true;
+    invincibleFrame = 1;
+    invincibleTimer->Start();
+    invincibleFrameTimer->Start();
+}

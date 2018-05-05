@@ -32,6 +32,7 @@ class Enemy : public Model
         float gravity;
 
         double aggroRadius; // Will be used to initiate enemy AI sequence when player gets close enough
+        double meleeRange;
 
         // x Movement
         void StartMove(float dir);
@@ -71,7 +72,7 @@ class Enemy : public Model
         virtual bool CheckForwardCollision() = 0;
         virtual bool CheckForPit() = 0; // will be implemented in melee player for checking if they should jump over a pit.
 
-        bool AggroOverlap();
+        bool PlayerInRange(double checkRadius); // pass radius values into this function to determine if player is within that radius. E.G: Aggro or melee range
 
         AudioSource* sound;
     private:

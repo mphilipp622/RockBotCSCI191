@@ -74,6 +74,7 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
 
     aggroRadius = 3;
+    meleeRange = 1.0;
 }
 
 void MeleeEnemy::InitEnemy()
@@ -171,7 +172,7 @@ bool MeleeEnemy::CheckForPit()
 void MeleeEnemy::AIRoutine()
 {
     // check if player is in aggro radius. If not, then enemy should stop if they're moving and stop the AI routine.
-    if(!AggroOverlap())
+    if(!PlayerInRange(aggroRadius))
     {
         if(moving)
             StopMove();

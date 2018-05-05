@@ -79,7 +79,7 @@ class Player : public Model
     private:
         int hp;
         int moveSpeed, jumpSpeed;
-        bool jump, slowDown, moving, playingChords, canPlay, pushBack;
+        bool jump, slowDown, moving, playingChords, canPlay, invincible;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
@@ -87,6 +87,13 @@ class Player : public Model
         float acceleration, accelRate, maxAcceleration, deceleration, pushAccel;
         float gravity;
         float playerZoom;
+
+        double invincibleTime;
+        int invincibleFrame;
+        Timer* invincibleTimer; // used for making player invincible temporarily after taking damage
+        Timer* invincibleFrameTimer; // used for animating alpha transparency when hit
+        void CheckInvincible(); // checks if the timer has run out on invincibility
+        void SetInvincible(); // sets the player to be invincible. This will be called after taking damage from an enemy.
 
         int chordDamage;
 
