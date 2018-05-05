@@ -50,11 +50,13 @@ Player::Player(double newX, double newY)
     accelRate = 0.05;
     deceleration = 0.2; // rate of deceleration
     maxAcceleration = 2.5;
-    pushAccel = 20.0; // used for push back
+    pushAccel = 8.0; // used for push back
+    pushDecel = 0.6;
     jump = false; // set true to avoid falling through earth on scene load
     slowDown = false;
     gravity = -9.80;
     moving = false;
+    pushBack = false;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
     idleFrame = 0;
@@ -263,7 +265,7 @@ void Player::Update()
         UpdateIcons();
     }
 
-    if(moving)
+    if(moving && !pushBack)
     {
 
         if(xDirection > 0)
@@ -288,8 +290,11 @@ void Player::Update()
     else
         ApplyGravity();
 
-    if(slowDown)
+    if(slowDown && !pushBack)
         StopMove();
+
+    if(pushBack)
+        PushBack();
 
     CheckEnemyCollision();
 
@@ -301,6 +306,7 @@ void Player::Update()
         ToggleMusicCircle();
         DrawMusicCircle();
     }
+
 //    DrawPlayer();
 }
 
@@ -366,6 +372,9 @@ void Player::StartMove(float dir)
 
 void Player::MoveLeft()
 {
+    if(pushBack)
+        return;
+
     slowDown = false;
 
     xDirection = -1.0;
@@ -395,6 +404,9 @@ void Player::MoveLeft()
 
 void Player::MoveRight()
 {
+    if(pushBack)
+        return;
+
     slowDown = false;
 
     xDirection = 1.0;
@@ -434,6 +446,7 @@ void Player::SlowDown()
 void Player::StopMove()
 {
     moving = false;
+
     if(prevXDirection > 0)
     {
         // if we're moving right, execute different code
@@ -483,6 +496,8 @@ void Player::StopMove()
 
         if(CheckCollision())
         {
+                        cout << "STOPPING COLLISION" << endl;
+
             xPos = prevXPos;
             moving = false;
             slowDown = false;
@@ -534,11 +549,11 @@ void Player::CheckTriggerCollision()
                                 trigger->GetY() - trigger->GetHeight() / 2,
                                 trigger->GetY() + trigger->GetHeight() / 2));
 
-        if(overlapTrigger)
-        {
-            // DISPLAY TEXT
-            cout << "DISPLAY TEXT" << endl;
-        }
+//        if(overlapTrigger)
+//        {
+//            // DISPLAY TEXT
+//            cout << "DISPLAY TEXT" << endl;
+//        }
     }
 }
 
@@ -553,41 +568,94 @@ void Player::CheckEnemyCollision()
         {
             TakeDamage(1);
 
-            if(enemy->GetX() >= xPos)
+            if(enemy->GetX() > xPos)
                 // if we're on left side of enemy and touch them, push back to the left
-                PushBack(-1.0);
+                StartPushBack(-1.0);
             else if(enemy->GetX() < xPos)
                 // if we're on right side of enemy and touch them, push back right.
-                PushBack(1.0);
+                StartPushBack(1.0);
+            else
+                StartPushBack(prevXDirection);
         }
     }
 }
 
-void Player::PushBack(double direction)
+void Player::StartPushBack(double direction)
 {
-    slowDown = true;
-
+    pushBack = true;
     xDirection = direction;
-    cout << "Pushed Back X Direction: " << xDirection << endl;
 
-    acceleration = pushAccel;
+    if(direction < 0)
+        acceleration = -pushAccel;
+    else if(direction > 0)
+        acceleration = pushAccel;
+    else
+        acceleration = pushAccel * prevXDirection;
+}
 
-    prevXPos = xPos;
-    xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 
-    CheckTriggerCollision(); // check for text or level triggers
-
-    if(CheckCollision())
+void Player::PushBack()
+{
+    if(xDirection > 0)
     {
-//        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
-        xPos = prevXPos;
-        moving = false;
-        xDirection = 0;
-        acceleration = 0;
-        return;
+        // if we're moving right, execute different code
+
+        if(acceleration > 0)
+            acceleration -= pushDecel;
+        else
+        {
+            pushBack = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        prevXPos = xPos;
+        xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+        CheckTriggerCollision(); // check for text or level triggers
+
+        if(CheckCollision())
+        {
+            xPos = prevXPos;
+            moving = false;
+            slowDown = false;
+            pushBack = false;
+            xDirection = 0;
+            acceleration = 0;
+            return;
+        }
+        AudioEngine::SetPosition(xPos, yPos);
+        chord->SetPosition(xPos, yPos);
     }
-    AudioEngine::SetPosition(xPos, yPos);
-    chord->SetPosition(xPos, yPos);
+    else if(xDirection < 0)
+    {
+        // Code for left direction slow down
+
+        if(acceleration < 0)
+            acceleration += pushDecel;
+        else
+        {
+            pushBack = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        prevXPos = xPos;
+        xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+        CheckTriggerCollision(); // check for text or level triggers
+
+        if(CheckCollision())
+        {
+            xPos = prevXPos;
+            moving = false;
+            slowDown = false;
+            pushBack = false;
+            xDirection = 0;
+            acceleration = 0;
+            return;
+        }
+        AudioEngine::SetPosition(xPos, yPos);
+        chord->SetPosition(xPos, yPos);
+    }
 }
 
 

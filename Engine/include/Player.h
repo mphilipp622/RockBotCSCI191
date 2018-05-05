@@ -79,12 +79,12 @@ class Player : public Model
     private:
         int hp;
         int moveSpeed, jumpSpeed;
-        bool jump, slowDown, moving, playingChords, canPlay, invincible;
+        bool jump, slowDown, moving, playingChords, canPlay, invincible, pushBack;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
         float prevXPos, prevYPos;
-        float acceleration, accelRate, maxAcceleration, deceleration, pushAccel;
+        float acceleration, accelRate, maxAcceleration, deceleration, pushAccel, pushDecel;
         float gravity;
         float playerZoom;
 
@@ -104,6 +104,7 @@ class Player : public Model
         double cooldownTargetTime;
         Timer* cooldownTimer;
         void NextInput();
+
 
         // music circle variables
         Model* musicCircle;
@@ -136,7 +137,9 @@ class Player : public Model
         void UpdateCooldownTimer();
 
         // Pushes player back when getting hit by a melee enemy
-        void PushBack(double direction);
+        void PushBack();
+
+        void StartPushBack(double direction); // pushes player back
 
         AudioSource* chord;
         ChordManager* chordManager;
