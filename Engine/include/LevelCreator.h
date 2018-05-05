@@ -40,6 +40,7 @@ class LevelCreator : public GLScene
 //        Parallax* background; // background image for menu.
         Model* selectedModel; // user selects this with the mouse and can then manipulate the model
         vector<Model*> triggers;
+        vector<Model*> healthPacks;
 
         string backgroundTexture;
 
@@ -88,6 +89,9 @@ class LevelCreator : public GLScene
 
         // Places a text trigger in the scene
         void CreateTextTrigger();
+
+        // Places a Health Pack in the scene
+        void CreateHealthPack();
 
         // Deletes the selectedObject from the scene
         void DeleteObject();

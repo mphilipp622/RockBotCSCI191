@@ -329,6 +329,7 @@ void Player::Jump()
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
 
     CheckTriggerCollision(); // check for text or level triggers
+    CheckHealthPackCollision();
 
     if(CheckCollision())
     {
@@ -354,6 +355,7 @@ void Player::ApplyGravity()
     yPos += fallVelocity * DeltaTime::GetDeltaTime();
 
     CheckTriggerCollision(); // check for text or level triggers
+    CheckHealthPackCollision();
 
     if(CheckCollision())
     {
@@ -390,6 +392,8 @@ void Player::MoveLeft()
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 
     CheckTriggerCollision(); // check for text or level triggers
+    CheckHealthPackCollision();
+
     if(CheckCollision())
     {
 //        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
@@ -422,6 +426,7 @@ void Player::MoveRight()
     xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 
     CheckTriggerCollision(); // check for text or level triggers
+    CheckHealthPackCollision();
 
     if(CheckCollision())
     {
@@ -464,6 +469,7 @@ void Player::StopMove()
         xPos += (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
 
         CheckTriggerCollision(); // check for text or level triggers
+        CheckHealthPackCollision();
 
         if(CheckCollision())
         {
@@ -494,6 +500,7 @@ void Player::StopMove()
 
 
         CheckTriggerCollision(); // check for text or level triggers
+        CheckHealthPackCollision();
 
         if(CheckCollision())
         {
@@ -613,6 +620,7 @@ void Player::PushBack()
         xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 
         CheckTriggerCollision(); // check for text or level triggers
+        CheckHealthPackCollision();
 
         if(CheckCollision())
         {
@@ -643,6 +651,7 @@ void Player::PushBack()
         xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 
         CheckTriggerCollision(); // check for text or level triggers
+        CheckHealthPackCollision();
 
         if(CheckCollision())
         {
@@ -659,6 +668,25 @@ void Player::PushBack()
     }
 }
 
+void Player::CheckHealthPackCollision()
+{
+    for(auto& healthPack : GLScene::healthPacks)
+    {
+        if(Collision(healthPack))
+            ConsumeHealthPack(healthPack);
+    }
+}
+
+void Player::ConsumeHealthPack(Model* healthPack)
+{
+    hp += 2; // add 2 to player hp
+
+    if(hp > 10)
+        hp = 10; // clamp HP to a maximum of 10
+
+    auto findHealthPack = find(GLScene::healthPacks.begin(), GLScene::healthPacks.end(), healthPack);
+    GLScene::healthPacks.erase(findHealthPack);
+}
 
 
 bool Player::CheckCircleCollision()

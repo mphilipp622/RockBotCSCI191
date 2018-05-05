@@ -8,7 +8,7 @@ class Trigger
 {
     public:
         Trigger();
-        Trigger(double newX, double newY, double newWidth, double newHeight, string newTag);
+        Trigger(double newX, double newY, double newWidth, double newHeight, string newText, string newTag);
         virtual ~Trigger();
 
         double GetX();

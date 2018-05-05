@@ -262,13 +262,13 @@
 	<GL\GL.h>
 	<TextureLoader.h>
 
-1525471116 source:e:\college\191\191\engine\src\deltatime.cpp
+1525501455 source:e:\college\191\191\engine\src\deltatime.cpp
 	<DeltaTime.h>
 	<windows.h>
 	<glut.h>
 	<iostream>
 
-1525470928 e:\college\191\191\engine\include\deltatime.h
+1525501455 e:\college\191\191\engine\include\deltatime.h
 
 1519274979 e:\college\191\191\common\include\gl\glut.h
 	<windows.h>
@@ -301,7 +301,7 @@
 	<MainMenu.h>
 	<string>
 
-1525468699 e:\college\191\191\engine\include\glscene.h
+1525504104 e:\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -318,7 +318,7 @@
 	<SceneManager.h>
 	<tinyxml2.h>
 
-1525501330 e:\college\191\191\engine\include\model.h
+1525501455 e:\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -333,7 +333,7 @@
 1525290471 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1525471501 source:e:\college\191\191\engine\src\glscene.cpp
+1525506942 source:e:\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<Parallax.h>
 	<DeltaTime.h>
@@ -357,7 +357,7 @@
 	<GL\GL.h>
 	<string>
 
-1525495745 e:\college\191\191\engine\include\player.h
+1525508047 e:\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -377,7 +377,7 @@
 	<DeltaTime.h>
 	<string>
 
-1525469008 source:e:\college\191\191\engine\src\model.cpp
+1525501455 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -391,7 +391,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1525501133 source:e:\college\191\191\engine\src\player.cpp
+1525508249 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -707,18 +707,18 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1525471476 source:e:\college\191\191\engine\src\audiosource.cpp
+1525503155 source:e:\college\191\191\engine\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1523308559 e:\college\191\191\engine\include\audiosource.h
+1525503257 e:\college\191\191\engine\include\audiosource.h
 	<string>
 	"irrKlang.h"
 	<windows.h>
 	<AudioEngine.h>
 
-1525474343 source:e:\college\191\191\engine\src\scenemanager.cpp
+1525501455 source:e:\college\191\191\engine\src\scenemanager.cpp
 	"SceneManager.h"
 	<GLScene.h>
 	<LevelCreator.h>
@@ -942,12 +942,12 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1522283586 e:\college\191\191\engine\include\audioengine.h
+1525502663 e:\college\191\191\engine\include\audioengine.h
 	<irrKlang.h>
 	<windows.h>
 	<iostream>
 
-1522288815 source:e:\college\191\191\engine\src\audioengine.cpp
+1525502798 source:e:\college\191\191\engine\src\audioengine.cpp
 	"AudioEngine.h"
 
 1522289524 e:\college\191\191\engine\include\chord.h
@@ -1179,7 +1179,7 @@
 	<GLScene.h>
 	<LevelCreator.h>
 
-1525491322 e:\college\191\191\engine\include\enemy.h
+1525501455 e:\college\191\191\engine\include\enemy.h
 	<Model.h>
 	<vector>
 	<Timer.h>
@@ -1188,12 +1188,12 @@
 	<algorithm>
 	<Player.h>
 
-1525476394 e:\college\191\191\engine\include\meleeenemy.h
+1525501455 e:\college\191\191\engine\include\meleeenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
 
-1525476694 e:\college\191\191\engine\include\rangedenemy.h
+1525501455 e:\college\191\191\engine\include\rangedenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
@@ -1203,7 +1203,7 @@
 	<GLScene.h>
 	<Parallax.h>
 
-1525491322 source:e:\college\191\191\engine\src\enemy.cpp
+1525501455 source:e:\college\191\191\engine\src\enemy.cpp
 	"Enemy.h"
 	<GLScene.h>
 
@@ -1234,7 +1234,7 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1525491322 source:e:\college\191\191\engine\src\meleeenemy.cpp
+1525501455 source:e:\college\191\191\engine\src\meleeenemy.cpp
 	"MeleeEnemy.h"
 
 1525290471 source:e:\college\191\191\engine\src\particles.cpp
@@ -1248,7 +1248,7 @@
 	<iostream>
 	<Timer.h>
 
-1525491322 source:e:\college\191\191\engine\src\rangedenemy.cpp
+1525501455 source:e:\college\191\191\engine\src\rangedenemy.cpp
 	"RangedEnemy.h"
 
 1525468097 source:e:\college\191\191\engine\src\mainmenu.cpp
@@ -1268,11 +1268,11 @@
 1525290471 e:\college\191\191\engine\include\level1.h
 	<GLScene.h>
 
-1525478139 source:e:\college\191\191\engine\src\levelcreator.cpp
+1525506829 source:e:\college\191\191\engine\src\levelcreator.cpp
 	"LevelCreator.h"
 	<GLLight.h>
 
-1525449924 e:\college\191\191\engine\include\levelcreator.h
+1525505030 e:\college\191\191\engine\include\levelcreator.h
 	<GLScene.h>
 	<iostream>
 	<Trigger.h>
@@ -1616,10 +1616,10 @@
 1525402627 source:c:\users\seapanda\documents\college\191\191\engine\src\trigger.cpp
 	"Trigger.h"
 
-1525449924 e:\college\191\191\engine\include\trigger.h
+1525502290 e:\college\191\191\engine\include\trigger.h
 	<string>
 
-1525449924 source:e:\college\191\191\engine\src\trigger.cpp
+1525502615 source:e:\college\191\191\engine\src\trigger.cpp
 	"Trigger.h"
 
 1519274979 e:\college\191\191\engine\common\include\gl\glut.h

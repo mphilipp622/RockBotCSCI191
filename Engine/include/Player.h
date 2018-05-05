@@ -16,23 +16,33 @@
 
 using namespace std;
 
+// Dhanyu's struct for handling vertices
 typedef struct
 {
     float x, y, z;
 }vec1;
 
+
+
 // class for player character. Inherits from Model for positions/rotations/etc.
 class Player : public Model
 {
     public:
-        Player(double, double);
+        // Constructor will take x and y positions
+        Player(double newX, double newY);
         virtual ~Player();
 
-        float scaleSize[3] = {1.0, 1.0, 1.0}; // x, y, z scale values
         vec1 vertices[4]; // 4 vertices of xyz values
 
-        // player stats
+        ////////////////////
+        // PLAYER STATS
+        ////////////////////
 
+        // Decrement hp from the player and set him to invincible temporarily.
+        void TakeDamage(int damage);
+
+        // Returns the player's current hit points.
+        int getHP();
 
         void DrawPlayer();
         void InitPlayer();
@@ -67,9 +77,7 @@ class Player : public Model
 
         // Checks whether user presses the proper input or not. Note that userInput must match the inputs assigned in Player::icons vector
         void CheckUserInput(int userInput, LPARAM lParam);
-        void TakeDamage(int damage);
 
-        int getHP();
 
         // Will be called on by GLScene when loading happens. WIll push new triggers into the trigger vector so player knows where all triggers are in the scene.
         void AddTextTrigger(Trigger* newTrigger);
@@ -121,14 +129,21 @@ class Player : public Model
         TextureLoader idle[5];
         TextureLoader jumpAnim[4];
 
+
+        //////////////////////
+        // COLLISION FUNCTIONS
+        //////////////////////
+
         bool CheckCollision();
         void CheckEnemyCollision();
+        void CheckHealthPackCollision(); // Checks if player has touched a health pack
         void CheckTriggerCollision(); // Used for checking text trigger collision
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();
         bool OverlapTrigger(double min0, double max0, double min1, double max1);
-
         void CheckHit();
+
+        void ConsumeHealthPack(Model* healthPack); // Adds HP to player and deletes healthpack from GLScene
 
         // Updates the positions of the input icons for chord playing. Also draws icons if chord button is held down. Called in Player whenever movements occur.
         void UpdateIcons();

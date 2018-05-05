@@ -111,6 +111,8 @@ GLint LevelCreator::drawGLScene()
     for(auto& trigger : triggers)
         trigger->DrawModel();
 
+    for(auto& healthPack : healthPacks)
+        healthPack->DrawModel();
 
     if(player)
     {
@@ -142,7 +144,7 @@ void LevelCreator::LoadScene(string sceneName)
 
 int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    const int bKey = 0x42, wKey = 0x57, sKey = 0x53, aKey = 0x41, dKey = 0x44, mKey = 0x4D, pKey = 0x50, eKey = 0x45, tKey = 0x54;
+    const int bKey = 0x42, wKey = 0x57, sKey = 0x53, aKey = 0x41, dKey = 0x44, mKey = 0x4D, pKey = 0x50, eKey = 0x45, tKey = 0x54, hKey = 0x48;
 
     if(uMsg == WM_KEYDOWN)
     {
@@ -274,6 +276,13 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         }
 
         ////////////////////////
+        // HEALTH PACK CREATION
+        ////////////////////////
+
+        if(wParam == hKey)
+            CreateHealthPack();
+
+        ////////////////////////
         // MODEL DELETION
         ////////////////////////
         else if(wParam == VK_DELETE)
@@ -384,7 +393,6 @@ void LevelCreator::CreatePlayer()
     player->InitModel(playerTexturePath, true);
 
     SetSelectedModel(player);
-    cout << player << "    " << selectedModel << endl;
 }
 
 void LevelCreator::CreateEnemy()
@@ -455,6 +463,17 @@ void LevelCreator::CreateTextTrigger()
 
     SetSelectedModel(triggers.back());
 }
+
+void LevelCreator::CreateHealthPack()
+{
+    cout << "Making Health Pack..." << endl;
+
+    healthPacks.push_back(new Model(0.3, 0.3, cameraPosX, cameraPosY, "HealthPack", "HealthPack")); // spawn player in middle of screen
+    healthPacks.back()->InitModel("Images/Misc/HealthPack.png", true);
+
+    SetSelectedModel(healthPacks.back());
+}
+
 
 
 
@@ -550,6 +569,15 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
         }
     }
 
+    for(auto& healthPack : healthPacks)
+    {
+        if(CheckPointerCollision(healthPack, convertedX, convertedY))
+        {
+            SetSelectedModel(healthPack);
+            return;
+        }
+    }
+
     if(player)
     {
         if(CheckPointerCollision(player, convertedX, convertedY))
@@ -588,6 +616,7 @@ void LevelCreator::DeleteObject()
         auto finderPlatform = find(platforms.begin(), platforms.end(), selectedModel);
         auto finderEnemy = find(enemies.begin(), enemies.end(), selectedModel);
         auto finderTrigger = find(triggers.begin(), triggers.end(), selectedModel);
+        auto finderHealthPack = find(healthPacks.begin(), healthPacks.end(), selectedModel);
 
         if(finderPlatform != platforms.end())
             // we found the selected model in platforms. Now remove it
@@ -598,6 +627,9 @@ void LevelCreator::DeleteObject()
         else if(finderTrigger != triggers.end())
             // found trigger, erase it
             triggers.erase(finderTrigger);
+        else if(finderHealthPack != healthPacks.end())
+            // found the health pack, erase it
+            healthPacks.erase(finderHealthPack);
 
     }
 
@@ -673,6 +705,16 @@ void LevelCreator::ClearScene()
         delete enemy;
 
     enemies.clear();
+
+    for(auto& trigger : triggers)
+        delete trigger;
+
+    triggers.clear();
+
+    for(auto& healthPack : healthPacks)
+        delete healthPack;
+
+    healthPacks.clear();
 
     delete player;
     player = nullptr;
@@ -853,6 +895,38 @@ void LevelCreator::SaveLevelToXML()
     }
 
 
+    ////////////////////////
+    // HEALTH PACKS
+    ////////////////////////
+
+    // Create child Element Platforms, which will contain all the platforms
+    XMLElement * healthElement = xmlDoc.NewElement("HealthPacks");
+    XMLElement * hChild;
+
+    if(healthPacks.size() > 0)
+    {
+        for(auto& healthPack : healthPacks)
+        {
+            XMLElement* newHealthPack = xmlDoc.NewElement("HealthPack");
+            newHealthPack->SetAttribute("Width", healthPack->GetWidth());
+            newHealthPack->SetAttribute("Height", healthPack->GetHeight());
+            newHealthPack->SetAttribute("xPos", healthPack->GetX());
+            newHealthPack->SetAttribute("yPos", healthPack->GetY());
+
+            if(!healthElement->FirstChild())
+                healthElement->InsertFirstChild(newHealthPack);
+            else
+                healthElement->InsertAfterChild(hChild, newHealthPack);
+
+            hChild = newHealthPack;
+        }
+
+        pRoot->InsertAfterChild(triggerElement, healthElement);
+        healthElement->InsertEndChild(hChild);
+
+        endElement = healthElement;
+    }
+
 
 
     ////////////////////////
@@ -990,9 +1064,9 @@ void LevelCreator::LoadLevelFromXML()
     nextLevelTrigger = new Model(newWidth, newHeight, newX, newY, "LevelTrigger", "Trigger");
     nextLevelTrigger->InitModel("Images/LevelTrigger.png", true);
 
-    //////////////////
-    // LOAD BACKGROUND
-    //////////////////
+    //////////////////////
+    // LOAD TEXT TRIGGERS
+    //////////////////////
 
     mainElements = mainElements->NextSiblingElement();
 
@@ -1023,6 +1097,33 @@ void LevelCreator::LoadLevelFromXML()
         checkName = mainElements->Name();
     }
 
+    ////////////////////
+    // LOAD HEALTH PACKS
+    ////////////////////
+
+    if(checkName == "HealthPacks")
+    {
+        for (const XMLElement* child = mainElements->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+        {
+            double newX, newY, newWidth, newHeight;
+            child->QueryAttribute("xPos", &newX);
+            child->QueryAttribute("yPos", &newY);
+            child->QueryAttribute("Width", &newWidth);
+            child->QueryAttribute("Height", &newHeight);
+
+            healthPacks.push_back(new Model(newWidth, newHeight, newX, newY, "HealthPack", "HealthPack"));
+
+            healthPacks.back()->InitModel("Images/Misc/HealthPack.png", true);
+        }
+
+        mainElements = mainElements->NextSiblingElement();
+        checkName = mainElements->Name();
+    }
+
+    //////////////////
+    // LOAD BACKGROUND
+    //////////////////
+
     if(checkName == "Background")
     {
         // LevelCreator class has variables for background scale x and y, which is where we'll dump width and height.
@@ -1035,6 +1136,10 @@ void LevelCreator::LoadLevelFromXML()
         mainElements = mainElements->NextSiblingElement();
         checkName = mainElements->Name();
     }
+
+    //////////////////////
+    // LOAD ENEMIES
+    //////////////////////
 
     if(checkName == "Enemies")
     {

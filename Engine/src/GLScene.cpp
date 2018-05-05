@@ -34,6 +34,7 @@ GLScene::~GLScene()
 vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
 vector<Enemy*> GLScene::enemies;
+vector<Model*> GLScene::healthPacks;
 
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
@@ -96,6 +97,9 @@ GLint GLScene::drawGLScene()
 
     for(auto& enemy : enemies)
         enemy->Update();
+
+    for(auto& healthPack : healthPacks)
+        healthPack->DrawModel();
 
     if(Player::player)
         Player::player->Update();
@@ -313,13 +317,35 @@ void GLScene::LoadLevelFromXML()
             if(child->FirstChildElement())
                 newText = child->FirstChildElement()->GetText(); // get the name of the enemy
 
-            Player::player->AddTextTrigger(new Trigger(newX, newY, newWidth, newHeight, "TextTrigger"));
+            Player::player->AddTextTrigger(new Trigger(newX, newY, newWidth, newHeight, newText, "TextTrigger"));
         }
 
         mainElements = mainElements->NextSiblingElement();
         checkName = mainElements->Name();
     }
 
+    ////////////////////
+    // LOAD HEALTH PACKS
+    ////////////////////
+
+    if(checkName == "HealthPacks")
+    {
+        for (const XMLElement* child = mainElements->FirstChildElement(); child != 0; child=child->NextSiblingElement())
+        {
+            double newX, newY, newWidth, newHeight;
+            child->QueryAttribute("xPos", &newX);
+            child->QueryAttribute("yPos", &newY);
+            child->QueryAttribute("Width", &newWidth);
+            child->QueryAttribute("Height", &newHeight);
+
+            healthPacks.push_back(new Model(newWidth, newHeight, newX, newY, "HealthPack", "HealthPack"));
+
+            healthPacks.back()->InitModel("Images/Misc/HealthPack.png", true);
+        }
+
+        mainElements = mainElements->NextSiblingElement();
+        checkName = mainElements->Name();
+    }
 
     //////////////////
     // LOAD BACKGROUND
@@ -378,6 +404,11 @@ void GLScene::ClearStaticData()
         delete obj;
 
     movableObjects.clear();
+
+    for(auto& healthPack : healthPacks)
+        delete healthPack;
+
+    healthPacks.clear();
 
     delete Player::player;
     Player::player = nullptr;

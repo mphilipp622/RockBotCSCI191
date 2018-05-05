@@ -44,6 +44,7 @@ class GLScene
         static vector<Model*> movableObjects; // only moving objects will check for collision
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static vector<Enemy*> enemies;
+        static vector<Model*> healthPacks; // vector of health pack objects in the scene
 
         //returns scene name
         string GetSceneName();

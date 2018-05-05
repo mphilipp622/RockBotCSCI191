@@ -8,21 +8,18 @@ using namespace irrklang;
 
 AudioSource::AudioSource()
 {
-    //ctor
-//    PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
+    // Default constructor should basically never need to be used
 }
 
 AudioSource::AudioSource(string newName, string newFilePath, double newX, double newY, float newVolume, bool isLooping)
 {
+    // Initializes all the private variables
     name = newName;
     filePath = newFilePath;
     xPos = newX;
     yPos = newY;
     volume = newVolume;
-    loop = isLooping;
-
-    sound = 0;
-    source = 0;
+    loop = isLooping; // Loop is specified on creation. If loop is true, then the sound will loop when it ends
 }
 
 AudioSource::~AudioSource()
@@ -31,9 +28,10 @@ AudioSource::~AudioSource()
     sound->drop();
 }
 
-void AudioSource::Update(double newX, double newY)
-{
-}
+
+//////////////////////////////////////
+// SOUND PLAYBACK
+//////////////////////////////////////
 
 void AudioSource::Play()
 {
@@ -65,10 +63,10 @@ void AudioSource::PlayChord(string newChord)
     sound->setIsPaused(false); // have to do this for some stupid reason.
 }
 
-void AudioSource::Stop()
-{
-    sound->stop();
-}
+
+/////////////////////////////////////////////
+// SOUND MANIPULATION
+/////////////////////////////////////////////
 
 void AudioSource::SetVolume(float newVal)
 {
@@ -80,13 +78,12 @@ void AudioSource::SetVolume(float newVal)
 
     if(sound)
         sound->setVolume(newVal);
-//    source->setDefaultVolume(newVal);
 }
 
-string AudioSource::GetName()
-{
-    return name;
-}
+
+/////////////////////////////////////////////
+// SOUND POSITIONING
+/////////////////////////////////////////////
 
 void AudioSource::SetPosition(double newX, double newY)
 {
@@ -94,12 +91,3 @@ void AudioSource::SetPosition(double newX, double newY)
     yPos = newY;
 }
 
-double AudioSource::GetX()
-{
-    return xPos;
-}
-
-double AudioSource::GetY()
-{
-    return yPos;
-}
