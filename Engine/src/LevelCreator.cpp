@@ -1061,8 +1061,10 @@ void LevelCreator::LoadLevelFromXML()
     mainElements->QueryAttribute("xPos", &newX);
     mainElements->QueryAttribute("yPos", &newY);
 
+    string texturePath = mainElements->FirstChildElement()->GetText();
+
     nextLevelTrigger = new Model(newWidth, newHeight, newX, newY, "LevelTrigger", "Trigger");
-    nextLevelTrigger->InitModel("Images/LevelTrigger.png", true);
+    nextLevelTrigger->InitModel(texturePath, true);
 
     //////////////////////
     // LOAD TEXT TRIGGERS

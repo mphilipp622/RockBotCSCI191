@@ -42,7 +42,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-std=c++11" />
-			<Add directory="../Common/include/GL" />
+			<Add directory="Common/include/GL" />
 			<Add directory="Common/include" />
 			<Add directory="irrKlang-1.6.0/include" />
 		</Compiler>
