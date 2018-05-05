@@ -37,6 +37,10 @@ class RangedEnemy : public Enemy
         bool CheckForwardCollision();
         bool CheckForPit();
 
+        void MoveLeft();
+        void MoveRight();
+        void StopMove();
+
 
 };
 

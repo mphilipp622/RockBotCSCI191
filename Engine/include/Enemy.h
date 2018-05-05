@@ -36,10 +36,13 @@ class Enemy : public Model
 
         // x Movement
         void StartMove(float dir);
-        void MoveLeft();
-        void MoveRight();
-        void StopMove();
         void SlowDown();
+
+        // These functions may be different between different types of enemies. So we'll make them virtual for overriding.
+        virtual void MoveLeft() = 0;
+        virtual void MoveRight() = 0;
+        virtual void StopMove() = 0;
+
 
         // y movement
         void ApplyGravity();

@@ -5,6 +5,8 @@ RangedEnemy::RangedEnemy()
 
 }
 
+
+
 RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHeight, string newName)
 {
     xPos = newX;
@@ -69,7 +71,7 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
 
     ignoreGravity = true;
 
-    sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
+    sound = new AudioSource(name + "Sound", "Audio/SFX/Laser.wav", xPos, yPos, 1.0, false);
 
     xPathDistance = 3.0;
     xPatrolCenter = xPos; // set patrol center to the starting position. This could also be changed later if needed
@@ -142,9 +144,131 @@ void RangedEnemy::Patrol()
         StartMove(1.0); // if drone has gone too far left, turn around
 }
 
+void RangedEnemy::MoveLeft()
+{
+    slowDown = false;
+
+    xDirection = -1.0;
+
+    if(acceleration > -maxAcceleration)
+        acceleration -= accelRate;
+
+    if(acceleration < -maxAcceleration)
+        acceleration = -maxAcceleration;
+
+    prevXPos = xPos;
+    xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    if(CheckCollision())
+    {
+        // if drone hits a wall, it should stop, turn around, and patrol again.
+        xPos = prevXPos;
+        slowDown = false;
+        xDirection = -xDirection;
+        acceleration = 0;
+        StartMove(xDirection);
+        return;
+    }
+
+    sound->SetPosition(xPos, yPos);
+}
+
+void RangedEnemy::MoveRight()
+{
+    slowDown = false;
+
+    xDirection = 1.0;
+
+    if(acceleration < maxAcceleration)
+        acceleration += accelRate;
+
+    if(acceleration > maxAcceleration)
+        acceleration = maxAcceleration;
+
+    prevXPos = xPos;
+    xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    if(CheckCollision())
+    {
+        // if drone hits a wall, it should stop, turn around, and patrol again.
+        xPos = prevXPos;
+        slowDown = false;
+        xDirection = -xDirection;
+        acceleration = 0;
+        StartMove(xDirection);
+        return;
+    }
+
+    sound->SetPosition(xPos, yPos);
+}
+
+void RangedEnemy::StopMove()
+{
+    moving = false;
+    if(prevXDirection > 0)
+    {
+        // if we're moving right, execute different code
+
+        if(acceleration > 0)
+            acceleration -= deceleration;
+        else
+        {
+            slowDown = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        prevXPos = xPos;
+        xPos += (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+        if(CheckCollision())
+        {
+            // if drone hits a wall, it should stop, turn around, and patrol again.
+            xPos = prevXPos;
+            slowDown = false;
+            xDirection = -xDirection;
+            acceleration = 0;
+            StartMove(xDirection);
+            return;
+        }
+        sound->SetPosition(xPos, yPos);
+
+    }
+    else if(prevXDirection < 0)
+    {
+        // Code for left direction slow down
+
+        if(acceleration < 0)
+            acceleration += deceleration;
+        else
+        {
+            slowDown = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        prevXPos = xPos;
+        xPos -= (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+        if(CheckCollision())
+        {
+            // if drone hits a wall, it should stop, turn around, and patrol again.
+            xPos = prevXPos;
+            slowDown = false;
+            xDirection = -xDirection;
+            acceleration = 0;
+            StartMove(xDirection);
+            return;
+        }
+
+        sound->SetPosition(xPos, yPos);
+    }
+}
+
+
 void RangedEnemy::ShootProjectile(double xTarget, double yTarget)
 {
     isAttacking = true;
+
+    sound->Play();
 
     Projectile *newProjectile = new Projectile(xPos, yPos, 0.3, 0.3, 1, 4.0, "DroneProjectile", "EnemyProjectile", xTarget, yTarget); // sends relative mouse pointer location
     vector<string> animations;
@@ -176,16 +300,16 @@ bool RangedEnemy::CheckCollision()
 
 bool RangedEnemy::CheckForwardCollision()
 {
-    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
-    {
-        // directions will be - or + 1 and will therefore modify how this calculation happens.
-        double tempX = xPos + (0.5 * xDirection);
-        double tempY = yPos + (0.5 * yDirection);
-
-        if(Collision(model, tempX, tempY))
-            return true;
-
-    }
+//    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
+//    {
+//        // directions will be - or + 1 and will therefore modify how this calculation happens.
+//        double tempX = xPos + (0.5 * xDirection);
+//        double tempY = yPos + (0.5 * yDirection);
+//
+//        if(Collision(model, tempX, tempY))
+//            return true;
+//
+//    }
     return false;
 }
 
@@ -209,5 +333,5 @@ bool RangedEnemy::CheckCircleSquareCollision()
 
 RangedEnemy::~RangedEnemy()
 {
-    //dtor
+
 }

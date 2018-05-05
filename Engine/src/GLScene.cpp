@@ -60,7 +60,7 @@ GLint GLScene::initGL()
 
     sceneTimer->Start();
 
-    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
+    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop120.ogg",0, 0, .6, true);
     BGM->PlayMusic();
     dTime = new DeltaTime();
     loadNewLevel = false;

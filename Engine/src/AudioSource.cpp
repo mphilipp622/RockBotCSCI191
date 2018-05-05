@@ -25,7 +25,7 @@ AudioSource::AudioSource(string newName, string newFilePath, double newX, double
 AudioSource::~AudioSource()
 {
     //dtor
-    sound->drop();
+//    sound->drop();
 }
 
 

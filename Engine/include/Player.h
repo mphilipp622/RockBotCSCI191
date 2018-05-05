@@ -76,11 +76,14 @@ class Player : public Model
         void PlayChords(bool isPlaying);
 
         // Checks whether user presses the proper input or not. Note that userInput must match the inputs assigned in Player::icons vector
-        void CheckUserInput(int userInput, LPARAM lParam);
-
+        void CheckUserInput(int userInput, double mouseX, double mouseY);
 
         // Will be called on by GLScene when loading happens. WIll push new triggers into the trigger vector so player knows where all triggers are in the scene.
         void AddTextTrigger(Trigger* newTrigger);
+
+        // used by enemy projectiles to determine if player is invincible or not.
+        bool IsInvincible();
+
 
     protected:
 
@@ -105,14 +108,16 @@ class Player : public Model
 
         int chordDamage;
 
+        Model* inputIcon;
+        unordered_map<int, string> iconNames;
         vector<Model*> icons;
         int activeInput;
         Timer* chordTimer;
         double chordTimingWindow;
         double cooldownTargetTime;
+        int bpm, beatsPerInput; // used for calculating chordTimingWindow. Beats per input is how many beats should pass before a new input is randomized
         Timer* cooldownTimer;
         void NextInput();
-
 
         // music circle variables
         Model* musicCircle;
@@ -148,7 +153,7 @@ class Player : public Model
         // Updates the positions of the input icons for chord playing. Also draws icons if chord button is held down. Called in Player whenever movements occur.
         void UpdateIcons();
 
-        // Updates the canPlay boolean based on the cooldown timer
+        // Updates the canPlay boolean based on the cooldown timer. Starts input minigame again when cooldown timer is over.
         void UpdateCooldownTimer();
 
         // Pushes player back when getting hit by a melee enemy

@@ -110,7 +110,7 @@ void Projectile::Move()
         Destroy();
     if(tag == "PlayerProjectile" && CheckCollisionEnemy())
         Destroy(); // implement damage code here later
-    if(tag == "EnemyProjectile" && Collision(Player::player))
+    if(tag == "EnemyProjectile" && Collision(Player::player) && !Player::player->IsInvincible())
     {
         Player::player->TakeDamage(damage); // deal damage to player
         Destroy(); // destroy projectile

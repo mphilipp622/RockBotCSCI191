@@ -68,18 +68,30 @@ Player::Player(double newX, double newY)
     name = "player";
     tag = "Player";
 
-    chord = new AudioSource("PlayerSource", "Audio/Music/Chords/E.ogg", xPos, yPos, 1.0, false);
+    chord = new AudioSource("PlayerSource", "Audio/Music/Chords/E.ogg", xPos, yPos, 0.8, false);
 
     // create icons for left and right mouse. They will be placed on the left and right side of our player
-    icons = {new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon", "HUD"), new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon", "HUD")};
+    icons =
+    {
+        new Model(0.4, 0.45, xPos + width / 2, yPos + height / 2, "EKeyIcon", "HUD"),
+        new Model(0.4, 0.45, xPos - width / 2, yPos + height / 2, "QKeyIcon", "HUD"),
+        new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon", "HUD"),
+        new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon", "HUD")
+    };
 
+    inputIcon = new Model(0.4, 0.45, xPos, yPos + height / 2, "Icon", "Icon");
 	frameTimer = new Timer();
     frameTimer->Start();
 
     chordTimer = new Timer();
     cooldownTimer = new Timer();
     cooldownTargetTime = 0;
-    chordTimingWindow = 2000; // chord timing window is 2 seconds. Might modify this later to fit with BPM
+    bpm = 120;
+    beatsPerInput = 1;
+
+    // Chord Timing Window follows the below equation. the constant 60 is for 60 seconds. 1000 is for converting to ms
+    chordTimingWindow = (beatsPerInput / (bpm / 60.0)) * 1000;
+    cout << chordTimingWindow << endl;
     canPlay = true;
     chordManager = new ChordManager();
 
@@ -92,10 +104,21 @@ Player::Player(double newX, double newY)
     musicCircle = new Model(3, 3, xPos, yPos, "MusicCircle", "MusicHUD");
     circleTimer = new Timer();
 
+    iconNames =
+    {
+        { 0, "Images/HUD/EKey.png"},
+        { 1, "Images/HUD/QKey.png"},
+        { 2, "Images/HUD/LeftMouse.png"},
+        { 3, "Images/HUD/RightMouse.png"}
+    };
+
     if(player)
         delete player;
 
     player = this;
+
+    PlayChords(true);
+    chordTimer->Start();
 }
 
 Player::~Player()
@@ -186,8 +209,10 @@ void Player::InitPlayer()
     jumpAnim[2].BindTexture("Images/Player/Test_Movement_0002.png");
     jumpAnim[3].BindTexture("Images/Player/Test_Movement_0003.png");
 
-    icons[0]->InitModel("Images/HUD/LeftMouse.png", true);
-    icons[1]->InitModel("Images/HUD/RightMouse.png", true);
+    icons[0]->InitModel("Images/HUD/EKey.png", true);
+    icons[1]->InitModel("Images/HUD/QKey.png", true);
+    icons[2]->InitModel("Images/HUD/LeftMouse.png", true);
+    icons[3]->InitModel("Images/HUD/RightMouse.png", true);
 
     musicCircle->InitModel("Images/MusicSprites/MusicCircle.png", true);
 
@@ -259,6 +284,7 @@ void Player::Update()
 
     if(playingChords)
     {
+
         if(chordTimer->GetTicks() > chordTimingWindow)
             // if user has exceeded their timing window, re-random the input. Might want to punish them and add a cooldown, not sure yet
             NextInput();
@@ -731,10 +757,16 @@ void Player::ShootProjectile(double x, double y)
 
 void Player::UpdateIcons()
 {
-    icons[0]->SetPosition(xPos - width / 1.5, yPos);
-    icons[1]->SetPosition(xPos + width / 1.5, yPos);
+//    inputIcon->SetPosition(xPos, yPos + height / 1.5);
+//    inputIcon->InitModel(iconNames[activeInput], true);
+
+    icons[0]->SetPosition(xPos + width / 1.5, yPos + height / 2);
+    icons[1]->SetPosition(xPos - width / 1.5, yPos + height / 2);
+    icons[2]->SetPosition(xPos - width / 1.5, yPos);
+    icons[3]->SetPosition(xPos + width / 1.5, yPos);
 
     if(playingChords)
+//        inputIcon->DrawModel();
         icons[activeInput]->DrawModel();
 //    if(playingChords)
 //    {
@@ -754,14 +786,15 @@ void Player::PlayChords(bool isPlaying)
     {
         // set the active input user must press and start a timer.
         srand(time(NULL));
-        activeInput = rand() % icons.size();
+        activeInput = rand() % iconNames.size();
+//        activeInput = rand() % icons.size();
 
-        chordTimer->Start();
+//        chordTimer->Start();
 
         chordManager->StartNewSequence();
     }
-    else
-        chordTimer->Stop();
+//    else
+//        chordTimer->Stop();
 
 }
 
@@ -770,13 +803,13 @@ void Player::PlayChords(bool isPlaying)
 void Player::NextInput()
 {
     srand(time(NULL));
-    activeInput = rand() % icons.size();
+    activeInput = rand() % iconNames.size();
 
     chordTimer->Reset();
 }
 
 
-void Player::CheckUserInput(int userInput, LPARAM lParam)
+void Player::CheckUserInput(int userInput, double mouseX, double mouseY)
 {
     if(!canPlay)
         // stop execution if waiting for cooldown
@@ -787,12 +820,12 @@ void Player::CheckUserInput(int userInput, LPARAM lParam)
         double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
         double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
         double aspectRatio = screenWidth / screenHeight;
-        double mousePosX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
-        double mousePosY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) * 3.33;
+        double mousePosX = (mouseX / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
+        double mousePosY = -(mouseY / (screenHeight / 2) - 1.0) * 3.33;
         ShootProjectile(mousePosX, mousePosY);
 
-        // reset input check
-        NextInput();
+//        // reset input check
+//        NextInput();
 
         // OLD CODE FOR CIRCLE AOE ATTACK
 //        circleTimer->Start(); // start timer
@@ -802,13 +835,16 @@ void Player::CheckUserInput(int userInput, LPARAM lParam)
     }
     else
     {
+        // Cooldown is the timing window minus the difference between the timing window and whatever my ticks were when I failed the input check
+        cooldownTargetTime = (chordTimingWindow + (chordTimingWindow - chordTimer->GetTicks())) * 2;
+
+        cout << cooldownTargetTime << endl;
         // set a cooldown for player
         cooldownTimer->Start();
-        cooldownTargetTime = chordTimingWindow;
+
         PlayChords(false);
         canPlay =  false;
     }
-
 }
 
 void Player::UpdateCooldownTimer()
@@ -818,6 +854,7 @@ void Player::UpdateCooldownTimer()
         canPlay = true;
         cooldownTimer->Stop();
         cooldownTargetTime = 0;
+        PlayChords(true);
     }
 }
 
@@ -887,4 +924,9 @@ void Player::SetInvincible()
     invincibleFrame = 1;
     invincibleTimer->Start();
     invincibleFrameTimer->Start();
+}
+
+bool Player::IsInvincible()
+{
+    return invincible;
 }

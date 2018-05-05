@@ -114,6 +114,123 @@ void MeleeEnemy::InitEnemy()
 
 }
 
+void MeleeEnemy::MoveLeft()
+{
+    slowDown = false;
+
+    xDirection = -1.0;
+
+    if(acceleration > -maxAcceleration)
+        acceleration -= accelRate;
+
+    if(acceleration < -maxAcceleration)
+        acceleration = -maxAcceleration;
+
+    prevXPos = xPos;
+    xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    if(CheckCollision())
+    {
+        jump = true;
+        xPos = prevXPos;
+        xDirection = 0;
+        acceleration = 0;
+        return;
+    }
+
+    if(CheckForwardCollision())
+        StartJump();
+
+    sound->SetPosition(xPos, yPos);
+}
+
+void MeleeEnemy::MoveRight()
+{
+    slowDown = false;
+
+    xDirection = 1.0;
+
+    if(acceleration < maxAcceleration)
+        acceleration += accelRate;
+
+    if(acceleration > maxAcceleration)
+        acceleration = maxAcceleration;
+
+    prevXPos = xPos;
+    xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+    if(CheckCollision())
+    {
+        jump = true;
+        xPos = prevXPos;
+        xDirection = 0;
+        acceleration = 0;
+        return;
+    }
+
+    if(CheckForwardCollision())
+        StartJump();
+
+    sound->SetPosition(xPos, yPos);
+}
+
+
+void MeleeEnemy::StopMove()
+{
+    moving = false;
+    if(prevXDirection > 0)
+    {
+        // if we're moving right, execute different code
+
+        if(acceleration > 0)
+            acceleration -= deceleration;
+        else
+        {
+            slowDown = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        prevXPos = xPos;
+        xPos += (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+        if(CheckCollision())
+        {
+            xPos = prevXPos;
+            slowDown = false;
+            xDirection = 0;
+            acceleration = 0;
+            return;
+        }
+        sound->SetPosition(xPos, yPos);
+
+    }
+    else if(prevXDirection < 0)
+    {
+        // Code for left direction slow down
+
+        if(acceleration < 0)
+            acceleration += deceleration;
+        else
+        {
+            slowDown = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        prevXPos = xPos;
+        xPos -= (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+        if(CheckCollision())
+        {
+            xPos = prevXPos;
+            slowDown = false;
+            xDirection = 0;
+            acceleration = 0;
+            return;
+        }
+        sound->SetPosition(xPos, yPos);
+    }
+}
+
+
 bool MeleeEnemy::CheckCollision()
 {
     for(auto& model : SceneManager::GetActiveScene()->staticObjects)
