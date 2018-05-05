@@ -318,7 +318,7 @@
 	<SceneManager.h>
 	<tinyxml2.h>
 
-1525469030 e:\college\191\191\engine\include\model.h
+1525501330 e:\college\191\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -391,7 +391,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1525471189 source:e:\college\191\191\engine\src\player.cpp
+1525501133 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -1621,4 +1621,10 @@
 
 1525449924 source:e:\college\191\191\engine\src\trigger.cpp
 	"Trigger.h"
+
+1519274979 e:\college\191\191\engine\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
 

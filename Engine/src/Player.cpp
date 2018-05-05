@@ -18,6 +18,7 @@ Player::Player(double newX, double newY)
     yPos = newY;
     playerZoom = 0;
 
+    // test
     // set previous positions to our starting position
     prevXPos = xPos;
     prevYPos = yPos;
