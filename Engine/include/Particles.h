@@ -6,12 +6,14 @@
 #include <stdlib.h>
 #include <iostream>
 #include <Timer.h>
+#include <vector>
 
 #define MAX_MUSIC_DROPS 500
 #define MAX_DROPS 50000
 #define GRAVITY -0.001
 
 using namespace std;
+
 
 class Particles
 {
@@ -20,18 +22,6 @@ class Particles
         virtual ~Particles();
 
         int numDrops;
-
-        typedef struct
-        {
-            // particle characteristics
-            bool alive;
-            float xPos, yPos, zPos;
-            float directionX, directionY;
-            float mass;
-            Timer* time;
-        } particle;
-
-        particle drops[MAX_MUSIC_DROPS];
 
         void DrawParticles();
         void LifeTime();
@@ -44,6 +34,31 @@ class Particles
     protected:
 
     private:
+
+        struct Node
+        {
+            bool alive;
+            double xPos, yPos, zPos;
+            float directionX, directionY;
+            float mass;
+            Timer* time;
+            // particle characteristics
+            Node()
+            {
+                alive = true;
+                xPos = 0;
+                yPos = 0;
+            }
+            Node(double newX, double newY)
+            {
+                alive = true;
+                xPos = newX;
+                yPos = newY;
+            }
+        };
+
+        vector<Node> drops;
+
 };
 
 #endif // PARTICLES_H

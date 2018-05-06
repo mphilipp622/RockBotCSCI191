@@ -220,6 +220,7 @@ void Player::InitPlayer()
 
 void Player::Actions(int newAction)
 {
+
     switch(newAction)
     {
     case 0:
@@ -696,7 +697,7 @@ void Player::PushBack()
 
 void Player::CheckHealthPackCollision()
 {
-    for(auto& healthPack : GLScene::healthPacks)
+    for(auto& healthPack : SceneManager::GetActiveScene()->healthPacks)
     {
         if(Collision(healthPack))
             ConsumeHealthPack(healthPack);
@@ -710,8 +711,8 @@ void Player::ConsumeHealthPack(Model* healthPack)
     if(hp > 10)
         hp = 10; // clamp HP to a maximum of 10
 
-    auto findHealthPack = find(GLScene::healthPacks.begin(), GLScene::healthPacks.end(), healthPack);
-    GLScene::healthPacks.erase(findHealthPack);
+    auto findHealthPack = find(SceneManager::GetActiveScene()->healthPacks.begin(), SceneManager::GetActiveScene()->healthPacks.end(), healthPack);
+    SceneManager::GetActiveScene()->healthPacks.erase(findHealthPack);
 }
 
 
@@ -750,7 +751,9 @@ double Player::GetZoom()
 void Player::ShootProjectile(double x, double y)
 {
     Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
-    newProjectile->InitModel("Images/Note.png", true);
+    vector<string> animNames = {"Images/Note.png"};
+    newProjectile->InitAnimations(animNames);
+//    newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord(chordManager->GetNextChord());
     SceneManager::GetActiveScene()->movableObjects.push_back(newProjectile);
 }
@@ -836,7 +839,7 @@ void Player::CheckUserInput(int userInput, double mouseX, double mouseY)
     else
     {
         // Cooldown is the timing window minus the difference between the timing window and whatever my ticks were when I failed the input check
-        cooldownTargetTime = (chordTimingWindow + (chordTimingWindow - chordTimer->GetTicks())) * 2;
+        cooldownTargetTime = (chordTimingWindow + (chordTimingWindow - chordTimer->GetTicks()));
 
         cout << cooldownTargetTime << endl;
         // set a cooldown for player

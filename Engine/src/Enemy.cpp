@@ -246,8 +246,8 @@ void Enemy::StartJump()
 
 void Enemy::Die()
 {
-    auto finder = find(GLScene::enemies.begin(), GLScene::enemies.end(), this);
-    GLScene::enemies.erase(finder);
+    auto finder = find(SceneManager::GetActiveScene()->enemies.begin(), SceneManager::GetActiveScene()->enemies.end(), this);
+    SceneManager::GetActiveScene()->enemies.erase(finder);
     delete this;
 }
 

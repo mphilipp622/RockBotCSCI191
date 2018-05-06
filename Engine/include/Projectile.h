@@ -43,7 +43,8 @@ class Projectile : public Model
         Timer *lifetime;
         double endOfLifeTime; // lifetime of 5 seconxs max
 
-        TextureLoader animation[4];
+        vector<TextureLoader> animation;
+//        TextureLoader animation[4];
 
         // will remove projectile from gl scene vector and delete it
         void Destroy();

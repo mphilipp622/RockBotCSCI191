@@ -76,7 +76,6 @@ GLint GLScene::drawGLScene()
     if(Player::player->getHP() <= 0)
         SetGameOver();
 
-
     if(loadNewLevel)
         return 1; // stop rendering the scene while next level loads.
 
@@ -110,9 +109,10 @@ GLint GLScene::drawGLScene()
 
     for(auto& healthPack : healthPacks)
         healthPack->DrawModel();
-//
+
     if(Player::player)
         Player::player->Update();
+
 
     if(nextLevelTrigger)
     {

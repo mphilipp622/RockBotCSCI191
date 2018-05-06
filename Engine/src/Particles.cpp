@@ -15,20 +15,13 @@ Particles::~Particles()
 void Particles::DrawParticles()
 {
     glPushMatrix();
-    glColor3f(1.0, 0, 0);
+    glColor4f(1.0, 1.0, 1.0, 1.0);
     glPointSize(10); // pixel size of particle
 
     glBegin(GL_POINTS);
 
-    int i = 0;
-    while(i < numDrops)
-    {
-        if(drops[i].alive)
-        {
-            glVertex3f(drops[i].xPos, drops[i].yPos, 0);
-        }
-        i++;
-    }
+    for(auto drop : drops)
+        glVertex3f(drop.xPos, drop.yPos, 0);
 
     glEnd();
     glPopMatrix();
@@ -63,8 +56,6 @@ void Particles::LifeTime()
 void Particles::LifetimeMusic(double x, double y, double width)
 {
     double radius = width / 2;
-//
-//    int newDrops = DoubleRandom() * 60; // 60 is arbitrary. Could put anything
     double theta = 0;
 
     for(int i = 0; i < numDrops; i++)
@@ -76,28 +67,8 @@ void Particles::LifetimeMusic(double x, double y, double width)
 
             drops[i].xPos = newX;
             drops[i].yPos = newY;
-//            drops[i].directionX = xDir;
-//            drops[i].directionY = yDir;
-//            drops[i].xPos += x;
-//            drops[i].yPos += y;
-//            if(drops[i].yPos + GRAVITY * drops[i].mass < 0.0)
-//            {
-//                // make particle bounce
-//                drops[i].directionY = -drops[i].directionY;
-//            }
-//            else
-//            {
-//                drops[i].directionY += GRAVITY * drops[i].mass;
-//            }
-//
-//            drops[i].xPos = x + -xDir;
-//            drops[i].yPos = y + -yDir;
-
-//            if(drops[i].time->GetTicks() > 200)
-//                drops[i].alive = false;
-//            if(drops[i].yPos < -5.0 && drops[i].xPos > 5.0)
-//                drops[i].alive = false; // bounds checking to destroy particle. Probably change later.
         }
+
         theta += 1;
     }
 }
@@ -105,8 +76,6 @@ void Particles::LifetimeMusic(double x, double y, double width)
 
 void Particles::GenerateParticles()
 {
-    int i = 0;
-
     int newDrops = DoubleRandom() * 60; // 60 is arbitrary. Could put anything
 
     if(numDrops + newDrops > MAX_DROPS)
@@ -159,16 +128,18 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
         double newX = x + radius * cos(theta);
         double newY = y + radius * sin(theta);
 
-        drops[i].alive = true;
-        drops[i].xPos = newX;
-        drops[i].yPos = newY;
-        drops[i].directionX = 0; // these constant values are pretty much test and check
-        drops[i].directionY = 0;
-        drops[i].mass = 0.5 + 0.5 * DoubleRandom();
-        drops[i].time = new Timer();
-        drops[i].time->Start();
 
-        theta += 1; // move onto the next part of the circle
+        drops.push_back(Node(newX, newY));
+//        drops[i].alive = true;
+//        drops[i].xPos = newX;
+//        drops[i].yPos = newY;
+//        drops[i].directionX = 0; // these constant values are pretty much test and check
+//        drops[i].directionY = 0;
+//        drops[i].mass = 0.5 + 0.5 * DoubleRandom();
+//        drops[i].time = new Timer();
+//        drops[i].time->Start();
+
+        theta += 3.6; // move onto the next part of the circle
 
 //        if(theta > 360) // if we've exceeded a full circle of particles, then stop generating
 //            break;

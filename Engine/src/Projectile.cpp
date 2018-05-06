@@ -91,13 +91,10 @@ void Projectile::Update()
 {
     Move();
 
-    if(tag == "EnemyProjectile")
-        Animate();
-    else
-    {
+    if(particle)
         DisplayParticles();
-        DrawModel();
-    }
+
+    Animate();
 
     if(lifetime->GetTicks() > endOfLifeTime)
         Destroy();
@@ -152,7 +149,11 @@ void Projectile::InitAnimations(vector<string> names)
     frame = 0;
 
     for(int i = 0; i < names.size(); i++)
-        animation[i].BindTexture(names.at(i));
+    {
+        animation.push_back(TextureLoader());
+        animation.back().BindTexture(names.at(i));
+    }
+
 }
 
 void Projectile::DrawProjectile()
@@ -183,11 +184,11 @@ void Projectile::Animate()
 {
     glPushMatrix();
 
-    glTranslated(xPos, yPos, zoom);
+    glTranslated(xPos, yPos, 0);
     if(frameTimer->GetTicks() > 60)
     {
         frame++;
-        frame %= 4;
+        frame %= animation.size();
         frameTimer->Reset();
     }
 
@@ -201,7 +202,7 @@ void Projectile::Animate()
 
 bool Projectile::CheckCollision()
 {
-    for(auto& model : GLScene::staticObjects)
+    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
     {
         if(Collision(model))
             return true;
@@ -213,7 +214,7 @@ bool Projectile::CheckCollision()
 bool Projectile::CheckCollisionEnemy()
 {
     // check for collision with an enemy
-    for(auto& enemy : GLScene::enemies)
+    for(auto& enemy : SceneManager::GetActiveScene()->enemies)
     {
         if(Collision(enemy))
         {
@@ -240,8 +241,8 @@ bool Projectile::CheckCircleSquareCollision()
 void Projectile::Destroy()
 {
     // find this projectile in the main vector and remove it. Then delete this projectile
-    auto finder = find(GLScene::movableObjects.begin(), GLScene::movableObjects.end(), this);
-    GLScene::movableObjects.erase(finder);
+    auto finder = find(SceneManager::GetActiveScene()->movableObjects.begin(), SceneManager::GetActiveScene()->movableObjects.end(), this);
+    SceneManager::GetActiveScene()->movableObjects.erase(finder);
 //    delete particle;
 //    delete this;
 }
