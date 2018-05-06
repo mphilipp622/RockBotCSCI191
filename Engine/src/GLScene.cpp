@@ -87,9 +87,7 @@ GLint GLScene::drawGLScene()
 
     displayHUD->showHP(Player::player);
 
-
-
-	for(auto& model : movableObjects)
+    for(auto& model : movableObjects)
         model->Update();
 
     for(auto& model : staticObjects)
@@ -100,7 +98,7 @@ GLint GLScene::drawGLScene()
 
     for(auto& healthPack : healthPacks)
         healthPack->DrawModel();
-
+//
     if(Player::player)
         Player::player->Update();
 

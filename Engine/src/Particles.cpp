@@ -4,7 +4,7 @@
 Particles::Particles()
 {
     //ctor
-    numDrops = 1;
+    numDrops = 0;
 }
 
 Particles::~Particles()
@@ -14,6 +14,7 @@ Particles::~Particles()
 
 void Particles::DrawParticles()
 {
+    glPushMatrix();
     glColor3f(1.0, 0, 0);
     glPointSize(10); // pixel size of particle
 
@@ -24,13 +25,13 @@ void Particles::DrawParticles()
     {
         if(drops[i].alive)
         {
-
             glVertex3f(drops[i].xPos, drops[i].yPos, 0);
         }
         i++;
     }
 
     glEnd();
+    glPopMatrix();
 }
 
 // Setting Movement
@@ -59,13 +60,26 @@ void Particles::LifeTime()
     }
 }
 
-void Particles::LifetimeMusic(double x, double y, double xDir, double yDir)
+void Particles::LifetimeMusic(double x, double y, double width)
 {
+    double radius = width / 2;
+//
+//    int newDrops = DoubleRandom() * 60; // 60 is arbitrary. Could put anything
+    double theta = 0;
+
     for(int i = 0; i < numDrops; i++)
     {
         if(drops[i].alive)
         {
+            double newX = x + radius * cos(theta);
+            double newY = y + radius * sin(theta);
 
+            drops[i].xPos = newX;
+            drops[i].yPos = newY;
+//            drops[i].directionX = xDir;
+//            drops[i].directionY = yDir;
+//            drops[i].xPos += x;
+//            drops[i].yPos += y;
 //            if(drops[i].yPos + GRAVITY * drops[i].mass < 0.0)
 //            {
 //                // make particle bounce
@@ -75,15 +89,16 @@ void Particles::LifetimeMusic(double x, double y, double xDir, double yDir)
 //            {
 //                drops[i].directionY += GRAVITY * drops[i].mass;
 //            }
+//
+//            drops[i].xPos = x + -xDir;
+//            drops[i].yPos = y + -yDir;
 
-            drops[i].xPos = x + -xDir;
-            drops[i].yPos = y + -yDir;
-
-            if(drops[i].time->GetTicks() > 200)
-                drops[i].alive = false;
+//            if(drops[i].time->GetTicks() > 200)
+//                drops[i].alive = false;
 //            if(drops[i].yPos < -5.0 && drops[i].xPos > 5.0)
 //                drops[i].alive = false; // bounds checking to destroy particle. Probably change later.
         }
+        theta += 1;
     }
 }
 
@@ -109,6 +124,7 @@ void Particles::GenerateParticles()
 
     numDrops += newDrops;
 
+
     if(numDrops >= MAX_DROPS)
         numDrops = 0;
 }
@@ -131,13 +147,13 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
 
     double radius = width / 2;
 
-    int newDrops = DoubleRandom() * 60; // 60 is arbitrary. Could put anything
+    int newDrops = 100; // 60 is arbitrary. Could put anything
     double theta = 0;
 
     if(numDrops + newDrops > MAX_MUSIC_DROPS)
         newDrops = MAX_MUSIC_DROPS - numDrops;
 
-    for(int i = numDrops; i < numDrops + newDrops; i++)
+    for(int i = 0; i < newDrops; i++)
     {
         // This equation will create a circle of particles around the boundaries of the music note
         double newX = x + radius * cos(theta);
@@ -154,12 +170,13 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
 
         theta += 1; // move onto the next part of the circle
 
-        if(theta > 360) // if we've exceeded a full circle of particles, then stop generating
-            break;
+//        if(theta > 360) // if we've exceeded a full circle of particles, then stop generating
+//            break;
     }
 
     numDrops += newDrops;
 
     if(numDrops >= MAX_MUSIC_DROPS)
-        numDrops = 0;
+        numDrops = MAX_MUSIC_DROPS;
+
 }

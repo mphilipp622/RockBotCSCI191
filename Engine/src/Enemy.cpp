@@ -134,9 +134,9 @@ void Enemy::Update()
         else if(xDirection < 0)
             MoveLeft();
 
-        if(!jump)
+        if(!jump && !isAttacking)
             Actions(1);
-        else if(jump)
+        else if(jump && !isAttacking)
             Actions(2);
     }
     else if(!moving && !jump && !isAttacking)
@@ -145,7 +145,7 @@ void Enemy::Update()
     if(jump)
     {
         Jump();
-        if(!moving)
+        if(!moving && !isAttacking)
             Actions(2);
     }
     else
@@ -154,7 +154,7 @@ void Enemy::Update()
     if(slowDown)
         StopMove();
 
-    if(isAttacking && !moving)
+    if(isAttacking)
         Actions(4);
 
     AIRoutine();

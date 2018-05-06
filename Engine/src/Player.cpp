@@ -48,7 +48,7 @@ Player::Player(double newX, double newY)
      // physics
     gravity = 0.98;
     acceleration = 0.0;
-    accelRate = 0.05;
+    accelRate = 0.1;
     deceleration = 0.2; // rate of deceleration
     maxAcceleration = 2.5;
     pushAccel = 8.0; // used for push back
@@ -87,7 +87,7 @@ Player::Player(double newX, double newY)
     cooldownTimer = new Timer();
     cooldownTargetTime = 0;
     bpm = 120;
-    beatsPerInput = 1;
+    beatsPerInput = 2;
 
     // Chord Timing Window follows the below equation. the constant 60 is for 60 seconds. 1000 is for converting to ms
     chordTimingWindow = (beatsPerInput / (bpm / 60.0)) * 1000;

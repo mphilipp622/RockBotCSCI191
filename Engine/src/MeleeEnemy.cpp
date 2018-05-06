@@ -74,7 +74,7 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
 
     aggroRadius = 3;
-    meleeRange = 1.0;
+    meleeRange = 0.5;
 }
 
 void MeleeEnemy::InitEnemy()
@@ -111,6 +111,12 @@ void MeleeEnemy::InitEnemy()
 
     deathAnim[0].BindTexture("Images/Enemies/MeleeIdle.png");
     maxDeathFrame = 1;
+
+    attackAnim[0].BindTexture("Images/Enemies/MeleeAttack0.png");
+    attackAnim[1].BindTexture("Images/Enemies/MeleeAttack1.png");
+    attackAnim[2].BindTexture("Images/Enemies/MeleeAttack2.png");
+    attackAnim[3].BindTexture("Images/Enemies/MeleeAttack3.png");
+    maxAttackFrame = 4;
 
 }
 
@@ -296,6 +302,19 @@ void MeleeEnemy::AIRoutine()
 
         return;
     }
+
+    if(PlayerInRange(meleeRange))
+    {
+        slowDown = true;
+        isAttacking = true;
+        return;
+    }
+    else
+    {
+        isAttacking = false;
+        slowDown = false;
+    }
+
 
     if(Player::player->GetX() < xPos)
         StartMove(-1.0); // move left

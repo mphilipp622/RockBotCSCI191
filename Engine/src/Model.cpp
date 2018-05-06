@@ -158,6 +158,7 @@ Model::~Model()
 {
 
 }
+
 void Model::DrawModel()
 {
     //render this model
@@ -166,9 +167,9 @@ void Model::DrawModel()
     texture->Binder(); // update texture
 //    if(name != "player")
     glTranslated(xPos, yPos, zoom);
-    glRotated(rotateX, 1, 0, 0);
-    glRotated(rotateY, 0, 1, 0);
-    glRotated(rotateZ, 0, 0, 1);
+//    glRotated(rotateX, 1, 0, 0);
+//    glRotated(rotateY, 0, 1, 0);
+//    glRotated(rotateZ, 0, 0, 1);
 
     glBegin(GL_QUADS);
 
@@ -274,10 +275,7 @@ void Model::SetHeight(double newHeight)
 
 void Model::Update()
 {
-//    if(name != "Player")
-//        DrawModel();
-//    if(GetAudioSource())
-//        GetAudioSource()->SetPosition(xPos, yPos);
+    return;
 }
 
 bool Model::CheckCollision()
