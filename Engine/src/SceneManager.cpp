@@ -83,3 +83,29 @@ void SceneManager::LoadNextLevel()
 
 
 }
+
+void SceneManager::ReloadLevel()
+{
+
+    GLScene* reloadedLevel = new GLScene(activeScene);
+
+    // if we already have the level loaded, we want to delete it
+    auto finder = scenes.find(activeScene); // find the scene in scene manager
+
+    if(finder != scenes.end())
+       scenes.erase(finder); // if hashtable already has level loaded, delete it
+
+    scenes.insert( {activeScene, reloadedLevel} ); // insert map into hash table
+    scenes[activeScene]->initGL(); // initialize map
+
+}
+
+void SceneManager::DeleteScene(string sceneName)
+{
+    // if we already have the level loaded, we want to delete it
+    auto finder = scenes.find(sceneName); // find the scene in scene manager
+
+    if(finder != scenes.end())
+       scenes.erase(finder); // if hashtable already has level loaded, delete it
+
+}

@@ -28,6 +28,12 @@ class SceneManager
         // Called by Player::CheckTriggerCollision(). Will load the next level from the current level.
         static void LoadNextLevel();
 
+        // Reloads the current scene
+        static void ReloadLevel();
+
+        // deletes the scene from the hashtable
+        static void DeleteScene(string sceneName);
+
     protected:
 
     private:

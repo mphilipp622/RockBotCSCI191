@@ -42,7 +42,7 @@ Player::Player(double newX, double newY)
 
     moveSpeed = 1.0;
     jumpSpeed = 1.0;
-    hp = 10;
+    hp = 3;
     actionTrigger = 0;
 
      // physics
@@ -891,8 +891,6 @@ void Player::TakeDamage(int damage)
     hp -= damage;
 
     SetInvincible(); // set player to invincible after taking damage
-//    if(hp <= 0)
- //       GameOver();
 }
 
 int Player::getHP()

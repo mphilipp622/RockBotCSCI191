@@ -23,6 +23,7 @@ GLScene::GLScene(string newName)
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
     sceneName = newName;
+    gameOver = false;
 }
 
 
@@ -57,7 +58,6 @@ GLint GLScene::initGL()
     keyboardAndMouse = new Inputs();
     sceneTimer = new Timer();
 
-
     sceneTimer->Start();
 
     BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop120.ogg",0, 0, .6, true);
@@ -73,12 +73,24 @@ GLint GLScene::drawGLScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
+    if(Player::player->getHP() <= 0)
+        SetGameOver();
+
+
     if(loadNewLevel)
         return 1; // stop rendering the scene while next level loads.
 
     gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
             Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
             0.0f, 1.0f, 0.0f);
+
+    if(gameOver)
+    {
+        gameOverWindow->DrawModel();
+        replayButton->DrawModel();
+        mainMenuButton->DrawModel();
+        return 1;
+    }
 
     glPushMatrix();
     glScaled(backgroundScaleX, backgroundScaleY, 1);
@@ -136,6 +148,13 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if(uMsg == WM_KEYDOWN)
     {
+        if(gameOver)
+        {
+            // Check for game over menu inputs
+            CheckGameOverCollision(wParam);
+            return 1;
+        }
+
 //        testAudio->UpdatePosition();
 
 //        testAudio->Update();
@@ -157,6 +176,13 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     if(uMsg == WM_LBUTTONDOWN)
     {
         // left-click functionality
+        if(gameOver)
+        {
+            // Check for gameover menu inputs
+            CheckGameOverCollision(LOWORD(lParam), HIWORD(lParam));
+            return 1;
+        }
+
         keyboardAndMouse->wParamMouse = wParam;
         keyboardAndMouse->MouseDown(Player::player, lParam);
     }
@@ -416,3 +442,59 @@ void GLScene::LoadNewLevel()
 {
     loadNewLevel = true;
 }
+
+void GLScene::SetGameOver()
+{
+    // Create menu graphics for game over menu if they don't already exist
+    gameOverWindow = new Model(1.5, 1.5, Player::player->GetX(), Player::player->GetY(), "GameOverMenu", "UI");
+    replayButton = new Model(1.0, 0.3, gameOverWindow->GetX(), gameOverWindow->GetY() + 0.1, "ReplayButton", "UI");
+    mainMenuButton = new Model(1.0, 0.3, gameOverWindow->GetX(), gameOverWindow->GetY() - 0.3, "MainMenuButton", "UI");
+
+    gameOverWindow->InitModel("Images/UI/GameOverMenu.png", true);
+    replayButton->InitModel("Images/UI/Restart.png", true);
+    mainMenuButton->InitModel("Images/UI/MainMenu.png", true);
+
+    gameOver = true;
+}
+
+void GLScene::CheckGameOverCollision(WPARAM keyPressed)
+{
+    if(keyPressed == 0x31 || keyPressed == VK_NUMPAD1) // 1 key on keyboard
+    {
+        loadNewLevel = true;
+        SceneManager::ReloadLevel();
+        delete this;
+    }
+    else if(keyPressed == 0x32 || keyPressed == VK_NUMPAD2)
+    {
+        loadNewLevel = true;
+        SceneManager::LoadScene("MainMenu");
+        AudioEngine::engine->stopAllSounds();
+        SceneManager::DeleteScene(sceneName);
+        delete this;
+    }
+}
+
+void GLScene::CheckGameOverCollision(double mouseX, double mouseY)
+{
+    // Mouse pointer selection of game over menu.
+
+    double convertedX, convertedY;
+    ConvertMouseToWorld(mouseX, mouseY, convertedX, convertedY);
+
+    if(CheckPointerCollision(replayButton, convertedX, convertedY))
+    {
+        loadNewLevel = true;
+        SceneManager::ReloadLevel();
+        delete this;
+    }
+    else if(CheckPointerCollision(mainMenuButton, convertedX, convertedY))
+    {
+        loadNewLevel = true;
+        SceneManager::LoadScene("MainMenu");
+        AudioEngine::engine->stopAllSounds();
+        SceneManager::DeleteScene(sceneName);
+        delete this;
+    }
+}
+

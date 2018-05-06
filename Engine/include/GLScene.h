@@ -52,6 +52,9 @@ class GLScene
         // flags level loading, which will prevent rendering in the scene to avoid seg faults
         void LoadNewLevel();
 
+        // called on by Player::TakeDamage()
+        void SetGameOver();
+
     protected:
         unordered_map<string, AudioSource*> audioSources; // map of all environmental sounds in scene
         AudioEngine* audioEngine;
@@ -81,8 +84,15 @@ class GLScene
         // Loads player, enemy, platform, trigger data into the scene
         void LoadLevelFromXML();
 
-
     private:
+        Model* gameOverWindow;
+        Model* replayButton;
+        Model* mainMenuButton;
+
+        bool gameOver;
+
+        void CheckGameOverCollision(WPARAM keyPressed);
+        void CheckGameOverCollision(double mouseX, double mouseY);
 
         bool loadNewLevel; // flag for stopping the rendering of everything while new level loads.
         // Empty out the static data. Useful for loading new data
