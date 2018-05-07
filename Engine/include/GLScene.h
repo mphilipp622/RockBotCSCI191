@@ -19,6 +19,7 @@
 #include <RangedEnemy.h>
 #include <SceneManager.h>
 #include <tinyxml2.h>
+#include <Particles.h>
 
 using namespace std;
 using namespace tinyxml2;
@@ -100,6 +101,9 @@ class GLScene
 
         // Checks if position is overlapping specified min and max values. Used by CheckPointerCollision()
         bool Overlap(double pos, double min, double max);
+
+        Particles* testParticle1;
+        Particles* testParticle2;
 };
 
 #endif // GLSCENE_H

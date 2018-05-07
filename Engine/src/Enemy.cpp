@@ -253,6 +253,7 @@ void Enemy::Die()
 
 void Enemy::Actions(int newAction)
 {
+
     switch(newAction)
     {
     case 0:

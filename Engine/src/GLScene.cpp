@@ -65,6 +65,10 @@ GLint GLScene::initGL()
     dTime = new DeltaTime();
     loadNewLevel = false;
 
+    testParticle1 = new Particles();
+    testParticle2 = new Particles();
+    testParticle1->GenerateMusicParticles(0, 0, 1.0, 1.0);
+    testParticle2->GenerateMusicParticles(1, 1, 1, 1);
     return true;
 }
 
@@ -98,11 +102,18 @@ GLint GLScene::drawGLScene()
 
     displayHUD->showHP(Player::player);
 
+
+
     for(auto& model : movableObjects)
         model->Update();
 
     for(auto& model : staticObjects)
         model->DrawModel();
+
+        glPushMatrix();
+    testParticle1->DrawParticles();
+    testParticle2->DrawParticles();
+    glPopMatrix();
 
     for(auto& enemy : enemies)
         enemy->Update();
@@ -110,9 +121,9 @@ GLint GLScene::drawGLScene()
     for(auto& healthPack : healthPacks)
         healthPack->DrawModel();
 
+
     if(Player::player)
         Player::player->Update();
-
 
     if(nextLevelTrigger)
     {

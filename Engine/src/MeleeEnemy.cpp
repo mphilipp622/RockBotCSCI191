@@ -50,6 +50,7 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     isAttacking = false;
     jump = false;
     moving = false;
+    slowDown = false;
 
      // physics
     gravity = 0.98;
@@ -57,10 +58,7 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     accelRate = 0.05;
     deceleration = 0.2; // rate of deceleration
     maxAcceleration = 2.0;
-    jump = false; // set true to avoid falling through earth on scene load
-    slowDown = false;
     gravity = -9.80;
-    moving = false;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
     idleFrame = 0;
