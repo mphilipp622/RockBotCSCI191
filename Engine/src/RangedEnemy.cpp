@@ -129,7 +129,7 @@ void RangedEnemy::AIRoutine()
     else
     {
         if(moving)
-             StopMove();
+            StopMove();
         if(attackTimer->GetTicks() > attackSpeed * 1000) // convert to MS using 1000
             ShootProjectile(Player::player->GetX(), Player::player->GetY());
     }

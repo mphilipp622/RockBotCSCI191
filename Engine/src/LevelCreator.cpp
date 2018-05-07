@@ -1134,6 +1134,8 @@ void LevelCreator::LoadLevelFromXML()
         string texturePath = mainElements->FirstChildElement()->GetText();
 
         background = new Parallax();
+        background->ParallaxInit(texturePath);
+        backgroundTexture = texturePath;
 
         mainElements = mainElements->NextSiblingElement();
         checkName = mainElements->Name();

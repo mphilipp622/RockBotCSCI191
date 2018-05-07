@@ -253,6 +253,7 @@ void Enemy::Die()
 
 void Enemy::Actions(int newAction)
 {
+    cout << newAction  << endl;
 
     switch(newAction)
     {
@@ -337,6 +338,7 @@ void Enemy::Actions(int newAction)
             Die();
         break;
     case 4:
+        cout << "ATTACKING " << endl;
         glPushMatrix();
 
         glTranslated(xPos, yPos, zoom);

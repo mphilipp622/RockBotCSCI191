@@ -42,21 +42,9 @@
         <Texture>Images/Backgrounds/BGSciFi.jpg</Texture>
     </Background>
     <Enemies>
-        <Enemy xPos="3.0057419412693509" yPos="0.54116393850409361">
-            <Name>Enemy0</Name>
-            <Tag>MeleeEnemy</Tag>
-        </Enemy>
-        <Enemy xPos="-0.9454069012669325" yPos="0.87368635854877752">
+        <Enemy xPos="-0.84548714742126208" yPos="1.023787135634084">
             <Name>Enemy1</Name>
             <Tag>RangedEnemy</Tag>
-        </Enemy>
-        <Enemy xPos="7.9680810181379753" yPos="2.4549940172201334">
-            <Name>Enemy2</Name>
-            <Tag>RangedEnemy</Tag>
-        </Enemy>
-        <Enemy xPos="12.463530601233117" yPos="2.293513697336143">
-            <Name>Enemy3</Name>
-            <Tag>MeleeEnemy</Tag>
         </Enemy>
     </Enemies>
 </Level1>

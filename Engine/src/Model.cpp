@@ -163,7 +163,7 @@ void Model::DrawModel()
 {
     //render this model
     glPushMatrix();
-    glColor4f(1.0, 1.0, 1.0, 1.0);
+    glColor4f(red, green, blue, 1.0);
     texture->Binder(); // update texture
 //    if(name != "player")
     glTranslated(xPos, yPos, zoom);
@@ -198,7 +198,6 @@ void Model::InitModel(string fileName, bool transparent)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead. Change it to mess with cool effects
     }
-    texture->Binder();
     texture->BindTexture(fileName);
 
 }

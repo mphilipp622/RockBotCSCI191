@@ -102,7 +102,6 @@ GLint GLScene::drawGLScene()
         return 1;
     }
 
-
     glPushMatrix();
     glScaled(backgroundScaleX, backgroundScaleY, 1);
     background->DrawSquare(screenWidth, screenHeight); // draw background
