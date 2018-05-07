@@ -20,6 +20,8 @@ AudioSource::AudioSource(string newName, string newFilePath, double newX, double
     yPos = newY;
     volume = newVolume;
     loop = isLooping; // Loop is specified on creation. If loop is true, then the sound will loop when it ends
+
+    sound = 0;
 }
 
 AudioSource::~AudioSource()

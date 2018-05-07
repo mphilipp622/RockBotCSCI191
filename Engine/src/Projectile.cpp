@@ -82,6 +82,8 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
         particle = new Particles();
         particle->GenerateMusicParticles(xPos, yPos, width, height);
     }
+    else
+        particle = nullptr;
 
     lifetime->Start();
     frameTimer->Start();

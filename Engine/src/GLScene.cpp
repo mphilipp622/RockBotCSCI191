@@ -413,7 +413,7 @@ void GLScene::LoadLevelFromXML()
 
 void GLScene::ClearStaticData()
 {
-    delete dTime;
+//    delete dTime;
     for(auto& enemy : enemies)
         delete enemy;
 

@@ -45,6 +45,9 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     hp = 3;
     actionTrigger = 0;
     isDying = false;
+    isAttacking = false;
+    jump = false;
+    moving = false;
 
      // physics
     gravity = 0.98;
