@@ -152,15 +152,13 @@ void Projectile::InitAnimations(vector<string> names)
 
     for(int i = 0; i < names.size(); i++)
     {
-        animation.push_back(TextureLoader());
-        animation.back().BindTexture(names.at(i));
+        animation.push_back(new TextureLoader());
+        animation.back()->BindTexture(names.at(i));
     }
-
 }
 
 void Projectile::DrawProjectile()
 {
-    glColor3f(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
 
@@ -186,6 +184,7 @@ void Projectile::Animate()
 {
     glPushMatrix();
 
+    glColor3f(1.0, 1.0, 1.0);
     glTranslated(xPos, yPos, 0);
     if(frameTimer->GetTicks() > 60)
     {
@@ -194,7 +193,7 @@ void Projectile::Animate()
         frameTimer->Reset();
     }
 
-    animation[frame].Binder();
+    animation[frame]->Binder();
     DrawProjectile();
 
     glPopMatrix();
