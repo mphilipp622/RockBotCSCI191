@@ -51,6 +51,7 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     jump = false;
     moving = false;
     slowDown = false;
+    ignoreGravity = false;
 
      // physics
     gravity = 0.98;

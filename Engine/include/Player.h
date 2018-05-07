@@ -13,6 +13,7 @@
 #include <ChordManager.h>
 #include <Trigger.h>
 #include <SceneManager.h>
+//#include <Projectile.h>
 
 using namespace std;
 
@@ -21,7 +22,6 @@ typedef struct
 {
     float x, y, z;
 }vec1;
-
 
 
 // class for player character. Inherits from Model for positions/rotations/etc.
@@ -133,6 +133,8 @@ class Player : public Model
         TextureLoader run[4];
         TextureLoader idle[5];
         TextureLoader jumpAnim[4];
+
+//        Particle* sparkParticles;
 
 
         //////////////////////

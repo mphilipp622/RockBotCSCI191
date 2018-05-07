@@ -60,7 +60,7 @@ void HUD::showHP(Player *playerStats)
     //Head Icon
 
     glPushMatrix();
-    glColor3f(1,1,1);
+    glColor4f(1.0,1.0,1.0, 1.0);
     glTranslatef(-4.5+tempX,1+tempY,-0.1);
     iconImage[1].Binder();
 
@@ -82,17 +82,17 @@ void HUD::showHP(Player *playerStats)
 
     glPopMatrix();
 
-
-    glPushMatrix();
-    glColor3f(0,0,0);
-    glTranslatef(-4.49+tempX,0.99+tempY,-0.11);
-    glBegin(GL_QUADS);
-    glVertex3f(0,0,0);
-    glVertex3f(1,0,0);
-    glVertex3f(1,1,0);
-    glVertex3f(0,1,0);
-    glEnd();
-    glPopMatrix();
+//
+//    glPushMatrix();
+//    glColor3f(0,0,0);
+//    glTranslatef(-4.49+tempX,0.99+tempY,-0.11);
+//    glBegin(GL_QUADS);
+//    glVertex3f(0,0,0);
+//    glVertex3f(1,0,0);
+//    glVertex3f(1,1,0);
+//    glVertex3f(0,1,0);
+//    glEnd();
+//    glPopMatrix();
 }
 
 void HUD::showHeadIcon()

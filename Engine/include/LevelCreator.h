@@ -5,6 +5,20 @@
 #include <iostream>
 #include <Trigger.h>
 
+/*
+B = Create Background. When asked for filename, put in the name of the file + the extension
+M = create a platform. When asked for filename, put in the name of the file + the extension
+P = create player.
+L = Create Next Level Trigger
+T = Create Text Trigger
++ / - = Scale Width of selected object up and down
+up arrow / down arrow = Scale height of selected object up and down.
+WASD = Move camera around in the scene
+Mouse Wheel = Zoom in and out
+Left Click on an object = select the object
+Right click = deselect object
+*/
+
 class LevelCreator : public GLScene
 {
     public:

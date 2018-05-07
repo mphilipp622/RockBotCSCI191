@@ -78,7 +78,7 @@ Enemy::~Enemy()
 
 void Enemy::DrawEnemy()
 {
-    glColor3f(1.0, 1.0, 1.0);
+    glColor4f(1.0, 1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
 

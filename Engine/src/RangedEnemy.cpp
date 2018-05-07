@@ -49,6 +49,7 @@ RangedEnemy::RangedEnemy(double newX, double newY, double newWidth, double newHe
     jump = false;
     moving = false;
     slowDown = false;
+    ignoreGravity = true;
 
      // physics
     gravity = 0.98;

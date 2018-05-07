@@ -30,6 +30,7 @@ class Particles
 
         void GenerateMusicParticles(int x, int y, double width, double height);
         void LifetimeMusic(double x, double y, double width);
+        void GenerateSparks(int x, int y, double width, double height);
 
     protected:
 

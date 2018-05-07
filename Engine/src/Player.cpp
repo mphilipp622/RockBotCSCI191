@@ -118,6 +118,10 @@ Player::Player(double newX, double newY)
     player = this;
 
     PlayChords(true);
+
+//    sparkParticles = new Particles();
+//    sparkParticles->GenerateSparks();
+
     chordTimer->Start();
 }
 
@@ -144,7 +148,7 @@ void Player::DrawPlayer()
     }
 
     else
-        glColor3f(1.0, 1.0, 1.0);
+        glColor4f(1.0, 1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
 

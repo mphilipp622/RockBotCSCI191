@@ -112,7 +112,6 @@ double Particles::DoubleRandom()
 
 void Particles::GenerateMusicParticles(int x, int y, double width, double height)
 {
-    int i = 0;
 
     double radius = width / 2;
 
@@ -150,4 +149,35 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
     if(numDrops >= MAX_MUSIC_DROPS)
         numDrops = MAX_MUSIC_DROPS;
 
+}
+
+void Particles::GenerateSparks(int x, int y, double width, double height)
+{
+
+//    int newDrops = 100; // 60 is arbitrary. Could put anything
+//
+//    if(numDrops + newDrops > MAX_MUSIC_DROPS)
+//        newDrops = MAX_MUSIC_DROPS - numDrops;
+//
+//    int randVal[2] = {-1, 1};
+//    for(int i = 0; i < newDrops; i++)
+//    {
+//        drops.push_back(Node(newX, newY));
+//        drops.back().directionX = (double) ((rand() % 1.0) * randVal[rand() % 2]);
+//        drops.back().directionY = (double) ((rand() % 1.0) * randVal[rand() % 2]);
+////        drops[i].alive = true;
+////        drops[i].xPos = newX;
+////        drops[i].yPos = newY;
+////        drops[i].directionX = 0; // these constant values are pretty much test and check
+////        drops[i].directionY = 0;
+//        drops[i].mass = 0.5 + 0.5 * DoubleRandom();
+//        drops[i].time = new Timer();
+//        drops[i].time->Start();
+//
+//    }
+//
+//    numDrops += newDrops;
+//
+//    if(numDrops >= MAX_MUSIC_DROPS)
+//        numDrops = MAX_MUSIC_DROPS;
 }

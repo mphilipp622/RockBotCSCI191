@@ -10,6 +10,7 @@
 
 GLScene::GLScene()
 {
+    ClearStaticData();
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
@@ -50,6 +51,10 @@ GLint GLScene::initGL()
     GLLight Light(GL_LIGHT0);
 
     nextLevelTrigger = nullptr;
+    gameOverWindow = nullptr;
+    replayButton = nullptr;
+    mainMenuButton = nullptr;
+    background = nullptr;
 
     loadNewLevel = true;
     LoadLevelFromXML();
@@ -80,12 +85,14 @@ GLint GLScene::drawGLScene()
     if(Player::player->getHP() <= 0)
         SetGameOver();
 
-    if(loadNewLevel)
-        return 1; // stop rendering the scene while next level loads.
+//    if(loadNewLevel)
+//        return 1; // stop rendering the scene while next level loads.
 
     gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
             Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
             0.0f, 1.0f, 0.0f);
+
+//    glutSolidTeapot(1.0);
 
     if(gameOver)
     {
@@ -95,6 +102,7 @@ GLint GLScene::drawGLScene()
         return 1;
     }
 
+
     glPushMatrix();
     glScaled(backgroundScaleX, backgroundScaleY, 1);
     background->DrawSquare(screenWidth, screenHeight); // draw background
@@ -102,25 +110,23 @@ GLint GLScene::drawGLScene()
 
     displayHUD->showHP(Player::player);
 
-
-
     for(auto& model : movableObjects)
         model->Update();
 
     for(auto& model : staticObjects)
         model->DrawModel();
 
-        glPushMatrix();
+    glPushMatrix();
     testParticle1->DrawParticles();
     testParticle2->DrawParticles();
     glPopMatrix();
 
-    for(auto& enemy : enemies)
-        enemy->Update();
-
     for(auto& healthPack : healthPacks)
         healthPack->DrawModel();
 
+
+    for(auto& enemy : enemies)
+        enemy->Update();
 
     if(Player::player)
         Player::player->Update();
@@ -231,21 +237,6 @@ bool GLScene::CheckPointerCollision(Model* button, double mouseX, double mouseY)
 bool GLScene::Overlap(double pos, double min, double max)
 {
     return pos >= min && pos <= max;
-}
-
-void GLScene::CleanStaticData()
-{
-    if(enemies.size() > 0)
-        enemies.clear();
-
-    if(movableObjects.size() > 0)
-        movableObjects.clear();
-
-    if(staticObjects.size() > 0)
-        staticObjects.clear();
-
-    delete Player::player;
-    Player::player = nullptr;
 }
 
 void GLScene::ConvertMouseToWorld(double mouseX, double mouseY, double &xOut, double &yOut)
@@ -392,7 +383,9 @@ void GLScene::LoadLevelFromXML()
         mainElements->QueryAttribute("Height", &backgroundScaleY);
         string texturePath = mainElements->FirstChildElement()->GetText();
 
+        cout << texturePath << endl;
         background = new Parallax();
+        background->ParallaxInit(texturePath);
 
         mainElements = mainElements->NextSiblingElement();
         checkName = mainElements->Name();

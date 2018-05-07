@@ -163,7 +163,7 @@ void Model::DrawModel()
 {
     //render this model
     glPushMatrix();
-    glColor3f(red, green, blue);
+    glColor4f(1.0, 1.0, 1.0, 1.0);
     texture->Binder(); // update texture
 //    if(name != "player")
     glTranslated(xPos, yPos, zoom);

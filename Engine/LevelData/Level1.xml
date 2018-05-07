@@ -27,7 +27,7 @@
     </Platforms>
     <Player xPos="-2.9501227439785773" yPos="-1.1229796158089109"/>
     <LevelTrigger Width="1" Height="1.5000001" xPos="13.554588062686115" yPos="2.3679200667257216">
-        <Texture>Images/Misc/Portal.png</Texture>
+        <Texture>LevelTrigger</Texture>
     </LevelTrigger>
     <TextTriggers>
         <Trigger Width="2.9999993" Height="1" xPos="6.5709645110676584" yPos="0.48516635905187616">
@@ -39,7 +39,7 @@
         <HealthPack Width="0.30000001" Height="0.30000001" xPos="1.19047547794" yPos="0.1718211992308917"/>
     </HealthPacks>
     <Background Width="12" Height="12">
-        <Texture>Images/Backgrounds/</Texture>
+        <Texture>Images/Backgrounds/BGSciFi.jpg</Texture>
     </Background>
     <Enemies>
         <Enemy xPos="3.0057419412693509" yPos="0.54116393850409361">

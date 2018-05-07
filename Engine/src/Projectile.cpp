@@ -184,7 +184,7 @@ void Projectile::Animate()
 {
     glPushMatrix();
 
-    glColor3f(1.0, 1.0, 1.0);
+    glColor4f(1.0, 1.0, 1.0, 1.0);
     glTranslated(xPos, yPos, 0);
     if(frameTimer->GetTicks() > 60)
     {

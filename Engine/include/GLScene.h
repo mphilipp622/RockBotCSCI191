@@ -72,9 +72,6 @@ class GLScene
         // Checks mouse pointer collision. Mainly used for checking mouse input on UI elements like buttons
         bool CheckPointerCollision(Model* button, double mouseX, double mouseY);
 
-        // called in GLscene and children classes to clear out staticObjects, movableObjects, and enemies
-        void CleanStaticData();
-
         Inputs *keyboardAndMouse;
 
         DeltaTime* dTime;
