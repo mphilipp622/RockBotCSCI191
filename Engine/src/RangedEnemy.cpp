@@ -93,16 +93,16 @@ void RangedEnemy::InitEnemy()
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
 
 
-    moveAnim[0].BindTexture("Images/Enemies/RangedWalk0.png");
-    moveAnim[1].BindTexture("Images/Enemies/RangedWalk1.png");
-    moveAnim[2].BindTexture("Images/Enemies/RangedWalk2.png");
-    moveAnim[3].BindTexture("Images/Enemies/RangedWalk3.png");
-    moveAnim[4].BindTexture("Images/Enemies/RangedWalk4.png");
-    moveAnim[5].BindTexture("Images/Enemies/RangedWalk5.png");
+    moveAnim[0].BindTexture("Images/Enemies/Ranged_0000.png");
+    moveAnim[1].BindTexture("Images/Enemies/Ranged_0001.png");
+    moveAnim[2].BindTexture("Images/Enemies/Ranged_0002.png");
+    moveAnim[3].BindTexture("Images/Enemies/Ranged_0000.png");
+    moveAnim[4].BindTexture("Images/Enemies/Ranged_0001.png");
+    moveAnim[5].BindTexture("Images/Enemies/Ranged_0002.png");
 
     maxMoveFrame = 6;
 
-    idleAnim[0].BindTexture("Images/Enemies/RangedIdle0.png");
+    idleAnim[0].BindTexture("Images/Enemies/Ranged_0001.png");
     maxIdleFrame = 1;
 
     deathAnim[0].BindTexture("Images/Enemies/RangedDie0.png");
@@ -112,8 +112,8 @@ void RangedEnemy::InitEnemy()
     dyingFrame = 0;
     maxDeathFrame = 4;
 
-    attackAnim[0].BindTexture("Images/Enemies/RangedAttack0.png");
-    attackAnim[1].BindTexture("Images/Enemies/RangedAttack1.png");
+    attackAnim[0].BindTexture("Images/Enemies/Ranged_0000.png");
+    attackAnim[1].BindTexture("Images/Enemies/Ranged_0002.png");
     maxAttackFrame = 2;
 }
 
