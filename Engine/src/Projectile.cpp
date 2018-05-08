@@ -93,10 +93,14 @@ void Projectile::Update()
 {
     Move();
 
+    glEnable(GL_TEXTURE_2D);
+    Animate();
+    glDisable(GL_TEXTURE_2D);
+
     if(particle)
         DisplayParticles();
 
-    Animate();
+
 
     if(lifetime->GetTicks() > endOfLifeTime)
         Destroy();

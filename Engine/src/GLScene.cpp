@@ -92,8 +92,6 @@ GLint GLScene::drawGLScene()
             Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
             0.0f, 1.0f, 0.0f);
 
-//    glutSolidTeapot(1.0);
-
     if(gameOver)
     {
         gameOverWindow->DrawModel();
@@ -103,36 +101,57 @@ GLint GLScene::drawGLScene()
     }
 
     glPushMatrix();
+    glEnable(GL_TEXTURE_2D);
     glScaled(backgroundScaleX, backgroundScaleY, 1);
     background->DrawSquare(screenWidth, screenHeight); // draw background
+    glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
+    glEnable(GL_TEXTURE_2D);
     displayHUD->showHP(Player::player);
+    glDisable(GL_TEXTURE_2D);
 
     for(auto& model : movableObjects)
+    {
+        glEnable(GL_TEXTURE_2D);
         model->Update();
+        glDisable(GL_TEXTURE_2D);
+    }
 
     for(auto& model : staticObjects)
+    {
+        glEnable(GL_TEXTURE_2D);
         model->DrawModel();
-
-    glPushMatrix();
-    testParticle1->DrawParticles();
-    testParticle2->DrawParticles();
-    glPopMatrix();
+        glDisable(GL_TEXTURE_2D);
+    }
 
     for(auto& healthPack : healthPacks)
+    {
+        glEnable(GL_TEXTURE_2D);
         healthPack->DrawModel();
-
+        glDisable(GL_TEXTURE_2D);
+    }
 
     for(auto& enemy : enemies)
+    {
+        glEnable(GL_TEXTURE_2D);
         enemy->Update();
+        glDisable(GL_TEXTURE_2D);
+    }
 
     if(Player::player)
+    {
+        glEnable(GL_TEXTURE_2D);
         Player::player->Update();
+        glDisable(GL_TEXTURE_2D);
+    }
+
 
     if(nextLevelTrigger)
     {
+        glEnable(GL_TEXTURE_2D);
         nextLevelTrigger->DrawModel();
+        glDisable(GL_TEXTURE_2D);
         if(nextLevelTrigger->LevelTriggerCollision())
         {
             loadNewLevel = true;

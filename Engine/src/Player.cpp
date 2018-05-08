@@ -283,6 +283,7 @@ void Player::Actions(int newAction)
 
 void Player::Update()
 {
+    glEnable(GL_TEXTURE_2D);
     if(invincible)
         // check if timer has expired for invincibility.
         CheckInvincible();
@@ -338,6 +339,8 @@ void Player::Update()
         ToggleMusicCircle();
         DrawMusicCircle();
     }
+
+    glDisable(GL_TEXTURE_2D);
 
 //    DrawPlayer();
 }

@@ -121,6 +121,7 @@ void Enemy::DrawEnemy()
 
 void Enemy::Update()
 {
+    glEnable(GL_TEXTURE_2D);
     if(isDying)
     {
         Actions(3);
@@ -158,6 +159,8 @@ void Enemy::Update()
         Actions(4);
 
     AIRoutine();
+
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Enemy::TakeDamage(int damageTaken)
