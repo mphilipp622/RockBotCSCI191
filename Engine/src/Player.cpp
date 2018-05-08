@@ -225,6 +225,7 @@ void Player::InitPlayer()
 void Player::Actions(int newAction)
 {
 
+glEnable(GL_TEXTURE_2D);
     switch(newAction)
     {
     case 0:
@@ -279,11 +280,11 @@ void Player::Actions(int newAction)
         glPopMatrix();
         break;
     }
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Player::Update()
 {
-    glEnable(GL_TEXTURE_2D);
     if(invincible)
         // check if timer has expired for invincibility.
         CheckInvincible();
@@ -334,13 +335,11 @@ void Player::Update()
     if(!canPlay)
         UpdateCooldownTimer();
 
-    if(drawCircle)
-    {
-        ToggleMusicCircle();
-        DrawMusicCircle();
-    }
-
-    glDisable(GL_TEXTURE_2D);
+//    if(drawCircle)
+//    {
+//        ToggleMusicCircle();
+//        DrawMusicCircle();
+//    }
 
 //    DrawPlayer();
 }
@@ -776,8 +775,13 @@ void Player::UpdateIcons()
     icons[3]->SetPosition(xPos + width / 1.5, yPos);
 
     if(playingChords)
-//        inputIcon->DrawModel();
+    {
+        glEnable(GL_TEXTURE_2D);
         icons[activeInput]->DrawModel();
+        glDisable(GL_TEXTURE_2D);
+    }
+//        inputIcon->DrawModel();
+
 //    if(playingChords)
 //    {
 //        for(auto& icon : icons)
