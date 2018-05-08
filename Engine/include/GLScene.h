@@ -6,6 +6,7 @@
 #define _WIN32_WINNT 0x0500 // need this for controlling console window
 #include <windows.h>
 #include <glut.h>
+//#include "freetype.h"
 #include <iostream>
 #include <vector>
 #include <Model.h>
@@ -99,8 +100,7 @@ class GLScene
         // Checks if position is overlapping specified min and max values. Used by CheckPointerCollision()
         bool Overlap(double pos, double min, double max);
 
-        Particles* testParticle1;
-        Particles* testParticle2;
+
 };
 
 #endif // GLSCENE_H

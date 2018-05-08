@@ -161,6 +161,7 @@ Model::~Model()
 
 void Model::DrawModel()
 {
+    glEnable(GL_TEXTURE_2D);
     //render this model
     glPushMatrix();
     glColor4f(red, green, blue, 1.0);
@@ -187,6 +188,7 @@ void Model::DrawModel()
 
     glEnd();
     glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Model::InitModel(string fileName, bool transparent)

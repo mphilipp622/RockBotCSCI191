@@ -44,3 +44,9 @@ string Trigger::GetTag()
 {
     return tag;
 }
+
+
+string Trigger::GetText()
+{
+    return text;
+}

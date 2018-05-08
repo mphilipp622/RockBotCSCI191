@@ -26,12 +26,18 @@
         </Platform>
     </Platforms>
     <Player xPos="-2.9501227439785773" yPos="-1.1229796158089109"/>
-    <LevelTrigger Width="1" Height="1.5000001" xPos="13.554588062686115" yPos="2.3679200667257216">
+    <LevelTrigger Width="1" Height="1.3000001" xPos="13.561791530788446" yPos="2.2580578688839448">
         <Texture>LevelTrigger</Texture>
     </LevelTrigger>
     <TextTriggers>
         <Trigger Width="2.9999993" Height="1" xPos="6.5709645110676584" yPos="0.48516635905187616">
             <Text>This is seriously trippin' me out...</Text>
+        </Trigger>
+        <Trigger Width="1.8000002" Height="1" xPos="-0.85699037391678934" yPos="-0.092025809944636772">
+            <Text>Hello, World</Text>
+        </Trigger>
+        <Trigger Width="2.6999996" Height="1.4000001" xPos="1.9440452777441262" yPos="0.69019357458477582">
+            <Text>Text Is Working</Text>
         </Trigger>
     </TextTriggers>
     <HealthPacks>

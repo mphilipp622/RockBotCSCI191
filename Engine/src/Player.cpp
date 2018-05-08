@@ -122,6 +122,9 @@ Player::Player(double newX, double newY)
 
     PlayChords(true);
 
+    test1_font.init("CALIFI.TTF", 24);
+    displayText = false;
+
 //    sparkParticles = new Particles();
 //    sparkParticles->GenerateSparks();
 
@@ -372,6 +375,9 @@ void Player::Update()
     if(!canPlay)
         UpdateCooldownTimer();
 
+    if(displayText)
+        DisplayText();
+
 //    if(drawCircle)
 //    {
 //        ToggleMusicCircle();
@@ -618,6 +624,8 @@ void Player::CheckTriggerCollision()
 //    }
 
 
+    bool insideTrigger = false; // track if we've hit any triggers at all. IF we haven't, we want to disable text display
+
     for(auto& trigger : textTriggers)
     {
         bool overlapTrigger = (OverlapTrigger(xPos - widthOffset, xPos + widthOffset,
@@ -627,12 +635,18 @@ void Player::CheckTriggerCollision()
                                 trigger->GetY() - trigger->GetHeight() / 2,
                                 trigger->GetY() + trigger->GetHeight() / 2));
 
-//        if(overlapTrigger)
-//        {
-//            // DISPLAY TEXT
-//            cout << "DISPLAY TEXT" << endl;
-//        }
+        if(overlapTrigger)
+        {
+            // DISPLAY TEXT
+            textToDisplay = trigger->GetText();
+            displayText = true;
+            insideTrigger = true;
+        }
     }
+
+    // Basically this will check if we've left the trigger area and it will stop displaying text.
+    if(!insideTrigger)
+        displayText = false;
 }
 
 void Player::CheckEnemyCollision()
@@ -979,4 +993,20 @@ void Player::SetInvincible()
 bool Player::IsInvincible()
 {
     return invincible;
+}
+
+void Player::DisplayText()
+{
+    glPushMatrix();
+	glLoadIdentity();
+	 //glUseProgram(shaderFont->program);
+	//glTranslatef(50,25,0);
+	glColor3f (1.0, 0.84, 0); // white font
+
+	// Note that the print function uses screen pixel coordinates, not openGL coordinates.
+	// Since our player is always center screen, we can use screen width and height each divided by 2 and add an offset to get the text where we want.
+	freetype::print(test1_font, GetSystemMetrics(SM_CXSCREEN) / 2 - 75, GetSystemMetrics(SM_CYSCREEN) / 2 + 100, textToDisplay.c_str());
+
+//	freetype::print(test1_font, GetSystemMetrics(SM_CXSCREEN) / 2 + 100, GetSystemMetrics(SM_CYSCREEN) / 2 + 100,"Test1: Active Freetype Text");
+	glPopMatrix();
 }

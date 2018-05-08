@@ -9,7 +9,7 @@
 	<MainMenu.h>
 	<string>
 
-1525738989 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1525771830 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -33,7 +33,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1525742695 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1525771894 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<Parallax.h>
 	<DeltaTime.h>
@@ -49,7 +49,7 @@
 1525137170 c:\users\seapanda\documents\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1525742695 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
+1525771002 source:c:\users\seapanda\documents\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -105,7 +105,7 @@
 	<glut.h>
 	<iostream>
 
-1525738989 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
+1525771702 source:c:\users\seapanda\documents\college\191\191\engine\src\parallax.cpp
 	<Parallax.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -231,7 +231,7 @@
 	<GL\GL.h>
 	<iostream>
 
-1525742967 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1525772550 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -239,7 +239,7 @@
 	<cmath>
 	<Projectile.h>
 
-1525738989 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1525772278 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -252,6 +252,7 @@
 	<ChordManager.h>
 	<Trigger.h>
 	<SceneManager.h>
+	"freetype.h"
 
 1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
 	<Timer.h>
@@ -436,7 +437,7 @@
 	<Timer.h>
 	<Particles.h>
 
-1525742695 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
+1525767698 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -1098,7 +1099,7 @@
 1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
-1525742695 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
+1525767698 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
 	"Enemy.h"
 	<GLScene.h>
 
@@ -1111,7 +1112,7 @@
 	<algorithm>
 	<Player.h>
 
-1525738989 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
+1525767698 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeenemy.cpp
 	"MeleeEnemy.h"
 
 1525711365 c:\users\seapanda\documents\college\191\191\engine\include\meleeenemy.h
@@ -1125,7 +1126,7 @@
 	<Player.h>
 	<Projectile.h>
 
-1525742695 source:c:\users\seapanda\documents\college\191\191\engine\src\rangedenemy.cpp
+1525767698 source:c:\users\seapanda\documents\college\191\191\engine\src\rangedenemy.cpp
 	"RangedEnemy.h"
 
 1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\fonts.cpp
@@ -1155,7 +1156,7 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1525743201 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
+1525767698 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
 	<GL/gl.h>
 	<math.h>
 	<stdlib.h>
@@ -1163,25 +1164,27 @@
 	<Timer.h>
 	<vector>
 	<TextureLoader.h>
+	<DeltaTime.h>
 
-1525738989 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
+1525767698 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
 	"Particles.h"
 	<iomanip>
+	<cmath>
 
 1525711365 c:\users\seapanda\documents\college\191\191\engine\include\scenemanager.h
 	<string>
 	<unordered_map>
 
-1525488061 c:\users\seapanda\documents\college\191\191\engine\include\mainmenu.h
+1525767698 c:\users\seapanda\documents\college\191\191\engine\include\mainmenu.h
 	<GLScene.h>
 	<Parallax.h>
 
-1525488061 source:c:\users\seapanda\documents\college\191\191\engine\src\mainmenu.cpp
+1525767698 source:c:\users\seapanda\documents\college\191\191\engine\src\mainmenu.cpp
 	"MainMenu.h"
 	<GLLight.h>
 	<LevelCreator.h>
 
-1525711365 source:c:\users\seapanda\documents\college\191\191\engine\src\scenemanager.cpp
+1525767698 source:c:\users\seapanda\documents\college\191\191\engine\src\scenemanager.cpp
 	"SceneManager.h"
 	<GLScene.h>
 	<LevelCreator.h>
@@ -1541,7 +1544,7 @@
 	"HUD.h"
 	"Player.h"
 
-1525738989 c:\users\seapanda\documents\college\191\191\engine\include\levelcreator.h
+1525767698 c:\users\seapanda\documents\college\191\191\engine\include\levelcreator.h
 	<GLScene.h>
 	<iostream>
 	<Trigger.h>
@@ -1570,7 +1573,7 @@
 	<cstddef>
 	<cstdarg>
 
-1525742695 source:c:\users\seapanda\documents\college\191\191\engine\src\levelcreator.cpp
+1525772629 source:c:\users\seapanda\documents\college\191\191\engine\src\levelcreator.cpp
 	"LevelCreator.h"
 	<GLLight.h>
 
@@ -1633,7 +1636,7 @@
 1525711365 c:\users\seapanda\documents\college\191\191\engine\include\trigger.h
 	<string>
 
-1525711365 source:c:\users\seapanda\documents\college\191\191\engine\src\trigger.cpp
+1525772580 source:c:\users\seapanda\documents\college\191\191\engine\src\trigger.cpp
 	"Trigger.h"
 
 1525508408 e:\college\191\191\engine\include\trigger.h
@@ -1731,4 +1734,36 @@
 1525757651 source:c:\users\sesat\documents\github\191\engine\src\levelcreator.cpp
 	"LevelCreator.h"
 	<GLLight.h>
+
+1525770041 source:c:\users\seapanda\documents\college\191\191\engine\src\freetype.cpp
+	"freetype.h"
+
+1525770028 c:\users\seapanda\documents\college\191\191\engine\include\freetype.h
+	<ft2build.h>
+	<freetype/freetype.h>
+	<freetype/ftglyph.h>
+	<freetype/ftoutln.h>
+	<freetype/fttrigon.h>
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<vector>
+	<string>
+	<stdexcept>
+
+1519775394 c:\users\seapanda\documents\college\191\191\engine\freetype-windows-binaries-master\include\ft2build.h
+	<freetype/config/ftheader.h>
+
+1519775394 c:\users\seapanda\documents\college\191\191\engine\freetype-windows-binaries-master\include\freetype\config\ftheader.h
+
+1519775394 c:\users\seapanda\documents\college\191\191\engine\freetype-windows-binaries-master\include\freetype\freetype.h
+	<ft2build.h>
+
+1519775394 c:\users\seapanda\documents\college\191\191\engine\freetype-windows-binaries-master\include\freetype\ftglyph.h
+	<ft2build.h>
+
+1519775394 c:\users\seapanda\documents\college\191\191\engine\freetype-windows-binaries-master\include\freetype\ftoutln.h
+	<ft2build.h>
+
+1519775394 c:\users\seapanda\documents\college\191\191\engine\freetype-windows-binaries-master\include\freetype\fttrigon.h
 

@@ -93,10 +93,12 @@ GLint LevelCreator::drawGLScene()
 
     if(background)
     {
+        glEnable(GL_TEXTURE_2D);
         glPushMatrix();
         glScaled(backgroundScaleX, backgroundScaleY, 1.0); // Scale the background image
         background->DrawSquare(screenWidth, screenHeight);
         glPopMatrix();
+        glDisable(GL_TEXTURE_2D);
     }
 
     for(auto& platform : platforms)
@@ -461,7 +463,7 @@ void LevelCreator::CreateTextTrigger()
 
     // We'll use the model's name for storing the text in the level creator. This avoids making a hashtable or something.
     triggers.push_back(new Model(1.0, 1.0, cameraPosX, cameraPosY, newText, "TextTrigger"));
-    triggers.back()->InitModel("Images/TextTrigger.png", true);
+    triggers.back()->InitModel("Images/Misc/TextTrigger.png", true);
 
     SetSelectedModel(triggers.back());
 }
@@ -596,7 +598,11 @@ void LevelCreator::SelectModel(double mouseX, double mouseY)
 void LevelCreator::DeleteObject()
 {
     if(!selectedModel)
-        return; // don't allow deletion to occur if nothing is selected.
+    {
+        delete background;
+        background = nullptr;
+        return; // delete background if nothing is selected
+    }
 
     if(selectedModel == player)
     {
@@ -1144,6 +1150,7 @@ void LevelCreator::LoadLevelFromXML()
             texturePath.erase(findRelativePath, backgroundRelativeFilePath.length());
 
         backgroundTexture = texturePath;
+        cout << texturePath << endl;
 
         mainElements = mainElements->NextSiblingElement();
         checkName = mainElements->Name();

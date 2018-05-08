@@ -70,10 +70,6 @@ GLint GLScene::initGL()
     dTime = new DeltaTime();
     loadNewLevel = false;
 
-    testParticle1 = new Particles();
-    testParticle2 = new Particles();
-    testParticle1->GenerateMusicParticles(0, 0, 1.0, 1.0);
-    testParticle2->GenerateMusicParticles(1, 1, 1, 1);
     return true;
 }
 
@@ -118,12 +114,14 @@ GLint GLScene::drawGLScene()
         glDisable(GL_TEXTURE_2D);
     }
 
+
     for(auto& model : staticObjects)
     {
         glEnable(GL_TEXTURE_2D);
         model->DrawModel();
         glDisable(GL_TEXTURE_2D);
     }
+
 
     for(auto& healthPack : healthPacks)
     {
@@ -139,13 +137,13 @@ GLint GLScene::drawGLScene()
         glDisable(GL_TEXTURE_2D);
     }
 
+
     if(Player::player)
     {
         glEnable(GL_TEXTURE_2D);
         Player::player->Update();
         glDisable(GL_TEXTURE_2D);
     }
-
 
     if(nextLevelTrigger)
     {

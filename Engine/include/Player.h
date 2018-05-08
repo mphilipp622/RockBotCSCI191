@@ -13,6 +13,7 @@
 #include <ChordManager.h>
 #include <Trigger.h>
 #include <SceneManager.h>
+#include "freetype.h"
 //#include <Projectile.h>
 
 using namespace std;
@@ -169,6 +170,15 @@ class Player : public Model
         ChordManager* chordManager;
 
         vector<Trigger*> textTriggers;
+
+        ////////////
+        // FREE TYPE
+        ////////////
+
+        string textToDisplay; // this will be set by CheckTriggerCollision() by grabbing the trigger's text value
+        bool displayText; // flag for displaying text in Player::Update(). Will be set by CheckTriggerCollision() when player steps inside a text trigger
+        freetype::font_data test1_font;
+        void DisplayText(); // This function is called at the bottom of Player::Update(). It will be where freetype2::print is called
 };
 
 #endif // PLAYER_H
