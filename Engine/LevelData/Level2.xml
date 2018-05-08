@@ -26,8 +26,8 @@
         </Platform>
     </Platforms>
     <Player xPos="-3.9304287415876833" yPos="-1.4267363971342719"/>
-    <LevelTrigger Width="1" Height="1" xPos="4.218067168459398" yPos="4.2000411482156945">
-        <Texture>LevelTrigger</Texture>
+    <LevelTrigger Width="1" Height="1" xPos="4.3958340553121777" yPos="4.1887004215143468">
+        <Texture>Images/Misc/Portal.png</Texture>
     </LevelTrigger>
     <TextTriggers>
         <Trigger Width="2.5999997" Height="1.6000001" xPos="-1.6819487347616777" yPos="-0.061749863004271065">
@@ -37,8 +37,8 @@
             <Text>What a Strange Place</Text>
         </Trigger>
     </TextTriggers>
-    <Background Width="15.399999999999988" Height="14.79999999999999">
-        <Texture>Images/Backgrounds/</Texture>
+    <Background Width="15.799999999999986" Height="16.199999999999989">
+        <Texture>Images/Backgrounds/MilkyWay.jpg</Texture>
     </Background>
     <Enemies>
         <Enemy xPos="4.1989908972721608" yPos="0.3910824656937168">

@@ -138,6 +138,7 @@ Player::~Player()
 
 void Player::DrawPlayer()
 {
+//    glRotated(45.0, 0, 0, -1.0);
 //    glPushMatrix();
     if(invincible)
     {

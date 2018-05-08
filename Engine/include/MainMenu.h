@@ -33,12 +33,12 @@ class MainMenu : public GLScene
         Model* creditsScreen;
         Model* backArrow;
         Model* splashImage;
+        vector<Model*> levelButtons;
 
         // Screen width and height in pixels
         double screenWidth, screenHeight;
         bool killGame; // Used for exiting the game
-        bool showHowToPlay;
-        bool showCredits;
+        bool showHowToPlay, showCredits, showLevelSelect;
 
         // Initializes the textures and vertices for the UI Elements in the scene
         void InitModels();

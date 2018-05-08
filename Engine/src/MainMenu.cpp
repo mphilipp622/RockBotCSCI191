@@ -20,6 +20,7 @@ MainMenu::MainMenu()
     killGame = false;
     showCredits = false;
     showHowToPlay = false;
+    showLevelSelect = false;
 
     zPosButtonUI = 0;
 }
@@ -61,6 +62,13 @@ void MainMenu::InitModels()
     howToPlayScreen = new Model(1.0, 1.5, 0, 0, "HowToPlayScreen", "UI");
     creditsScreen = new Model(4.0, 4.0, 2.0, 0, "CreditsScreen", "UI");
 
+    for(int i = 0; i < 9; i++)
+    {
+        levelButtons.push_back(new Model(1.5, 0.4, 1.5, 2.0 - (i * 0.45), "Level" + to_string(i + 1), "LevelButton"));
+        levelButtons.back()->InitModel("Images/UI/Level" + to_string(i + 1) + ".png", true);
+    }
+
+
     // Bind textures for UI elements
 //    background->ParallaxInit("Images/UI/Splashscreen.png");
     startGame->InitModel("Images/UI/NewGame.png", true);
@@ -93,7 +101,7 @@ GLint MainMenu::drawGLScene()
 
     splashImage->DrawModel();
 
-    if(!showCredits && !showHowToPlay)
+    if(!showCredits && !showHowToPlay && !showLevelSelect)
         DrawButtons();
 
     if(showHowToPlay)
@@ -106,6 +114,13 @@ GLint MainMenu::drawGLScene()
     if(showCredits)
     {
         creditsScreen->DrawModel();
+        backArrow->DrawModel();
+    }
+
+    if(showLevelSelect)
+    {
+        for(auto& button : levelButtons)
+            button->DrawModel();
         backArrow->DrawModel();
     }
 
@@ -126,46 +141,94 @@ int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         ConvertMouseToWorld(LOWORD(lParam), HIWORD(lParam), mouseX, mouseY);
 
-        if(CheckPointerCollision(exit, mouseX, mouseY))
-            killGame = true;
-        else if(CheckPointerCollision(startGame, mouseX, mouseY))
-            SceneManager::LoadScene("Level1");
-        else if(CheckPointerCollision(levelCreator, mouseX, mouseY))
-            SceneManager::LoadScene("LevelCreator");
-        else if(CheckPointerCollision(howToPlay, mouseX, mouseY))
-            showHowToPlay = true;
-        else if(CheckPointerCollision(credits, mouseX, mouseY))
-            showCredits = true;
-        else if(CheckPointerCollision(backArrow, mouseX, mouseY) && (showCredits || showHowToPlay))
+        if(!showCredits && !showHowToPlay && !showLevelSelect)
         {
-            showCredits = false;
-            showHowToPlay = false;
+            if(CheckPointerCollision(exit, mouseX, mouseY))
+                killGame = true;
+            else if(CheckPointerCollision(startGame, mouseX, mouseY))
+                showLevelSelect = true;
+    //            SceneManager::LoadScene("Level1");
+            else if(CheckPointerCollision(levelCreator, mouseX, mouseY))
+                SceneManager::LoadScene("LevelCreator");
+            else if(CheckPointerCollision(howToPlay, mouseX, mouseY))
+                showHowToPlay = true;
+            else if(CheckPointerCollision(credits, mouseX, mouseY))
+                showCredits = true;
         }
+        else
+        {
+             if(showLevelSelect)
+            {
+                // check for pointer collision on level buttons
+
+                for(auto& button : levelButtons)
+                {
+                    if(CheckPointerCollision(button, mouseX, mouseY))
+                        SceneManager::LoadScene(button->GetName());
+                }
+            }
+            if(CheckPointerCollision(backArrow, mouseX, mouseY) && (showCredits || showHowToPlay || showLevelSelect))
+            {
+                showCredits = false;
+                showHowToPlay = false;
+                showLevelSelect = false;
+            }
+        }
+
+
     }
     if(uMsg == WM_KEYDOWN)
     {
         // Handle keyboard input. User can select options 0 - 9. Hex values represent numbers 0 - 9 at top of keyboard
 
-        const int oneKey = 0x31, twoKey = 0x32, threeKey = 0x33, fourKey = 0x34, fiveKey = 0x35;
+        const int oneKey = 0x31, twoKey = 0x32, threeKey = 0x33, fourKey = 0x34, fiveKey = 0x35, sixKey = 0x36, sevenKey = 0x37, eightKey = 0x38, nineKey = 0x39;
 
-        if(wParam == oneKey || wParam == VK_NUMPAD1)
-            SceneManager::LoadScene("Level1");
-        else if(wParam == twoKey || wParam == VK_NUMPAD2)
-            SceneManager::LoadScene("LevelCreator");
-        else if(wParam == threeKey || wParam == VK_NUMPAD3)
-            showHowToPlay = true;
-        else if(wParam == fourKey || wParam == VK_NUMPAD4)
-            showCredits = true;
-        else if(wParam == fiveKey || wParam == VK_NUMPAD5)
-            killGame = true;
-
-        if(wParam == VK_BACK)
+        if(!showCredits && !showHowToPlay && !showLevelSelect)
         {
-            // if user presses backspace, they can go back to the last menu
-            showCredits = false;
-            showHowToPlay = false;
+            if(wParam == oneKey || wParam == VK_NUMPAD1)
+                showLevelSelect = true;
+            else if(wParam == twoKey || wParam == VK_NUMPAD2)
+                SceneManager::LoadScene("LevelCreator");
+            else if(wParam == threeKey || wParam == VK_NUMPAD3)
+                showHowToPlay = true;
+            else if(wParam == fourKey || wParam == VK_NUMPAD4)
+                showCredits = true;
+            else if(wParam == fiveKey || wParam == VK_NUMPAD5)
+                killGame = true;
         }
+        else
+        {
+             if(showLevelSelect)
+            {
+                // check for pointer collision on level buttons
 
+                if(wParam == oneKey || wParam == VK_NUMPAD1)
+                    SceneManager::LoadScene("Level1");
+                else if(wParam == twoKey || wParam == VK_NUMPAD2)
+                    SceneManager::LoadScene("Level2");
+                else if(wParam == threeKey || wParam == VK_NUMPAD3)
+                    SceneManager::LoadScene("Level3");
+                else if(wParam == fourKey || wParam == VK_NUMPAD4)
+                    SceneManager::LoadScene("Level4");
+                else if(wParam == fiveKey || wParam == VK_NUMPAD5)
+                    SceneManager::LoadScene("Level5");
+                else if(wParam == sixKey || wParam == VK_NUMPAD6)
+                    SceneManager::LoadScene("Level6");
+                else if(wParam == sevenKey || wParam == VK_NUMPAD7)
+                    SceneManager::LoadScene("Level7");
+                else if(wParam == eightKey || wParam == VK_NUMPAD8)
+                    SceneManager::LoadScene("Level8");
+                else if(wParam == nineKey || wParam == VK_NUMPAD9)
+                    SceneManager::LoadScene("Level9");
+            }
+            if(wParam == VK_BACK)
+            {
+                // if user presses backspace, they can go back to the last menu
+                showCredits = false;
+                showHowToPlay = false;
+                showLevelSelect = false;
+            }
+        }
     }
 
 	return 1;

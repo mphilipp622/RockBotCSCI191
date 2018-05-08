@@ -27,8 +27,6 @@ void Particles::DrawParticles()
 
     for(auto drop : drops)
     {
-//        glRotated(0, 1, 0, 0);
-//        glRotated(0, 0, 1, 0);
 //        glRotated(drop.angleOfRotation, 0, 0, 1.0);
 
         glBegin(GL_QUADS);

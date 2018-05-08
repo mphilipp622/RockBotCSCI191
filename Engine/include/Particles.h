@@ -39,6 +39,7 @@ class Particles
     private:
 
         double RadiusRandom();
+//        double projectileX, projectileY;
 
         struct Node
         {
