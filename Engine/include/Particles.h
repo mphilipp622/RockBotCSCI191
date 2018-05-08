@@ -7,6 +7,7 @@
 #include <iostream>
 #include <Timer.h>
 #include <vector>
+#include <TextureLoader.h>
 
 #define MAX_MUSIC_DROPS 500
 #define MAX_DROPS 50000
@@ -59,6 +60,8 @@ class Particles
         };
 
         vector<Node> drops;
+
+        TextureLoader* texture;
 
 };
 

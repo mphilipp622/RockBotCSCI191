@@ -5,6 +5,8 @@ Particles::Particles()
 {
     //ctor
     numDrops = 0;
+    texture = new TextureLoader();
+    texture->BindTexture("Images/Misc/MusicParticle.png");
 }
 
 Particles::~Particles()
@@ -14,17 +16,35 @@ Particles::~Particles()
 
 void Particles::DrawParticles()
 {
+    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
     glColor4f(1.0, 1.0, 1.0, 1.0);
-    glPointSize(10); // pixel size of particle
+    texture->Binder();
+//    glPointSize(5); // pixel size of particle
 
-    glBegin(GL_POINTS);
+glBegin(GL_QUADS);
+//    glBegin(GL_POINTS);
 
     for(auto drop : drops)
-        glVertex3f(drop.xPos, drop.yPos, 0);
+    {
+        glTexCoord2f(0.0, 1.0);
+		glVertex3f(drop.xPos, drop.yPos, 0);
+
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(drop.xPos + 0.03, drop.yPos, 0);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(drop.xPos + 0.03, drop.yPos - 0.03, 0);
+
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(drop.xPos, drop.yPos - 0.03, 0);
+//        glVertex3f(drop.xPos, drop.yPos, 0);
+    }
+
 
     glEnd();
     glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 // Setting Movement
@@ -115,7 +135,7 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
 
     double radius = width / 2;
 
-    int newDrops = 100; // 60 is arbitrary. Could put anything
+    int newDrops = 50; // 60 is arbitrary. Could put anything
     double theta = 0;
 
     if(numDrops + newDrops > MAX_MUSIC_DROPS)

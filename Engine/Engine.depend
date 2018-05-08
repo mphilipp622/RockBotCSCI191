@@ -228,7 +228,7 @@
 	<GL\GL.h>
 	<iostream>
 
-1525738989 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1525742967 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -424,7 +424,7 @@
 	<Timer.h>
 	<Particles.h>
 
-1525730852 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
+1525743173 c:\users\seapanda\documents\college\191\191\engine\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
@@ -1151,13 +1151,14 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1525738989 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
+1525743201 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
 	<GL/gl.h>
 	<math.h>
 	<stdlib.h>
 	<iostream>
 	<Timer.h>
 	<vector>
+	<TextureLoader.h>
 
 1525738989 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
 	"Particles.h"
