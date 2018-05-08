@@ -340,10 +340,11 @@ void Player::Update()
         else if(xDirection < 0)
             MoveLeft();
 
-        if(!jump)
+        if(!jump && !attacking)
             Actions(1);
-        else
+        else if(jump && !attacking)
             Actions(2);
+
     }
     else if(!moving && !jump && !attacking)
         Actions(0);
@@ -793,7 +794,7 @@ double Player::GetZoom()
 void Player::ShootProjectile(double x, double y)
 {
     attacking = true;
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.3, 0.5, 1, 3.5, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.4, 0.5, 1, 3.5, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
     vector<string> animNames = {"Images/music_note.png"};
     newProjectile->InitAnimations(animNames);
 //    newProjectile->InitModel("Images/Note.png", true);
