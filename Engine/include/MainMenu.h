@@ -25,13 +25,19 @@ class MainMenu : public GLScene
     private:
         Model* startGame; // start game button image
         Model* howToPlay; // how to play button image
+        Model* credits;
         Parallax* background; // background image for menu.
         Model* exit; // exit UI element for menu.
         Model* levelCreator;
+        Model* howToPlayScreen;
+        Model* creditsScreen;
+        Model* backArrow;
 
         // Screen width and height in pixels
         double screenWidth, screenHeight;
         bool killGame; // Used for exiting the game
+        bool showHowToPlay;
+        bool showCredits;
 
         // Initializes the textures and vertices for the UI Elements in the scene
         void InitModels();
@@ -43,7 +49,6 @@ class MainMenu : public GLScene
 
         // draws UI buttons
         void DrawButtons();
-
 
 };
 

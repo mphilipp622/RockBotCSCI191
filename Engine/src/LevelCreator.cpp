@@ -310,6 +310,8 @@ int LevelCreator::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         else if(wParam == VK_BACK)
         {
             SceneManager::LoadScene("MainMenu");
+            SceneManager::DeleteScene(sceneName);
+            delete this;
         }
 
     }

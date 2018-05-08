@@ -48,8 +48,6 @@ void SceneManager::LoadScene(string sceneName)
         newGame->initGL(); // initialize map
     }
 
-
-
     activeScene = sceneName; // set active scene to the new scene.
 }
 
