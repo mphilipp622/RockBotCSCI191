@@ -32,6 +32,7 @@ class MainMenu : public GLScene
         Model* howToPlayScreen;
         Model* creditsScreen;
         Model* backArrow;
+        Model* splashImage;
 
         // Screen width and height in pixels
         double screenWidth, screenHeight;

@@ -50,18 +50,19 @@ GLint MainMenu::initGL()
 void MainMenu::InitModels()
 {
     // instantiate UI elements
-    background = new Parallax();
-    startGame = new Model(2.0, 0.5, 0, 1.5, "NewGameButton", "Button");
-    levelCreator = new Model(2.0, 0.5, 0, 0.8, "LevelCreatorButton", "Button");
-    howToPlay = new Model(2.0, 0.5, 0, 0.1, "HowToPlayButton", "Button");
-    credits = new Model(2.0, 0.5, 0, -0.6, "CreditsButton", "Button");
-    exit = new Model(2.0, 0.5, 0, -1.3, "ExitButton", "Button");
-    backArrow = new Model(1.0, 0.8, -3.3, -1.3, "BackButton", "Button");
-    howToPlayScreen = new Model(1.0, 1.0, 0, 0, "HowToPlayScreen", "UI");
-    creditsScreen = new Model(4.0, 4.0, 0, 0, "CreditsScreen", "UI");
+//    background = new Parallax();
+    splashImage = new Model(4.0, 5.0, -2.0, 0, "Splash", "Splash");
+    startGame = new Model(2.0, 0.5, 1.5, 1.5, "NewGameButton", "Button");
+    levelCreator = new Model(2.0, 0.5, 1.5, 0.8, "LevelCreatorButton", "Button");
+    howToPlay = new Model(2.0, 0.5, 1.5, 0.1, "HowToPlayButton", "Button");
+    credits = new Model(2.0, 0.5, 1.5, -0.6, "CreditsButton", "Button");
+    exit = new Model(2.0, 0.5, 1.5, -1.3, "ExitButton", "Button");
+    backArrow = new Model(0.8, 0.6, 3.33, -1.4, "BackButton", "Button");
+    howToPlayScreen = new Model(1.0, 1.5, 0, 0, "HowToPlayScreen", "UI");
+    creditsScreen = new Model(4.0, 4.0, 2.0, 0, "CreditsScreen", "UI");
 
     // Bind textures for UI elements
-    background->ParallaxInit("Images/Backgrounds/MenuBackground.jpg");
+//    background->ParallaxInit("Images/UI/Splashscreen.png");
     startGame->InitModel("Images/UI/NewGame.png", true);
     exit->InitModel("Images/UI/Exit.png", true);
     levelCreator->InitModel("Images/UI/LevelCreator.png", true);
@@ -70,7 +71,7 @@ void MainMenu::InitModels()
     howToPlayScreen->InitModel("Images/UI/HowToPlayScreen.png", true);
     creditsScreen->InitModel("Images/UI/CreditsScreen.png", true);
     backArrow->InitModel("Images/UI/BackArrow.png", true);
-
+    splashImage->InitModel("Images/UI/Splashscreen.png", true);
 }
 
 GLint MainMenu::drawGLScene()
@@ -85,10 +86,12 @@ GLint MainMenu::drawGLScene()
     if(killGame) // exit game
         return 0;
 
-    glPushMatrix();
-    glScaled(6.66, 6.66, 1.0); // Scale the background image
-    background->DrawSquare(screenWidth, screenHeight);
-    glPopMatrix();
+//    glPushMatrix();
+//    glScaled(6.66, 6.66, 1.0); // Scale the background image
+//    background->DrawSquare(screenWidth, screenHeight);
+//    glPopMatrix();
+
+    splashImage->DrawModel();
 
     if(!showCredits && !showHowToPlay)
         DrawButtons();
