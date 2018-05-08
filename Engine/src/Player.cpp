@@ -340,10 +340,10 @@ void Player::Update()
         else if(xDirection < 0)
             MoveLeft();
 
-        if(!jump && !attacking)
+        if(!attacking)
             Actions(1);
-        else if(jump && !attacking)
-            Actions(2);
+//        else if(jump && !attacking)
+//            Actions(2);
 
     }
     else if(!moving && !jump && !attacking)
