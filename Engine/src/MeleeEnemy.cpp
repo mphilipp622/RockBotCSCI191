@@ -89,35 +89,35 @@ void MeleeEnemy::InitEnemy()
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
 
 
-    moveAnim[0].BindTexture("Images/Enemies/MeleeWalk0.png");
-    moveAnim[1].BindTexture("Images/Enemies/MeleeWalk1.png");
-    moveAnim[2].BindTexture("Images/Enemies/MeleeWalk2.png");
-    moveAnim[3].BindTexture("Images/Enemies/MeleeWalk3.png");
-    moveAnim[4].BindTexture("Images/Enemies/MeleeWalk4.png");
-    moveAnim[5].BindTexture("Images/Enemies/MeleeWalk5.png");
-    moveAnim[6].BindTexture("Images/Enemies/MeleeWalk6.png");
+    moveAnim[0].BindTexture("Images/Enemies/Melee_0000.png");
+    moveAnim[1].BindTexture("Images/Enemies/Melee_0001.png");
+    moveAnim[2].BindTexture("Images/Enemies/Melee_0002.png");
+    moveAnim[3].BindTexture("Images/Enemies/Melee_0000.png");
+    moveAnim[4].BindTexture("Images/Enemies/Melee_0001.png");
+    moveAnim[5].BindTexture("Images/Enemies/Melee_0002.png");
+    moveAnim[6].BindTexture("Images/Enemies/Melee_0000.png");
 
     maxMoveFrame = 7;
 
-    idleAnim[0].BindTexture("Images/Enemies/MeleeIdle0.png");
-    idleAnim[1].BindTexture("Images/Enemies/MeleeIdle1.png");
-    idleAnim[2].BindTexture("Images/Enemies/MeleeIdle2.png");
-    idleAnim[3].BindTexture("Images/Enemies/MeleeIdle3.png");
-    idleAnim[4].BindTexture("Images/Enemies/MeleeIdle4.png");
+    idleAnim[0].BindTexture("Images/Enemies/Melee_0000.png");
+    idleAnim[1].BindTexture("Images/Enemies/Melee_0001.png");
+    idleAnim[2].BindTexture("Images/Enemies/Melee_0002.png");
+    idleAnim[3].BindTexture("Images/Enemies/Melee_0000.png");
+    idleAnim[4].BindTexture("Images/Enemies/Melee_0001.png");
 
     maxIdleFrame = 5;
 
-    jumpAnim[0].BindTexture("Images/Enemies/MeleeJump0.png");
-    jumpAnim[1].BindTexture("Images/Enemies/MeleeJump1.png");
+    jumpAnim[0].BindTexture("Images/Enemies/Melee_0000.png");
+    jumpAnim[1].BindTexture("Images/Enemies/Melee_0001.png");
     maxJumpFrame = 2;
 
-    deathAnim[0].BindTexture("Images/Enemies/MeleeIdle.png");
+    deathAnim[0].BindTexture("Images/Enemies/Melee_0000.png");
     maxDeathFrame = 1;
 
-    attackAnim[0].BindTexture("Images/Enemies/MeleeAttack0.png");
-    attackAnim[1].BindTexture("Images/Enemies/MeleeAttack1.png");
-    attackAnim[2].BindTexture("Images/Enemies/MeleeAttack2.png");
-    attackAnim[3].BindTexture("Images/Enemies/MeleeAttack3.png");
+    attackAnim[0].BindTexture("Images/Enemies/Melee_0000.png");
+    attackAnim[1].BindTexture("Images/Enemies/Melee_0001.png");
+    attackAnim[2].BindTexture("Images/Enemies/Melee_0002.png");
+    attackAnim[3].BindTexture("Images/Enemies/Melee_0000.png");
     maxAttackFrame = 4;
 
 }
