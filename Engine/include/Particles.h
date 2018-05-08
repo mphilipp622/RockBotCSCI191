@@ -8,6 +8,7 @@
 #include <Timer.h>
 #include <vector>
 #include <TextureLoader.h>
+#include <DeltaTime.h>
 
 #define MAX_MUSIC_DROPS 500
 #define MAX_DROPS 50000
@@ -30,7 +31,7 @@ class Particles
         double DoubleRandom();
 
         void GenerateMusicParticles(int x, int y, double width, double height);
-        void LifetimeMusic(double x, double y, double width);
+        void LifetimeMusic(double x, double y, double xDir, double yDir, double width);
         void GenerateSparks(int x, int y, double width, double height);
 
     protected:
@@ -50,12 +51,16 @@ class Particles
                 alive = true;
                 xPos = 0;
                 yPos = 0;
+                time = new Timer();
+                time->Start();
             }
             Node(double newX, double newY)
             {
                 alive = true;
                 xPos = newX;
                 yPos = newY;
+                time = new Timer();
+                time->Start();
             }
         };
 

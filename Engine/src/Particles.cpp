@@ -27,6 +27,9 @@ glBegin(GL_QUADS);
 
     for(auto drop : drops)
     {
+        if(!drop.alive)
+            continue;
+
         glTexCoord2f(0.0, 1.0);
 		glVertex3f(drop.xPos, drop.yPos, 0);
 
@@ -73,10 +76,12 @@ void Particles::LifeTime()
     }
 }
 
-void Particles::LifetimeMusic(double x, double y, double width)
+void Particles::LifetimeMusic(double x, double y, double xDir, double yDir, double width)
 {
     double radius = width / 2;
-    double theta = 0;
+    double theta = sqrt((xDir * xDir) + (yDir * yDir)) * 1000;
+
+    cout << theta << endl;
 
     for(int i = 0; i < numDrops; i++)
     {
@@ -84,12 +89,25 @@ void Particles::LifetimeMusic(double x, double y, double width)
         {
             double newX = x + radius * cos(theta);
             double newY = y + radius * sin(theta);
-
+//            double newX = x + radius * cos(theta);
+//            double newY = y + radius * sin(theta);
+//            double newX = (x - drops[i].xPos) - newDir;
+//            double newY = (y - drops[i].yPos) - newDir;
+//            double newX = x * DoubleRandom();
+//            double newY = y * DoubleRandom();
             drops[i].xPos = newX;
             drops[i].yPos = newY;
+//            drops[i].xPos -= xDir;
+//            drops[i].yPos -= yDir;
+//            drops[i].xPos -= (x - drops[i].xPos) * xDir;
+//            drops[i].yPos -= (y - drops[i].yPos) * yDir;
+
+//            if(drops[i].time->GetTicks() > 100)
+//                drops[i].alive = false;
+
         }
 
-        theta += 1;
+        theta += 1.8;
     }
 }
 
@@ -133,9 +151,9 @@ double Particles::DoubleRandom()
 void Particles::GenerateMusicParticles(int x, int y, double width, double height)
 {
 
-    double radius = width / 2;
+    double radius = width / 4;
 
-    int newDrops = 50; // 60 is arbitrary. Could put anything
+    int newDrops = 100; // 60 is arbitrary. Could put anything
     double theta = 0;
 
     if(numDrops + newDrops > MAX_MUSIC_DROPS)
@@ -144,11 +162,17 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
     for(int i = 0; i < newDrops; i++)
     {
         // This equation will create a circle of particles around the boundaries of the music note
-        double newX = x + radius * cos(theta);
-        double newY = y + radius * sin(theta);
+//        double newX = x + radius * cos(theta);
+//        double newY = y + radius * sin(theta);
 
 
+//        drops.push_back(Node(newX, newY));
+        cout << DoubleRandom() << endl;
+        double newX = x * DoubleRandom();
+        double newY = y * DoubleRandom();
         drops.push_back(Node(newX, newY));
+
+
 //        drops[i].alive = true;
 //        drops[i].xPos = newX;
 //        drops[i].yPos = newY;
@@ -167,7 +191,7 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
     numDrops += newDrops;
 
     if(numDrops >= MAX_MUSIC_DROPS)
-        numDrops = MAX_MUSIC_DROPS;
+        numDrops = 0;
 
 }
 

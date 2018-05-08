@@ -121,7 +121,6 @@ void Enemy::DrawEnemy()
 
 void Enemy::Update()
 {
-    glEnable(GL_TEXTURE_2D);
     if(isDying)
     {
         Actions(3);
@@ -159,8 +158,6 @@ void Enemy::Update()
         Actions(4);
 
     AIRoutine();
-
-    glDisable(GL_TEXTURE_2D);
 }
 
 void Enemy::TakeDamage(int damageTaken)
@@ -256,8 +253,7 @@ void Enemy::Die()
 
 void Enemy::Actions(int newAction)
 {
-    cout << newAction  << endl;
-
+    glEnable(GL_TEXTURE_2D);
     switch(newAction)
     {
     case 0:
@@ -364,6 +360,7 @@ void Enemy::Actions(int newAction)
 
         break;
     }
+    glDisable(GL_TEXTURE_2D);
 }
 
 bool Enemy::PlayerInRange(double checkRadius)
