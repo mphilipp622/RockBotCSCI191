@@ -45,10 +45,12 @@
 			<Add directory="Common/include/GL" />
 			<Add directory="Common/include" />
 			<Add directory="irrKlang-1.6.0/include" />
+			<Add directory="freetype-windows-binaries-master/include" />
 		</Compiler>
 		<Linker>
 			<Add library="Common/lib/libSOIL.a" />
 			<Add library="irrKlang-1.6.0/lib/Win32-gcc/libirrKlang.a" />
+			<Add library="freetype-windows-binaries-master/win32/freetype.lib" />
 			<Add library="Common/lib/glew32s.lib" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
@@ -82,6 +84,7 @@
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/Timer.h" />
 		<Unit filename="include/Trigger.h" />
+		<Unit filename="include/freetype.h" />
 		<Unit filename="include/tinyxml2.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AudioEngine.cpp" />
@@ -110,6 +113,7 @@
 		<Unit filename="src/TextureLoader.cpp" />
 		<Unit filename="src/Timer.cpp" />
 		<Unit filename="src/Trigger.cpp" />
+		<Unit filename="src/freetype.cpp" />
 		<Unit filename="src/tinyxml2.cpp" />
 		<Extensions>
 			<code_completion />
