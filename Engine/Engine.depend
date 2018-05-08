@@ -116,15 +116,17 @@
 	<GL\GL.h>
 	<string>
 
-1523924534 source:c:\users\sesat\documents\github\191\engine\main.cpp
+1525305976 source:c:\users\sesat\documents\github\191\engine\main.cpp
 	<windows.h>
 	<windows.h>
-	<GLScene.h>
 	<stdlib.h>
 	<iostream>
+	<SceneManager.h>
+	<GLScene.h>
+	<MainMenu.h>
 	<string>
 
-1524697897 c:\users\sesat\documents\github\191\engine\include\glscene.h
+1525742849 c:\users\sesat\documents\github\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -137,6 +139,10 @@
 	<Enemy.h>
 	<MeleeEnemy.h>
 	<HUD.h>
+	<RangedEnemy.h>
+	<SceneManager.h>
+	<tinyxml2.h>
+	<Particles.h>
 
 1520460267 c:\users\sesat\documents\github\191\common\include\gl\glut.h
 	<windows.h>
@@ -144,34 +150,31 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1519975467 c:\users\sesat\documents\github\191\engine\include\deltatime.h
+1525717237 c:\users\sesat\documents\github\191\engine\include\deltatime.h
 
-1520900258 source:c:\users\sesat\documents\github\191\engine\src\deltatime.cpp
+1525717237 source:c:\users\sesat\documents\github\191\engine\src\deltatime.cpp
 	<DeltaTime.h>
 	<windows.h>
 	<glut.h>
 	<iostream>
 
-1520900258 source:c:\users\sesat\documents\github\191\engine\src\gllight.cpp
+1525305976 source:c:\users\sesat\documents\github\191\engine\src\gllight.cpp
 	<GLLight.h>
-
-1519975467 c:\users\sesat\documents\github\191\engine\include\gllight.h
 	<GLScene.h>
 
-1524784958 source:c:\users\sesat\documents\github\191\engine\src\glscene.cpp
-	<LoadShader.h>
+1525305976 c:\users\sesat\documents\github\191\engine\include\gllight.h
 	<GLScene.h>
-	<GLLight.h>
+
+1525742849 source:c:\users\sesat\documents\github\191\engine\src\glscene.cpp
+	<GLScene.h>
 	<Parallax.h>
 	<DeltaTime.h>
 	<Player.h>
-	<Skybox.h>
 	<Timer.h>
-	<Fonts.h>
-	<Particles.h>
 	<HUD.h>
+	<GLLight.h>
 
-1524694573 c:\users\sesat\documents\github\191\engine\include\model.h
+1525717237 c:\users\sesat\documents\github\191\engine\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -188,19 +191,19 @@
 	<string>
 	<Player.h>
 
-1520900258 c:\users\sesat\documents\github\191\engine\include\parallax.h
+1525717237 c:\users\sesat\documents\github\191\engine\include\parallax.h
 	<windows.h>
 	<string>
 	<GL\GL.h>
 	<string>
 
-1523924534 source:c:\users\sesat\documents\github\191\engine\src\inputs.cpp
+1525717237 source:c:\users\sesat\documents\github\191\engine\src\inputs.cpp
 	<Inputs.h>
 	<iostream>
 	<DeltaTime.h>
 	<string>
 
-1523924534 source:c:\users\sesat\documents\github\191\engine\src\model.cpp
+1525742849 source:c:\users\sesat\documents\github\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -217,7 +220,7 @@
 
 1519975467 c:\users\sesat\documents\github\191\engine\common\include\soil.h
 
-1521072138 source:c:\users\sesat\documents\github\191\engine\src\parallax.cpp
+1525742849 source:c:\users\sesat\documents\github\191\engine\src\parallax.cpp
 	<Parallax.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -1285,10 +1288,10 @@
 	<iostream>
 	<Trigger.h>
 
-1523924534 source:c:\users\sesat\documents\github\191\engine\src\audioengine.cpp
+1525717237 source:c:\users\sesat\documents\github\191\engine\src\audioengine.cpp
 	"AudioEngine.h"
 
-1524697970 c:\users\sesat\documents\github\191\engine\include\audioengine.h
+1525717237 c:\users\sesat\documents\github\191\engine\include\audioengine.h
 	<irrKlang.h>
 	<windows.h>
 	<iostream>
@@ -1390,18 +1393,18 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1523924534 source:c:\users\sesat\documents\github\191\engine\src\audiosource.cpp
+1525717237 source:c:\users\sesat\documents\github\191\engine\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1523924533 c:\users\sesat\documents\github\191\engine\include\audiosource.h
+1525717237 c:\users\sesat\documents\github\191\engine\include\audiosource.h
 	<string>
 	"irrKlang.h"
 	<windows.h>
 	<AudioEngine.h>
 
-1524698429 c:\users\sesat\documents\github\191\engine\include\player.h
+1525757651 c:\users\sesat\documents\github\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -1412,6 +1415,8 @@
 	<time.h>
 	<Timer.h>
 	<ChordManager.h>
+	<Trigger.h>
+	<SceneManager.h>
 
 1523924533 c:\users\sesat\documents\github\191\engine\include\timer.h
 	<time.h>
@@ -1424,7 +1429,7 @@
 	<cstdlib>
 	<time.h>
 
-1523924533 c:\users\sesat\documents\github\191\engine\include\enemy.h
+1525717237 c:\users\sesat\documents\github\191\engine\include\enemy.h
 	<Model.h>
 	<vector>
 	<Timer.h>
@@ -1433,7 +1438,7 @@
 	<algorithm>
 	<Player.h>
 
-1523924533 c:\users\sesat\documents\github\191\engine\include\meleeenemy.h
+1525717237 c:\users\sesat\documents\github\191\engine\include\meleeenemy.h
 	<Enemy.h>
 	<GLScene.h>
 	<Player.h>
@@ -1441,23 +1446,24 @@
 1523924534 source:c:\users\sesat\documents\github\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
-1523924534 source:c:\users\sesat\documents\github\191\engine\src\enemy.cpp
+1525752978 source:c:\users\sesat\documents\github\191\engine\src\enemy.cpp
 	"Enemy.h"
 	<GLScene.h>
 
-1523924534 source:c:\users\sesat\documents\github\191\engine\src\meleeenemy.cpp
+1525742849 source:c:\users\sesat\documents\github\191\engine\src\meleeenemy.cpp
 	"MeleeEnemy.h"
 
-1523924534 source:c:\users\sesat\documents\github\191\engine\src\projectile.cpp
+1525757651 source:c:\users\sesat\documents\github\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
-1523924533 c:\users\sesat\documents\github\191\engine\include\projectile.h
+1525737690 c:\users\sesat\documents\github\191\engine\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
 	<algorithm>
 	<Timer.h>
+	<Particles.h>
 
 1520900258 source:c:\users\sesat\documents\github\191\engine\src\skybox.cpp
 	<Skybox.h>
@@ -1493,19 +1499,25 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1524691121 c:\users\sesat\documents\github\191\engine\include\particles.h
+1525757651 c:\users\sesat\documents\github\191\engine\include\particles.h
 	<GL/gl.h>
 	<math.h>
 	<stdlib.h>
 	<iostream>
+	<Timer.h>
+	<vector>
+	<TextureLoader.h>
+	<DeltaTime.h>
 
 1524691121 source:c:\users\sesat\documents\github\191\engine\src\loadshader.cpp
 	"LoadShader.h"
 
-1524691121 source:c:\users\sesat\documents\github\191\engine\src\particles.cpp
+1525757651 source:c:\users\sesat\documents\github\191\engine\src\particles.cpp
 	"Particles.h"
+	<iomanip>
+	<cmath>
 
-1524698461 source:c:\users\sesat\documents\github\191\engine\src\player.cpp
+1525757900 source:c:\users\sesat\documents\github\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -1517,7 +1529,7 @@
 	<Player.h>
 	<TextureLoader.h>
 
-1524786013 source:c:\users\sesat\documents\github\191\engine\src\hud.cpp
+1525742849 source:c:\users\sesat\documents\github\191\engine\src\hud.cpp
 	"HUD.h"
 	"Player.h"
 
@@ -1641,4 +1653,82 @@
 	<stdlib.h>
 	<GL/gl.h>
 	<GL/glu.h>
+
+1525717237 c:\users\sesat\documents\github\191\engine\include\scenemanager.h
+	<string>
+	<unordered_map>
+
+1520578225 c:\users\sesat\documents\github\191\engine\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1525717237 c:\users\sesat\documents\github\191\engine\include\trigger.h
+	<string>
+
+1525717237 c:\users\sesat\documents\github\191\engine\include\rangedenemy.h
+	<Enemy.h>
+	<GLScene.h>
+	<Player.h>
+	<Projectile.h>
+
+1525717237 c:\users\sesat\documents\github\191\engine\include\tinyxml2.h
+	<ctype.h>
+	<limits.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stddef.h>
+	<cctype>
+	<climits>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<stdint.h>
+	<android/log.h>
+	<assert.h>
+
+1525717237 c:\users\sesat\documents\github\191\engine\include\mainmenu.h
+	<GLScene.h>
+	<Parallax.h>
+
+1525305976 source:c:\users\sesat\documents\github\191\engine\src\level1.cpp
+	"Level1.h"
+
+1525305976 c:\users\sesat\documents\github\191\engine\include\level1.h
+	<GLScene.h>
+
+1525717237 source:c:\users\sesat\documents\github\191\engine\src\mainmenu.cpp
+	"MainMenu.h"
+	<GLLight.h>
+	<LevelCreator.h>
+
+1525752978 c:\users\sesat\documents\github\191\engine\include\levelcreator.h
+	<GLScene.h>
+	<iostream>
+	<Trigger.h>
+
+1525742849 source:c:\users\sesat\documents\github\191\engine\src\rangedenemy.cpp
+	"RangedEnemy.h"
+
+1525717237 source:c:\users\sesat\documents\github\191\engine\src\scenemanager.cpp
+	"SceneManager.h"
+	<GLScene.h>
+	<LevelCreator.h>
+
+1525717237 source:c:\users\sesat\documents\github\191\engine\src\tinyxml2.cpp
+	"tinyxml2.h"
+	<new>
+	<stddef.h>
+	<stdarg.h>
+	<cstddef>
+	<cstdarg>
+
+1525717237 source:c:\users\sesat\documents\github\191\engine\src\trigger.cpp
+	"Trigger.h"
+
+1525757651 source:c:\users\sesat\documents\github\191\engine\src\levelcreator.cpp
+	"LevelCreator.h"
+	<GLLight.h>
 

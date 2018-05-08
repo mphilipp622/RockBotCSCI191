@@ -200,26 +200,26 @@ void Player::InitPlayer()
 
 //    for(int i = 0; i < 10; i++)
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
-    run[0].BindTexture("Images/Player/Test_Movement_0000.png");
-    run[1].BindTexture("Images/Player/Test_Movement_0001.png");
-    run[2].BindTexture("Images/Player/Test_Movement_0002.png");
-    run[3].BindTexture("Images/Player/Test_Movement_0003.png");
+    run[0].BindTexture("Images/Player/MovingB_0000.png");
+    run[1].BindTexture("Images/Player/MovingB_0001.png");
+    run[2].BindTexture("Images/Player/MovingB_0002.png");
+    run[3].BindTexture("Images/Player/MovingB_0003.png");
 
-    idle[0].BindTexture("Images/Player/Test_Idle_0000.png");
-    idle[1].BindTexture("Images/Player/Test_Idle_0001.png");
-    idle[2].BindTexture("Images/Player/Test_Idle_0002.png");
-    idle[3].BindTexture("Images/Player/Test_Idle_0003.png");
-    idle[4].BindTexture("Images/Player/Test_Idle_0004.png");
+    idle[0].BindTexture("Images/Player/IdleB_0000.png");
+    idle[1].BindTexture("Images/Player/IdleB_0001.png");
+    idle[2].BindTexture("Images/Player/IdleB_0002.png");
+    idle[3].BindTexture("Images/Player/IdleB_0003.png");
+    idle[4].BindTexture("Images/Player/IdleB_0004.png");
 
-    jumpAnim[0].BindTexture("Images/Player/Test_Movement_0000.png");
-    jumpAnim[1].BindTexture("Images/Player/Test_Movement_0001.png");
-    jumpAnim[2].BindTexture("Images/Player/Test_Movement_0002.png");
-    jumpAnim[3].BindTexture("Images/Player/Test_Movement_0003.png");
+    jumpAnim[0].BindTexture("Images/Player/MovingB_0000.png");
+    jumpAnim[1].BindTexture("Images/Player/MovingB_0001.png");
+    jumpAnim[2].BindTexture("Images/Player/MovingB_0002.png");
+    jumpAnim[3].BindTexture("Images/Player/MovingB_0003.png");
 
-    attackAnim[0].BindTexture("Images/Player/");
-    attackAnim[1].BindTexture("Images/Player/");
-    attackAnim[2].BindTexture("Images/Player/");
-    attackAnim[3].BindTexture("Images/Player/");
+    attackAnim[0].BindTexture("Images/Player/MovementB_0000.png");
+    attackAnim[1].BindTexture("Images/Player/MovementB_0001.png");
+    attackAnim[2].BindTexture("Images/Player/MovementB_0002.png");
+    attackAnim[3].BindTexture("Images/Player/MovementB_0003.png");
 
     icons[0]->InitModel("Images/HUD/EKey.png", true);
     icons[1]->InitModel("Images/HUD/QKey.png", true);
