@@ -24,6 +24,11 @@ LOADING / SAVING
 ENTER = Save Map. When asked for an input, use 0 - 9 to specify which level you are saving. (Level 1, 2, 3, etc.) ONLY put in the integer number, such as 1, 2, 3.
 Right Shift = Load Map. When asked for an input, use 0 - 9 to specify which level to load.
 
+NOTE: Levels in-game will be loaded sequentially. When you click "New Game", level 1 is loaded. If you touch the next level trigger in level 1,
+level 2 will be loaded, etc.
+
+I may work up a level selection menu for easier testing
+
 ----------------------------------------
 OBJECT MANIPULATION
 ----------------------------------------
