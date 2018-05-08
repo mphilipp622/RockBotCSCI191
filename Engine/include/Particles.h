@@ -38,11 +38,14 @@ class Particles
 
     private:
 
+        double RadiusRandom();
+
         struct Node
         {
             bool alive;
             double xPos, yPos, zPos;
             float directionX, directionY;
+            double angleOfRotation, rotationZ;
             float mass;
             Timer* time;
             // particle characteristics

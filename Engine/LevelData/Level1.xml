@@ -42,7 +42,7 @@
         <Texture>Images/Backgrounds/BGSciFi.jpg</Texture>
     </Background>
     <Enemies>
-        <Enemy xPos="-0.84548714742126208" yPos="1.023787135634084">
+        <Enemy xPos="6.8364352093985472" yPos="2.9109981543112577">
             <Name>Enemy1</Name>
             <Tag>RangedEnemy</Tag>
         </Enemy>

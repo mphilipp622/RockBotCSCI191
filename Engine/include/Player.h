@@ -90,7 +90,7 @@ class Player : public Model
     private:
         int hp;
         int moveSpeed, jumpSpeed;
-        bool jump, slowDown, moving, playingChords, canPlay, invincible, pushBack;
+        bool jump, slowDown, moving, attacking, playingChords, canPlay, invincible, pushBack;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
@@ -128,11 +128,13 @@ class Player : public Model
         void ToggleMusicCircle();
         void DrawMusicCircle();
 
-        int idleFrame;
+        int idleFrame, attackFrame, dieFrame;
         Timer* frameTimer;
         TextureLoader run[4];
         TextureLoader idle[5];
         TextureLoader jumpAnim[4];
+        TextureLoader attackAnim[4];
+//        TextureLoader dieAnim[];
 
 //        Particle* sparkParticles;
 

@@ -1135,6 +1135,12 @@ void LevelCreator::LoadLevelFromXML()
 
         background = new Parallax();
         background->ParallaxInit(texturePath);
+
+        string::size_type findRelativePath = texturePath.find(backgroundRelativeFilePath);
+
+        if (findRelativePath != string::npos)
+            texturePath.erase(findRelativePath, backgroundRelativeFilePath.length());
+
         backgroundTexture = texturePath;
 
         mainElements = mainElements->NextSiblingElement();

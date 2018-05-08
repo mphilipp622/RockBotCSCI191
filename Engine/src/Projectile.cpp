@@ -138,7 +138,7 @@ void Projectile::DisplayParticles()
     // This is called in DrawGLScene. Make sure it is uncommented in DrawGLScene
 
 //    particle->GenerateMusicParticles(xPos, yPos, width, height);
-    particle->LifetimeMusic(xPos, yPos, xDir, yDir, width);
+    particle->LifetimeMusic(xPos, yPos, xDir, yDir, height);
     particle->DrawParticles();
 
 //    glUseProgram(shader->program);

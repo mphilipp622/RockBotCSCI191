@@ -44,6 +44,8 @@ Player::Player(double newX, double newY)
     jumpSpeed = 1.0;
     hp = 3;
     actionTrigger = 0;
+    attackFrame = 0;
+    dieFrame = 0;
 
      // physics
     gravity = 0.98;
@@ -57,6 +59,7 @@ Player::Player(double newX, double newY)
     slowDown = false;
     gravity = -9.80;
     moving = false;
+    attacking = false;
     pushBack = false;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
@@ -213,12 +216,17 @@ void Player::InitPlayer()
     jumpAnim[2].BindTexture("Images/Player/Test_Movement_0002.png");
     jumpAnim[3].BindTexture("Images/Player/Test_Movement_0003.png");
 
+    attackAnim[0].BindTexture("Images/Player/");
+    attackAnim[1].BindTexture("Images/Player/");
+    attackAnim[2].BindTexture("Images/Player/");
+    attackAnim[3].BindTexture("Images/Player/");
+
     icons[0]->InitModel("Images/HUD/EKey.png", true);
     icons[1]->InitModel("Images/HUD/QKey.png", true);
     icons[2]->InitModel("Images/HUD/LeftMouse.png", true);
     icons[3]->InitModel("Images/HUD/RightMouse.png", true);
 
-    musicCircle->InitModel("Images/MusicSprites/MusicCircle.png", true);
+//    musicCircle->InitModel("Images/MusicSprites/MusicCircle.png", true);
 
 }
 
@@ -279,6 +287,31 @@ glEnable(GL_TEXTURE_2D);
 
         glPopMatrix();
         break;
+    case 3:
+        // Attacking
+
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, playerZoom);
+
+        if(frameTimer->GetTicks() > 60)
+        {
+            attackFrame++;
+            attackFrame %= 4;
+
+            if(attackFrame == 0) // only show the attack animation one time before stopping.
+                attacking = false;
+
+            frameTimer->Reset();
+        }
+
+        attackAnim[attackFrame].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+
+        break;
+
     }
     glDisable(GL_TEXTURE_2D);
 }
@@ -312,13 +345,13 @@ void Player::Update()
         else
             Actions(2);
     }
-    else if(!moving && !jump)
+    else if(!moving && !jump && !attacking)
         Actions(0);
 
     if(jump)
     {
         Jump();
-        if(!moving)
+        if(!moving && !attacking)
             Actions(2);
     }
     else
@@ -329,6 +362,9 @@ void Player::Update()
 
     if(pushBack)
         PushBack();
+
+    if(attacking)
+        Actions(3);
 
     CheckEnemyCollision();
 
@@ -756,8 +792,9 @@ double Player::GetZoom()
 
 void Player::ShootProjectile(double x, double y)
 {
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
-    vector<string> animNames = {"Images/Note.png"};
+    attacking = true;
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.3, 0.5, 1, 3.5, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
+    vector<string> animNames = {"Images/music_note.png"};
     newProjectile->InitAnimations(animNames);
 //    newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord(chordManager->GetNextChord());
