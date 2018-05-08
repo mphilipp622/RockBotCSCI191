@@ -6,17 +6,66 @@
 #include <Trigger.h>
 
 /*
+DOCUMENTATION
+----------------------------------------
+OBJECT CREATION
+----------------------------------------
 B = Create Background. When asked for filename, put in the name of the file + the extension
-M = create a platform. When asked for filename, put in the name of the file + the extension
+M = create a platform / Model. When asked for filename, put in the name of the file + the extension
 P = create player.
 L = Create Next Level Trigger
-T = Create Text Trigger
+T = Create Text Trigger. NOTE: Text Triggers will not visibly show in game. They only show in level creator for your reference
+E = Create an enemy. You'll be asked the kind of enemy to create. Read the on screen menu for instructions
+H = Create health pack.
+
+----------------------------------------
+LOADING / SAVING
+----------------------------------------
+ENTER = Save Map. When asked for an input, use 0 - 9 to specify which level you are saving. (Level 1, 2, 3, etc.) ONLY put in the integer number, such as 1, 2, 3.
+Right Shift = Load Map. When asked for an input, use 0 - 9 to specify which level to load.
+
+----------------------------------------
+OBJECT MANIPULATION
+----------------------------------------
 + / - = Scale Width of selected object up and down
 up arrow / down arrow = Scale height of selected object up and down.
+Left Click on an object = select the object.
+HOLD left click while an object is selected to move it around.
+Right click = deselect object
+DELETE = While an object is selected (highlighted in red), press delete to delete it
+
+----------------------------------------
+CAMERA OPTIONS
+----------------------------------------
 WASD = Move camera around in the scene
 Mouse Wheel = Zoom in and out
-Left Click on an object = select the object
-Right click = deselect object
+
+----------------------------------------
+XML FILE INFO
+----------------------------------------
+XML Files are saved into the project folder/LevelData. If you want to backup a level design for any reason, I recommend saving the xml file into a
+separate location for later use.
+
+----------------------------------------
+FILE PATH INFO
+----------------------------------------
+List of relative file paths for platforms, backgrounds, and level triggers. If you wish to download files from the internet and utilize them for textures,
+you'll want to save the files to these file paths to ensure they can be loaded and saved in the level creator properly.
+
+The below file paths are relative to your project location.
+
+Platforms = Images/Platforms
+Backgrounds = Images/Backgrounds
+NextLevelTrigger = Images/Misc
+
+----------------------------------------
+BUGS
+----------------------------------------
+The main bug I am aware of is when being asked for filename inputs, sometimes the console window will automatically read a \n character.
+I think this is due to the cin buffer not being cleared out before user is asked for input.
+
+If you want to try and fix this bug, feel free. Typically, when this issue happens, I will delete the new object and remake it.
+
 */
 
 class LevelCreator : public GLScene
