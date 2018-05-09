@@ -1409,7 +1409,7 @@
 	<windows.h>
 	<AudioEngine.h>
 
-1525817398 c:\users\sesat\documents\github\191\engine\include\player.h
+1525831988 c:\users\sesat\documents\github\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -1423,6 +1423,7 @@
 	<Trigger.h>
 	<SceneManager.h>
 	"freetype.h"
+	<Particles.h>
 
 1523924533 c:\users\sesat\documents\github\191\engine\include\timer.h
 	<time.h>
@@ -1505,7 +1506,7 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1525824419 c:\users\sesat\documents\github\191\engine\include\particles.h
+1525831988 c:\users\sesat\documents\github\191\engine\include\particles.h
 	<GL/gl.h>
 	<math.h>
 	<stdlib.h>
@@ -1514,16 +1515,17 @@
 	<vector>
 	<TextureLoader.h>
 	<DeltaTime.h>
+	<algorithm>
 
 1524691121 source:c:\users\sesat\documents\github\191\engine\src\loadshader.cpp
 	"LoadShader.h"
 
-1525824419 source:c:\users\sesat\documents\github\191\engine\src\particles.cpp
+1525831988 source:c:\users\sesat\documents\github\191\engine\src\particles.cpp
 	"Particles.h"
 	<iomanip>
 	<cmath>
 
-1525824419 source:c:\users\sesat\documents\github\191\engine\src\player.cpp
+1525832353 source:c:\users\sesat\documents\github\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>

@@ -218,7 +218,7 @@ void Player::InitPlayer()
     idle[1].BindTexture("Images/Player/IdleB_0001.png");
     idle[2].BindTexture("Images/Player/IdleB_0002.png");
     idle[3].BindTexture("Images/Player/IdleB_0003.png");
-    idle[4].BindTexture("Images/Player/IdleB_0004.png");
+    idle[4].BindTexture("Images/Player/IdleB_0001.png");
 
     jumpAnim[0].BindTexture("Images/Player/MovingB_0000.png");
     jumpAnim[1].BindTexture("Images/Player/MovingB_0001.png");
