@@ -61,6 +61,8 @@ Player::Player(double newX, double newY)
     moving = false;
     attacking = false;
     pushBack = false;
+    falling = false;
+    isDead = false;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
     idleFrame = 0;
@@ -108,6 +110,7 @@ Player::Player(double newX, double newY)
     drawCircle = false;
     musicCircle = new Model(3, 3, xPos, yPos, "MusicCircle", "MusicHUD");
     circleTimer = new Timer();
+    fallTimer = new Timer();
 
     iconNames =
     {
@@ -397,6 +400,12 @@ void Player::Update()
         }
     }
 
+    if(falling)
+    {
+        if(fallTimer->GetTicks() > 3000)
+            isDead = true;
+    }
+
 
 //    if(drawCircle)
 //    {
@@ -430,6 +439,8 @@ void Player::Jump()
     if(CheckCollision())
     {
         jump = false;
+        falling = false;
+        fallTimer->Stop();
         yPos = prevYPos;
         return;
     }
@@ -457,8 +468,16 @@ void Player::ApplyGravity()
     {
         fallVelocity = 0;
         yPos = prevYPos;
+        falling = false;
+        fallTimer->Stop();
         return;
     }
+    else
+    {
+        falling = true;
+        fallTimer->Start();
+    }
+
     AudioEngine::SetPosition(xPos, yPos);
     chord->SetPosition(xPos, yPos);
 }
@@ -979,6 +998,15 @@ void Player::TakeDamage(int damage)
 {
     hp -= damage;
 
+    if(hp <= 0)
+    {
+        isDead = true;
+        return;
+    }
+
+
+
+
     SetInvincible(); // set player to invincible after taking damage
 }
 
@@ -1032,4 +1060,9 @@ void Player::DisplayText()
 
 //	freetype::print(test1_font, GetSystemMetrics(SM_CXSCREEN) / 2 + 100, GetSystemMetrics(SM_CYSCREEN) / 2 + 100,"Test1: Active Freetype Text");
 	glPopMatrix();
+}
+
+bool Player::IsDead()
+{
+    return isDead;
 }

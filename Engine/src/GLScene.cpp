@@ -65,7 +65,7 @@ GLint GLScene::initGL()
 
     sceneTimer->Start();
 
-    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop120.ogg",0, 0, .6, true);
+    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .6, true);
     BGM->PlayMusic();
     dTime = new DeltaTime();
     loadNewLevel = false;
@@ -78,7 +78,7 @@ GLint GLScene::drawGLScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    if(Player::player->getHP() <= 0)
+    if(Player::player->IsDead())
         SetGameOver();
 
 //    if(loadNewLevel)
@@ -179,6 +179,7 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
 }
 int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+
     if(uMsg == WM_KEYDOWN)
     {
         if(gameOver)
@@ -488,8 +489,8 @@ void GLScene::CheckGameOverCollision(WPARAM keyPressed)
     else if(keyPressed == 0x32 || keyPressed == VK_NUMPAD2)
     {
         loadNewLevel = true;
-        SceneManager::LoadScene("MainMenu");
         AudioEngine::engine->stopAllSounds();
+        SceneManager::LoadScene("MainMenu");
         SceneManager::DeleteScene(sceneName);
         delete this;
     }

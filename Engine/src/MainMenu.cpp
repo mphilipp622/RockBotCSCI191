@@ -17,6 +17,9 @@ MainMenu::MainMenu()
     // Initialize the audio engine. Will be used by other classes
     audioEngine = new AudioEngine();
 
+    BGM = new AudioSource("Music", "Audio/Music/BGM/DarkSong.ogg",0, 0, .6, true);
+    BGM->PlayMusic();
+
     killGame = false;
     showCredits = false;
     showHowToPlay = false;

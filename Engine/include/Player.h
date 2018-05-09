@@ -86,13 +86,14 @@ class Player : public Model
         // used by enemy projectiles to determine if player is invincible or not.
         bool IsInvincible();
 
+        bool IsDead();
 
     protected:
 
     private:
         int hp;
         int moveSpeed, jumpSpeed;
-        bool jump, slowDown, moving, attacking, playingChords, canPlay, invincible, pushBack;
+        bool jump, slowDown, moving, attacking, playingChords, canPlay, invincible, pushBack, isDead;
         float jumpVelocity, fallVelocity;
         float initialY;
         float xDirection, prevXDirection;
@@ -100,6 +101,9 @@ class Player : public Model
         float acceleration, accelRate, maxAcceleration, deceleration, pushAccel, pushDecel;
         float gravity;
         float playerZoom;
+
+        bool falling;
+        Timer* fallTimer; // used for killing player if they fall in pit
 
         double invincibleTime;
         int invincibleFrame;

@@ -228,7 +228,7 @@ void Particles::LifetimeSparks()
         drop.xPos += normalized * (drop.directionX * drop.accelerationX) * DeltaTime::GetDeltaTime();
         drop.yPos += ((normalized * drop.acceleration) + (GRAVITY * drop.mass)) * DeltaTime::GetDeltaTime();
 
-        if(drop.time->GetTicks() > 1000)
+        if(drop.time->GetTicks() > 500)
         {
             auto finder = find(drops.begin(), drops.end(), drop);
 

@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include <GLScene.h>
 #include <LevelCreator.h>
+#include <MainMenu.h>
 
 // global static variables. Bad design but we've gone too far down this rabbit hole to come back now
 unordered_map<string, GLScene*> SceneManager::scenes;
@@ -28,17 +29,27 @@ void SceneManager::LoadScene(string sceneName)
     // if we already have the level loaded, we want to delete it
     auto finder = scenes.find(sceneName); // find the scene in scene manager
 
-//    if(finder != scenes.end())
-//        delete scenes[sceneName]; // if hashtable already has map loaded, delete it
+    if(activeScene == "MainMenu")
+        AudioEngine::engine->stopAllSounds();
 
-    if(finder != scenes.end())
-        activeScene = sceneName;
-    else if(sceneName == "LevelCreator")
+    string oldScene = activeScene;
+
+//    if(finder != scenes.end())
+//        activeScene = sceneName;
+
+    if(sceneName == "LevelCreator")
     {
         LevelCreator* creatorScene = new LevelCreator();
 
         scenes.insert( {sceneName, creatorScene} );
         creatorScene->initGL();
+    }
+    else if(sceneName == "MainMenu")
+    {
+        MainMenu* newMenu = new MainMenu();
+
+        scenes.insert( {sceneName, newMenu} );
+        newMenu->initGL();
     }
     else
     {
@@ -47,6 +58,8 @@ void SceneManager::LoadScene(string sceneName)
         scenes.insert( {sceneName, newGame} ); // insert map into hash table
         newGame->initGL(); // initialize map
     }
+
+    DeleteScene(oldScene);
 
     activeScene = sceneName; // set active scene to the new scene.
 }

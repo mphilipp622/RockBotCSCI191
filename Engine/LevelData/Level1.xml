@@ -12,7 +12,7 @@
         <Platform Width="1.9000002" Height="0.19999993" xPos="-0.84108613974782265" yPos="-0.76284555186721625">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
-        <Platform Width="4.0999985" Height="0.19999993" xPos="7.232555015203002" yPos="-0.12349689139502304">
+        <Platform Width="4.0999985" Height="0.19999993" xPos="7.2268009032942153" yPos="-0.14727601518805591">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
         <Platform Width="10.400003" Height="0.39999992" xPos="10.523258419243469" yPos="-1.8256132865198336">
@@ -26,8 +26,8 @@
         </Platform>
     </Platforms>
     <Player xPos="-2.9501227439785773" yPos="-1.1229796158089109"/>
-    <LevelTrigger Width="1" Height="1.3000001" xPos="13.561791530788446" yPos="2.2580578688839448">
-        <Texture>LevelTrigger</Texture>
+    <LevelTrigger Width="1" Height="1" xPos="13.584346870247735" yPos="2.1585256652615947">
+        <Texture>Images/Misc/Portal.png</Texture>
     </LevelTrigger>
     <TextTriggers>
         <Trigger Width="2.9999993" Height="1" xPos="6.5709645110676584" yPos="0.48516635905187616">
