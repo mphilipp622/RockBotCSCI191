@@ -53,7 +53,7 @@ Player::Player(double newX, double newY)
     accelRate = 0.1;
     deceleration = 0.2; // rate of deceleration
     maxAcceleration = 2.5;
-    pushAccel = 8.0; // used for push back
+    pushAccel = 20; // used for push back
     pushDecel = 0.6;
     jump = false; // set true to avoid falling through earth on scene load
     slowDown = false;
@@ -484,6 +484,8 @@ void Player::ApplyGravity()
 
 void Player::StartMove(float dir)
 {
+    if(pushBack) return;
+
     xDirection = dir;
     moving = true;
 }
@@ -513,9 +515,9 @@ void Player::MoveLeft()
     {
 //        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
         xPos = prevXPos;
-        moving = false;
+//        moving = false;
 //        xDirection = 0;
-        acceleration = 0;
+//        acceleration = 0;
         return;
     }
     AudioEngine::SetPosition(xPos, yPos);
@@ -548,7 +550,7 @@ void Player::MoveRight()
 
 //        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
         xPos = prevXPos;
-        moving = false;
+//        moving = false;
 //        xDirection = 0;
         acceleration = 0;
         return;
@@ -714,7 +716,8 @@ void Player::CheckEnemyCollision()
 void Player::StartPushBack(double direction)
 {
     pushBack = true;
-    xDirection = direction;
+    pushDir = direction;
+//    xDirection = direction;
 
     if(direction < 0)
         acceleration = -pushAccel;
@@ -727,10 +730,11 @@ void Player::StartPushBack(double direction)
 
 void Player::PushBack()
 {
-    if(xDirection > 0)
-    {
-        // if we're moving right, execute different code
 
+// if we're pushing right, execute different code
+
+    if(pushDir > 0)
+    {
         if(acceleration > 0)
             acceleration -= pushDecel;
         else
@@ -740,7 +744,7 @@ void Player::PushBack()
         }
 
         prevXPos = xPos;
-        xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+        xPos += (acceleration) * DeltaTime::GetDeltaTime();
 
         CheckTriggerCollision(); // check for text or level triggers
         CheckHealthPackCollision();
@@ -758,10 +762,8 @@ void Player::PushBack()
         AudioEngine::SetPosition(xPos, yPos);
         chord->SetPosition(xPos, yPos);
     }
-    else if(xDirection < 0)
+    if(pushDir < 0)
     {
-        // Code for left direction slow down
-
         if(acceleration < 0)
             acceleration += pushDecel;
         else
@@ -771,7 +773,7 @@ void Player::PushBack()
         }
 
         prevXPos = xPos;
-        xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+        xPos += (acceleration) * DeltaTime::GetDeltaTime();
 
         CheckTriggerCollision(); // check for text or level triggers
         CheckHealthPackCollision();

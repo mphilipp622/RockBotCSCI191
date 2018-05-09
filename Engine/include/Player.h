@@ -101,6 +101,7 @@ class Player : public Model
         float acceleration, accelRate, maxAcceleration, deceleration, pushAccel, pushDecel;
         float gravity;
         float playerZoom;
+        double pushDir;
 
         bool falling;
         Timer* fallTimer; // used for killing player if they fall in pit

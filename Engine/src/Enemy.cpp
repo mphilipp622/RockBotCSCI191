@@ -200,16 +200,14 @@ void Enemy::ApplyGravity()
 
     // Check Pit Collision
 
+    if(!falling && CheckForPit() && Player::player->GetY() >= yPos)
+    {
+        // If a pit is ahead of us, and player is at enemy's y position or greater, then jump
+        StartJump();
+    }
+
     if(CheckCollision())
     {
-        if(CheckForPit() && Player::player->GetY() >= yPos)
-        {
-            cout << " JUMP " << endl;
-            // If a pit is ahead of us, and player is at enemy's y position or greater, then jump
-            StartJump();
-        }
-
-
         fallVelocity = 0;
         yPos = prevYPos;
         falling = false;
@@ -337,7 +335,6 @@ void Enemy::Actions(int newAction)
             Die();
         break;
     case 4:
-        cout << "ATTACKING " << endl;
         glPushMatrix();
 
         glTranslated(xPos, yPos, zoom);

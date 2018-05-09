@@ -461,8 +461,8 @@ void GLScene::ClearStaticData()
 
     healthPacks.clear();
 
-//    delete Player::player;
-//    Player::player = nullptr;
+    delete Player::player;
+    Player::player = nullptr;
 }
 
 void GLScene::LoadNewLevel()

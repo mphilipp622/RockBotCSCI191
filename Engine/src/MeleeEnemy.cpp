@@ -137,6 +137,12 @@ void MeleeEnemy::MoveLeft()
     prevXPos = xPos;
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
 
+    if(!falling && CheckForPit() && Player::player->GetY() >= yPos)
+    {
+        // If a pit is ahead of us, and player is at enemy's y position or greater, then jump
+        StartJump();
+    }
+
     if(CheckCollision())
     {
         jump = true;
@@ -146,7 +152,7 @@ void MeleeEnemy::MoveLeft()
         return;
     }
 
-    if(CheckForwardCollision())
+    if(CheckForwardCollision() && !falling)
         StartJump();
 
     sound->SetPosition(xPos, yPos);
@@ -166,6 +172,13 @@ void MeleeEnemy::MoveRight()
 
     prevXPos = xPos;
     xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    if(!falling && CheckForPit() && Player::player->GetY() >= yPos)
+    {
+        // If a pit is ahead of us, and player is at enemy's y position or greater, then jump
+        StartJump();
+    }
+
     if(CheckCollision())
     {
         jump = true;
@@ -175,7 +188,7 @@ void MeleeEnemy::MoveRight()
         return;
     }
 
-    if(CheckForwardCollision())
+    if(CheckForwardCollision() && !falling)
         StartJump();
 
     sound->SetPosition(xPos, yPos);
@@ -282,7 +295,7 @@ bool MeleeEnemy::CheckForPit()
     for(auto& model : SceneManager::GetActiveScene()->staticObjects)
     {
         // directions will be - or + 1 and will therefore modify how this calculation happens.
-        double tempX = xPos + (0.2 * xDirection);
+        double tempX = xPos + (0.3 * xDirection);
         double tempY = yPos - 0.1;
 
         if(Collision(model, tempX, tempY))
