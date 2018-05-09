@@ -184,7 +184,9 @@ class Player : public Model
         //////////////////
         // SPARK PARTICLES
         //////////////////
-        Particles* sparks;
+
+        vector<Particles*> sparks; // container for the sparks. Allows multiple spark particles at once.
+//        Particles* sparks;
 };
 
 #endif // PLAYER_H
