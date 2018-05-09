@@ -64,6 +64,7 @@ void MainMenu::InitModels()
     backArrow = new Model(0.8, 0.6, 3.33, -1.4, "BackButton", "Button");
     howToPlayScreen = new Model(1.0, 1.5, 0, 0, "HowToPlayScreen", "UI");
     creditsScreen = new Model(4.0, 4.0, 2.0, 0, "CreditsScreen", "UI");
+    titleImage = new Model(2.0, 0.4, 1.5, 2.15, "TitleImage", "UI");
 
     for(int i = 0; i < 9; i++)
     {
@@ -83,6 +84,7 @@ void MainMenu::InitModels()
     creditsScreen->InitModel("Images/UI/CreditsScreen.png", true);
     backArrow->InitModel("Images/UI/BackArrow.png", true);
     splashImage->InitModel("Images/UI/Splashscreen.png", true);
+    titleImage->InitModel("Images/UI/RockBotTitle.png", true);
 }
 
 GLint MainMenu::drawGLScene()
@@ -244,4 +246,5 @@ void MainMenu::DrawButtons()
     levelCreator->DrawModel();
     credits->DrawModel();
     howToPlay->DrawModel();
+    titleImage->DrawModel();
 }

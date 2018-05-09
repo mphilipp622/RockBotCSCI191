@@ -33,6 +33,8 @@ class MainMenu : public GLScene
         Model* creditsScreen;
         Model* backArrow;
         Model* splashImage;
+        Model* titleImage;
+
         vector<Model*> levelButtons;
 
         // Screen width and height in pixels
