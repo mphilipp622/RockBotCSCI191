@@ -26,7 +26,7 @@
         </Platform>
     </Platforms>
     <Player xPos="-3.9304287415876833" yPos="-1.4267363971342719"/>
-    <LevelTrigger Width="1" Height="1" xPos="4.3958340553121777" yPos="4.1887004215143468">
+    <LevelTrigger Width="1" Height="1" xPos="4.4176485444152114" yPos="4.1778486137508501">
         <Texture>Images/Misc/Portal.png</Texture>
     </LevelTrigger>
     <TextTriggers>

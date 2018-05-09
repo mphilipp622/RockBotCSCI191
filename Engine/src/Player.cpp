@@ -514,7 +514,7 @@ void Player::MoveLeft()
 //        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
         xPos = prevXPos;
         moving = false;
-        xDirection = 0;
+//        xDirection = 0;
         acceleration = 0;
         return;
     }
@@ -549,7 +549,7 @@ void Player::MoveRight()
 //        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
         xPos = prevXPos;
         moving = false;
-        xDirection = 0;
+//        xDirection = 0;
         acceleration = 0;
         return;
     }
@@ -591,7 +591,7 @@ void Player::StopMove()
             xPos = prevXPos;
             moving = false;
             slowDown = false;
-            xDirection = 0;
+//            xDirection = 0;
             acceleration = 0;
             return;
         }
@@ -624,7 +624,7 @@ void Player::StopMove()
             xPos = prevXPos;
             moving = false;
             slowDown = false;
-            xDirection = 0;
+//            xDirection = 0;
             acceleration = 0;
             return;
         }

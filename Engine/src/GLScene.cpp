@@ -81,8 +81,8 @@ GLint GLScene::drawGLScene()
     if(Player::player->IsDead())
         SetGameOver();
 
-//    if(loadNewLevel)
-//        return 1; // stop rendering the scene while next level loads.
+    if(loadNewLevel)
+        return 1; // stop rendering the scene while next level loads.
 
     gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
             Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),

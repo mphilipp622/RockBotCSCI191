@@ -417,12 +417,12 @@ void LevelCreator::CreateEnemy()
     // Enemy tags will be used in the XML file to determine which class to spawn
     if(type == 1)
     {
-        filepath = enemyRelativeFilePath + "MeleeIdle0.png";
+        filepath = enemyRelativeFilePath + "Melee_0000.png";
         temp = new Model(1.0, 1.0, cameraPosX, cameraPosY, "Enemy" + to_string(enemies.size()), "MeleeEnemy");
     }
     else if(type == 2)
     {
-        filepath = enemyRelativeFilePath + "RangedIdle0.png";
+        filepath = enemyRelativeFilePath + "Ranged_0000.png";
         temp = new Model(1.0, 1.0, cameraPosX, cameraPosY, "Enemy" + to_string(enemies.size()), "RangedEnemy");
     }
 
@@ -1178,9 +1178,9 @@ void LevelCreator::LoadLevelFromXML()
             string texturePath;
 
             if(newTag == "MeleeEnemy")
-                texturePath = "Images/Enemies/MeleeIdle0.png";
+                texturePath = "Images/Enemies/Melee_0000.png";
             else if(newTag == "RangedEnemy")
-                texturePath = "Images/Enemies/RangedIdle0.png";
+                texturePath = "Images/Enemies/Ranged_0000.png";
 
             enemies.back()->InitModel(texturePath, true);
         }
