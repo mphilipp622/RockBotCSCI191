@@ -317,8 +317,14 @@ void GLScene::LoadLevelFromXML()
     mainElements->QueryAttribute("xPos", &playerX);
     mainElements->QueryAttribute("yPos", &playerY);
 
-    Player::player = new Player(playerX, playerY);
-    Player::player->InitPlayer();
+    if(!Player::player)
+    {
+        Player::player = new Player(playerX, playerY);
+        Player::player->InitPlayer();
+    }
+    else
+        Player::player->SetPosition(playerX, playerY);
+
 
     ///////////////
     // LOAD TRIGGER
@@ -455,8 +461,8 @@ void GLScene::ClearStaticData()
 
     healthPacks.clear();
 
-    delete Player::player;
-    Player::player = nullptr;
+//    delete Player::player;
+//    Player::player = nullptr;
 }
 
 void GLScene::LoadNewLevel()

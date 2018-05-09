@@ -58,7 +58,7 @@ MeleeEnemy::MeleeEnemy(double newX, double newY, double newWidth, double newHeig
     acceleration = 0.0;
     accelRate = 0.05;
     deceleration = 0.2; // rate of deceleration
-    maxAcceleration = 2.0;
+    maxAcceleration = 1.5;
     gravity = -9.80;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;

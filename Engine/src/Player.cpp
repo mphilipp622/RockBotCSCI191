@@ -98,7 +98,7 @@ Player::Player(double newX, double newY)
 
     // Chord Timing Window follows the below equation. the constant 60 is for 60 seconds. 1000 is for converting to ms
     chordTimingWindow = (beatsPerInput / (bpm / 60.0)) * 1000;
-    cout << chordTimingWindow << endl;
+
     canPlay = true;
     chordManager = new ChordManager();
 
