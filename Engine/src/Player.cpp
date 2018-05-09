@@ -64,6 +64,8 @@ Player::Player(double newX, double newY)
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
     idleFrame = 0;
+    xDirection = 1.0;
+    prevXDirection = 1.0;
 
     playingChords = false;
     chordDamage = 1;
@@ -124,14 +126,6 @@ Player::Player(double newX, double newY)
 
     test1_font.init("CALIFI.TTF", 24);
     displayText = false;
-
-    ///////////////////////
-    // INITIALIZE PARTICLES
-    ///////////////////////
-    sparks = nullptr;
-
-//    sparkParticles = new Particles();
-//    sparkParticles->GenerateSparks();
 
     chordTimer->Start();
 }
@@ -387,17 +381,22 @@ void Player::Update()
     //////////////
     // DRAW SPARKS
     //////////////
-    if(sparks)
-    {
-        sparks->LifetimeSparks();
-        sparks->DrawParticles();
 
-        if(sparks->GetIsDead())
+    for(auto& spark : sparks)
+    {
+        // iterate over all the sparks and update and draw them
+        spark->LifetimeSparks();
+        spark->DrawSparks();
+
+        if(spark->GetIsDead())
         {
-            delete sparks;
-            sparks = nullptr;
+            // if the spark timer has run out, destroy it
+            auto finder = find(sparks.begin(), sparks.end(), spark);
+            sparks.erase(finder);
+            delete spark;
         }
     }
+
 
 //    if(drawCircle)
 //    {
@@ -833,8 +832,8 @@ void Player::ShootProjectile(double x, double y)
     vector<string> animNames = {"Images/music_note.png"};
     newProjectile->InitAnimations(animNames);
 
-    sparks = new Particles();
-    sparks->GenerateSparks(xPos, yPos);
+    sparks.push_back(new Particles());
+    sparks.back()->GenerateSparks(xPos, yPos, xDirection);
 //    newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord(chordManager->GetNextChord());
     SceneManager::GetActiveScene()->movableObjects.push_back(newProjectile);

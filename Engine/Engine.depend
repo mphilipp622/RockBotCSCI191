@@ -307,7 +307,7 @@
 	<MainMenu.h>
 	<string>
 
-1525745889 e:\college\191\191\engine\include\glscene.h
+1525793978 e:\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -340,7 +340,7 @@
 1525290471 e:\college\191\191\engine\include\gllight.h
 	<GLScene.h>
 
-1525745889 source:e:\college\191\191\engine\src\glscene.cpp
+1525793978 source:e:\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<Parallax.h>
 	<DeltaTime.h>
@@ -364,7 +364,7 @@
 	<GL\GL.h>
 	<string>
 
-1525757185 e:\college\191\191\engine\include\player.h
+1525833658 e:\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -377,6 +377,8 @@
 	<ChordManager.h>
 	<Trigger.h>
 	<SceneManager.h>
+	"freetype.h"
+	<Particles.h>
 
 1525558520 source:e:\college\191\191\engine\src\inputs.cpp
 	<Inputs.h>
@@ -384,7 +386,7 @@
 	<DeltaTime.h>
 	<string>
 
-1525745889 source:e:\college\191\191\engine\src\model.cpp
+1525793978 source:e:\college\191\191\engine\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -398,7 +400,7 @@
 	<TextureLoader.h>
 	<DeltaTime.h>
 
-1525759021 source:e:\college\191\191\engine\src\player.cpp
+1525834834 source:e:\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -1211,7 +1213,7 @@
 	<Player.h>
 	<Projectile.h>
 
-1525765053 e:\college\191\191\engine\include\mainmenu.h
+1525830152 e:\college\191\191\engine\include\mainmenu.h
 	<GLScene.h>
 	<Parallax.h>
 
@@ -1249,12 +1251,12 @@
 1525763018 source:e:\college\191\191\engine\src\meleeenemy.cpp
 	"MeleeEnemy.h"
 
-1525758234 source:e:\college\191\191\engine\src\particles.cpp
+1525834710 source:e:\college\191\191\engine\src\particles.cpp
 	"Particles.h"
 	<iomanip>
 	<cmath>
 
-1525755140 e:\college\191\191\engine\include\particles.h
+1525834889 e:\college\191\191\engine\include\particles.h
 	<GL/gl.h>
 	<math.h>
 	<stdlib.h>
@@ -1263,11 +1265,12 @@
 	<vector>
 	<TextureLoader.h>
 	<DeltaTime.h>
+	<algorithm>
 
 1525763018 source:e:\college\191\191\engine\src\rangedenemy.cpp
 	"RangedEnemy.h"
 
-1525764996 source:e:\college\191\191\engine\src\mainmenu.cpp
+1525830152 source:e:\college\191\191\engine\src\mainmenu.cpp
 	"MainMenu.h"
 	<GLLight.h>
 	<LevelCreator.h>
@@ -1284,7 +1287,7 @@
 1525290471 e:\college\191\191\engine\include\level1.h
 	<GLScene.h>
 
-1525761416 source:e:\college\191\191\engine\src\levelcreator.cpp
+1525794246 source:e:\college\191\191\engine\src\levelcreator.cpp
 	"LevelCreator.h"
 	<GLLight.h>
 
@@ -1645,7 +1648,7 @@
 1525508408 e:\college\191\191\engine\include\trigger.h
 	<string>
 
-1525508408 source:e:\college\191\191\engine\src\trigger.cpp
+1525793978 source:e:\college\191\191\engine\src\trigger.cpp
 	"Trigger.h"
 
 1519274979 e:\college\191\191\engine\common\include\gl\glut.h
@@ -1800,5 +1803,37 @@
 1525817398 c:\users\sesat\documents\github\191\engine\freetype-windows-binaries-master\include\freetype\fttrigon.h
 
 1525817398 source:c:\users\sesat\documents\github\191\engine\src\freetype.cpp
+	"freetype.h"
+
+1525793978 e:\college\191\191\engine\include\freetype.h
+	<ft2build.h>
+	<freetype/freetype.h>
+	<freetype/ftglyph.h>
+	<freetype/ftoutln.h>
+	<freetype/fttrigon.h>
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<vector>
+	<string>
+	<stdexcept>
+
+1525793978 e:\college\191\191\engine\freetype-windows-binaries-master\include\ft2build.h
+	<freetype/config/ftheader.h>
+
+1525793977 e:\college\191\191\engine\freetype-windows-binaries-master\include\freetype\config\ftheader.h
+
+1525793977 e:\college\191\191\engine\freetype-windows-binaries-master\include\freetype\freetype.h
+	<ft2build.h>
+
+1525793977 e:\college\191\191\engine\freetype-windows-binaries-master\include\freetype\ftglyph.h
+	<ft2build.h>
+
+1525793978 e:\college\191\191\engine\freetype-windows-binaries-master\include\freetype\ftoutln.h
+	<ft2build.h>
+
+1525793978 e:\college\191\191\engine\freetype-windows-binaries-master\include\freetype\fttrigon.h
+
+1525793978 source:e:\college\191\191\engine\src\freetype.cpp
 	"freetype.h"
 
