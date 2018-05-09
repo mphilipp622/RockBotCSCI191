@@ -463,6 +463,7 @@ void LevelCreator::CreateTextTrigger()
 
     // We'll use the model's name for storing the text in the level creator. This avoids making a hashtable or something.
     triggers.push_back(new Model(1.0, 1.0, cameraPosX, cameraPosY, newText, "TextTrigger"));
+    triggers.back()->SetZoom(-0.1);
     triggers.back()->InitModel("Images/Misc/TextTrigger.png", true);
 
     SetSelectedModel(triggers.back());
@@ -1098,7 +1099,7 @@ void LevelCreator::LoadLevelFromXML()
             newText = child->FirstChildElement()->GetText(); // get the name of the enemy
 
             triggers.push_back(new Model(newWidth, newHeight, newX, newY, newText, "TextTrigger"));
-
+            triggers.back()->SetZoom(-0.1);
             triggers.back()->InitModel("Images/Misc/TextTrigger.png", true);
         }
 

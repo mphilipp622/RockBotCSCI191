@@ -282,7 +282,7 @@ bool MeleeEnemy::CheckForPit()
     for(auto& model : SceneManager::GetActiveScene()->staticObjects)
     {
         // directions will be - or + 1 and will therefore modify how this calculation happens.
-        double tempX = xPos + (0.3 * xDirection);
+        double tempX = xPos + (0.2 * xDirection);
         double tempY = yPos - 0.1;
 
         if(Collision(model, tempX, tempY))
