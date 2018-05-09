@@ -61,9 +61,9 @@ void MainMenu::InitModels()
     howToPlay = new Model(2.0, 0.5, 1.5, 0.1, "HowToPlayButton", "Button");
     credits = new Model(2.0, 0.5, 1.5, -0.6, "CreditsButton", "Button");
     exit = new Model(2.0, 0.5, 1.5, -1.3, "ExitButton", "Button");
-    backArrow = new Model(0.8, 0.6, 3.33, -1.4, "BackButton", "Button");
-    howToPlayScreen = new Model(1.0, 1.5, 0, 0, "HowToPlayScreen", "UI");
-    creditsScreen = new Model(4.0, 4.0, 2.0, 0, "CreditsScreen", "UI");
+    backArrow = new Model(0.5, 0.4, 4.0, -1.9, "BackButton", "Button");
+    howToPlayScreen = new Model(4.8, 5.0, 2.0, 0, "HowToPlayScreen", "UI");
+    creditsScreen = new Model(3.5, 3.5, 2.0, 0, "CreditsScreen", "UI");
     titleImage = new Model(2.0, 0.4, 1.5, 2.15, "TitleImage", "UI");
 
     for(int i = 0; i < 9; i++)

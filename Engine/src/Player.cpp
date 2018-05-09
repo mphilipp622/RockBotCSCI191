@@ -94,7 +94,7 @@ Player::Player(double newX, double newY)
     cooldownTimer = new Timer();
     cooldownTargetTime = 0;
     bpm = 120;
-    beatsPerInput = 2;
+    beatsPerInput = 4;
 
     // Chord Timing Window follows the below equation. the constant 60 is for 60 seconds. 1000 is for converting to ms
     chordTimingWindow = (beatsPerInput / (bpm / 60.0)) * 1000;
