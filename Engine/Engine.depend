@@ -231,7 +231,7 @@
 	<GL\GL.h>
 	<iostream>
 
-1525818830 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1525828980 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -239,7 +239,7 @@
 	<cmath>
 	<Projectile.h>
 
-1525772869 c:\users\seapanda\documents\college\191\191\engine\include\player.h
+1525828451 c:\users\seapanda\documents\college\191\191\engine\include\player.h
 	<GL\GL.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -253,6 +253,7 @@
 	<Trigger.h>
 	<SceneManager.h>
 	"freetype.h"
+	<Particles.h>
 
 1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\timer.cpp
 	<Timer.h>
@@ -1156,7 +1157,7 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1525816728 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
+1525828475 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
 	<GL/gl.h>
 	<math.h>
 	<stdlib.h>
@@ -1165,8 +1166,9 @@
 	<vector>
 	<TextureLoader.h>
 	<DeltaTime.h>
+	<algorithm>
 
-1525816734 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
+1525824884 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
 	"Particles.h"
 	<iomanip>
 	<cmath>
@@ -1175,11 +1177,11 @@
 	<string>
 	<unordered_map>
 
-1525818944 c:\users\seapanda\documents\college\191\191\engine\include\mainmenu.h
+1525821894 c:\users\seapanda\documents\college\191\191\engine\include\mainmenu.h
 	<GLScene.h>
 	<Parallax.h>
 
-1525820785 source:c:\users\seapanda\documents\college\191\191\engine\src\mainmenu.cpp
+1525821894 source:c:\users\seapanda\documents\college\191\191\engine\src\mainmenu.cpp
 	"MainMenu.h"
 	<GLLight.h>
 	<LevelCreator.h>

@@ -125,6 +125,11 @@ Player::Player(double newX, double newY)
     test1_font.init("CALIFI.TTF", 24);
     displayText = false;
 
+    ///////////////////////
+    // INITIALIZE PARTICLES
+    ///////////////////////
+    sparks = nullptr;
+
 //    sparkParticles = new Particles();
 //    sparkParticles->GenerateSparks();
 
@@ -378,6 +383,21 @@ void Player::Update()
 
     if(displayText)
         DisplayText();
+
+    //////////////
+    // DRAW SPARKS
+    //////////////
+    if(sparks)
+    {
+        sparks->LifetimeSparks();
+        sparks->DrawParticles();
+
+        if(sparks->GetIsDead())
+        {
+            delete sparks;
+            sparks = nullptr;
+        }
+    }
 
 //    if(drawCircle)
 //    {
@@ -812,6 +832,9 @@ void Player::ShootProjectile(double x, double y)
     Projectile *newProjectile = new Projectile(xPos, yPos, 0.4, 0.5, 1, 3.5, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
     vector<string> animNames = {"Images/music_note.png"};
     newProjectile->InitAnimations(animNames);
+
+    sparks = new Particles();
+    sparks->GenerateSparks(xPos, yPos);
 //    newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord(chordManager->GetNextChord());
     SceneManager::GetActiveScene()->movableObjects.push_back(newProjectile);

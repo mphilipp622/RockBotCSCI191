@@ -7,7 +7,6 @@ Particles::Particles()
     //ctor
     numDrops = 0;
     texture = new TextureLoader();
-    texture->BindTexture("Images/Misc/MusicParticle3.png");
 }
 
 Particles::~Particles()
@@ -148,6 +147,7 @@ double Particles::RadiusRandom()
 void Particles::GenerateMusicParticles(int x, int y, double width, double height)
 {
 
+    texture->BindTexture("Images/Misc/MusicParticle3.png");
     double radius = width / 2;
 
     int newDrops = 25; // 60 is arbitrary. Could put anything
@@ -188,33 +188,59 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
 
 }
 
-void Particles::GenerateSparks(int x, int y, double width, double height)
+void Particles::GenerateSparks(int x, int y)
 {
 
-//    int newDrops = 100; // 60 is arbitrary. Could put anything
-//
-//    if(numDrops + newDrops > MAX_MUSIC_DROPS)
-//        newDrops = MAX_MUSIC_DROPS - numDrops;
-//
-//    int randVal[2] = {-1, 1};
-//    for(int i = 0; i < newDrops; i++)
-//    {
-//        drops.push_back(Node(newX, newY));
-//        drops.back().directionX = (double) ((rand() % 1.0) * randVal[rand() % 2]);
-//        drops.back().directionY = (double) ((rand() % 1.0) * randVal[rand() % 2]);
-////        drops[i].alive = true;
-////        drops[i].xPos = newX;
-////        drops[i].yPos = newY;
-////        drops[i].directionX = 0; // these constant values are pretty much test and check
-////        drops[i].directionY = 0;
-//        drops[i].mass = 0.5 + 0.5 * DoubleRandom();
-//        drops[i].time = new Timer();
-//        drops[i].time->Start();
-//
-//    }
-//
-//    numDrops += newDrops;
-//
-//    if(numDrops >= MAX_MUSIC_DROPS)
-//        numDrops = MAX_MUSIC_DROPS;
+    texture->BindTexture("Images/Misc/MusicParticle.png");
+    int newDrops = 50; // 60 is arbitrary. Could put anything
+
+    double randNum[2] = {-1.0, 1.0};
+
+    if(numDrops + newDrops > MAX_SPARKS)
+        newDrops = MAX_SPARKS - numDrops;
+
+    for(int i = numDrops; i < numDrops + newDrops; i++)
+    {
+        drops.push_back(Node(x, y, "Node" + to_string(i)));
+        drops.back().directionX = randNum[rand() % 2] * DoubleRandom(); // these constant values are pretty much test and check
+        drops.back().directionY = randNum[rand() % 2] * DoubleRandom();
+        drops.back().mass = 0.5 + 0.5 * DoubleRandom();
+    }
+
+    numDrops += newDrops;
+
+
+    if(numDrops >= MAX_SPARKS)
+        numDrops = 0;
 }
+
+void Particles::LifetimeSparks()
+{
+    if(drops.size() <= 0)
+        isDead = true;
+
+    for(auto drop : drops)
+    {
+        if(drop.alive)
+        {
+            drop.xPos += drop.directionX;
+            drop.yPos += (drop.directionY + (GRAVITY * drop.mass));
+        }
+
+        if(drop.time->GetTicks() > 500)
+        {
+            auto finder = find(drops.begin(), drops.end(), drop);
+
+            drops.erase(finder);
+        }
+
+//            if(drops[i].yPos < -5.0 && drops[i].xPos > 5.0)
+//                drops[i].alive = false; // bounds checking to destroy particle. Probably change later.
+    }
+}
+
+bool Particles::GetIsDead()
+{
+    return isDead;
+}
+

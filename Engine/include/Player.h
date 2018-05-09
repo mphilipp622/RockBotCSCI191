@@ -14,6 +14,7 @@
 #include <Trigger.h>
 #include <SceneManager.h>
 #include "freetype.h"
+#include <Particles.h>
 //#include <Projectile.h>
 
 using namespace std;
@@ -179,6 +180,11 @@ class Player : public Model
         bool displayText; // flag for displaying text in Player::Update(). Will be set by CheckTriggerCollision() when player steps inside a text trigger
         freetype::font_data test1_font;
         void DisplayText(); // This function is called at the bottom of Player::Update(). It will be where freetype2::print is called
+
+        //////////////////
+        // SPARK PARTICLES
+        //////////////////
+        Particles* sparks;
 };
 
 #endif // PLAYER_H
