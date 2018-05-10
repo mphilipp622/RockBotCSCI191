@@ -81,8 +81,7 @@ GLint GLScene::drawGLScene()
     if(Player::player->IsDead())
         SetGameOver();
 
-    if(loadNewLevel)
-        return 1; // stop rendering the scene while next level loads.
+
 
     gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
             Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
@@ -95,6 +94,17 @@ GLint GLScene::drawGLScene()
         mainMenuButton->DrawModel();
         return 1;
     }
+
+    if(paused)
+    {
+        pauseWindow->DrawModel();
+        resumeButton->DrawModel();
+        mainMenuButton->DrawModel();
+        return 1;
+    }
+
+    if(loadNewLevel)
+        return 1; // stop rendering the scene while next level loads.
 
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
@@ -174,14 +184,30 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             CheckGameOverCollision(wParam);
             return 1;
         }
+        if(wParam == VK_BACK)
+            SetPaused();
+        if(paused && (wParam == VK_NUMPAD1 || wParam == 0x31))
+            paused = false;
+        else if(paused && (wParam == VK_NUMPAD2 || wParam == 0x32))
+        {
+            loadNewLevel = true;
+            AudioEngine::engine->stopAllSounds();
+            SceneManager::LoadScene("MainMenu");
+            SceneManager::DeleteScene(sceneName);
+            delete this;
+        }
 
 //        testAudio->UpdatePosition();
 
 //        testAudio->Update();
 //        testAudio->Play();
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
-        keyboardAndMouse->wParamKeys = wParam;
-        keyboardAndMouse->KeyPressed(Player::player);
+        if(!paused)
+        {
+            keyboardAndMouse->wParamKeys = wParam;
+            keyboardAndMouse->KeyPressed(Player::player);
+        }
+
 //        keyboardAndMouse->KeyEnv(background, 0.1);
     }
     if(uMsg == WM_KEYUP)
@@ -202,9 +228,23 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             CheckGameOverCollision(LOWORD(lParam), HIWORD(lParam));
             return 1;
         }
+        if(paused && CheckPointerCollision(resumeButton, LOWORD(lParam), HIWORD(lParam)))
+            paused = false;
+        else if(paused && CheckPointerCollision(mainMenuButton, LOWORD(lParam), HIWORD(lParam)))
+        {
+            loadNewLevel = true;
+            AudioEngine::engine->stopAllSounds();
+            SceneManager::LoadScene("MainMenu");
+            SceneManager::DeleteScene(sceneName);
+            delete this;
+        }
 
-        keyboardAndMouse->wParamMouse = wParam;
-        keyboardAndMouse->MouseDown(Player::player, lParam);
+        if(!paused)
+        {
+            keyboardAndMouse->wParamMouse = wParam;
+            keyboardAndMouse->MouseDown(Player::player, lParam);
+        }
+
     }
     if(uMsg == WM_RBUTTONDOWN)
     {
@@ -469,6 +509,34 @@ void GLScene::SetGameOver()
 
     gameOver = true;
 }
+
+void GLScene::GameWon()
+{
+    // Create menu graphics for game over menu if they don't already exist
+    gameOverWindow = new Model(1.5, 1.5, Player::player->GetX(), Player::player->GetY(), "GameOverMenu", "UI");
+    replayButton = new Model(1.0, 0.3, gameOverWindow->GetX(), gameOverWindow->GetY() + 0.1, "ReplayButton", "UI");
+    mainMenuButton = new Model(1.0, 0.3, gameOverWindow->GetX(), gameOverWindow->GetY() - 0.3, "MainMenuButton", "UI");
+
+    gameOverWindow->InitModel("Images/UI/YouWinMenu.png", true);
+    replayButton->InitModel("Images/UI/Restart.png", true);
+    mainMenuButton->InitModel("Images/UI/MainMenu.png", true);
+
+    gameOver = true;
+}
+
+void GLScene::SetPaused()
+{
+    pauseWindow = new Model(1.5, 1.5, Player::player->GetX(), Player::player->GetY(), "GameOverMenu", "UI");
+    resumeButton = new Model(1.0, 0.3, pauseWindow->GetX(), pauseWindow->GetY() + 0.1, "ReplayButton", "UI");
+    mainMenuButton = new Model(1.0, 0.3, pauseWindow->GetX(), pauseWindow->GetY() - 0.3, "MainMenuButton", "UI");
+
+    pauseWindow->InitModel("Images/UI/PauseMenu.png", true);
+    resumeButton->InitModel("Images/UI/Resume.png", true);
+    mainMenuButton->InitModel("Images/UI/MainMenu.png", true);
+
+    paused = true;
+}
+
 
 void GLScene::CheckGameOverCollision(WPARAM keyPressed)
 {

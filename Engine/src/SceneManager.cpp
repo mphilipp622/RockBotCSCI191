@@ -2,6 +2,7 @@
 #include <GLScene.h>
 #include <LevelCreator.h>
 #include <MainMenu.h>
+#include <fstream>
 
 // global static variables. Bad design but we've gone too far down this rabbit hole to come back now
 unordered_map<string, GLScene*> SceneManager::scenes;
@@ -26,11 +27,10 @@ GLScene* SceneManager::GetActiveScene()
 
 void SceneManager::LoadScene(string sceneName)
 {
+    // check if the file exists or not.
+
     // if we already have the level loaded, we want to delete it
     auto finder = scenes.find(sceneName); // find the scene in scene manager
-
-    if(activeScene == "MainMenu")
-        AudioEngine::engine->stopAllSounds();
 
     string oldScene = activeScene;
 
@@ -39,6 +39,7 @@ void SceneManager::LoadScene(string sceneName)
 
     if(sceneName == "LevelCreator")
     {
+        AudioEngine::engine->stopAllSounds();
         LevelCreator* creatorScene = new LevelCreator();
 
         scenes.insert( {sceneName, creatorScene} );
@@ -46,6 +47,7 @@ void SceneManager::LoadScene(string sceneName)
     }
     else if(sceneName == "MainMenu")
     {
+        AudioEngine::engine->stopAllSounds();
         MainMenu* newMenu = new MainMenu();
 
         scenes.insert( {sceneName, newMenu} );
@@ -53,6 +55,11 @@ void SceneManager::LoadScene(string sceneName)
     }
     else
     {
+        ifstream checkInput("LevelData/" + sceneName + ".xml");
+        if(!checkInput)
+            return;
+
+        AudioEngine::engine->stopAllSounds();
         GLScene* newGame = new GLScene(sceneName); // create new map
 
         scenes.insert( {sceneName, newGame} ); // insert map into hash table
@@ -66,6 +73,16 @@ void SceneManager::LoadScene(string sceneName)
 
 void SceneManager::LoadNextLevel()
 {
+    ifstream checkFile("LevelData/Level" + to_string((activeScene.back() - '0') + 1) + ".xml");
+
+    if(!checkFile)
+    {
+        // if there is not a next level, then we've reached the end.
+        scenes[activeScene]->GameWon();
+        return;
+    }
+
+
     string currentLevel = activeScene; // hold onto this so we can delete it after we initialize new level.
 
     // STop rendering current level

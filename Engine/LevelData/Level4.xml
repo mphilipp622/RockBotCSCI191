@@ -1,0 +1,39 @@
+<Level4>
+    <Platforms>
+        <Platform Width="7.8999949" Height="0.29999992" xPos="-0.04909177228618556" yPos="-1.9513979055508415">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="2.3999999" Height="0.19999993" xPos="0.174890271873925" yPos="-0.5706945588537089">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="2.7999995" Height="0.19999993" xPos="2.9363156172516884" yPos="0.50626130220893517">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+    </Platforms>
+    <Player xPos="-3.5760458222642035" yPos="-1.1966176234029378"/>
+    <LevelTrigger Width="1" Height="1" xPos="3.9166216148607944" yPos="1.1966176234029378">
+        <Texture>Images/Misc/Portal.png</Texture>
+    </LevelTrigger>
+    <TextTriggers>
+        <Trigger Width="2.3" Height="0.89999998" xPos="0.12165589590750456" yPos="-0.014037218450499895">
+            <Text>Hello, Worl!</Text>
+        </Trigger>
+    </TextTriggers>
+    <HealthPacks>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="0.092047511512592106" yPos="-1.6016266651700863"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="1.8363478546762126" yPos="0.8146204590089231"/>
+    </HealthPacks>
+    <Background Width="15.599999999999987" Height="14.599999999999991">
+        <Texture>Images/Backgrounds/BGSciFi.jpg</Texture>
+    </Background>
+    <Enemies>
+        <Enemy xPos="3.0375678799155392" yPos="-1.325484136692485">
+            <Name>Enemy0</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="0.11045701381511054" yPos="1.7995288105790337">
+            <Name>Enemy1</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+    </Enemies>
+</Level4>

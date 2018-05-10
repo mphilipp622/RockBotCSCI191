@@ -1,5 +1,6 @@
 #include "LevelCreator.h"
 
+#include <fstream>
 #include <GLLight.h>
 
 LevelCreator::LevelCreator()
@@ -797,7 +798,7 @@ void LevelCreator::SaveLevelToXML()
         return;
     }
 
-    cout << "Input a number for the level (0 - 9): ";
+    cout << "Input a number for the level (1 - 9): ";
 
     char num;
 
@@ -806,6 +807,12 @@ void LevelCreator::SaveLevelToXML()
     cin.ignore(10000,'\n');
 
     int convertNum = num - 48;
+
+    if(convertNum > 9 || convertNum < 1)
+    {
+        cout << "ERROR: only numbers 1 - 9 are valid" << endl;
+        return;
+    }
 
     string filepath = "LevelData/Level" + to_string(convertNum) + ".xml";
 
@@ -1029,6 +1036,13 @@ void LevelCreator::LoadLevelFromXML()
     int convertNum = num - 48;
 
     string filepath = "LevelData/Level" + to_string(convertNum) + ".xml";
+    ifstream checkFile(filepath);
+
+    if(!checkFile)
+    {
+        cout << "ERROR: " << filepath << " DOES NOT EXIST" << endl;
+        return;
+    }
 
     ClearScene();
 

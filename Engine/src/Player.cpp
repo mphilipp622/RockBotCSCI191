@@ -398,7 +398,6 @@ void Player::Update()
 
     if(falling)
     {
-        cout << "FALLING " << endl;
         if(fallTimer->GetTicks() > 3000)
             isDead = true;
     }
@@ -434,7 +433,9 @@ void Player::Jump()
     if(jumpVelocity <= 0 && !falling)
     {
         falling = true;
+        jump = false;
         fallTimer->Start();
+        return;
     }
 
     CheckTriggerCollision(); // check for text or level triggers
@@ -456,7 +457,6 @@ void Player::ApplyGravity()
 {
     if(DeltaTime::GetDeltaTime() > 0.2f)
         return; // kill if delta time is too high
-
 
     fallVelocity += gravity * DeltaTime::GetDeltaTime();
 

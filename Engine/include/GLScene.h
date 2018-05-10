@@ -57,6 +57,8 @@ class GLScene
         // called on by Player::TakeDamage()
         void SetGameOver();
 
+        void GameWon();
+
     protected:
         unordered_map<string, AudioSource*> audioSources; // map of all environmental sounds in scene
         AudioEngine* audioEngine;
@@ -87,8 +89,10 @@ class GLScene
         Model* gameOverWindow;
         Model* replayButton;
         Model* mainMenuButton;
+        Model* pauseWindow;
+        Model* resumeButton;
 
-        bool gameOver;
+        bool gameOver, paused;
 
         void CheckGameOverCollision(WPARAM keyPressed);
         void CheckGameOverCollision(double mouseX, double mouseY);
@@ -100,7 +104,7 @@ class GLScene
         // Checks if position is overlapping specified min and max values. Used by CheckPointerCollision()
         bool Overlap(double pos, double min, double max);
 
-
+        void SetPaused();
 };
 
 #endif // GLSCENE_H
