@@ -80,8 +80,6 @@ Player::Player(double newX, double newY)
     // create icons for left and right mouse. They will be placed on the left and right side of our player
     icons =
     {
-        new Model(0.4, 0.45, xPos + width / 2, yPos + height / 2, "EKeyIcon", "HUD"),
-        new Model(0.4, 0.45, xPos - width / 2, yPos + height / 2, "QKeyIcon", "HUD"),
         new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon", "HUD"),
         new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon", "HUD")
     };
@@ -114,10 +112,8 @@ Player::Player(double newX, double newY)
 
     iconNames =
     {
-        { 0, "Images/HUD/EKey.png"},
-        { 1, "Images/HUD/QKey.png"},
-        { 2, "Images/HUD/LeftMouse.png"},
-        { 3, "Images/HUD/RightMouse.png"}
+        { 0, "Images/HUD/XButton.png"},
+        { 1, "Images/HUD/BButton.png"}
     };
 
     if(player)
@@ -125,7 +121,7 @@ Player::Player(double newX, double newY)
 
     player = this;
 
-    PlayChords(true);
+//    PlayChords(true);
 
     test1_font.init("CALIFI.TTF", 24);
     displayText = false;
@@ -227,10 +223,8 @@ void Player::InitPlayer()
     attackAnim[2].BindTexture("Images/Player/Attack_0002.png");
     attackAnim[3].BindTexture("Images/Player/Attack_0003.png");
 
-    icons[0]->InitModel("Images/HUD/EKey.png", true);
-    icons[1]->InitModel("Images/HUD/QKey.png", true);
-    icons[2]->InitModel("Images/HUD/LeftMouse.png", true);
-    icons[3]->InitModel("Images/HUD/RightMouse.png", true);
+    icons[0]->InitModel("Images/HUD/XButton.png", true);
+    icons[1]->InitModel("Images/HUD/BButton.png", true);
 
 //    musicCircle->InitModel("Images/MusicSprites/MusicCircle.png", true);
 
@@ -328,15 +322,15 @@ void Player::Update()
         // check if timer has expired for invincibility.
         CheckInvincible();
 
-//    if(playingChords)
-//    {
-//
-//        if(chordTimer->GetTicks() > chordTimingWindow)
-//            // if user has exceeded their timing window, re-random the input. Might want to punish them and add a cooldown, not sure yet
-//            NextInput();
-//
-//        UpdateIcons();
-//    }
+    if(playingChords)
+    {
+
+        if(chordTimer->GetTicks() > chordTimingWindow)
+            // if user has exceeded their timing window, re-random the input. Might want to punish them and add a cooldown, not sure yet
+            NextInput();
+
+        UpdateIcons();
+    }
 
     if(moving && !pushBack)
     {
@@ -866,10 +860,8 @@ void Player::UpdateIcons()
 //    inputIcon->SetPosition(xPos, yPos + height / 1.5);
 //    inputIcon->InitModel(iconNames[activeInput], true);
 
-    icons[0]->SetPosition(xPos + width / 1.5, yPos + height / 2);
-    icons[1]->SetPosition(xPos - width / 1.5, yPos + height / 2);
-    icons[2]->SetPosition(xPos - width / 1.5, yPos);
-    icons[3]->SetPosition(xPos + width / 1.5, yPos);
+    icons[0]->SetPosition(xPos - width / 1.5, yPos);
+    icons[1]->SetPosition(xPos + width / 1.5, yPos);
 
     if(playingChords)
     {
@@ -926,8 +918,8 @@ void Player::CheckUserInput(int userInput, double mouseX, double mouseY)
         // stop execution if waiting for cooldown
         return;
 
-//    if(activeInput == userInput)
-//    {
+    if(activeInput == userInput)
+    {
         double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
         double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
         double aspectRatio = screenWidth / screenHeight;
@@ -935,7 +927,7 @@ void Player::CheckUserInput(int userInput, double mouseX, double mouseY)
         double mousePosY = -(mouseY / (screenHeight / 2) - 1.0) * 3.33;
         ShootProjectile(mousePosX, mousePosY);
 
-//        // reset input check
+        // reset input check
 //        NextInput();
 
         // OLD CODE FOR CIRCLE AOE ATTACK
@@ -956,6 +948,7 @@ void Player::CheckUserInput(int userInput, double mouseX, double mouseY)
 //        PlayChords(false);
 //        canPlay =  false;
 //    }
+    }
 }
 
 void Player::UpdateCooldownTimer()

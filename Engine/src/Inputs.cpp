@@ -35,14 +35,12 @@ void Inputs::KeyPressed(Player* model)
         model->StartJump();
         keys["Jump"] = true;
     }
-
-    if(wParamKeys == eKey)
-        model->CheckUserInput(0, mousePosX, mousePosY);
-    if(wParamKeys == qKey)
-        model->CheckUserInput(1, mousePosX, mousePosY);
-
+    if(!keys["PlayChord"] && wParamKeys == VK_SHIFT)
+    {
+        model->PlayChords(true);
+        keys["PlayChord"] = true;
+    }
 }
-
 
 
 void Inputs::KeyUp(Player* model)
@@ -63,6 +61,11 @@ void Inputs::KeyUp(Player* model)
     {
         keys["Jump"] = false;
     }
+    if(keys["PlayChord"] && wParamKeys == VK_SHIFT)
+    {
+        model->PlayChords(false);
+        keys["PlayChord"] = false;
+    }
 //    if(keys["PlayChord"] && wParamKeys == VK_SHIFT)
 //    {
 //        model->PlayChords(false);
@@ -74,10 +77,10 @@ void Inputs::MouseDown(Player* model, LPARAM lParam)
 {
 
     // using 0x5 for lmouse and 0x6 for rmouse. For some reason, windows is sending those values when shift is held down instead of 0x1 and 0x2
-    if(wParamMouse == 1)
+    if(keys["PlayChord"] && wParamMouse == 0x5)
     {
-
-        model->CheckUserInput(2, mousePosX, mousePosY);
+        cout << "HELLO" << endl;
+        model->CheckUserInput(0, mousePosX, mousePosY);
         // convert mouse X and Y to openGL coordinates
 //        double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
 //        double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
@@ -88,8 +91,8 @@ void Inputs::MouseDown(Player* model, LPARAM lParam)
 //        model->rotateX += currentY;
 //        model->rotateY += currentX;
     }
-    if(wParamMouse == 2)
-        model->CheckUserInput(3, mousePosX, mousePosY);
+    if(keys["PlayChord"] && wParamMouse == 0x6)
+        model->CheckUserInput(1, mousePosX, mousePosY);
 
 
 //    prevMouseX = xNew;
