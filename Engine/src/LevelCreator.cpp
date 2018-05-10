@@ -633,16 +633,16 @@ void LevelCreator::DeleteObject()
 
         if(finderPlatform != platforms.end())
             // we found the selected model in platforms. Now remove it
-            platforms.erase(finderPlatform);
+            platforms.erase(std::remove(platforms.begin(), platforms.end(), selectedModel), platforms.end());
         else if(finderEnemy != enemies.end())
              // we found selected model in enemies. Remove it
-            enemies.erase(finderEnemy);
+            enemies.erase(std::remove(enemies.begin(), enemies.end(), selectedModel), enemies.end());
         else if(finderTrigger != triggers.end())
             // found trigger, erase it
-            triggers.erase(finderTrigger);
+            triggers.erase(std::remove(triggers.begin(), triggers.end(), selectedModel), triggers.end());
         else if(finderHealthPack != healthPacks.end())
             // found the health pack, erase it
-            healthPacks.erase(finderHealthPack);
+            healthPacks.erase(std::remove(healthPacks.begin(), healthPacks.end(), selectedModel), healthPacks.end());
 
     }
 

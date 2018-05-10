@@ -30,7 +30,7 @@ HINSTANCE	hInstance;		// Holds The Instance Of The Application
 
 bool	keys[256];			// Array Used For The Keyboard Routine
 bool	active=TRUE;		// Window Active Flag Set To TRUE By Default
-bool	fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+bool	fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
@@ -108,7 +108,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	WindowRect.top=(long)0;				// Set Top Value To 0
 	WindowRect.bottom=(long)height;		// Set Bottom Value To Requested Height
 
-	fullscreen=fullscreenflag;			// Set The Global Fullscreen Flag
+	fullscreen=TRUE;			// Set The Global Fullscreen Flag
 
 	hInstance			= GetModuleHandle(NULL);				// Grab An Instance For Our Window
 	wc.style			= CS_HREDRAW | CS_VREDRAW | CS_OWNDC;	// Redraw On Size, And Own DC For Window.
@@ -138,9 +138,10 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 		dmScreenSettings.dmBitsPerPel	= bits;					// Selected Bits Per Pixel
 		dmScreenSettings.dmFields=DM_BITSPERPEL|DM_PELSWIDTH|DM_PELSHEIGHT;
 
-		dwExStyle=WS_EX_APPWINDOW;								// Window Extended Style
-		dwStyle= WS_POPUP;										// Windows Style. Must handle GSync situation
-		//ShowCursor(FALSE);									// Hide Mouse Pointer
+		dwExStyle=WS_EX_APPWINDOW | WS_EX_OVERLAPPEDWINDOW;								// Window Extended Style
+//		dwStyle= WS_POPUP;										// Windows Style. Must handle GSync situation
+		dwStyle= WS_POPUP | WS_MAXIMIZE;
+		ShowCursor(TRUE);									// Hide Mouse Pointer
 	}
 	else
 	{

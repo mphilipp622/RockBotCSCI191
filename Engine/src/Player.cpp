@@ -386,8 +386,9 @@ void Player::Update()
         if(spark->GetIsDead())
         {
             // if the spark timer has run out, destroy it
-            auto finder = find(sparks.begin(), sparks.end(), spark);
-            sparks.erase(finder);
+//            auto finder = find(sparks.begin(), sparks.end(), spark);
+//            sparks.erase(finder);
+            sparks.erase(std::remove(sparks.begin(), sparks.end(), spark), sparks.end());
             delete spark;
         }
     }
@@ -415,7 +416,7 @@ void Player::Update()
 
 void Player::StartJump()
 {
-    if(jump)
+    if(jump || falling)
         return; // if we're already jumping, don't allow another jump
 
     jump = true;
@@ -430,7 +431,7 @@ void Player::Jump()
     prevYPos = yPos;
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
 
-    if(jumpVelocity < 0 && !falling)
+    if(jumpVelocity <= 0 && !falling)
     {
         falling = true;
         fallTimer->Start();
@@ -456,11 +457,6 @@ void Player::ApplyGravity()
     if(DeltaTime::GetDeltaTime() > 0.2f)
         return; // kill if delta time is too high
 
-    if(!falling)
-    {
-        falling = true;
-        fallTimer->Start();
-    }
 
     fallVelocity += gravity * DeltaTime::GetDeltaTime();
 
@@ -480,6 +476,14 @@ void Player::ApplyGravity()
         falling = false;
         fallTimer->Stop();
         return;
+    }
+    else
+    {
+        if(!falling)
+        {
+            falling = true;
+            fallTimer->Start();
+        }
     }
 
     AudioEngine::SetPosition(xPos, yPos);
@@ -814,8 +818,9 @@ void Player::ConsumeHealthPack(Model* healthPack)
     if(hp > 10)
         hp = 10; // clamp HP to a maximum of 10
 
-    auto findHealthPack = find(SceneManager::GetActiveScene()->healthPacks.begin(), SceneManager::GetActiveScene()->healthPacks.end(), healthPack);
-    SceneManager::GetActiveScene()->healthPacks.erase(findHealthPack);
+//    auto findHealthPack = find(SceneManager::GetActiveScene()->healthPacks.begin(), SceneManager::GetActiveScene()->healthPacks.end(), healthPack);
+//    SceneManager::GetActiveScene()->healthPacks.erase(findHealthPack);
+    SceneManager::GetActiveScene()->healthPacks.erase(std::remove(SceneManager::GetActiveScene()->healthPacks.begin(), SceneManager::GetActiveScene()->healthPacks.end(), healthPack), SceneManager::GetActiveScene()->healthPacks.end());
 }
 
 
