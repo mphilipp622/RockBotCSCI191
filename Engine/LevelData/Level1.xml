@@ -56,5 +56,9 @@
             <Name>Enemy1</Name>
             <Tag>MeleeEnemy</Tag>
         </Enemy>
+        <Enemy xPos="1.1459915183317719" yPos="0.52467080410744205">
+            <Name>Enemy2</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
     </Enemies>
 </Level1>

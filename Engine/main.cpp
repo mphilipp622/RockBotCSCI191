@@ -108,7 +108,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	WindowRect.top=(long)0;				// Set Top Value To 0
 	WindowRect.bottom=(long)height;		// Set Bottom Value To Requested Height
 
-	fullscreen=FALSE;			// Set The Global Fullscreen Flag
+	fullscreen=TRUE;			// Set The Global Fullscreen Flag
 
 	hInstance			= GetModuleHandle(NULL);				// Grab An Instance For Our Window
 	wc.style			= CS_HREDRAW | CS_VREDRAW | CS_OWNDC;	// Redraw On Size, And Own DC For Window.
