@@ -59,6 +59,7 @@ void HUD::showHP(Player *playerStats)
 
     //Head Icon
 
+    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
     glColor4f(1.0,1.0,1.0, 1.0);
     glTranslatef(-4.5+tempX,1+tempY,0.1);
@@ -81,6 +82,7 @@ void HUD::showHP(Player *playerStats)
     glEnd();
 
     glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 
 //
 //    glPushMatrix();

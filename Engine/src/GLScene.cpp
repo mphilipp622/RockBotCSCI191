@@ -103,9 +103,7 @@ GLint GLScene::drawGLScene()
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 
-    glEnable(GL_TEXTURE_2D);
     displayHUD->showHP(Player::player);
-    glDisable(GL_TEXTURE_2D);
 
     for(auto& model : movableObjects)
     {
@@ -128,11 +126,11 @@ GLint GLScene::drawGLScene()
         enemy->Update();
     }
 
-
     if(Player::player)
     {
         Player::player->Update();
     }
+
 
     if(nextLevelTrigger)
     {

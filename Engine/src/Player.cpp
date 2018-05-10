@@ -66,6 +66,7 @@ Player::Player(double newX, double newY)
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
     idleFrame = 0;
+
     xDirection = 1.0;
     prevXDirection = 1.0;
 
@@ -372,9 +373,6 @@ void Player::Update()
     if(!canPlay)
         UpdateCooldownTimer();
 
-    if(displayText)
-        DisplayText();
-
     //////////////
     // DRAW SPARKS
     //////////////
@@ -390,9 +388,11 @@ void Player::Update()
             // if the spark timer has run out, destroy it
             auto finder = find(sparks.begin(), sparks.end(), spark);
             sparks.erase(finder);
-//            delete spark;
+            delete spark;
         }
     }
+    if(displayText)
+        DisplayText();
 
 
     if(falling)
@@ -512,7 +512,7 @@ void Player::MoveLeft()
         xPos = prevXPos;
 //        moving = false;
 //        xDirection = 0;
-//        acceleration = 0;
+        acceleration = 0;
         return;
     }
     AudioEngine::SetPosition(xPos, yPos);

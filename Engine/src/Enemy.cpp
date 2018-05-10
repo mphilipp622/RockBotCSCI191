@@ -20,8 +20,8 @@ Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string
     // set previous positions to our starting position
     prevXPos = xPos;
     prevYPos = yPos;
-
     // Initialize Quad
+
     vertices[0].x = -width / 2;
     vertices[0].y = -height / 2;
     vertices[0].z = zoom;
