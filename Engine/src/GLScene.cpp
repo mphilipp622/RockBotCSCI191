@@ -106,12 +106,16 @@ GLint GLScene::drawGLScene()
     if(loadNewLevel)
         return 1; // stop rendering the scene while next level loads.
 
-    glEnable(GL_TEXTURE_2D);
-    glPushMatrix();
-    glScaled(backgroundScaleX, backgroundScaleY, 1);
-    background->DrawSquare(screenWidth, screenHeight); // draw background
-    glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
+    if(background)
+    {
+        glEnable(GL_TEXTURE_2D);
+        glPushMatrix();
+        glScaled(backgroundScaleX, backgroundScaleY, 1);
+        background->DrawSquare(screenWidth, screenHeight); // draw background
+        glPopMatrix();
+        glDisable(GL_TEXTURE_2D);
+    }
+
 
     displayHUD->showHP(Player::player);
 
