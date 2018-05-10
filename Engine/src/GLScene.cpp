@@ -189,8 +189,11 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             CheckGameOverCollision(wParam);
             return 1;
         }
-        if(wParam == VK_BACK)
+        if(!paused && wParam == VK_BACK)
             SetPaused();
+        else if(paused && wParam == VK_BACK)
+            paused = false;
+
         if(paused && (wParam == VK_NUMPAD1 || wParam == 0x31))
             paused = false;
         else if(paused && (wParam == VK_NUMPAD2 || wParam == 0x32))
@@ -226,6 +229,9 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     if(uMsg == WM_LBUTTONDOWN)
     {
+        double convertedX, convertedY;
+
+        ConvertMouseToWorld(LOWORD(lParam), HIWORD(lParam), convertedX, convertedY);
         // left-click functionality
         if(gameOver)
         {
@@ -233,9 +239,9 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             CheckGameOverCollision(LOWORD(lParam), HIWORD(lParam));
             return 1;
         }
-        if(paused && CheckPointerCollision(resumeButton, LOWORD(lParam), HIWORD(lParam)))
+        if(paused && CheckPointerCollision(resumeButton, convertedX, convertedY))
             paused = false;
-        else if(paused && CheckPointerCollision(mainMenuButton, LOWORD(lParam), HIWORD(lParam)))
+        else if(paused && CheckPointerCollision(mainMenuButton, convertedX, convertedY))
         {
             loadNewLevel = true;
             AudioEngine::engine->stopAllSounds();
