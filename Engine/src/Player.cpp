@@ -328,15 +328,15 @@ void Player::Update()
         // check if timer has expired for invincibility.
         CheckInvincible();
 
-    if(playingChords)
-    {
-
-        if(chordTimer->GetTicks() > chordTimingWindow)
-            // if user has exceeded their timing window, re-random the input. Might want to punish them and add a cooldown, not sure yet
-            NextInput();
-
-        UpdateIcons();
-    }
+//    if(playingChords)
+//    {
+//
+//        if(chordTimer->GetTicks() > chordTimingWindow)
+//            // if user has exceeded their timing window, re-random the input. Might want to punish them and add a cooldown, not sure yet
+//            NextInput();
+//
+//        UpdateIcons();
+//    }
 
     if(moving && !pushBack)
     {
@@ -396,9 +396,10 @@ void Player::Update()
             // if the spark timer has run out, destroy it
             auto finder = find(sparks.begin(), sparks.end(), spark);
             sparks.erase(finder);
-            delete spark;
+//            delete spark;
         }
     }
+
 
     if(falling)
     {
@@ -925,8 +926,8 @@ void Player::CheckUserInput(int userInput, double mouseX, double mouseY)
         // stop execution if waiting for cooldown
         return;
 
-    if(activeInput == userInput)
-    {
+//    if(activeInput == userInput)
+//    {
         double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
         double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
         double aspectRatio = screenWidth / screenHeight;
@@ -942,19 +943,19 @@ void Player::CheckUserInput(int userInput, double mouseX, double mouseY)
 //        musicCircle->SetPosition(xPos, yPos);
 //        drawCircle = true; // used in Update()
 //        CheckHit();
-    }
-    else
-    {
-        // Cooldown is the timing window minus the difference between the timing window and whatever my ticks were when I failed the input check
-        cooldownTargetTime = (chordTimingWindow + (chordTimingWindow - chordTimer->GetTicks()));
-
-        cout << cooldownTargetTime << endl;
-        // set a cooldown for player
-        cooldownTimer->Start();
-
-        PlayChords(false);
-        canPlay =  false;
-    }
+//    }
+//    else
+//    {
+//        // Cooldown is the timing window minus the difference between the timing window and whatever my ticks were when I failed the input check
+//        cooldownTargetTime = (chordTimingWindow + (chordTimingWindow - chordTimer->GetTicks()));
+//
+//        cout << cooldownTargetTime << endl;
+//        // set a cooldown for player
+//        cooldownTimer->Start();
+//
+//        PlayChords(false);
+//        canPlay =  false;
+//    }
 }
 
 void Player::UpdateCooldownTimer()
