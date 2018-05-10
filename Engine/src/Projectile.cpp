@@ -247,7 +247,7 @@ bool Projectile::CheckCircleSquareCollision()
 void Projectile::Destroy()
 {
     // find this projectile in the main vector and remove it. Then delete this projectile
-    auto finder = find(SceneManager::GetActiveScene()->movableObjects.begin(), SceneManager::GetActiveScene()->movableObjects.end(), this);
+//    auto finder = find(SceneManager::GetActiveScene()->movableObjects.begin(), SceneManager::GetActiveScene()->movableObjects.end(), this);
 //    SceneManager::GetActiveScene()->movableObjects.erase(finder);
     SceneManager::GetActiveScene()->movableObjects.erase(std::remove(SceneManager::GetActiveScene()->movableObjects.begin(), SceneManager::GetActiveScene()->movableObjects.end(), this), SceneManager::GetActiveScene()->movableObjects.end());
 //    delete particle;

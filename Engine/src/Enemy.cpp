@@ -244,9 +244,11 @@ void Enemy::StartJump()
 
 void Enemy::Die()
 {
-    auto finder = find(SceneManager::GetActiveScene()->enemies.begin(), SceneManager::GetActiveScene()->enemies.end(), this);
-    SceneManager::GetActiveScene()->enemies.erase(finder);
-    delete this;
+//    auto finder = find(SceneManager::GetActiveScene()->enemies.begin(), SceneManager::GetActiveScene()->enemies.end(), this);
+    SceneManager::GetActiveScene()->enemies.erase(std::remove(SceneManager::GetActiveScene()->enemies.begin(), SceneManager::GetActiveScene()->enemies.end(), this), SceneManager::GetActiveScene()->enemies.end());
+
+//    SceneManager::GetActiveScene()->enemies.erase(finder);
+//    delete this;
 }
 
 void Enemy::Actions(int newAction)
