@@ -21,7 +21,7 @@ LevelCreator::LevelCreator()
     platformRelativeFilePath = "Images/Platforms/";
     playerRelativeFilePath = "Images/Player/";
     enemyRelativeFilePath = "Images/Enemies/";
-    playerTexturePath = "Images/Player/Test_Idle_0000.png";
+    playerTexturePath = "Images/Player/Idle_0000.png";
 
     waitingForConsoleInput = false;
     mouseDown = false;
@@ -408,6 +408,9 @@ void LevelCreator::CreateEnemy()
 
     char type;
     cin >> type;
+    cin.clear();
+
+    cin.ignore(10000,'\n');
 
     type = type - '0'; // convert to integer from ascii
 
@@ -438,6 +441,7 @@ void LevelCreator::CreateEnemy()
 
 void LevelCreator::CreateLevelTrigger()
 {
+
     if(nextLevelTrigger)
         return; // don't allow user to put more than 1 level trigger
 
@@ -656,13 +660,15 @@ void LevelCreator::EditTextTrigger()
 
     cin >> input;
 
+    cin.clear();
+    cin.ignore(10000,'\n');
+
     if(input == 'y' || input == 'Y')
     {
         cout << "Input new Text:" << endl;
         string newText;
 
         // Need to do this twice to flush the buffer from previous character input.
-        getline(cin, newText);
         getline(cin, newText);
         selectedModel->SetName(newText);
     }
@@ -681,6 +687,7 @@ string LevelCreator::GetFilenameFromInput()
 
     cout << "Input texture file name (don't input full path): ";
     getline(cin, path);
+
 
     return path;
 }
@@ -795,6 +802,8 @@ void LevelCreator::SaveLevelToXML()
     char num;
 
     cin >> num;
+    cin.clear();
+    cin.ignore(10000,'\n');
 
     int convertNum = num - 48;
 
@@ -1014,6 +1023,8 @@ void LevelCreator::LoadLevelFromXML()
     char num;
 
     cin >> num;
+    cin.clear();
+    cin.ignore(10000,'\n');
 
     int convertNum = num - 48;
 
