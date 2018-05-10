@@ -13,7 +13,7 @@ class Enemy : public Model
 {
     public:
         Enemy();
-        Enemy(double newX, double newY, double newWidth, double newHeight, string newName);
+        Enemy(double newX, double newY, double newWidth, double newHeight, string newName, string newTag);
         virtual ~Enemy();
 
         void Update();
@@ -23,20 +23,26 @@ class Enemy : public Model
         void TakeDamage(int damageTaken);
 
     protected:
-        bool jump, slowDown, moving, startGravity;
+        bool jump, slowDown, moving, ignoreGravity, falling;
         float jumpVelocity, fallVelocity;
         float initialY;
-        float xDirection, prevXDirection;
+        float xDirection, prevXDirection, yDirection;
         float prevXPos, prevYPos;
         float acceleration, accelRate, maxAcceleration, deceleration;
         float gravity;
 
+        double aggroRadius; // Will be used to initiate enemy AI sequence when player gets close enough
+        double meleeRange;
+
         // x Movement
         void StartMove(float dir);
-        void MoveLeft();
-        void MoveRight();
-        void StopMove();
         void SlowDown();
+
+        // These functions may be different between different types of enemies. So we'll make them virtual for overriding.
+        virtual void MoveLeft() = 0;
+        virtual void MoveRight() = 0;
+        virtual void StopMove() = 0;
+
 
         // y movement
         void ApplyGravity();
@@ -47,24 +53,34 @@ class Enemy : public Model
         bool isDying;
         void Die();
 
+        bool isAttacking;
+
         virtual void AIRoutine() = 0;
 
-        int idleFrame, dyingFrame;
+        int idleFrame, dyingFrame, jumpFrame, moveFrame, attackFrame;
         int actionTrigger;
         int moveSpeed, jumpSpeed;
         Timer* frameTimer;
-        TextureLoader moveAnim[4];
-        TextureLoader idleAnim[1];
-        TextureLoader jumpAnim[1];
-        TextureLoader deathAnim[3];
+        TextureLoader moveAnim[10];
+        TextureLoader idleAnim[10];
+        TextureLoader jumpAnim[10];
+        TextureLoader deathAnim[10];
+        TextureLoader attackAnim[10];
+        int maxIdleFrame, maxMoveFrame, maxJumpFrame, maxDeathFrame, maxAttackFrame;
         void Actions(int);
 
         virtual bool CheckCollision() = 0;
         virtual bool CheckCircleCollision() = 0;
         virtual bool CheckCircleSquareCollision() = 0;
+        virtual bool CheckForwardCollision() = 0;
+        virtual bool CheckForPit() = 0; // will be implemented in melee player for checking if they should jump over a pit.
+
+        bool PlayerInRange(double checkRadius); // pass radius values into this function to determine if player is within that radius. E.G: Aggro or melee range
 
         AudioSource* sound;
     private:
+
+
 
 };
 

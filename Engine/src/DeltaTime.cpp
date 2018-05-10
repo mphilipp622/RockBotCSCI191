@@ -3,17 +3,20 @@
 #include <glut.h>
 #include <iostream>
 
-double deltaTime = 0.0;
+double DeltaTime::deltaTime;
 
 DeltaTime::DeltaTime()
 {
+    deltaTime = 0.0;
     oldTime = glutGet(GLUT_ELAPSED_TIME);
     UpdateDeltaTime();
+
 }
 
 DeltaTime::~DeltaTime()
 {
     //dtor
+    deltaTime = 0.0;
 }
 void DeltaTime::UpdateDeltaTime()
 {

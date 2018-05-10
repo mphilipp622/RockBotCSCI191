@@ -6,7 +6,7 @@ Enemy::Enemy()
     //ctor
 }
 
-Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string newName)
+Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string newName, string newTag)
 {
     xPos = newX;
     yPos = newY;
@@ -15,7 +15,7 @@ Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string
     zoom = 0;
 
     name = newName;
-    tag = "Enemy";
+    tag = newTag;
 
     // set previous positions to our starting position
     prevXPos = xPos;
@@ -61,6 +61,10 @@ Enemy::Enemy(double newX, double newY, double newWidth, double newHeight, string
     frameTimer->Start();
 
     isDying = false;
+    ignoreGravity = false;
+    falling = false;
+
+    isAttacking = false;
 
     sound = new AudioSource(name + "Sound", "", xPos, yPos, 1.0, false);
 }
@@ -74,7 +78,7 @@ Enemy::~Enemy()
 
 void Enemy::DrawEnemy()
 {
-    glColor3f(1.0, 1.0, 1.0);
+    glColor4f(1.0, 1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
 
@@ -123,8 +127,6 @@ void Enemy::Update()
         return;
     }
 
-    AIRoutine();
-
     if(moving)
     {
         if(xDirection > 0)
@@ -132,18 +134,18 @@ void Enemy::Update()
         else if(xDirection < 0)
             MoveLeft();
 
-        if(!jump)
+        if(!jump && !isAttacking)
             Actions(1);
-        else
+        else if(jump && !isAttacking)
             Actions(2);
     }
-    else if(!moving && !jump)
+    else if(!moving && !jump && !isAttacking)
         Actions(0);
 
     if(jump)
     {
         Jump();
-        if(!moving)
+        if(!moving && !isAttacking)
             Actions(2);
     }
     else
@@ -152,6 +154,10 @@ void Enemy::Update()
     if(slowDown)
         StopMove();
 
+    if(isAttacking)
+        Actions(4);
+
+    AIRoutine();
 }
 
 void Enemy::TakeDamage(int damageTaken)
@@ -168,120 +174,6 @@ void Enemy::StartMove(float dir)
     moving = true;
 }
 
-void Enemy::MoveLeft()
-{
-    slowDown = false;
-
-    xDirection = -1.0;
-
-    if(acceleration > -maxAcceleration)
-        acceleration -= accelRate;
-
-    if(acceleration < -maxAcceleration)
-        acceleration = -maxAcceleration;
-
-    prevXPos = xPos;
-    xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
-    if(CheckCollision())
-    {
-//        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
-        xPos = prevXPos;
-//        moving = false;
-        xDirection = 0;
-        acceleration = 0;
-        return;
-    }
-
-    sound->SetPosition(xPos, yPos);
-}
-
-void Enemy::MoveRight()
-{
-    slowDown = false;
-
-    xDirection = 1.0;
-
-    if(acceleration < maxAcceleration)
-        acceleration += accelRate;
-
-    if(acceleration > maxAcceleration)
-        acceleration = maxAcceleration;
-
-    prevXPos = xPos;
-    xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
-    if(CheckCollision())
-    {
-
-//        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
-        xPos = prevXPos;
-//        moving = false;
-        xDirection = 0;
-        acceleration = 0;
-        return;
-    }
-    sound->SetPosition(xPos, yPos);
-
-}
-
-void Enemy::StopMove()
-{
-    moving = false;
-    if(prevXDirection > 0)
-    {
-        // if we're moving right, execute different code
-
-        if(acceleration > 0)
-            acceleration -= deceleration;
-        else
-        {
-            slowDown = false; // once acceleration is 0, we no longer need to slow down.
-            acceleration = 0; // acceleration is back to baseline
-        }
-
-        prevXPos = xPos;
-        xPos += (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
-
-        if(CheckCollision())
-        {
-            xPos = prevXPos;
-//            moving = false;
-            slowDown = false;
-            xDirection = 0;
-            acceleration = 0;
-            return;
-        }
-        sound->SetPosition(xPos, yPos);
-
-    }
-    else if(prevXDirection < 0)
-    {
-        // Code for left direction slow down
-
-        if(acceleration < 0)
-            acceleration += deceleration;
-        else
-        {
-            slowDown = false; // once acceleration is 0, we no longer need to slow down.
-            acceleration = 0; // acceleration is back to baseline
-        }
-
-        prevXPos = xPos;
-        xPos -= (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
-
-        if(CheckCollision())
-        {
-            xPos = prevXPos;
-//            moving = false;
-            slowDown = false;
-            xDirection = 0;
-            acceleration = 0;
-            return;
-        }
-        sound->SetPosition(xPos, yPos);
-
-    }
-}
-
 void Enemy::SlowDown()
 {
     prevXDirection = xDirection;
@@ -291,9 +183,13 @@ void Enemy::SlowDown()
 
 void Enemy::ApplyGravity()
 {
-    if(DeltaTime::GetDeltaTime() > 1)
+    if(ignoreGravity)
+        return;
+
+    if(DeltaTime::GetDeltaTime() > 0.2)
         return; // kill if delta time is too high
 
+    falling = true;
     fallVelocity += gravity * DeltaTime::GetDeltaTime();
 
     if(fallVelocity < sqrt(2 * gravity))
@@ -302,10 +198,19 @@ void Enemy::ApplyGravity()
     prevYPos = yPos;
     yPos += fallVelocity * DeltaTime::GetDeltaTime();
 
+    // Check Pit Collision
+
+    if(!falling && CheckForPit() && Player::player->GetY() >= yPos)
+    {
+        // If a pit is ahead of us, and player is at enemy's y position or greater, then jump
+        StartJump();
+    }
+
     if(CheckCollision())
     {
         fallVelocity = 0;
         yPos = prevYPos;
+        falling = false;
         return;
     }
 
@@ -339,13 +244,14 @@ void Enemy::StartJump()
 
 void Enemy::Die()
 {
-    auto finder = find(GLScene::enemies.begin(), GLScene::enemies.end(), this);
-    GLScene::enemies.erase(finder);
+    auto finder = find(SceneManager::GetActiveScene()->enemies.begin(), SceneManager::GetActiveScene()->enemies.end(), this);
+    SceneManager::GetActiveScene()->enemies.erase(finder);
     delete this;
 }
 
 void Enemy::Actions(int newAction)
 {
+    glEnable(GL_TEXTURE_2D);
     switch(newAction)
     {
     case 0:
@@ -358,7 +264,7 @@ void Enemy::Actions(int newAction)
         if(frameTimer->GetTicks() > 60)
         {
             idleFrame++;
-            idleFrame %= 1;
+            idleFrame %= maxIdleFrame;
             frameTimer->Reset();
         }
 
@@ -377,12 +283,12 @@ void Enemy::Actions(int newAction)
 
         if(frameTimer->GetTicks() > 60)
         {
-            moveSpeed++;
-            moveSpeed %= 4;
+            moveFrame++;
+            moveFrame %= maxMoveFrame;
             frameTimer->Reset();
         }
 
-        moveAnim[moveSpeed].Binder();
+        moveAnim[moveFrame].Binder();
         DrawEnemy();
 
         glPopMatrix();
@@ -394,7 +300,14 @@ void Enemy::Actions(int newAction)
 
         glTranslated(xPos, yPos, zoom);
 
-        jumpAnim[0].Binder();
+        if(frameTimer->GetTicks() > 60)
+        {
+            jumpFrame++;
+            jumpFrame %= maxJumpFrame;
+            frameTimer->Reset();
+        }
+
+        jumpAnim[jumpFrame].Binder();
         DrawEnemy();
 
         glPopMatrix();
@@ -403,14 +316,16 @@ void Enemy::Actions(int newAction)
     case 3:
         glPushMatrix();
 
+        glTranslated(xPos, yPos, zoom);
+
         if(frameTimer->GetTicks() > 60)
         {
             dyingFrame++;
-            dyingFrame %= 3;
+            dyingFrame %= maxDeathFrame;
             frameTimer->Reset();
         }
 
-        moveAnim[moveSpeed].Binder();
+        deathAnim[dyingFrame].Binder();
         DrawEnemy();
 
         glPopMatrix();
@@ -419,5 +334,34 @@ void Enemy::Actions(int newAction)
             // animation is over. Delete from game
             Die();
         break;
+    case 4:
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        if(frameTimer->GetTicks() > 60)
+        {
+            attackFrame++;
+            attackFrame %= maxAttackFrame;
+
+            if(attackFrame == 0) // only show the attack animation one time before stopping.
+                isAttacking = false;
+
+            frameTimer->Reset();
+        }
+
+        attackAnim[attackFrame].Binder();
+        DrawEnemy();
+
+        glPopMatrix();
+
+        break;
     }
+    glDisable(GL_TEXTURE_2D);
+}
+
+bool Enemy::PlayerInRange(double checkRadius)
+{
+    return OverlappingCircles(xPos, yPos, Player::player->GetX(), Player::player->GetY(), checkRadius, Player::player->GetRadius());
+
 }

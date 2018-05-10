@@ -19,7 +19,7 @@ Parallax::~Parallax()
 
 void Parallax::DrawSquare(float width, float height)
 {
-    glColor3f(1.0,1.0,1.0);
+    glColor4f(1.0,1.0,1.0, 1.0);
     backgroundTexture->Binder();
     glBegin(GL_POLYGON);
         glTexCoord2f(xMin,yMin);
@@ -38,7 +38,10 @@ void Parallax::DrawSquare(float width, float height)
 
 void Parallax::ParallaxInit(string fileName)
 {
-    backgroundTexture->Binder();
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead. Change it to mess with cool effects
+
+    textureName = fileName;
     cout << "Loading Parallax: " << fileName << endl;
     backgroundTexture->BindTexture(fileName);
 }
@@ -70,4 +73,9 @@ void Parallax::Scroll(bool Auto, string dir, float speed)
             xMax += speed * DeltaTime::GetDeltaTime();;
         }
     }
+}
+
+string Parallax::GetTextureName()
+{
+    return textureName;
 }

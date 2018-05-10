@@ -20,9 +20,12 @@ class Parallax
 
         float xMax, yMax, xMin, yMin;
 
+        string GetTextureName();
+
     protected:
 
     private:
+        string textureName;
 };
 
 #endif // PARALLAX_H

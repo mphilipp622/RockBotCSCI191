@@ -1,0 +1,60 @@
+<Level1>
+    <Platforms>
+        <Platform Width="10.900005" Height="0.39999992" xPos="-0.1173608567089985" yPos="-1.8256132865198336">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="2.7999995" Height="0.19999993" xPos="2.0081746592428638" yPos="-0.13692099648898753">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="1.3000001" Height="3.1999991" xPos="-4.9291559817779378" yPos="-0.026080189807426195">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="1.9000002" Height="0.19999993" xPos="-0.84108613974782265" yPos="-0.76284555186721625">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="4.0999985" Height="0.19999993" xPos="7.2268009032942153" yPos="-0.14727601518805591">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="10.400003" Height="0.39999992" xPos="10.523258419243469" yPos="-1.8256132865198336">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="0.79999995" Height="1" xPos="8.4587027495338383" yPos="0.47634515252366039">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="4.0999985" Height="0.19999993" xPos="11.788147652662675" yPos="1.4865708190232931">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+    </Platforms>
+    <Player xPos="-2.9501227439785773" yPos="-1.1229796158089109"/>
+    <LevelTrigger Width="1" Height="1" xPos="13.489141881875092" yPos="2.1349000441450574">
+        <Texture>Images/Misc/Portal.png</Texture>
+    </LevelTrigger>
+    <TextTriggers>
+        <Trigger Width="2.9999993" Height="1" xPos="6.5709645110676584" yPos="0.48516635905187616">
+            <Text>This is seriously trippin' me out...</Text>
+        </Trigger>
+        <Trigger Width="1.8000002" Height="1" xPos="-0.85699037391678934" yPos="-0.092025809944636772">
+            <Text>Hello, World</Text>
+        </Trigger>
+        <Trigger Width="2.6999996" Height="1.4000001" xPos="1.9440452777441262" yPos="0.69019357458477582">
+            <Text>Text Is Working</Text>
+        </Trigger>
+    </TextTriggers>
+    <HealthPacks>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-0.72257296537384808" yPos="-0.46944229841192175"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="1.19047547794" yPos="0.1718211992308917"/>
+    </HealthPacks>
+    <Background Width="12" Height="12">
+        <Texture>Images/Backgrounds/BGSciFi.jpg</Texture>
+    </Background>
+    <Enemies>
+        <Enemy xPos="6.8364352093985472" yPos="2.9109981543112577">
+            <Name>Enemy1</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="7.1074485248423489" yPos="0.4831355022093447">
+            <Name>Enemy1</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+    </Enemies>
+</Level1>

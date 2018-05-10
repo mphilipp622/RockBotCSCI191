@@ -42,13 +42,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-std=c++11" />
-			<Add directory="../Common/include/GL" />
+			<Add directory="Common/include/GL" />
 			<Add directory="Common/include" />
 			<Add directory="irrKlang-1.6.0/include" />
+			<Add directory="freetype-windows-binaries-master/include" />
 		</Compiler>
 		<Linker>
 			<Add library="Common/lib/libSOIL.a" />
 			<Add library="irrKlang-1.6.0/lib/Win32-gcc/libirrKlang.a" />
+			<Add library="freetype-windows-binaries-master/win32/freetype.lib" />
 			<Add library="Common/lib/glew32s.lib" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
@@ -58,6 +60,7 @@
 		</Linker>
 		<Unit filename="include/AudioEngine.h" />
 		<Unit filename="include/AudioSource.h" />
+		<Unit filename="include/BossEnemy.h" />
 		<Unit filename="include/ChordManager.h" />
 		<Unit filename="include/DeltaTime.h" />
 		<Unit filename="include/Enemy.h" />
@@ -66,19 +69,29 @@
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/HUD.h" />
 		<Unit filename="include/Inputs.h" />
+		<Unit filename="include/Level1.h" />
+		<Unit filename="include/LevelCreator.h" />
 		<Unit filename="include/LoadShader.h" />
+		<Unit filename="include/MainMenu.h" />
+		<Unit filename="include/MeleeBoss.h" />
 		<Unit filename="include/MeleeEnemy.h" />
 		<Unit filename="include/Model.h" />
 		<Unit filename="include/Parallax.h" />
 		<Unit filename="include/Particles.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Projectile.h" />
+		<Unit filename="include/RangedEnemy.h" />
+		<Unit filename="include/SceneManager.h" />
 		<Unit filename="include/Skybox.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/Timer.h" />
+		<Unit filename="include/Trigger.h" />
+		<Unit filename="include/freetype.h" />
+		<Unit filename="include/tinyxml2.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AudioEngine.cpp" />
 		<Unit filename="src/AudioSource.cpp" />
+		<Unit filename="src/BossEnemy.cpp" />
 		<Unit filename="src/ChordManager.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
 		<Unit filename="src/Enemy.cpp" />
@@ -87,16 +100,25 @@
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/HUD.cpp" />
 		<Unit filename="src/Inputs.cpp" />
+		<Unit filename="src/Level1.cpp" />
+		<Unit filename="src/LevelCreator.cpp" />
 		<Unit filename="src/LoadShader.cpp" />
+		<Unit filename="src/MainMenu.cpp" />
+		<Unit filename="src/MeleeBoss.cpp" />
 		<Unit filename="src/MeleeEnemy.cpp" />
 		<Unit filename="src/Model.cpp" />
 		<Unit filename="src/Parallax.cpp" />
 		<Unit filename="src/Particles.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Projectile.cpp" />
+		<Unit filename="src/RangedEnemy.cpp" />
+		<Unit filename="src/SceneManager.cpp" />
 		<Unit filename="src/Skybox.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
 		<Unit filename="src/Timer.cpp" />
+		<Unit filename="src/Trigger.cpp" />
+		<Unit filename="src/freetype.cpp" />
+		<Unit filename="src/tinyxml2.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

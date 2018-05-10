@@ -24,22 +24,11 @@ class AudioSource
 
         void PlayMusic();
 
-        // Stops playing any currently playing sound
-        void Stop();
-
         // Sets the volume of this audio source
         void SetVolume(float newVal);
 
-        // Gets the name of this AudioSource
-        string GetName();
-
+        // Sets the position of this audio source in openGL space
         void SetPosition(double newX, double newY);
-
-        double GetX();
-        double GetY();
-
-        // called by drawGLScene in GLScene classes.
-        void Update(double newX, double newY);
 
     protected:
 

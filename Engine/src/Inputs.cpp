@@ -17,7 +17,7 @@ Inputs::~Inputs()
 void Inputs::KeyPressed(Player* model)
 {
     // Handle key presses for model passed to this function
-    const int aKey = 0x41, dKey = 0x44, cKey = 0x43, bKey = 0x42;
+    const int aKey = 0x41, dKey = 0x44, cKey = 0x43, bKey = 0x42, eKey = 0x45, qKey = 0x51;
 
     // Use the unordered map of booleans to keep track of which keys are pressed. This allows multiple keys being pressed at once
     if(!keys["MoveLeft"] && wParamKeys == aKey)
@@ -42,6 +42,7 @@ void Inputs::KeyPressed(Player* model)
     }
 }
 
+
 void Inputs::KeyUp(Player* model)
 {
     const int aKey = 0x41, dKey = 0x44, cKey = 0x43, bKey = 0x42;
@@ -65,14 +66,21 @@ void Inputs::KeyUp(Player* model)
         model->PlayChords(false);
         keys["PlayChord"] = false;
     }
+//    if(keys["PlayChord"] && wParamKeys == VK_SHIFT)
+//    {
+//        model->PlayChords(false);
+//        keys["PlayChord"] = false;
+//    }
 }
 
 void Inputs::MouseDown(Player* model, LPARAM lParam)
 {
+
     // using 0x5 for lmouse and 0x6 for rmouse. For some reason, windows is sending those values when shift is held down instead of 0x1 and 0x2
     if(keys["PlayChord"] && wParamMouse == 0x5)
     {
-        model->CheckUserInput(0, lParam);
+        cout << "HELLO" << endl;
+        model->CheckUserInput(0, mousePosX, mousePosY);
         // convert mouse X and Y to openGL coordinates
 //        double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
 //        double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
@@ -84,7 +92,7 @@ void Inputs::MouseDown(Player* model, LPARAM lParam)
 //        model->rotateY += currentX;
     }
     if(keys["PlayChord"] && wParamMouse == 0x6)
-        model->CheckUserInput(1, lParam);
+        model->CheckUserInput(1, mousePosX, mousePosY);
 
 
 //    prevMouseX = xNew;

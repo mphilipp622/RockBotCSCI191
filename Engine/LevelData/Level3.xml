@@ -1,0 +1,76 @@
+<Level3>
+    <Platforms>
+        <Platform Width="14.400019" Height="0.29999992" xPos="-0.21094321873341576" yPos="-1.4597270416003245">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="1.3000001" Height="3.3999989" xPos="-6.7586207282186415" yPos="0.40501097107985889">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="1.2" Height="0.19999993" xPos="-1.9744285273447717" yPos="-0.33750914256654901">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="1.3000001" Height="0.19999993" xPos="0" yPos="0.37126005682320395">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="3.4999988" Height="0.19999993" xPos="3.096646451006543" yPos="1.2319083703679039">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="9.8000011" Height="0.29999992" xPos="11.888332969305749" yPos="-1.4497482745074195">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="5.2999973" Height="0.29999992" xPos="8.4347263015883076" yPos="2.3455848507313699">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="1.9000002" Height="6.5999961" xPos="15.882828216448111" yPos="2.0257168400707242">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="8.1347819910455179" yPos="2.9906749568561515">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="4.4999981" Height="0.29999992" xPos="4.4878078519823914" yPos="4.2820159660837085">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="3.5999987" Height="0.29999992" xPos="9.1706929332696738" yPos="5.3179268855739465">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="9.1706929332696738" yPos="6.0132643520810927">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="4.2999983" Height="0.29999992" xPos="12.533855855285086" yPos="6.9072696661617075">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+    </Platforms>
+    <Player xPos="-3.6872874634601076" yPos="-0.83533512785220887"/>
+    <LevelTrigger Width="1.1" Height="1.7000002" xPos="15.925399899005265" yPos="6.1551699574907133">
+        <Texture>Images/Misc/Portal.png</Texture>
+    </LevelTrigger>
+    <Background Width="15.899999999999986" Height="15.199999999999989">
+        <Texture>Images/Backgrounds/MilkyWay.jpg</Texture>
+    </Background>
+    <Enemies>
+        <Enemy xPos="-6.6527695471424799" yPos="2.6901028813334373">
+            <Name>Enemy0</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="4.0479004655584347" yPos="1.8696206741201409">
+            <Name>Enemy1</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="-1.662232563619316" yPos="2.7675749690457017">
+            <Name>Enemy2</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="10.855608306717389" yPos="3.0209910668045605">
+            <Name>Enemy3</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="4.3190493656388016" yPos="8.070974619487389">
+            <Name>Enemy4</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="14.200402681249242" yPos="7.6337466062680939">
+            <Name>Enemy5</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+    </Enemies>
+</Level3>

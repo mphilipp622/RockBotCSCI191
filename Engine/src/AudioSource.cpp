@@ -8,32 +8,32 @@ using namespace irrklang;
 
 AudioSource::AudioSource()
 {
-    //ctor
-//    PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
+    // Default constructor should basically never need to be used
 }
 
 AudioSource::AudioSource(string newName, string newFilePath, double newX, double newY, float newVolume, bool isLooping)
 {
+    // Initializes all the private variables
     name = newName;
     filePath = newFilePath;
     xPos = newX;
     yPos = newY;
     volume = newVolume;
-    loop = isLooping;
+    loop = isLooping; // Loop is specified on creation. If loop is true, then the sound will loop when it ends
 
     sound = 0;
-    source = 0;
 }
 
 AudioSource::~AudioSource()
 {
     //dtor
-    sound->drop();
+//    sound->drop();
 }
 
-void AudioSource::Update(double newX, double newY)
-{
-}
+
+//////////////////////////////////////
+// SOUND PLAYBACK
+//////////////////////////////////////
 
 void AudioSource::Play()
 {
@@ -42,7 +42,12 @@ void AudioSource::Play()
 
 void AudioSource::PlayMusic()
 {
-    sound = AudioEngine::engine->play2D(filePath.c_str(), loop);
+    if(AudioEngine::engine->isCurrentlyPlaying(filePath.c_str()))
+        return; // keep playing music if we haven't changed the song from level to level
+
+    sound = AudioEngine::engine->play2D(filePath.c_str(), loop, true);
+    sound->setVolume(volume);
+    sound->setIsPaused(false);
 }
 
 void AudioSource::PlayChord(string newChord)
@@ -60,10 +65,10 @@ void AudioSource::PlayChord(string newChord)
     sound->setIsPaused(false); // have to do this for some stupid reason.
 }
 
-void AudioSource::Stop()
-{
-    sound->stop();
-}
+
+/////////////////////////////////////////////
+// SOUND MANIPULATION
+/////////////////////////////////////////////
 
 void AudioSource::SetVolume(float newVal)
 {
@@ -73,13 +78,14 @@ void AudioSource::SetVolume(float newVal)
     else if(newVal < 0)
         newVal = 0;
 
-    source->setDefaultVolume(newVal);
+    if(sound)
+        sound->setVolume(newVal);
 }
 
-string AudioSource::GetName()
-{
-    return name;
-}
+
+/////////////////////////////////////////////
+// SOUND POSITIONING
+/////////////////////////////////////////////
 
 void AudioSource::SetPosition(double newX, double newY)
 {
@@ -87,12 +93,3 @@ void AudioSource::SetPosition(double newX, double newY)
     yPos = newY;
 }
 
-double AudioSource::GetX()
-{
-    return xPos;
-}
-
-double AudioSource::GetY()
-{
-    return yPos;
-}

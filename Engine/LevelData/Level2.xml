@@ -1,0 +1,53 @@
+<Level2>
+    <Platforms>
+        <Platform Width="5.0999975" Height="0.29999992" xPos="-1.9818766559954035" yPos="-2.0553882971421653">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="2.3999999" Height="0.29999992" xPos="-1.6760677951296439" yPos="-1.0262239137376477">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="6.4999962" Height="0.29999992" xPos="3.8226107608219948" yPos="-2.0553882971421653">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="4.0999985" Height="0.29999992" xPos="2.4229471283979418" yPos="-0.2675827396851746">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="5.1999974" Height="0.19999993" xPos="-1.9818766559954035" yPos="1.508460939104336">
+            <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="0.79999995" Height="1.1" xPos="2.1289001467962496" yPos="0.44401091969737766">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="-1.1067780463731973" yPos="2.1352375236038008">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+        <Platform Width="4.599998" Height="0.29999992" xPos="2.4349117020210342" yPos="3.4834943480719729">
+            <Texture>Images/Platforms/block2.png</Texture>
+        </Platform>
+    </Platforms>
+    <Player xPos="-3.9304287415876833" yPos="-1.4267363971342719"/>
+    <LevelTrigger Width="1" Height="1" xPos="4.4176485444152114" yPos="4.1778486137508501">
+        <Texture>Images/Misc/Portal.png</Texture>
+    </LevelTrigger>
+    <TextTriggers>
+        <Trigger Width="2.5999997" Height="1.6000001" xPos="-1.6819487347616777" yPos="-0.061749863004271065">
+            <Text>What a Strange Place</Text>
+        </Trigger>
+        <Trigger Width="2.5999997" Height="1.6000001" xPos="-1.6819487347616777" yPos="-0.061749863004271065">
+            <Text>What a Strange Place</Text>
+        </Trigger>
+    </TextTriggers>
+    <Background Width="15.799999999999986" Height="16.199999999999989">
+        <Texture>Images/Backgrounds/MilkyWay.jpg</Texture>
+    </Background>
+    <Enemies>
+        <Enemy xPos="4.1989908972721608" yPos="0.3910824656937168">
+            <Name>Enemy0</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="-3.7429221204620857" yPos="4.2683005593295649">
+            <Name>Enemy1</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+    </Enemies>
+</Level2>

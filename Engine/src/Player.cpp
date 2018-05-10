@@ -12,11 +12,13 @@ Player::Player(double newX, double newY)
     // Collision
     width = 1.0;
     height = 1.0;
+    radius = width / 2;
 
     xPos = newX;
     yPos = newY;
     playerZoom = 0;
 
+    // test
     // set previous positions to our starting position
     prevXPos = xPos;
     prevYPos = yPos;
@@ -40,22 +42,32 @@ Player::Player(double newX, double newY)
 
     moveSpeed = 1.0;
     jumpSpeed = 1.0;
-    hp = 10;
+    hp = 3;
     actionTrigger = 0;
+    attackFrame = 0;
+    dieFrame = 0;
 
      // physics
     gravity = 0.98;
     acceleration = 0.0;
-    accelRate = 0.05;
+    accelRate = 0.1;
     deceleration = 0.2; // rate of deceleration
     maxAcceleration = 2.5;
+    pushAccel = 20; // used for push back
+    pushDecel = 0.6;
     jump = false; // set true to avoid falling through earth on scene load
     slowDown = false;
     gravity = -9.80;
     moving = false;
+    attacking = false;
+    pushBack = false;
+    falling = false;
+    isDead = false;
     jumpVelocity = 5.0;
     fallVelocity = 0.0;
     idleFrame = 0;
+    xDirection = 1.0;
+    prevXDirection = 1.0;
 
     playingChords = false;
     chordDamage = 1;
@@ -63,26 +75,58 @@ Player::Player(double newX, double newY)
     name = "player";
     tag = "Player";
 
-    chord = new AudioSource("PlayerSource", "Audio/Music/Chords/E.ogg", xPos, yPos, 1.0, false);
+    chord = new AudioSource("PlayerSource", "Audio/Music/Chords/E.ogg", xPos, yPos, 0.8, false);
 
     // create icons for left and right mouse. They will be placed on the left and right side of our player
-    icons = {new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon", "HUD"), new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon", "HUD")};
+    icons =
+    {
+        new Model(0.4, 0.45, xPos - width / 2, yPos, "LeftMouseIcon", "HUD"),
+        new Model(0.4, 0.45, xPos + width / 2, yPos, "RightMouseIcon", "HUD")
+    };
 
+    inputIcon = new Model(0.4, 0.45, xPos, yPos + height / 2, "Icon", "Icon");
 	frameTimer = new Timer();
     frameTimer->Start();
 
     chordTimer = new Timer();
     cooldownTimer = new Timer();
     cooldownTargetTime = 0;
-    chordTimingWindow = 2000; // chord timing window is 2 seconds. Might modify this later to fit with BPM
+    bpm = 120;
+    beatsPerInput = 4;
+
+    // Chord Timing Window follows the below equation. the constant 60 is for 60 seconds. 1000 is for converting to ms
+    chordTimingWindow = (beatsPerInput / (bpm / 60.0)) * 1000;
+
     canPlay = true;
     chordManager = new ChordManager();
+
+    invincible = false;
+    invincibleTime = 1.0; // player can be invincible for 1 second.
+    invincibleTimer = new Timer();
+    invincibleFrameTimer = new Timer();
 
     drawCircle = false;
     musicCircle = new Model(3, 3, xPos, yPos, "MusicCircle", "MusicHUD");
     circleTimer = new Timer();
+    fallTimer = new Timer();
+
+    iconNames =
+    {
+        { 0, "Images/HUD/XButton.png"},
+        { 1, "Images/HUD/BButton.png"}
+    };
+
+    if(player)
+        delete player;
 
     player = this;
+
+//    PlayChords(true);
+
+    test1_font.init("CALIFI.TTF", 24);
+    displayText = false;
+
+    chordTimer->Start();
 }
 
 Player::~Player()
@@ -92,7 +136,24 @@ Player::~Player()
 
 void Player::DrawPlayer()
 {
-    glColor3f(1.0, 1.0, 1.0);
+//    glRotated(45.0, 0, 0, -1.0);
+//    glPushMatrix();
+    if(invincible)
+    {
+        // Change the player's alpha transparency to make him flicker.
+        if(invincibleFrameTimer->GetTicks() > 100)
+        {
+            invincibleFrame += 1;
+            invincibleFrame %= 2;
+            glColor4f(1.0, 1.0, 1.0, invincibleFrame); // if the player is invincible from taking damage, color him red
+            invincibleFrameTimer->Reset();
+        }
+        else
+            glColor4f(1.0, 1.0, 1.0, invincibleFrame);
+    }
+
+    else
+        glColor4f(1.0, 1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
 
@@ -130,7 +191,7 @@ void Player::DrawPlayer()
 	}
 
     glEnd();
-
+//    glPopMatrix();
 }
 
 void Player::InitPlayer()
@@ -141,31 +202,38 @@ void Player::InitPlayer()
 
 //    for(int i = 0; i < 10; i++)
 //        run[i].BindTexture("Images/Player/player" + std::string::to_string(i) + ".png");
-    run[0].BindTexture("Images/Player/Test_Movement_0000.png");
-    run[1].BindTexture("Images/Player/Test_Movement_0001.png");
-    run[2].BindTexture("Images/Player/Test_Movement_0002.png");
-    run[3].BindTexture("Images/Player/Test_Movement_0003.png");
+    run[0].BindTexture("Images/Player/Movement_0000.png");
+    run[1].BindTexture("Images/Player/Movement_0001.png");
+    run[2].BindTexture("Images/Player/Movement_0002.png");
+    run[3].BindTexture("Images/Player/Movement_0003.png");
 
-    idle[0].BindTexture("Images/Player/Test_Idle_0000.png");
-    idle[1].BindTexture("Images/Player/Test_Idle_0001.png");
-    idle[2].BindTexture("Images/Player/Test_Idle_0002.png");
-    idle[3].BindTexture("Images/Player/Test_Idle_0003.png");
-    idle[4].BindTexture("Images/Player/Test_Idle_0004.png");
+    idle[0].BindTexture("Images/Player/Idle_0000.png");
+    idle[1].BindTexture("Images/Player/Idle_0001.png");
+    idle[2].BindTexture("Images/Player/Idle_0002.png");
+    idle[3].BindTexture("Images/Player/Idle_0003.png");
+    idle[4].BindTexture("Images/Player/Idle_0001.png");
 
-    jumpAnim[0].BindTexture("Images/Player/Test_Movement_0000.png");
-    jumpAnim[1].BindTexture("Images/Player/Test_Movement_0001.png");
-    jumpAnim[2].BindTexture("Images/Player/Test_Movement_0002.png");
-    jumpAnim[3].BindTexture("Images/Player/Test_Movement_0003.png");
+    jumpAnim[0].BindTexture("Images/Player/Movement_0000.png");
+    jumpAnim[1].BindTexture("Images/Player/Movement_0001.png");
+    jumpAnim[2].BindTexture("Images/Player/Movement_0002.png");
+    jumpAnim[3].BindTexture("Images/Player/Movement_0003.png");
 
-    icons[0]->InitModel("Images/HUD/LeftMouse.png", true);
-    icons[1]->InitModel("Images/HUD/RightMouse.png", true);
+    attackAnim[0].BindTexture("Images/Player/Attack_0000.png");
+    attackAnim[1].BindTexture("Images/Player/Attack_0001.png");
+    attackAnim[2].BindTexture("Images/Player/Attack_0002.png");
+    attackAnim[3].BindTexture("Images/Player/Attack_0003.png");
 
-    musicCircle->InitModel("Images/MusicSprites/MusicCircle.png", true);
+    icons[0]->InitModel("Images/HUD/XButton.png", true);
+    icons[1]->InitModel("Images/HUD/BButton.png", true);
+
+//    musicCircle->InitModel("Images/MusicSprites/MusicCircle.png", true);
 
 }
 
 void Player::Actions(int newAction)
 {
+
+glEnable(GL_TEXTURE_2D);
     switch(newAction)
     {
     case 0:
@@ -219,13 +287,44 @@ void Player::Actions(int newAction)
 
         glPopMatrix();
         break;
+    case 3:
+        // Attacking
+
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, playerZoom);
+
+        if(frameTimer->GetTicks() > 60)
+        {
+            attackFrame++;
+            attackFrame %= 4;
+
+            if(attackFrame == 0) // only show the attack animation one time before stopping.
+                attacking = false;
+
+            frameTimer->Reset();
+        }
+
+        attackAnim[attackFrame].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+
+        break;
+
     }
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Player::Update()
 {
+    if(invincible)
+        // check if timer has expired for invincibility.
+        CheckInvincible();
+
     if(playingChords)
     {
+
         if(chordTimer->GetTicks() > chordTimingWindow)
             // if user has exceeded their timing window, re-random the input. Might want to punish them and add a cooldown, not sure yet
             NextInput();
@@ -233,43 +332,82 @@ void Player::Update()
         UpdateIcons();
     }
 
-    if(moving)
+    if(moving && !pushBack)
     {
+
         if(xDirection > 0)
             MoveRight();
         else if(xDirection < 0)
             MoveLeft();
 
-        if(!jump)
+        if(!attacking)
             Actions(1);
-        else
-            Actions(2);
+//        else if(jump && !attacking)
+//            Actions(2);
+
     }
-    else if(!moving && !jump)
+    else if(!moving && !jump && !attacking)
         Actions(0);
 
     if(jump)
     {
         Jump();
-        if(!moving)
+        if(!moving && !attacking)
             Actions(2);
     }
     else
         ApplyGravity();
 
-    if(slowDown)
+    if(slowDown && !pushBack)
         StopMove();
+
+    if(pushBack)
+        PushBack();
+
+    if(attacking)
+        Actions(3);
 
     CheckEnemyCollision();
 
     if(!canPlay)
         UpdateCooldownTimer();
 
-    if(drawCircle)
+    if(displayText)
+        DisplayText();
+
+    //////////////
+    // DRAW SPARKS
+    //////////////
+
+    for(auto& spark : sparks)
     {
-        ToggleMusicCircle();
-        DrawMusicCircle();
+        // iterate over all the sparks and update and draw them
+        spark->LifetimeSparks();
+        spark->DrawSparks();
+
+        if(spark->GetIsDead())
+        {
+            // if the spark timer has run out, destroy it
+            auto finder = find(sparks.begin(), sparks.end(), spark);
+            sparks.erase(finder);
+//            delete spark;
+        }
     }
+
+
+    if(falling)
+    {
+        if(fallTimer->GetTicks() > 3000)
+            isDead = true;
+    }
+
+
+//    if(drawCircle)
+//    {
+//        ToggleMusicCircle();
+//        DrawMusicCircle();
+//    }
+
 //    DrawPlayer();
 }
 
@@ -289,9 +427,15 @@ void Player::Jump()
     jumpVelocity += gravity * DeltaTime::GetDeltaTime();
     prevYPos = yPos;
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
+
+    CheckTriggerCollision(); // check for text or level triggers
+    CheckHealthPackCollision();
+
     if(CheckCollision())
     {
         jump = false;
+        falling = false;
+        fallTimer->Stop();
         yPos = prevYPos;
         return;
     }
@@ -301,9 +445,7 @@ void Player::Jump()
 
 void Player::ApplyGravity()
 {
-//    jumpVelocity += gravity * DeltaTime::GetDeltaTime();
-
-    if(DeltaTime::GetDeltaTime() > 1)
+    if(DeltaTime::GetDeltaTime() > 0.2f)
         return; // kill if delta time is too high
 
     fallVelocity += gravity * DeltaTime::GetDeltaTime();
@@ -314,24 +456,40 @@ void Player::ApplyGravity()
     prevYPos = yPos;
     yPos += fallVelocity * DeltaTime::GetDeltaTime();
 
+    CheckTriggerCollision(); // check for text or level triggers
+    CheckHealthPackCollision();
+
     if(CheckCollision())
     {
         fallVelocity = 0;
         yPos = prevYPos;
+        falling = false;
+        fallTimer->Stop();
         return;
     }
+    else
+    {
+        falling = true;
+        fallTimer->Start();
+    }
+
     AudioEngine::SetPosition(xPos, yPos);
     chord->SetPosition(xPos, yPos);
 }
 
 void Player::StartMove(float dir)
 {
+    if(pushBack) return;
+
     xDirection = dir;
     moving = true;
 }
 
 void Player::MoveLeft()
 {
+    if(pushBack)
+        return;
+
     slowDown = false;
 
     xDirection = -1.0;
@@ -344,13 +502,17 @@ void Player::MoveLeft()
 
     prevXPos = xPos;
     xPos -= (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    CheckTriggerCollision(); // check for text or level triggers
+    CheckHealthPackCollision();
+
     if(CheckCollision())
     {
 //        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
         xPos = prevXPos;
-        moving = false;
-        xDirection = 0;
-        acceleration = 0;
+//        moving = false;
+//        xDirection = 0;
+//        acceleration = 0;
         return;
     }
     AudioEngine::SetPosition(xPos, yPos);
@@ -359,6 +521,9 @@ void Player::MoveLeft()
 
 void Player::MoveRight()
 {
+    if(pushBack)
+        return;
+
     slowDown = false;
 
     xDirection = 1.0;
@@ -371,13 +536,17 @@ void Player::MoveRight()
 
     prevXPos = xPos;
     xPos += (xDirection * acceleration) * DeltaTime::GetDeltaTime();
+
+    CheckTriggerCollision(); // check for text or level triggers
+    CheckHealthPackCollision();
+
     if(CheckCollision())
     {
 
 //        GLScene::keyboardAndMouse->SetKey("MoveRight", false);
         xPos = prevXPos;
-        moving = false;
-        xDirection = 0;
+//        moving = false;
+//        xDirection = 0;
         acceleration = 0;
         return;
     }
@@ -395,6 +564,7 @@ void Player::SlowDown()
 void Player::StopMove()
 {
     moving = false;
+
     if(prevXDirection > 0)
     {
         // if we're moving right, execute different code
@@ -410,12 +580,15 @@ void Player::StopMove()
         prevXPos = xPos;
         xPos += (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
 
+        CheckTriggerCollision(); // check for text or level triggers
+        CheckHealthPackCollision();
+
         if(CheckCollision())
         {
             xPos = prevXPos;
             moving = false;
             slowDown = false;
-            xDirection = 0;
+//            xDirection = 0;
             acceleration = 0;
             return;
         }
@@ -437,12 +610,18 @@ void Player::StopMove()
         prevXPos = xPos;
         xPos -= (prevXDirection * acceleration) * DeltaTime::GetDeltaTime();
 
+
+        CheckTriggerCollision(); // check for text or level triggers
+        CheckHealthPackCollision();
+
         if(CheckCollision())
         {
+                        cout << "STOPPING COLLISION" << endl;
+
             xPos = prevXPos;
             moving = false;
             slowDown = false;
-            xDirection = 0;
+//            xDirection = 0;
             acceleration = 0;
             return;
         }
@@ -454,7 +633,7 @@ void Player::StopMove()
 
 bool Player::CheckCollision()
 {
-    for(auto& model : GLScene::staticObjects)
+    for(auto& model : SceneManager::GetActiveScene()->staticObjects)
     {
         if(Collision(model))
             return true;
@@ -463,22 +642,170 @@ bool Player::CheckCollision()
     return false;
 }
 
+void Player::CheckTriggerCollision()
+{
+    double widthOffset = width / 2, heightOffset = height / 2;
+
+    bool collideLevelTrigger = false;
+
+//    if(nextLevelTrigger)
+//    {
+//        // Check level trigger collision
+//        collideLevelTrigger = (OverlapTrigger(xPos - widthOffset, xPos + widthOffset,
+//                                    nextLevelTrigger->GetX() - nextLevelTrigger->GetWidth() / 2,
+//                                    nextLevelTrigger->GetX() + nextLevelTrigger->GetWidth() / 2) &&
+//                                    OverlapTrigger(yPos - heightOffset, yPos + heightOffset,
+//                                    nextLevelTrigger->GetY() - nextLevelTrigger->GetHeight() / 2,
+//                                    nextLevelTrigger->GetY() + nextLevelTrigger->GetHeight() / 2));
+//    }
+
+
+    bool insideTrigger = false; // track if we've hit any triggers at all. IF we haven't, we want to disable text display
+
+    for(auto& trigger : textTriggers)
+    {
+        bool overlapTrigger = (OverlapTrigger(xPos - widthOffset, xPos + widthOffset,
+                                trigger->GetX() - trigger->GetWidth() / 2,
+                                trigger->GetX() + trigger->GetWidth() / 2) &&
+                                OverlapTrigger(yPos - heightOffset, yPos + heightOffset,
+                                trigger->GetY() - trigger->GetHeight() / 2,
+                                trigger->GetY() + trigger->GetHeight() / 2));
+
+        if(overlapTrigger)
+        {
+            // DISPLAY TEXT
+            textToDisplay = trigger->GetText();
+            displayText = true;
+            insideTrigger = true;
+        }
+    }
+
+    // Basically this will check if we've left the trigger area and it will stop displaying text.
+    if(!insideTrigger)
+        displayText = false;
+}
+
 void Player::CheckEnemyCollision()
 {
-    for(auto& enemy : GLScene::enemies)
+    if(invincible)
+        return; // if player is invincible, then we don't check for enemy collision
+
+    for(auto& enemy : SceneManager::GetActiveScene()->enemies)
     {
         if(Collision(enemy))
         {
             TakeDamage(1);
 
-            if(enemy->GetX() >= xPos)
+            if(enemy->GetX() > xPos)
                 // if we're on left side of enemy and touch them, push back to the left
-                SetPosition(xPos - 1.0, yPos);
+                StartPushBack(-1.0);
             else if(enemy->GetX() < xPos)
                 // if we're on right side of enemy and touch them, push back right.
-                SetPosition(xPos + 1.0, yPos);
+                StartPushBack(1.0);
+            else
+                StartPushBack(prevXDirection);
         }
     }
+}
+
+void Player::StartPushBack(double direction)
+{
+    pushBack = true;
+    pushDir = direction;
+//    xDirection = direction;
+
+    if(direction < 0)
+        acceleration = -pushAccel;
+    else if(direction > 0)
+        acceleration = pushAccel;
+    else
+        acceleration = pushAccel * prevXDirection;
+}
+
+
+void Player::PushBack()
+{
+
+// if we're pushing right, execute different code
+
+    if(pushDir > 0)
+    {
+        if(acceleration > 0)
+            acceleration -= pushDecel;
+        else
+        {
+            pushBack = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        prevXPos = xPos;
+        xPos += (acceleration) * DeltaTime::GetDeltaTime();
+
+        CheckTriggerCollision(); // check for text or level triggers
+        CheckHealthPackCollision();
+
+        if(CheckCollision())
+        {
+            xPos = prevXPos;
+            moving = false;
+            slowDown = false;
+            pushBack = false;
+            xDirection = 0;
+            acceleration = 0;
+            return;
+        }
+        AudioEngine::SetPosition(xPos, yPos);
+        chord->SetPosition(xPos, yPos);
+    }
+    if(pushDir < 0)
+    {
+        if(acceleration < 0)
+            acceleration += pushDecel;
+        else
+        {
+            pushBack = false; // once acceleration is 0, we no longer need to slow down.
+            acceleration = 0; // acceleration is back to baseline
+        }
+
+        prevXPos = xPos;
+        xPos += (acceleration) * DeltaTime::GetDeltaTime();
+
+        CheckTriggerCollision(); // check for text or level triggers
+        CheckHealthPackCollision();
+
+        if(CheckCollision())
+        {
+            xPos = prevXPos;
+            moving = false;
+            slowDown = false;
+            pushBack = false;
+            xDirection = 0;
+            acceleration = 0;
+            return;
+        }
+        AudioEngine::SetPosition(xPos, yPos);
+        chord->SetPosition(xPos, yPos);
+    }
+}
+
+void Player::CheckHealthPackCollision()
+{
+    for(auto& healthPack : SceneManager::GetActiveScene()->healthPacks)
+    {
+        if(Collision(healthPack))
+            ConsumeHealthPack(healthPack);
+    }
+}
+
+void Player::ConsumeHealthPack(Model* healthPack)
+{
+    hp += 2; // add 2 to player hp
+
+    if(hp > 10)
+        hp = 10; // clamp HP to a maximum of 10
+
+    auto findHealthPack = find(SceneManager::GetActiveScene()->healthPacks.begin(), SceneManager::GetActiveScene()->healthPacks.end(), healthPack);
+    SceneManager::GetActiveScene()->healthPacks.erase(findHealthPack);
 }
 
 
@@ -491,6 +818,12 @@ bool Player::CheckCircleSquareCollision()
 {
     return false;
 }
+
+bool Player::OverlapTrigger(double min0, double max0, double min1, double max1)
+{
+    return max0 >= min1 && min0 <= max1;
+}
+
 
 
 double Player::GetOffsetX()
@@ -510,19 +843,34 @@ double Player::GetZoom()
 
 void Player::ShootProjectile(double x, double y)
 {
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
-    newProjectile->InitModel("Images/Note.png", true);
+    attacking = true;
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.4, 0.5, 1, 3.5, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
+    vector<string> animNames = {"Images/music_note.png"};
+    newProjectile->InitAnimations(animNames);
+
+    sparks.push_back(new Particles());
+    sparks.back()->GenerateSparks(xPos, yPos, xDirection);
+//    newProjectile->InitModel("Images/Note.png", true);
     chord->PlayChord(chordManager->GetNextChord());
-    GLScene::movableObjects.push_back(newProjectile);
+    SceneManager::GetActiveScene()->movableObjects.push_back(newProjectile);
 }
 
 void Player::UpdateIcons()
 {
+//    inputIcon->SetPosition(xPos, yPos + height / 1.5);
+//    inputIcon->InitModel(iconNames[activeInput], true);
+
     icons[0]->SetPosition(xPos - width / 1.5, yPos);
     icons[1]->SetPosition(xPos + width / 1.5, yPos);
 
     if(playingChords)
+    {
+//        glEnable(GL_TEXTURE_2D);
         icons[activeInput]->DrawModel();
+//        glDisable(GL_TEXTURE_2D);
+    }
+//        inputIcon->DrawModel();
+
 //    if(playingChords)
 //    {
 //        for(auto& icon : icons)
@@ -541,14 +889,15 @@ void Player::PlayChords(bool isPlaying)
     {
         // set the active input user must press and start a timer.
         srand(time(NULL));
-        activeInput = rand() % icons.size();
+        activeInput = rand() % iconNames.size();
+//        activeInput = rand() % icons.size();
 
-        chordTimer->Start();
+//        chordTimer->Start();
 
         chordManager->StartNewSequence();
     }
-    else
-        chordTimer->Stop();
+//    else
+//        chordTimer->Stop();
 
 }
 
@@ -557,13 +906,13 @@ void Player::PlayChords(bool isPlaying)
 void Player::NextInput()
 {
     srand(time(NULL));
-    activeInput = rand() % icons.size();
+    activeInput = rand() % iconNames.size();
 
     chordTimer->Reset();
 }
 
 
-void Player::CheckUserInput(int userInput, LPARAM lParam)
+void Player::CheckUserInput(int userInput, double mouseX, double mouseY)
 {
     if(!canPlay)
         // stop execution if waiting for cooldown
@@ -574,28 +923,32 @@ void Player::CheckUserInput(int userInput, LPARAM lParam)
         double screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
         double screenWidth = GetSystemMetrics(SM_CXSCREEN); //
         double aspectRatio = screenWidth / screenHeight;
-        double mousePosX = (LOWORD(lParam) / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
-        double mousePosY = -(HIWORD(lParam) / (screenHeight / 2) - 1.0) * 3.33;
+        double mousePosX = (mouseX / (screenWidth / 2) - 1.0) * aspectRatio * 3.33;
+        double mousePosY = -(mouseY / (screenHeight / 2) - 1.0) * 3.33;
         ShootProjectile(mousePosX, mousePosY);
 
         // reset input check
-        NextInput();
+//        NextInput();
 
         // OLD CODE FOR CIRCLE AOE ATTACK
 //        circleTimer->Start(); // start timer
 //        musicCircle->SetPosition(xPos, yPos);
 //        drawCircle = true; // used in Update()
 //        CheckHit();
+//    }
+//    else
+//    {
+//        // Cooldown is the timing window minus the difference between the timing window and whatever my ticks were when I failed the input check
+//        cooldownTargetTime = (chordTimingWindow + (chordTimingWindow - chordTimer->GetTicks()));
+//
+//        cout << cooldownTargetTime << endl;
+//        // set a cooldown for player
+//        cooldownTimer->Start();
+//
+//        PlayChords(false);
+//        canPlay =  false;
+//    }
     }
-    else
-    {
-        // set a cooldown for player
-        cooldownTimer->Start();
-        cooldownTargetTime = chordTimingWindow;
-        PlayChords(false);
-        canPlay =  false;
-    }
-
 }
 
 void Player::UpdateCooldownTimer()
@@ -605,6 +958,7 @@ void Player::UpdateCooldownTimer()
         canPlay = true;
         cooldownTimer->Stop();
         cooldownTargetTime = 0;
+        PlayChords(true);
     }
 }
 
@@ -626,7 +980,7 @@ void Player::DrawMusicCircle()
 
 void Player::CheckHit()
 {
-    for(auto& enemy : GLScene::movableObjects)
+    for(auto& enemy : SceneManager::GetActiveScene()->movableObjects)
     {
         if(enemy->GetTag() == "Player")
             continue;
@@ -640,8 +994,16 @@ void Player::TakeDamage(int damage)
 {
     hp -= damage;
 
-//    if(hp <= 0)
- //       GameOver();
+    if(hp <= 0)
+    {
+        isDead = true;
+        return;
+    }
+
+
+
+
+    SetInvincible(); // set player to invincible after taking damage
 }
 
 int Player::getHP()
@@ -649,4 +1011,54 @@ int Player::getHP()
     return hp;
 }
 
+void Player::AddTextTrigger(Trigger* newTrigger)
+{
+    textTriggers.push_back(newTrigger);
+}
 
+void Player::CheckInvincible()
+{
+    if(invincibleTimer->GetTicks() > invincibleTime * 1000)
+    {
+        invincible = false;
+        invincibleTimer->Stop();
+        invincibleFrameTimer->Stop();
+    }
+}
+
+void Player::SetInvincible()
+{
+    if(invincible)
+        return; // safety check to make sure we aren't already invincible.
+
+    invincible = true;
+    invincibleFrame = 1;
+    invincibleTimer->Start();
+    invincibleFrameTimer->Start();
+}
+
+bool Player::IsInvincible()
+{
+    return invincible;
+}
+
+void Player::DisplayText()
+{
+    glPushMatrix();
+	glLoadIdentity();
+	 //glUseProgram(shaderFont->program);
+	//glTranslatef(50,25,0);
+	glColor3f (1.0, 0.84, 0); // white font
+
+	// Note that the print function uses screen pixel coordinates, not openGL coordinates.
+	// Since our player is always center screen, we can use screen width and height each divided by 2 and add an offset to get the text where we want.
+	freetype::print(test1_font, GetSystemMetrics(SM_CXSCREEN) / 2 - 75, GetSystemMetrics(SM_CYSCREEN) / 2 + 100, textToDisplay.c_str());
+
+//	freetype::print(test1_font, GetSystemMetrics(SM_CXSCREEN) / 2 + 100, GetSystemMetrics(SM_CYSCREEN) / 2 + 100,"Test1: Active Freetype Text");
+	glPopMatrix();
+}
+
+bool Player::IsDead()
+{
+    return isDead;
+}

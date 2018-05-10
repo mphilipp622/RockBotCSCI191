@@ -1,9 +1,17 @@
 #include "Particles.h"
+#include <iomanip>
+#include <cmath>
 
 Particles::Particles()
 {
     //ctor
-    numDrops = 1;
+    numDrops = 0;
+    texture = new TextureLoader();
+
+    for(int i = 0; i < 6; i++)
+    {
+        sparkFiles.push_back("Images/Misc/Spark" + to_string(i + 1) + ".png");
+    }
 }
 
 Particles::~Particles()
@@ -13,23 +21,37 @@ Particles::~Particles()
 
 void Particles::DrawParticles()
 {
-    glColor3f(1.0, 1.0 , 1.0);
-    glPointSize(3); // pixel size of particle
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glColor4f(1.0, 1.0, 1.0, 1.0);
+    texture->Binder();
+//    glPointSize(5); // pixel size of particle
 
-    glBegin(GL_POINTS);
+//    glBegin(GL_POINTS);
 
-    int i = 0;
-    while(i < numDrops)
+    for(auto& drop : drops)
     {
-        if(drops[i].alive)
-        {
+//        glRotated(drop.angleOfRotation, 0, 0, 1.0);
+        glBegin(GL_QUADS);
+        glTexCoord2f(0.0, 1.0);
+		glVertex3f(drop.xPos, drop.yPos, 0);
 
-            glVertex3f(drops[i].xPos, drops[i].yPos, 0);
-        }
-        i++;
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(drop.xPos + 0.08, drop.yPos, 0);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(drop.xPos + 0.08, drop.yPos - 0.08, 0);
+
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(drop.xPos, drop.yPos - 0.08, 0);
+		glEnd();
+//        glVertex3f(drop.xPos, drop.yPos, 0);
     }
 
-    glEnd();
+
+
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 // Setting Movement
@@ -58,10 +80,34 @@ void Particles::LifeTime()
     }
 }
 
+void Particles::LifetimeMusic(double x, double y, double xDir, double yDir, double width)
+{
+    double radius = width / 2;
+    double theta = 0;
+
+    for(int i = 0; i < numDrops; i++)
+    {
+        if(drops[i].alive)
+        {
+            double newX = x + (radius * RadiusRandom()) * cos(theta);
+            double newY = y + (radius * RadiusRandom()) * sin(theta);
+//            double newX = (x - drops[i].xPos) - newDir;
+//            double newY = (y - drops[i].yPos) - newDir;
+            drops[i].angleOfRotation = theta;
+            drops[i].xPos = newX;
+            drops[i].yPos = newY;
+//            cout << abs((x - drops[i].xPos) - xDir) << "    " << abs((y - drops[i].yPos) - yDir) << endl;
+//            drops[i].xPos -= abs((x - drops[i].xPos) - xDir) * DeltaTime::GetDeltaTime();
+//            drops[i].yPos -= abs((y - drops[i].yPos) - yDir) * DeltaTime::GetDeltaTime();
+        }
+
+        theta += (360 / numDrops);
+    }
+}
+
+
 void Particles::GenerateParticles()
 {
-    int i = 0;
-
     int newDrops = DoubleRandom() * 60; // 60 is arbitrary. Could put anything
 
     if(numDrops + newDrops > MAX_DROPS)
@@ -79,6 +125,7 @@ void Particles::GenerateParticles()
 
     numDrops += newDrops;
 
+
     if(numDrops >= MAX_DROPS)
         numDrops = 0;
 }
@@ -88,7 +135,150 @@ double Particles::DoubleRandom()
     return rand() % 1000 / 1000.0;
 }
 
-void Particles::GenerateMusicParticles()
+double Particles::RadiusRandom()
+{
+    // returns a number between 0.7 and 1.0
+    // 0.3 is 1.0 - 0.7
+    return ((rand() / double(RAND_MAX)) * 0.5) + 0.5;
+}
+
+
+
+////////////////////////////////////////////
+// MUSIC NOTE PARTICLE GENERATION
+///////////////////////////////////////////
+
+void Particles::GenerateMusicParticles(int x, int y, double width, double height)
 {
 
+    texture->BindTexture("Images/Misc/MusicParticle3.png");
+    double radius = width / 2;
+
+    int newDrops = 25; // 60 is arbitrary. Could put anything
+    double theta = 0;
+
+
+
+    if(numDrops + newDrops > MAX_MUSIC_DROPS)
+        newDrops = MAX_MUSIC_DROPS - numDrops;
+
+    for(int i = 0; i < newDrops; i++)
+    {
+        // This equation will create a circle of particles around the boundaries of the music note
+        double newX = x + radius * cos(theta);
+        double newY = y + radius * sin(theta);
+
+
+        drops.push_back(Node(newX, newY));
+//        drops[i].alive = true;
+//        drops[i].xPos = newX;
+//        drops[i].yPos = newY;
+//        drops[i].directionX = 0; // these constant values are pretty much test and check
+//        drops[i].directionY = 0;
+//        drops[i].mass = 0.5 + 0.5 * DoubleRandom();
+//        drops[i].time = new Timer();
+//        drops[i].time->Start();
+
+        theta += (360 / newDrops); // move onto the next part of the circle
+
+//        if(theta > 360) // if we've exceeded a full circle of particles, then stop generating
+//            break;
+    }
+
+    numDrops += newDrops;
+
+    if(numDrops >= MAX_MUSIC_DROPS)
+        numDrops = MAX_MUSIC_DROPS;
+
 }
+
+void Particles::GenerateSparks(int x, int y, double playerDir)
+{
+
+//    texture->BindTexture("Images/Misc/Spark.png");
+    int newDrops = 15; // 60 is arbitrary. Could put anything
+
+    double randNum[2] = {-1.0, 1.0};
+
+
+    for(int i = 0; i < newDrops; i++)
+    {
+        drops.push_back(Node(x, y, "Node" + to_string(i)));
+        drops.back().directionX = playerDir * DoubleRandom();
+        drops.back().directionY = -1.0 * DoubleRandom();
+        drops.back().mass = 0.5 + 0.5 * DoubleRandom();
+        drops.back().SetTexture(sparkFiles[rand() % 6]);
+    }
+
+}
+
+void Particles::LifetimeSparks()
+{
+    if(drops.size() <= 0)
+        isDead = true;
+
+    for(auto& drop : drops)
+    {
+
+        drop.acceleration -= drop.accelRate;
+//        if(drop.acceleration <= 0)
+//            drop.acceleration = 0;
+
+        double normalized = sqrt((drop.directionX * drop.directionX) + (drop.directionY * drop.directionY));
+        drop.xPos += normalized * (drop.directionX * drop.accelerationX) * DeltaTime::GetDeltaTime();
+        drop.yPos += ((normalized * drop.acceleration) + (GRAVITY * drop.mass)) * DeltaTime::GetDeltaTime();
+
+        if(drop.time->GetTicks() > 500)
+        {
+            auto finder = find(drops.begin(), drops.end(), drop);
+
+            drops.erase(finder);
+        }
+
+//            if(drops[i].yPos < -5.0 && drops[i].xPos > 5.0)
+//                drops[i].alive = false; // bounds checking to destroy particle. Probably change later.
+    }
+}
+
+void Particles::DrawSparks()
+{
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glColor4f(0.95, 0.75, 0.2, 1.0);
+//    texture->Binder();
+
+//    glPointSize(2); // pixel size of particle
+
+//    glBegin(GL_POINTS);
+    for(auto& drop : drops)
+    {
+//        glVertex3f(drop.xPos, drop.yPos, 0);
+        drop.sparkTex.Binder();
+
+        glBegin(GL_QUADS);
+        glTexCoord2f(0.0, 1.0);
+		glVertex3f(drop.xPos, drop.yPos, 0);
+
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(drop.xPos + 0.04, drop.yPos, 0);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(drop.xPos + 0.04, drop.yPos - 0.04, 0);
+
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(drop.xPos, drop.yPos - 0.04, 0);
+		glEnd();
+    }
+
+//    glEnd();
+
+    glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
+}
+
+
+bool Particles::GetIsDead()
+{
+    return isDead;
+}
+

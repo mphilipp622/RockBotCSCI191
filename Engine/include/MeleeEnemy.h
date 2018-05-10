@@ -17,11 +17,16 @@ class MeleeEnemy : public Enemy
     protected:
 
     private:
-
         void AIRoutine();
         bool CheckCollision();
         bool CheckCircleCollision();
         bool CheckCircleSquareCollision();
+        bool CheckForwardCollision();
+        bool CheckForPit();
+
+        void MoveLeft();
+        void MoveRight();
+        void StopMove();
 };
 
 #endif // MELEEENEMY_H
