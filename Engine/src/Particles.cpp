@@ -205,6 +205,8 @@ void Particles::GenerateSparks(double x, double y, double playerDir)
     else
         sparkTexture = "Images/Misc/SparkLeft.png";
 
+    texture->BindTexture(sparkTexture);
+
     for(int i = 0; i < newDrops; i++)
     {
         drops.push_back(Node(x, y, "Node" + to_string(i)));
@@ -212,7 +214,7 @@ void Particles::GenerateSparks(double x, double y, double playerDir)
         drops.back().directionY = -1.0 * RandomSparks();
         drops.back().mass = 0.5 + 0.5;
 
-        drops.back().SetTexture(sparkTexture);
+//        drops.back().SetTexture(sparkTexture);
     }
 
 }
@@ -264,8 +266,9 @@ void Particles::DrawSparks()
         glEnable(GL_TEXTURE_2D);
         glPushMatrix();
         glTranslated(drop.xPos, drop.yPos, 0);
+        texture->Binder();
 //        glVertex3f(drop.xPos, drop.yPos, 0);
-        drop.sparkTex.Binder();
+//        drop.sparkTex.Binder();
 
 
         glBegin(GL_QUADS);
