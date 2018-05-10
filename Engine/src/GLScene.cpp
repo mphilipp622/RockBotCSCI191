@@ -81,6 +81,9 @@ GLint GLScene::drawGLScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
+    if(loadNewLevel && !gameOver)
+        return 1; // stop rendering the scene while next level loads.
+
     if(Player::player->IsDead())
         SetGameOver();
 
@@ -103,9 +106,6 @@ GLint GLScene::drawGLScene()
         mainMenuButton->DrawModel();
         return 1;
     }
-
-    if(loadNewLevel)
-        return 1; // stop rendering the scene while next level loads.
 
     if(background)
     {
@@ -155,7 +155,7 @@ GLint GLScene::drawGLScene()
         {
             loadNewLevel = true;
             SceneManager::LoadNextLevel();
-            delete this;
+//            delete this;
         }
 
     }

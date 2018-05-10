@@ -33,13 +33,13 @@ void Particles::DrawParticles()
 		glVertex3f(drop.xPos, drop.yPos, 0);
 
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(drop.xPos + 0.08, drop.yPos, 0);
+		glVertex3f(drop.xPos + 0.1, drop.yPos, 0);
 
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(drop.xPos + 0.08, drop.yPos - 0.08, 0);
+		glVertex3f(drop.xPos + 0.1, drop.yPos - 0.1, 0);
 
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(drop.xPos, drop.yPos - 0.08, 0);
+		glVertex3f(drop.xPos, drop.yPos - 0.1, 0);
 		glEnd();
 //        glVertex3f(drop.xPos, drop.yPos, 0);
     }
@@ -154,7 +154,7 @@ void Particles::GenerateMusicParticles(double x, double y, double width, double 
     texture->BindTexture("Images/Misc/MusicParticle3.png");
     double radius = width / 2;
 
-    int newDrops = 25; // 60 is arbitrary. Could put anything
+    int newDrops = 10; // 60 is arbitrary. Could put anything
     double theta = 0;
 
 
@@ -194,8 +194,8 @@ void Particles::GenerateMusicParticles(double x, double y, double width, double 
 
 void Particles::GenerateSparks(double x, double y, double playerDir)
 {
-    sparkWidth = 0.03;
-    sparkHeight = 0.03;
+    sparkWidth = 0.04;
+    sparkHeight = 0.04;
 //    texture->BindTexture("Images/Misc/Spark.png");
     int newDrops = 10; // 60 is arbitrary. Could put anything
     string sparkTexture;
