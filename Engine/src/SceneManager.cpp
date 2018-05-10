@@ -125,7 +125,6 @@ void SceneManager::ReloadLevel()
 
     scenes.insert( {activeScene, reloadedLevel} ); // insert map into hash table
     scenes[activeScene]->initGL(); // initialize map
-
 }
 
 void SceneManager::DeleteScene(string sceneName)

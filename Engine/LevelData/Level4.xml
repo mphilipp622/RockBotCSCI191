@@ -153,11 +153,11 @@
         <Texture>Images/Backgrounds/Park.jpg</Texture>
     </Background>
     <Enemies>
-        <Enemy xPos="4.1411616716941211" yPos="0.24588146094582636">
+        <Enemy xPos="3.7385486110463861" yPos="0.43817417329082242">
             <Name>Enemy0</Name>
             <Tag>RangedEnemy</Tag>
         </Enemy>
-        <Enemy xPos="-0.31705769048907823" yPos="2.6999960333363346">
+        <Enemy xPos="-0.13803871794632702" yPos="3.1299291141714285">
             <Name>Enemy1</Name>
             <Tag>MeleeEnemy</Tag>
         </Enemy>
