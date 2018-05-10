@@ -42,7 +42,7 @@ Player::Player(double newX, double newY)
 
     moveSpeed = 1.0;
     jumpSpeed = 1.0;
-    hp = 3;
+    hp = 10;
     actionTrigger = 0;
     attackFrame = 0;
     dieFrame = 0;
@@ -50,10 +50,10 @@ Player::Player(double newX, double newY)
      // physics
     gravity = 0.98;
     acceleration = 0.0;
-    accelRate = 0.1;
+    accelRate = 0.2;
     deceleration = 0.2; // rate of deceleration
-    maxAcceleration = 2.5;
-    pushAccel = 20; // used for push back
+    maxAcceleration = 3.0;
+    pushAccel = 8.0; // used for push back
     pushDecel = 0.6;
     jump = false; // set true to avoid falling through earth on scene load
     slowDown = false;
@@ -397,6 +397,7 @@ void Player::Update()
 
     if(falling)
     {
+        cout << "FALLING " << endl;
         if(fallTimer->GetTicks() > 3000)
             isDead = true;
     }
@@ -418,6 +419,7 @@ void Player::StartJump()
         return; // if we're already jumping, don't allow another jump
 
     jump = true;
+    falling = false;
     jumpVelocity = 6.0;
     initialY = yPos;
 }
@@ -427,6 +429,12 @@ void Player::Jump()
     jumpVelocity += gravity * DeltaTime::GetDeltaTime();
     prevYPos = yPos;
     yPos += jumpVelocity * DeltaTime::GetDeltaTime();
+
+    if(jumpVelocity < 0 && !falling)
+    {
+        falling = true;
+        fallTimer->Start();
+    }
 
     CheckTriggerCollision(); // check for text or level triggers
     CheckHealthPackCollision();
@@ -448,6 +456,12 @@ void Player::ApplyGravity()
     if(DeltaTime::GetDeltaTime() > 0.2f)
         return; // kill if delta time is too high
 
+    if(!falling)
+    {
+        falling = true;
+        fallTimer->Start();
+    }
+
     fallVelocity += gravity * DeltaTime::GetDeltaTime();
 
     if(fallVelocity < sqrt(2 * gravity))
@@ -466,11 +480,6 @@ void Player::ApplyGravity()
         falling = false;
         fallTimer->Stop();
         return;
-    }
-    else
-    {
-        falling = true;
-        fallTimer->Start();
     }
 
     AudioEngine::SetPosition(xPos, yPos);
@@ -507,7 +516,8 @@ void Player::MoveLeft()
     CheckHealthPackCollision();
 
     if(CheckCollision())
-    {
+    {falling = true;
+        fallTimer->Start();
 //        GLScene::keyboardAndMouse->SetKey("MoveLeft", false);
         xPos = prevXPos;
 //        moving = false;
@@ -844,7 +854,7 @@ double Player::GetZoom()
 void Player::ShootProjectile(double x, double y)
 {
     attacking = true;
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.4, 0.5, 1, 3.5, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.4, 0.5, 1, 4.0, "MusicNote", "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
     vector<string> animNames = {"Images/music_note.png"};
     newProjectile->InitAnimations(animNames);
 

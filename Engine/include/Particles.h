@@ -13,7 +13,7 @@
 
 #define MAX_MUSIC_DROPS 500
 #define MAX_DROPS 50000
-#define GRAVITY -2.0
+#define GRAVITY -1.5
 #define MAX_SPARKS 50
 
 using namespace std;
@@ -47,6 +47,7 @@ class Particles
         double sparkWidth, sparkHeight;
 
         double RadiusRandom();
+        double RandomSparks();
 //        double projectileX, projectileY;
 
         struct Node
@@ -86,8 +87,8 @@ class Particles
                 time = new Timer();
                 time->Start();
                 name = newName;
-                acceleration = 2.0;
-                accelerationX = 1.5;
+                acceleration = 2.5;
+                accelerationX = 2.0;
                 accelRate = 0.1;
             }
 
@@ -105,7 +106,6 @@ class Particles
         vector<Node> drops;
 
         TextureLoader* texture;
-        vector<string> sparkFiles;
 
         bool isDead;
 };

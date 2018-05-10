@@ -8,10 +8,6 @@ Particles::Particles()
     numDrops = 0;
     texture = new TextureLoader();
 
-    for(int i = 0; i < 6; i++)
-    {
-        sparkFiles.push_back("Images/Misc/Spark" + to_string(i + 1) + ".png");
-    }
 }
 
 Particles::~Particles()
@@ -142,6 +138,10 @@ double Particles::RadiusRandom()
     return ((rand() / double(RAND_MAX)) * 0.5) + 0.5;
 }
 
+double Particles::RandomSparks()
+{
+    return ((rand() / double(RAND_MAX)) * 0.6) + 0.4;
+}
 
 
 ////////////////////////////////////////////
@@ -197,15 +197,22 @@ void Particles::GenerateSparks(double x, double y, double playerDir)
     sparkWidth = 0.03;
     sparkHeight = 0.03;
 //    texture->BindTexture("Images/Misc/Spark.png");
-    int newDrops = 15; // 60 is arbitrary. Could put anything
+    int newDrops = 10; // 60 is arbitrary. Could put anything
+    string sparkTexture;
+
+    if(playerDir > 0)
+        sparkTexture = "Images/Misc/SparkRight.png";
+    else
+        sparkTexture = "Images/Misc/SparkLeft.png";
 
     for(int i = 0; i < newDrops; i++)
     {
         drops.push_back(Node(x, y, "Node" + to_string(i)));
-        drops.back().directionX = playerDir * DoubleRandom();
-        drops.back().directionY = -1.0 * DoubleRandom();
-        drops.back().mass = 0.5 + 0.5 * DoubleRandom();
-        drops.back().SetTexture(sparkFiles[rand() % 6]);
+        drops.back().directionX = playerDir * RandomSparks();
+        drops.back().directionY = -1.0 * RandomSparks();
+        drops.back().mass = 0.5 + 0.5;
+
+        drops.back().SetTexture(sparkTexture);
     }
 
 }
@@ -230,7 +237,7 @@ void Particles::LifetimeSparks()
         drop.xPos += normalized * (drop.directionX * drop.accelerationX) * DeltaTime::GetDeltaTime();
         drop.yPos += ((normalized * drop.directionY) + (GRAVITY * drop.mass)) * DeltaTime::GetDeltaTime();
 
-        if(drop.time->GetTicks() > 500)
+        if(drop.time->GetTicks() > 300)
         {
             auto finder = find(drops.begin(), drops.end(), drop);
 
