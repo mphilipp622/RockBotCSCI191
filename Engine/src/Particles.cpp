@@ -148,7 +148,7 @@ double Particles::RadiusRandom()
 // MUSIC NOTE PARTICLE GENERATION
 ///////////////////////////////////////////
 
-void Particles::GenerateMusicParticles(int x, int y, double width, double height)
+void Particles::GenerateMusicParticles(double x, double y, double width, double height)
 {
 
     texture->BindTexture("Images/Misc/MusicParticle3.png");
@@ -192,14 +192,12 @@ void Particles::GenerateMusicParticles(int x, int y, double width, double height
 
 }
 
-void Particles::GenerateSparks(int x, int y, double playerDir)
+void Particles::GenerateSparks(double x, double y, double playerDir)
 {
-
+    sparkWidth = 0.03;
+    sparkHeight = 0.03;
 //    texture->BindTexture("Images/Misc/Spark.png");
     int newDrops = 15; // 60 is arbitrary. Could put anything
-
-    double randNum[2] = {-1.0, 1.0};
-
 
     for(int i = 0; i < newDrops; i++)
     {
@@ -215,7 +213,11 @@ void Particles::GenerateSparks(int x, int y, double playerDir)
 void Particles::LifetimeSparks()
 {
     if(drops.size() <= 0)
-        isDead = true;
+    {
+         isDead = true;
+         return;
+    }
+
 
     for(auto& drop : drops)
     {
@@ -226,7 +228,7 @@ void Particles::LifetimeSparks()
 
         double normalized = sqrt((drop.directionX * drop.directionX) + (drop.directionY * drop.directionY));
         drop.xPos += normalized * (drop.directionX * drop.accelerationX) * DeltaTime::GetDeltaTime();
-        drop.yPos += ((normalized * drop.acceleration) + (GRAVITY * drop.mass)) * DeltaTime::GetDeltaTime();
+        drop.yPos += ((normalized * drop.directionY) + (GRAVITY * drop.mass)) * DeltaTime::GetDeltaTime();
 
         if(drop.time->GetTicks() > 500)
         {
@@ -242,9 +244,9 @@ void Particles::LifetimeSparks()
 
 void Particles::DrawSparks()
 {
-    glEnable(GL_TEXTURE_2D);
-    glPushMatrix();
-    glColor4f(0.95, 0.75, 0.2, 1.0);
+
+//    glColor4f(1.0, 1.0, 1.0, 1.0);
+//    glColor4f(0.95, 0.75, 0.2, 1.0);
 //    texture->Binder();
 
 //    glPointSize(2); // pixel size of particle
@@ -252,28 +254,33 @@ void Particles::DrawSparks()
 //    glBegin(GL_POINTS);
     for(auto& drop : drops)
     {
+        glEnable(GL_TEXTURE_2D);
+        glPushMatrix();
+        glTranslated(drop.xPos, drop.yPos, 0);
 //        glVertex3f(drop.xPos, drop.yPos, 0);
         drop.sparkTex.Binder();
 
+
         glBegin(GL_QUADS);
         glTexCoord2f(0.0, 1.0);
-		glVertex3f(drop.xPos, drop.yPos, 0);
+		glVertex3f(-sparkWidth, -sparkHeight, 0);
 
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(drop.xPos + 0.04, drop.yPos, 0);
+		glVertex3f(sparkWidth, -sparkHeight, 0);
 
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(drop.xPos + 0.04, drop.yPos - 0.04, 0);
+		glVertex3f(sparkWidth, sparkHeight, 0);
 
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(drop.xPos, drop.yPos - 0.04, 0);
+		glVertex3f(-sparkWidth, sparkHeight, 0);
 		glEnd();
+		glPopMatrix();
+        glDisable(GL_TEXTURE_2D);
     }
 
 //    glEnd();
 
-    glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
+
 }
 
 

@@ -32,10 +32,10 @@ class Particles
         void GenerateParticles();
         double DoubleRandom();
 
-        void GenerateMusicParticles(int x, int y, double width, double height);
+        void GenerateMusicParticles(double x, double y, double width, double height);
         void LifetimeMusic(double x, double y, double xDir, double yDir, double width);
 
-        void GenerateSparks(int x, int y, double playerDir);
+        void GenerateSparks(double x, double y, double playerDir);
         void LifetimeSparks();
         bool GetIsDead();
         void DrawSparks();
@@ -44,6 +44,8 @@ class Particles
 
     private:
 
+        double sparkWidth, sparkHeight;
+
         double RadiusRandom();
 //        double projectileX, projectileY;
 
@@ -51,10 +53,11 @@ class Particles
         {
             bool alive;
             double xPos, yPos, zPos;
-            float directionX, directionY;
+            double directionX, directionY;
             double angleOfRotation, rotationZ;
             double acceleration, accelerationX, accelRate;
-            float mass;
+            double mass;
+
             TextureLoader sparkTex;
             string name;
             Timer* time;
@@ -84,7 +87,7 @@ class Particles
                 time->Start();
                 name = newName;
                 acceleration = 2.0;
-                accelerationX = 2.0;
+                accelerationX = 1.5;
                 accelRate = 0.1;
             }
 
