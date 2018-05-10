@@ -1,0 +1,177 @@
+<Level4>
+    <Platforms>
+        <Platform Width="2.3" Height="1" xPos="-4.5052837591397612" yPos="-1.6564645790034613">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="2.1000001" Height="1" xPos="-2.318232751276303" yPos="-1.6694057085269269">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="3.3999991" Height="1" xPos="2.348815135664009" yPos="-1.6629351437651945">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="4.361160885502871" yPos="-1.6758762732886585">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.5" xPos="1.360589114697037" yPos="0.30411654380141684">
+            <Texture>Images/Platforms/Block7.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="4.361160885502871" yPos="-0.72470325331401464">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.5" xPos="4.2329417235525693" yPos="1.9217831963986034">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="4.9781009597716448" yPos="2.1739019707729632">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1.1" xPos="4.9781009597716448" yPos="3.1492035453264111">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="4.9770648158297242" yPos="4.1199429703829606">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="4.2999983" xPos="4.9729348883777602" yPos="6.3611767067970195">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="3.9999983" xPos="5.3546982299870551" yPos="-0.30411654380141684">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="4.0999985" xPos="-6.1182249132056583" yPos="-0.10352903618771681">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="3.8999984" xPos="-6.1376366085417242" yPos="3.8082331352865406">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="2.4999998" xPos="-6.1570483038777732" yPos="6.8547100371733993">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1.5000002" Height="0.5" xPos="-0.1552935626885284" yPos="2.0852923809717754">
+            <Texture>Images/Platforms/Block6.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.5" xPos="-2.8311778362984477" yPos="3.7905920879046073">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.5" xPos="-5.3935216206592012" yPos="5.0523522164424062">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.5" xPos="1.6047001477814613" yPos="3.6723512752901701">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.9000001" xPos="2.0964630962951492" yPos="3.8811799945688641">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.9000001" xPos="2.1029336614071705" yPos="4.6705888955002015">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.9000001" xPos="2.1029336614071701" yPos="5.4729389259550034">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.9000001" xPos="2.1158747916312142" yPos="6.2623478268863408">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.9000001" xPos="2.1094042265191799" yPos="7.0488269800253613">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.9000001" xPos="2.109404226519179" yPos="7.8382358809566934">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.70000005" xPos="2.1094042265191781" yPos="8.5499980047472395">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.70000005" xPos="2.1158747916312" yPos="9.1194077037796752">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.5" xPos="-0.46588068806558469" yPos="4.837052932401968">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="1.2000002" xPos="-0.94470250635521313" yPos="5.0570521343008634">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="1.0000001" xPos="-0.9382319412431962" yPos="5.9147077382375155">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="1.0000001" xPos="-0.93176137613117371" yPos="6.7494105925009755">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="1.0000001" xPos="-0.92529081101915156" yPos="7.6358779648582944">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.9000001" xPos="-0.91234968079510492" yPos="8.4594100980829889">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.80000007" xPos="-0.89940855057106051" yPos="9.07411375044755">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.80000007" Height="0.5" xPos="-0.29117543004099078" yPos="9.2229367399673912">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.80000007" Height="0.5" xPos="0.45293955784154116" yPos="9.2229367399673912">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.5" xPos="1.6241118431175323" yPos="6.5035291315551502">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="2.2" xPos="-6.1570483038777715" yPos="8.4011750152273965">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="3.299999" Height="1" xPos="-4.3323489422875685" yPos="8.9899964085450303">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="0.5" Height="0.5" xPos="-1.4075935818621883" yPos="7.1862125891400872">
+            <Texture>Images/Platforms/Block5.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="3.0999992" xPos="-1.7729348406940337" yPos="-3.6594101457667056">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1" Height="3.1999991" xPos="1.1388194597158756" yPos="-3.7370569229074917">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="3.8999984" Height="1" xPos="-0.31058712537705901" yPos="-5.5894090916661847">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="1.6000001" Height="1" xPos="-1.9382398508394219" yPos="8.9899964085450321">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+        <Platform Width="2.3" Height="0.49999991" xPos="-2.5946966099208479" yPos="0.61470365236456559">
+            <Texture>Images/Platforms/Block3.png</Texture>
+        </Platform>
+    </Platforms>
+    <Player xPos="-3.8082331682137815" yPos="-0.63588587434374488"/>
+    <LevelTrigger Width="1" Height="1" xPos="1.3534797987534859" yPos="9.1643906553342021">
+        <Texture>Images/Misc/Portal2.png</Texture>
+    </LevelTrigger>
+    <TextTriggers>
+        <Trigger Width="1" Height="1" xPos="0.10392142433638624" yPos="-2.7249828495749595">
+            <Text>You Suck</Text>
+        </Trigger>
+    </TextTriggers>
+    <HealthPacks>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="4.232941723552579" yPos="2.3275363942566645"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-5.3741099253231361" yPos="5.447056666908078"/>
+    </HealthPacks>
+    <Background Width="12" Height="11.9">
+        <Texture>Images/Backgrounds/Park.jpg</Texture>
+    </Background>
+    <Enemies>
+        <Enemy xPos="4.1411616716941211" yPos="0.24588146094582636">
+            <Name>Enemy0</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="-0.31705769048907823" yPos="2.6999960333363346">
+            <Name>Enemy1</Name>
+            <Tag>MeleeEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="-1.4142282867580387" yPos="7.9027606847303744">
+            <Name>Enemy2</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="-0.8347028994508463" yPos="-4.7158828488323277">
+            <Name>Enemy3</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+        <Enemy xPos="0.17470525802459572" yPos="-4.7158828488323277">
+            <Name>Enemy4</Name>
+            <Tag>RangedEnemy</Tag>
+        </Enemy>
+    </Enemies>
+</Level4>
