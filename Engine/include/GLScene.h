@@ -94,6 +94,8 @@ class GLScene
         Model* pauseWindow;
         Model* resumeButton;
 
+        int playerHPFromLastScene;
+
         bool gameOver, paused;
 
         void CheckGameOverCollision(WPARAM keyPressed);

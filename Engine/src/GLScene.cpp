@@ -358,6 +358,7 @@ void GLScene::LoadLevelFromXML()
     {
         Player::player = new Player(playerX, playerY);
         Player::player->InitPlayer();
+        Player::player->SetHP(playerHPFromLastScene);
     }
     else
         Player::player->SetPosition(playerX, playerY);
@@ -505,6 +506,11 @@ void GLScene::ClearStaticData()
         delete healthPack;
 
     healthPacks.clear();
+
+    if(Player::player)
+        playerHPFromLastScene = Player::player->getHP();
+    else
+        playerHPFromLastScene = 10;
 
     delete Player::player;
     Player::player = nullptr;

@@ -1024,6 +1024,12 @@ int Player::getHP()
     return hp;
 }
 
+void Player::SetHP(int newHP)
+{
+    hp = newHP;
+}
+
+
 void Player::AddTextTrigger(Trigger* newTrigger)
 {
     textTriggers.push_back(newTrigger);

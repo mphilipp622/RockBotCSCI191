@@ -45,6 +45,7 @@ class Player : public Model
 
         // Returns the player's current hit points.
         int getHP();
+        void SetHP(int newHP);
 
         void DrawPlayer();
         void InitPlayer();
