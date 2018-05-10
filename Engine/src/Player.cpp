@@ -444,8 +444,8 @@ void Player::Jump()
     if(CheckCollision())
     {
         jump = false;
-        falling = false;
-        fallTimer->Stop();
+//        falling = false;
+//        fallTimer->Stop();
         yPos = prevYPos;
         return;
     }
@@ -457,6 +457,12 @@ void Player::ApplyGravity()
 {
     if(DeltaTime::GetDeltaTime() > 0.2f)
         return; // kill if delta time is too high
+
+    if(!falling && fallVelocity < 0)
+    {
+        falling = true;
+        fallTimer->Start();
+    }
 
     fallVelocity += gravity * DeltaTime::GetDeltaTime();
 
@@ -476,14 +482,6 @@ void Player::ApplyGravity()
         falling = false;
         fallTimer->Stop();
         return;
-    }
-    else
-    {
-        if(!falling)
-        {
-            falling = true;
-            fallTimer->Start();
-        }
     }
 
     AudioEngine::SetPosition(xPos, yPos);
@@ -1059,7 +1057,6 @@ bool Player::IsInvincible()
 
 void Player::DisplayText()
 {
-    test1_font.init("BADABB__.TTF", 26);
     glPushMatrix();
 	glLoadIdentity();
 	 //glUseProgram(shaderFont->program);

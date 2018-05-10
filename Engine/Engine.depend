@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1525893139 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
+1525943733 source:c:\users\seapanda\documents\college\191\191\engine\main.cpp
 	<windows.h>
 	<windows.h>
 	<stdlib.h>
@@ -9,7 +9,7 @@
 	<MainMenu.h>
 	<string>
 
-1525772869 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
+1525943857 c:\users\seapanda\documents\college\191\191\engine\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -26,6 +26,8 @@
 	<SceneManager.h>
 	<tinyxml2.h>
 	<Particles.h>
+	<BossEnemy.h>
+	<MeleeBoss.h>
 
 1519256343 c:\users\seapanda\documents\college\191\191\common\include\gl\glut.h
 	<windows.h>
@@ -33,7 +35,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1525917980 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
+1525944074 source:c:\users\seapanda\documents\college\191\191\engine\src\glscene.cpp
 	<GLScene.h>
 	<Parallax.h>
 	<DeltaTime.h>
@@ -66,7 +68,7 @@
 	<AudioSource.h>
 	<cmath>
 
-1525915711 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
+1525944409 source:c:\users\seapanda\documents\college\191\191\engine\src\inputs.cpp
 	<Inputs.h>
 	<iostream>
 	<DeltaTime.h>
@@ -231,7 +233,7 @@
 	<GL\GL.h>
 	<iostream>
 
-1525917403 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
+1525944907 source:c:\users\seapanda\documents\college\191\191\engine\src\player.cpp
 	<Player.h>
 	<TextureLoader.h>
 	<string>
@@ -440,7 +442,7 @@
 	<Timer.h>
 	<Particles.h>
 
-1525916975 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
+1525943733 source:c:\users\seapanda\documents\college\191\191\engine\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -1104,7 +1106,7 @@
 1524785972 source:c:\users\seapanda\documents\college\191\191\engine\src\chordmanager.cpp
 	"ChordManager.h"
 
-1525917801 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
+1525943733 source:c:\users\seapanda\documents\college\191\191\engine\src\enemy.cpp
 	"Enemy.h"
 	<GLScene.h>
 
@@ -1161,7 +1163,7 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1525884226 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
+1525943733 c:\users\seapanda\documents\college\191\191\engine\include\particles.h
 	<GL/gl.h>
 	<math.h>
 	<stdlib.h>
@@ -1172,7 +1174,7 @@
 	<DeltaTime.h>
 	<algorithm>
 
-1525914271 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
+1525943733 source:c:\users\seapanda\documents\college\191\191\engine\src\particles.cpp
 	"Particles.h"
 	<iomanip>
 	<cmath>
@@ -1185,16 +1187,17 @@
 	<GLScene.h>
 	<Parallax.h>
 
-1525893139 source:c:\users\seapanda\documents\college\191\191\engine\src\mainmenu.cpp
+1525943733 source:c:\users\seapanda\documents\college\191\191\engine\src\mainmenu.cpp
 	"MainMenu.h"
 	<GLLight.h>
 	<LevelCreator.h>
 
-1525884226 source:c:\users\seapanda\documents\college\191\191\engine\src\scenemanager.cpp
+1525943733 source:c:\users\seapanda\documents\college\191\191\engine\src\scenemanager.cpp
 	"SceneManager.h"
 	<GLScene.h>
 	<LevelCreator.h>
 	<MainMenu.h>
+	<fstream>
 
 1525937181 e:\college\191\191\engine\include\enemy.h
 	<Model.h>
@@ -1552,7 +1555,7 @@
 	<Player.h>
 	<TextureLoader.h>
 
-1525917932 source:c:\users\seapanda\documents\college\191\191\engine\src\hud.cpp
+1525943733 source:c:\users\seapanda\documents\college\191\191\engine\src\hud.cpp
 	"HUD.h"
 	"Player.h"
 
@@ -1585,8 +1588,9 @@
 	<cstddef>
 	<cstdarg>
 
-1525910646 source:c:\users\seapanda\documents\college\191\191\engine\src\levelcreator.cpp
+1525943981 source:c:\users\seapanda\documents\college\191\191\engine\src\levelcreator.cpp
 	"LevelCreator.h"
+	<fstream>
 	<GLLight.h>
 
 1523058586 c:\users\seapanda\documents\college\191\191\engine\include\tinyxml2.h
@@ -1843,4 +1847,21 @@
 
 1525937181 source:e:\college\191\191\engine\src\freetype.cpp
 	"freetype.h"
+
+1525943506 c:\users\seapanda\documents\college\191\191\engine\include\bossenemy.h
+	<Enemy.h>
+	<GLScene.h>
+	<Player.h>
+	<Projectile.h>
+
+1525943506 c:\users\seapanda\documents\college\191\191\engine\include\meleeboss.h
+	<Enemy.h>
+	<GLScene.h>
+	<Player.h>
+
+1525943506 source:c:\users\seapanda\documents\college\191\191\engine\src\bossenemy.cpp
+	"BossEnemy.h"
+
+1525943506 source:c:\users\seapanda\documents\college\191\191\engine\src\meleeboss.cpp
+	"MeleeBoss.h"
 

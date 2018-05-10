@@ -60,6 +60,7 @@
 		</Linker>
 		<Unit filename="include/AudioEngine.h" />
 		<Unit filename="include/AudioSource.h" />
+		<Unit filename="include/BossEnemy.h" />
 		<Unit filename="include/ChordManager.h" />
 		<Unit filename="include/DeltaTime.h" />
 		<Unit filename="include/Enemy.h" />
@@ -72,6 +73,7 @@
 		<Unit filename="include/LevelCreator.h" />
 		<Unit filename="include/LoadShader.h" />
 		<Unit filename="include/MainMenu.h" />
+		<Unit filename="include/MeleeBoss.h" />
 		<Unit filename="include/MeleeEnemy.h" />
 		<Unit filename="include/Model.h" />
 		<Unit filename="include/Parallax.h" />
@@ -89,6 +91,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AudioEngine.cpp" />
 		<Unit filename="src/AudioSource.cpp" />
+		<Unit filename="src/BossEnemy.cpp" />
 		<Unit filename="src/ChordManager.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
 		<Unit filename="src/Enemy.cpp" />
@@ -101,6 +104,7 @@
 		<Unit filename="src/LevelCreator.cpp" />
 		<Unit filename="src/LoadShader.cpp" />
 		<Unit filename="src/MainMenu.cpp" />
+		<Unit filename="src/MeleeBoss.cpp" />
 		<Unit filename="src/MeleeEnemy.cpp" />
 		<Unit filename="src/Model.cpp" />
 		<Unit filename="src/Parallax.cpp" />

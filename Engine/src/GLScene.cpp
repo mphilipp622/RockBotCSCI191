@@ -68,6 +68,9 @@ GLint GLScene::initGL()
     BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .6, true);
     BGM->PlayMusic();
     dTime = new DeltaTime();
+
+    paused = false;
+    gameOver = false;
     loadNewLevel = false;
 
     return true;
@@ -80,8 +83,6 @@ GLint GLScene::drawGLScene()
 
     if(Player::player->IsDead())
         SetGameOver();
-
-
 
     gluLookAt(Player::player->GetX(), Player::player->GetY(), 6.0,
             Player::player->GetX(), Player::player->GetY(), Player::player->GetZoom(),
@@ -461,6 +462,10 @@ void GLScene::LoadLevelFromXML()
                 enemies.push_back(new MeleeEnemy(newX, newY, 1.0, 1.0, newName));
             else if(newTag == "RangedEnemy")
                 enemies.push_back(new RangedEnemy(newX, newY, 1.0, 1.0, newName));
+            else if(newTag == "Boss")
+                enemies.push_back(new BossEnemy(newX, newY, 4.0, 4.0, newName));
+            else if(newTag == "MeleeBoss")
+                enemies.push_back(new MeleeBoss(newX, newY, 3.0, 3.0, newName));
 
             if(enemies.size() > 0)
             {

@@ -21,6 +21,8 @@
 #include <SceneManager.h>
 #include <tinyxml2.h>
 #include <Particles.h>
+#include <BossEnemy.h>
+#include <MeleeBoss.h>
 
 using namespace std;
 using namespace tinyxml2;

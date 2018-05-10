@@ -405,7 +405,7 @@ void LevelCreator::CreateEnemy()
     waitingForConsoleInput = true;
 
     cout << "Making Enemy..." << endl;
-    cout << "Choose The Type of Enemy To Make\n\t1 = Melee Enemy\n\t2 = Ranged Enemy" << endl;
+    cout << "Choose The Type of Enemy To Make\n\t1 = Melee Enemy\n\t2 = Ranged Enemy\n\t3 = Ranged Boss\n\t4 = Melee Boss" << endl;
 
     char type;
     cin >> type;
@@ -428,6 +428,14 @@ void LevelCreator::CreateEnemy()
     {
         filepath = enemyRelativeFilePath + "Ranged_0000.png";
         temp = new Model(1.0, 1.0, cameraPosX, cameraPosY, "Enemy" + to_string(enemies.size()), "RangedEnemy");
+    }
+    else if(type == 3){
+        filepath = enemyRelativeFilePath + "Ranged_0000.png";
+        temp = new Model(4.0, 4.0, cameraPosX, cameraPosY, "Enemy" + to_string(enemies.size()), "Boss");
+    }
+    else if(type == 4){
+        filepath = enemyRelativeFilePath + "Melee_0000.png";
+        temp = new Model(4.0, 4.0, cameraPosX, cameraPosY, "Enemy" + to_string(enemies.size()), "MeleeBoss");
     }
 
     // instantiate model with default Width and Height of 1 and spawned at camera's center
@@ -1206,6 +1214,10 @@ void LevelCreator::LoadLevelFromXML()
                 texturePath = "Images/Enemies/Melee_0000.png";
             else if(newTag == "RangedEnemy")
                 texturePath = "Images/Enemies/Ranged_0000.png";
+            else if(newTag == "Boss")
+                texturePath = "Images/Enemies/Ranged_0000.png";
+            else if(newTag == "MeleeBoss")
+                texturePath = "Images/Enemies/Melee_0000.png";
 
             enemies.back()->InitModel(texturePath, true);
         }
