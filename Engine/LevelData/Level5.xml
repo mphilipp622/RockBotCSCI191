@@ -157,7 +157,7 @@
             <Name>Enemy0</Name>
             <Tag>RangedEnemy</Tag>
         </Enemy>
-        <Enemy xPos="-0.16679678418514512" yPos="3.2047000847514453">
+        <Enemy xPos="-0.11503226495527241" yPos="3.5267904195576691">
             <Name>Enemy1</Name>
             <Tag>MeleeEnemy</Tag>
         </Enemy>
