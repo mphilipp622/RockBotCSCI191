@@ -865,9 +865,9 @@ void Player::UpdateIcons()
 
     if(playingChords)
     {
-        glEnable(GL_TEXTURE_2D);
+//        glEnable(GL_TEXTURE_2D);
         icons[activeInput]->DrawModel();
-        glDisable(GL_TEXTURE_2D);
+//        glDisable(GL_TEXTURE_2D);
     }
 //        inputIcon->DrawModel();
 

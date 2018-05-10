@@ -96,12 +96,12 @@ GLint GLScene::drawGLScene()
         return 1;
     }
 
-    glPushMatrix();
     glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
     glScaled(backgroundScaleX, backgroundScaleY, 1);
     background->DrawSquare(screenWidth, screenHeight); // draw background
-    glDisable(GL_TEXTURE_2D);
     glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 
     glEnable(GL_TEXTURE_2D);
     displayHUD->showHP(Player::player);
@@ -109,47 +109,35 @@ GLint GLScene::drawGLScene()
 
     for(auto& model : movableObjects)
     {
-        glEnable(GL_TEXTURE_2D);
         model->Update();
-        glDisable(GL_TEXTURE_2D);
     }
 
 
     for(auto& model : staticObjects)
     {
-        glEnable(GL_TEXTURE_2D);
         model->DrawModel();
-        glDisable(GL_TEXTURE_2D);
     }
-
 
     for(auto& healthPack : healthPacks)
     {
-        glEnable(GL_TEXTURE_2D);
         healthPack->DrawModel();
-        glDisable(GL_TEXTURE_2D);
     }
 
     for(auto& enemy : enemies)
     {
-        glEnable(GL_TEXTURE_2D);
         enemy->Update();
-        glDisable(GL_TEXTURE_2D);
     }
 
 
     if(Player::player)
     {
-        glEnable(GL_TEXTURE_2D);
         Player::player->Update();
-        glDisable(GL_TEXTURE_2D);
     }
 
     if(nextLevelTrigger)
     {
-        glEnable(GL_TEXTURE_2D);
         nextLevelTrigger->DrawModel();
-        glDisable(GL_TEXTURE_2D);
+
         if(nextLevelTrigger->LevelTriggerCollision())
         {
             loadNewLevel = true;

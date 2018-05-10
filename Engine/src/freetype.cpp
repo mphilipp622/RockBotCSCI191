@@ -289,6 +289,7 @@ void print(const font_data &ft_font, float x, float y, const char *fmt, ...)  {
 	}
 
 
+	glDisable(GL_TEXTURE_2D);
 	glPopAttrib();
 
 	pop_projection_matrix();

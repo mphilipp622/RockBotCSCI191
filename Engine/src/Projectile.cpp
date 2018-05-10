@@ -93,9 +93,7 @@ void Projectile::Update()
 {
     Move();
 
-    glEnable(GL_TEXTURE_2D);
     Animate();
-    glDisable(GL_TEXTURE_2D);
 
     if(particle)
         DisplayParticles();
@@ -187,6 +185,7 @@ void Projectile::DrawProjectile()
 
 void Projectile::Animate()
 {
+    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
 
     glColor4f(1.0, 1.0, 1.0, 1.0);
@@ -202,6 +201,7 @@ void Projectile::Animate()
     DrawProjectile();
 
     glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 
 
