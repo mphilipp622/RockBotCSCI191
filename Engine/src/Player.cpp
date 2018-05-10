@@ -389,7 +389,7 @@ void Player::Update()
 //            auto finder = find(sparks.begin(), sparks.end(), spark);
 //            sparks.erase(finder);
             sparks.erase(std::remove(sparks.begin(), sparks.end(), spark), sparks.end());
-            delete spark;
+//            delete spark;
         }
     }
     if(displayText)

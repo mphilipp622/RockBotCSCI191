@@ -33,13 +33,13 @@ void Particles::DrawParticles()
 		glVertex3f(drop.xPos, drop.yPos, 0);
 
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(drop.xPos + 0.1, drop.yPos, 0);
+		glVertex3f(drop.xPos + 0.08, drop.yPos, 0);
 
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(drop.xPos + 0.1, drop.yPos - 0.1, 0);
+		glVertex3f(drop.xPos + 0.08, drop.yPos - 0.08, 0);
 
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(drop.xPos, drop.yPos - 0.1, 0);
+		glVertex3f(drop.xPos, drop.yPos - 0.08, 0);
 		glEnd();
 //        glVertex3f(drop.xPos, drop.yPos, 0);
     }
@@ -154,7 +154,7 @@ void Particles::GenerateMusicParticles(double x, double y, double width, double 
     texture->BindTexture("Images/Misc/MusicParticle3.png");
     double radius = width / 2;
 
-    int newDrops = 10; // 60 is arbitrary. Could put anything
+    int newDrops = 25; // 60 is arbitrary. Could put anything
     double theta = 0;
 
 
@@ -194,10 +194,10 @@ void Particles::GenerateMusicParticles(double x, double y, double width, double 
 
 void Particles::GenerateSparks(double x, double y, double playerDir)
 {
-    sparkWidth = 0.04;
-    sparkHeight = 0.04;
+    sparkWidth = 0.035;
+    sparkHeight = 0.035;
 //    texture->BindTexture("Images/Misc/Spark.png");
-    int newDrops = 10; // 60 is arbitrary. Could put anything
+    int newDrops = 15; // 60 is arbitrary. Could put anything
     string sparkTexture;
 
     if(playerDir > 0)
@@ -241,9 +241,7 @@ void Particles::LifetimeSparks()
 
         if(drop.time->GetTicks() > 300)
         {
-            auto finder = find(drops.begin(), drops.end(), drop);
-
-            drops.erase(finder);
+            drops.erase(std::remove(drops.begin(), drops.end(), drop), drops.end());
         }
 
 //            if(drops[i].yPos < -5.0 && drops[i].xPos > 5.0)
@@ -254,7 +252,7 @@ void Particles::LifetimeSparks()
 void Particles::DrawSparks()
 {
 
-//    glColor4f(1.0, 1.0, 1.0, 1.0);
+
 //    glColor4f(0.95, 0.75, 0.2, 1.0);
 //    texture->Binder();
 
@@ -263,10 +261,11 @@ void Particles::DrawSparks()
 //    glBegin(GL_POINTS);
     for(auto& drop : drops)
     {
+        glColor4f(1.0, 1.0, 1.0, 1.0);
         glEnable(GL_TEXTURE_2D);
         glPushMatrix();
-        glTranslated(drop.xPos, drop.yPos, 0);
         texture->Binder();
+        glTranslated(drop.xPos, drop.yPos, 0);
 //        glVertex3f(drop.xPos, drop.yPos, 0);
 //        drop.sparkTex.Binder();
 
