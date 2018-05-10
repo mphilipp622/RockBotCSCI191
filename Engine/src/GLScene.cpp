@@ -462,8 +462,12 @@ void GLScene::LoadLevelFromXML()
             else if(newTag == "RangedEnemy")
                 enemies.push_back(new RangedEnemy(newX, newY, 1.0, 1.0, newName));
 
-            if(enemies.back())
-                enemies.back()->InitEnemy();
+            if(enemies.size() > 0)
+            {
+                if(enemies.back())
+                    enemies.back()->InitEnemy();
+            }
+
         }
     }
 }

@@ -1,6 +1,6 @@
 <Level4>
     <Platforms>
-        <Platform Width="2.3" Height="1" xPos="-4.4994966364885096" yPos="-1.6626081402088928">
+        <Platform Width="2.3" Height="1" xPos="-4.5052837591397612" yPos="-1.6564645790034613">
             <Texture>Images/Platforms/Block3.png</Texture>
         </Platform>
         <Platform Width="2.1000001" Height="1" xPos="-2.318232751276303" yPos="-1.6694057085269269">
@@ -153,11 +153,11 @@
         <Texture>Images/Backgrounds/Park.jpg</Texture>
     </Background>
     <Enemies>
-        <Enemy xPos="4.1076202012494374" yPos="0.5011828792747276">
+        <Enemy xPos="4.1411616716941211" yPos="0.24588146094582636">
             <Name>Enemy0</Name>
             <Tag>RangedEnemy</Tag>
         </Enemy>
-        <Enemy xPos="-0.33367222923314688" yPos="3.0331639367284868">
+        <Enemy xPos="-0.31705769048907823" yPos="2.6999960333363346">
             <Name>Enemy1</Name>
             <Tag>MeleeEnemy</Tag>
         </Enemy>

@@ -1,0 +1,114 @@
+<Level6>
+    <Platforms>
+        <Platform Width="30.000078" Height="1" xPos="0" yPos="-7.9588295456473457">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="1" Height="12.600012" xPos="-14.506776457176258" yPos="-1.1576479339123413">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="6.2999964" Height="1" xPos="-9.9412198418022282" yPos="-4.8931168510049599">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="1" Height="2.1000001" xPos="-7.3064644717031975" yPos="-6.4208320669295844">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="1" Height="2.2" xPos="14.542952957069463" yPos="-6.3670636365178765">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="1" Height="7.699995" xPos="14.501619288105628" yPos="-0.10123293893925016">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="0.29999992" Height="0.29999992" xPos="-13.854702303994424" yPos="-6.147648069659855">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="0.39999992" Height="0.39999992" xPos="13.84192172860889" yPos="-6.0000888407629933">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="5.4114884699465566" yPos="-4.5136179413466042">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="0.29999992" Height="5.9999967" xPos="4.137907459212391" yPos="-1.2514873490995879">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="8.0813925217323241" yPos="-2.7454592286181674">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="1" Height="1" xPos="10.089930632858717" yPos="-1.384892364831755">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="0.79999995" Height="0.79999995" xPos="7.8964709582076464" yPos="-7.0599977010641259">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="0.29999992" Height="0.29999992" xPos="-6.6488112523914866" yPos="-5.8952960439522935">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="0.29999992" Height="0.29999992" xPos="-4.9535231930416961" yPos="-4.2823550097962606">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+        <Platform Width="0.29999992" Height="0.29999992" xPos="-3.1741177872356183" yPos="-3.5447106269587794">
+            <Texture>Images/Platforms/Tile (13).png</Texture>
+        </Platform>
+    </Platforms>
+    <Player xPos="-7.3800059782143563" yPos="-3.8347087810846303"/>
+    <LevelTrigger Width="1" Height="1" xPos="15.024742980079788" yPos="-4.7222966090783407">
+        <Texture>Images/Misc/Portal.png</Texture>
+    </LevelTrigger>
+    <TextTriggers>
+        <Trigger Width="1" Height="1" xPos="14.84895065227486" yPos="-4.741386165608076">
+            <Text>You Win!</Text>
+        </Trigger>
+    </TextTriggers>
+    <HealthPacks>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-13.362340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-13.06234005621277" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-12.762340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-12.462340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-12.162340056212772" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-11.862340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-11.56234005621277" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-11.262340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-10.962340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-10.662340056212772" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-10.362340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-10.06234005621277" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-9.7623400562127713" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-9.4623400562127706" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-9.1623400562127717" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-8.862340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-8.5623400562127703" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-8.362340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-8.0623400562127703" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-13.362340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-13.06234005621277" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-12.762340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-12.462340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-12.162340056212772" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-11.862340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-11.56234005621277" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-11.262340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-10.962340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-10.662340056212772" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-10.362340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-10.06234005621277" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-9.7623400562127713" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-9.4623400562127706" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-9.1623400562127717" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-8.862340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-8.5623400562127703" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-8.362340056212771" yPos="-7.2621824756996673"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-8.0623400562127703" yPos="-7.2621824756996673"/>
+    </HealthPacks>
+    <Background Width="12" Height="12">
+        <Texture>Images/Backgrounds/Wasteland.jpg</Texture>
+    </Background>
+    <Enemies>
+        <Enemy xPos="-1.2618717508395561" yPos="-5.9210902026267274">
+            <Name>Enemy0</Name>
+            <Tag>MeleeBoss</Tag>
+        </Enemy>
+        <Enemy xPos="11.502446344191338" yPos="-5.9210902026267274">
+            <Name>Enemy1</Name>
+            <Tag>Boss</Tag>
+        </Enemy>
+    </Enemies>
+</Level6>
