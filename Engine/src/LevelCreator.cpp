@@ -689,7 +689,6 @@ string LevelCreator::GetFilenameFromInput()
     cout << "Input texture file name (don't input full path): ";
     getline(cin, path);
 
-
     return path;
 }
 

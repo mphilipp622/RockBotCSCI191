@@ -124,7 +124,7 @@ Player::Player(double newX, double newY)
 
 //    PlayChords(true);
 
-    test1_font.init("CALIFI.TTF", 24);
+    test1_font.init("BADABB__.TTF", 26);
     displayText = false;
 
     chordTimer->Start();
@@ -1059,6 +1059,7 @@ bool Player::IsInvincible()
 
 void Player::DisplayText()
 {
+    test1_font.init("BADABB__.TTF", 26);
     glPushMatrix();
 	glLoadIdentity();
 	 //glUseProgram(shaderFont->program);
@@ -1067,7 +1068,7 @@ void Player::DisplayText()
 
 	// Note that the print function uses screen pixel coordinates, not openGL coordinates.
 	// Since our player is always center screen, we can use screen width and height each divided by 2 and add an offset to get the text where we want.
-	freetype::print(test1_font, GetSystemMetrics(SM_CXSCREEN) / 2 - 75, GetSystemMetrics(SM_CYSCREEN) / 2 + 100, textToDisplay.c_str());
+	freetype::print(test1_font, GetSystemMetrics(SM_CXSCREEN) / 2 - 125, GetSystemMetrics(SM_CYSCREEN) / 2 + 100, textToDisplay.c_str());
 
 //	freetype::print(test1_font, GetSystemMetrics(SM_CXSCREEN) / 2 + 100, GetSystemMetrics(SM_CYSCREEN) / 2 + 100,"Test1: Active Freetype Text");
 	glPopMatrix();

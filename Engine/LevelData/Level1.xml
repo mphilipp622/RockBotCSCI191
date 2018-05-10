@@ -3,26 +3,29 @@
         <Platform Width="10.900005" Height="0.39999992" xPos="-0.1173608567089985" yPos="-1.8256132865198336">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
-        <Platform Width="2.7999995" Height="0.19999993" xPos="2.0081746592428638" yPos="-0.13692099648898753">
+        <Platform Width="2.7999995" Height="0.19999993" xPos="2.7029434855157071" yPos="0.17949264351044161">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
-        <Platform Width="1.3000001" Height="3.1999991" xPos="-4.9291559817779378" yPos="-0.026080189807426195">
+        <Platform Width="1.3000001" Height="4.7999978" xPos="-4.9447754776061341" yPos="0.79113277499651735">
             <Texture>Images/Platforms/block2.png</Texture>
         </Platform>
-        <Platform Width="1.9000002" Height="0.19999993" xPos="-0.84108613974782265" yPos="-0.76284555186721625">
+        <Platform Width="1.9000002" Height="0.19999993" xPos="-1.0447392556679205" yPos="-0.33597340964774791">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
-        <Platform Width="4.0999985" Height="0.19999993" xPos="7.2268009032942153" yPos="-0.14727601518805591">
+        <Platform Width="4.0999985" Height="0.19999993" xPos="7.7116771344218575" yPos="-0.67654919477012498">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
         <Platform Width="10.400003" Height="0.39999992" xPos="10.523258419243469" yPos="-1.8256132865198336">
             <Texture>Images/Platforms/block.png</Texture>
         </Platform>
-        <Platform Width="0.79999995" Height="1" xPos="8.4587027495338383" yPos="0.47634515252366039">
+        <Platform Width="0.79999995" Height="1" xPos="9.3455204637703737" yPos="-0.069035632119400531">
             <Texture>Images/Platforms/block2.png</Texture>
         </Platform>
         <Platform Width="4.0999985" Height="0.19999993" xPos="11.788147652662675" yPos="1.4865708190232931">
             <Texture>Images/Platforms/block.png</Texture>
+        </Platform>
+        <Platform Width="1.6000001" Height="6.7999959" xPos="14.934152085512038" yPos="1.8040386091361678">
+            <Texture>Images/Platforms/block2.png</Texture>
         </Platform>
     </Platforms>
     <Player xPos="-2.9501227439785773" yPos="-1.1229796158089109"/>
@@ -30,33 +33,31 @@
         <Texture>Images/Misc/Portal.png</Texture>
     </LevelTrigger>
     <TextTriggers>
-        <Trigger Width="2.9999993" Height="1" xPos="6.5709645110676584" yPos="0.48516635905187616">
-            <Text>This is seriously trippin' me out...</Text>
+        <Trigger Width="2.9999993" Height="1" xPos="7.2709816251664634" yPos="-0.049496060794073947">
+            <Text>Why would they bring me back to life in this world?</Text>
         </Trigger>
-        <Trigger Width="1.8000002" Height="1" xPos="-0.85699037391678934" yPos="-0.092025809944636772">
-            <Text>Hello, World</Text>
+        <Trigger Width="1.8000002" Height="1" xPos="-1.0668286256504245" yPos="0.27606529619316456">
+            <Text>Where am I?</Text>
         </Trigger>
-        <Trigger Width="2.6999996" Height="1.4000001" xPos="1.9440452777441262" yPos="0.69019357458477582">
-            <Text>Text Is Working</Text>
+        <Trigger Width="1.8000002" Height="1.4000001" xPos="3.5556095895671844" yPos="0.99664250998549897">
+            <Text>What the hell was that thing?!</Text>
+        </Trigger>
+        <Trigger Width="3.1999991" Height="1" xPos="11.357902817415072" yPos="2.1154675502905764">
+            <Text>What a cruel fate...</Text>
         </Trigger>
     </TextTriggers>
     <HealthPacks>
-        <HealthPack Width="0.30000001" Height="0.30000001" xPos="-0.72257296537384808" yPos="-0.46944229841192175"/>
-        <HealthPack Width="0.30000001" Height="0.30000001" xPos="1.19047547794" yPos="0.1718211992308917"/>
+        <HealthPack Width="0.30000001" Height="0.30000001" xPos="1.533940089305784" yPos="0.52006842863281721"/>
     </HealthPacks>
     <Background Width="12" Height="12">
         <Texture>Images/Backgrounds/BGSciFi.jpg</Texture>
     </Background>
     <Enemies>
-        <Enemy xPos="6.8364352093985472" yPos="2.9109981543112577">
+        <Enemy xPos="9.7853376605059932" yPos="3.3561892758393777">
             <Name>Enemy1</Name>
             <Tag>RangedEnemy</Tag>
         </Enemy>
-        <Enemy xPos="7.1074485248423489" yPos="0.4831355022093447">
-            <Name>Enemy1</Name>
-            <Tag>MeleeEnemy</Tag>
-        </Enemy>
-        <Enemy xPos="1.1459915183317719" yPos="0.52467080410744205">
+        <Enemy xPos="3.3196618126500779" yPos="0.85604183828056868">
             <Name>Enemy2</Name>
             <Tag>MeleeEnemy</Tag>
         </Enemy>
