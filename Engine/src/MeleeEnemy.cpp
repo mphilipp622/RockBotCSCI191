@@ -114,10 +114,10 @@ void MeleeEnemy::InitEnemy()
     deathAnim[0].BindTexture("Images/Enemies/Melee_0000.png");
     maxDeathFrame = 1;
 
-    attackAnim[0].BindTexture("Images/Enemies/Melee_0000.png");
-    attackAnim[1].BindTexture("Images/Enemies/Melee_0001.png");
-    attackAnim[2].BindTexture("Images/Enemies/Melee_0002.png");
-    attackAnim[3].BindTexture("Images/Enemies/Melee_0003.png");
+    attackAnim[0].BindTexture("Images/Enemies/MeleeAttack_0000.png");
+    attackAnim[1].BindTexture("Images/Enemies/MeleeAttack_0001.png");
+    attackAnim[2].BindTexture("Images/Enemies/MeleeAttack_0002.png");
+    attackAnim[3].BindTexture("Images/Enemies/MeleeAttack_0003.png");
     maxAttackFrame = 4;
 
 }

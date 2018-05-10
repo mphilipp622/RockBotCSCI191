@@ -112,8 +112,8 @@ void RangedEnemy::InitEnemy()
     dyingFrame = 0;
     maxDeathFrame = 4;
 
-    attackAnim[0].BindTexture("Images/Enemies/Ranged_0000.png");
-    attackAnim[1].BindTexture("Images/Enemies/Ranged_0002.png");
+    attackAnim[0].BindTexture("Images/Enemies/RangedAttack_0000.png");
+    attackAnim[1].BindTexture("Images/Enemies/RangedAttack_0001.png");
     maxAttackFrame = 2;
 }
 
