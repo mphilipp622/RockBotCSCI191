@@ -6,6 +6,8 @@ Rock Bot is a group project for the CSCI 191T Game Development course at CSU Fre
 
 Download the zip file from this repo and extract it. All the project files are inside the "Engine" folder. If you want to distribute the program without all the source code, you can zip up the Engine/Release folder, which contains an executable and the necessary folders and dll files for the program to run.
 
+There is a ReadMe file inside the Engine folder that details how to play the game and use the level creator.
+
 ### Prerequisites
 
 If you wish to modify and compile the code, you'll want to use Code::Blocks IDE with MinGW 32-bit. You can get the project to work in other IDE's, such as Visual Studio, but you'll have to link the libraries yourself.
