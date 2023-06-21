@@ -2,6 +2,10 @@
 
 Rock Bot is a group project for the CSCI 191T Game Development course at CSU Fresno. For this project, we had to create our own game engine using C++ and multiple libraries. The project was done using the Code::Blocks IDE and this repo contains a .cbp file that can be used with Code::Blocks. All libraries should already be linked properly in the .cbp file using relative paths.
 
+Video:
+
+[![Gameplay Video](https://img.youtube.com/vi/X5drQzdHJLY/0.jpg)](https://www.youtube.com/watch?v=X5drQzdHJLY)
+
 ## Getting Started
 
 Download the zip file from this repo and extract it. All the project files are inside the "Engine" folder. If you want to distribute the program without all the source code, you can zip up the Engine/Release folder, which contains an executable and the necessary folders and dll files for the program to run.
